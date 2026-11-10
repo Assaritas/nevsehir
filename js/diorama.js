@@ -70,11 +70,27 @@ async function buildGrid(r) {
   const half = r.size / 2 / mpp(r.lat, zDem) / 256;     // karo birimi
   const box = [cx - half, cy - half, cx + half, cy + half];
   const px = 512;
-  const can = await mosaic(TERRARIUM, zDem, box, px, null, false);
-  const d = can.getContext("2d").getImageData(0, 0, px, px).data;
-  // yüklenemeyen karo / kenar pikselleri (saydam) geçersiz sayılır ve en yakın geçerli komşudan doldurulur
-  const raw = new Float32Array(px * px);
-  for (let q = 0; q < px * px; q++) raw[q] = d[q * 4 + 3] < 250 ? NaN : d[q * 4] * 256 + d[q * 4 + 1] + d[q * 4 + 2] / 256 - 32768;
+  // Karolar PNG baytlarından doğrudan çözülür (tuval okuması yok): Safari / Firefox parmak izi korumasının
+  // tuval piksellerine eklediği gürültü, Terrarium kodlamasında ±256 m'lik iğne ve çukurlar oluşturuyordu.
+  // yüklenemeyen karo pikselleri geçersiz (NaN) sayılır ve en yakın geçerli komşudan doldurulur
+  const raw = new Float32Array(px * px).fill(NaN);
+  const k = px / (box[2] - box[0]);
+  const jobs = [];
+  for (let tx = Math.floor(box[0]); tx < box[2]; tx++) for (let ty = Math.floor(box[1]); ty < box[3]; ty++) {
+    jobs.push(demTile(zDem, tx, ty).then((hs) => {
+      if (!hs) return;
+      const X0 = Math.max(0, Math.round((tx - box[0]) * k)), X1 = Math.min(px, Math.round((tx + 1 - box[0]) * k));
+      const Y0 = Math.max(0, Math.round((ty - box[1]) * k)), Y1 = Math.min(px, Math.round((ty + 1 - box[1]) * k));
+      for (let Y = Y0; Y < Y1; Y++) {
+        const sy = Math.min(255, Math.floor(((Y + 0.5) / k + box[1] - ty) * 256));
+        for (let X = X0; X < X1; X++) {
+          const sx = Math.min(255, Math.floor(((X + 0.5) / k + box[0] - tx) * 256));
+          raw[Y * px + X] = hs[sy * 256 + sx];
+        }
+      }
+    }));
+  }
+  await Promise.all(jobs);
   for (let pass = 0; pass < 2; pass++) for (let y = 0; y < px; y++) {
     let last = NaN;
     for (let x = 0; x < px; x++) { const q = y * px + x; if (Number.isNaN(raw[q])) raw[q] = last; else last = raw[q]; }
@@ -97,7 +113,92 @@ async function buildGrid(r) {
     grid[j * N + i] = h;
     if (h < hMin) hMin = h; if (h > hMax) hMax = h;
   }
-  return { grid, hMin, hMax, zDem, box, demCanvas: can };
+  return { grid, hMin, hMax, zDem, box };
+}
+
+/** Terrarium karosu → 256×256 yükseklik (m) ya da null. PNG'yi kendimiz çözeriz (8 bit RGB/RGBA, taramasız). */
+const demCache = new Map();
+export function demTile(z, x, y) {
+  const n = 2 ** z;
+  if (y < 0 || y >= n) return Promise.resolve(null);
+  x = ((x % n) + n) % n;
+  const key = `${z}/${x}/${y}`;
+  if (!demCache.has(key)) {
+    const url = TERRARIUM.replace("{z}", z).replace("{x}", x).replace("{y}", y);
+    const p = fetch(url).then((r) => (r.ok ? r.arrayBuffer() : null))
+      .then((b) => (b ? decodeTerrarium(new Uint8Array(b)).catch(() => null).then((hs) => hs || canvasDecode(b)) : null))
+      .then((hs) => { if (hs) despike(hs, 256, Math.max(60, mpp(tile2lat(y + 0.5, z), z) * 0.5)); return hs; })
+      .catch(() => null);
+    demCache.set(key, p);
+    if (demCache.size > 400) demCache.delete(demCache.keys().next().value);
+  }
+  return demCache.get(key);
+}
+const tile2lat = (y, z) => (Math.atan(Math.sinh(Math.PI * (1 - (2 * y) / 2 ** z))) * 180) / Math.PI;
+// eski tarayıcılar (DecompressionStream yok / farklı PNG biçimi) için tuval yolu; iğneleri despike ayıklar
+async function canvasDecode(buf) {
+  const url = URL.createObjectURL(new Blob([buf], { type: "image/png" }));
+  try {
+    const img = await loadImage(url);
+    if (!img) return null;
+    const c = document.createElement("canvas"); c.width = c.height = 256;
+    const g = c.getContext("2d", { willReadFrequently: true });
+    g.drawImage(img, 0, 0, 256, 256);
+    const d = g.getImageData(0, 0, 256, 256).data, out = new Float32Array(65536);
+    for (let q = 0; q < 65536; q++) out[q] = d[q * 4 + 3] < 250 ? NaN : d[q * 4] * 256 + d[q * 4 + 1] + d[q * 4 + 2] / 256 - 32768;
+    return out;
+  } finally { URL.revokeObjectURL(url); }
+}
+export async function decodeTerrarium(b) {
+  const dv = new DataView(b.buffer, b.byteOffset, b.byteLength);
+  let i = 8, w = 0, h = 0, ct = 0, depth = 0, inter = 0;
+  const idat = [];
+  while (i + 8 <= b.length) {
+    const len = dv.getUint32(i), type = String.fromCharCode(b[i + 4], b[i + 5], b[i + 6], b[i + 7]);
+    if (type === "IHDR") { w = dv.getUint32(i + 8); h = dv.getUint32(i + 12); depth = b[i + 16]; ct = b[i + 17]; inter = b[i + 20]; }
+    else if (type === "IDAT") idat.push(b.subarray(i + 8, i + 8 + len));
+    else if (type === "IEND") break;
+    i += 12 + len;
+  }
+  const bpp = ct === 2 ? 3 : ct === 6 ? 4 : 0;
+  if (!bpp || depth !== 8 || inter || w !== 256 || h !== 256 || typeof DecompressionStream === "undefined") return null;
+  const data = new Uint8Array(await new Response(new Blob(idat).stream().pipeThrough(new DecompressionStream("deflate"))).arrayBuffer());
+  const stride = w * bpp, out = new Float32Array(w * h);
+  const cur = new Uint8Array(stride), prev = new Uint8Array(stride);
+  for (let r = 0; r < h; r++) {
+    const f = data[r * (stride + 1)], o = r * (stride + 1) + 1;
+    for (let c = 0; c < stride; c++) {
+      const a = c >= bpp ? cur[c - bpp] : 0, up = prev[c], ul = c >= bpp ? prev[c - bpp] : 0;
+      let v = data[o + c];
+      if (f === 1) v += a;
+      else if (f === 2) v += up;
+      else if (f === 3) v += (a + up) >> 1;
+      else if (f === 4) { const p = a + up - ul, pa = Math.abs(p - a), pb = Math.abs(p - up), pc = Math.abs(p - ul); v += pa <= pb && pa <= pc ? a : pb <= pc ? up : ul; }
+      cur[c] = v & 255;
+    }
+    for (let x = 0; x < w; x++) { const q = x * bpp; out[r * w + x] = ct === 6 && cur[q + 3] < 250 ? NaN : cur[q] * 256 + cur[q + 1] + cur[q + 2] / 256 - 32768; }
+    prev.set(cur);
+  }
+  return out;
+}
+
+/** Tek piksellik iğne / çukurları ayıklar: 8 komşusunun tümünden belirgin biçimde yüksek ya da alçak olan değer
+ *  komşuların ortancasıyla değiştirilir (gerçek yamaç ve uçurumlarda en az bir komşu benzer yükseklikte olduğundan dokunulmaz). */
+function despike(a, px, tol) {
+  const src = a.slice(), nb = new Float32Array(8);
+  for (let y = 1; y < px - 1; y++) for (let x = 1; x < px - 1; x++) {
+    const v = src[y * px + x];
+    let lo = Infinity, hi = -Infinity, n = 0;
+    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+      if (!dx && !dy) continue;
+      const u = src[(y + dy) * px + x + dx];
+      if (Number.isNaN(u)) continue;
+      nb[n++] = u; if (u < lo) lo = u; if (u > hi) hi = u;
+    }
+    if (n < 5 || !(v > hi + tol || v < lo - tol)) continue;
+    const s = nb.subarray(0, n).sort();
+    a[y * px + x] = s[n >> 1];
+  }
 }
 
 // --- doku ------------------------------------------------------------------------
@@ -1003,6 +1104,7 @@ function close() {
 
 export function initDiorama(_map, _ctx) {
   map = _map; ctx = _ctx;
+  window.__dioModel = () => model;   // tanılama / test
   $("btnDiorama").onclick = open;
   $("dioClose").onclick = close;
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("diorama").hidden) close(); });
