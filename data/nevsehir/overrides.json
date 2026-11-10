@@ -1,0 +1,22 @@
+{
+  "_aciklama": "OSM kimliği → düzeltme. Veri yenilendiğinde de geçerli kalır. wikidata: doğru Wikidata öğesi; wikipedia: null ise OSM'deki Vikipedi bağlantısı kullanılmaz.",
+  "w26045752": {
+    "wikidata": "Q115453100",
+    "wikipedia": null,
+    "_not": "Göreme Açık Hava Müzesi: OSM'de 'Göreme'deki kiliseler listesi' öğesine bağlıydı"
+  },
+  "n9382198517": {
+    "name": "Paşabağları",
+    "name:de": null,
+    "name:es": null,
+    "wikidata": "Q133612406",
+    "image": null,
+    "_not": "OSM'de ad yazım hatası ('Pasşabağ'); de/es adları 'peri bacası' genel terimiydi; image bir Google Photos bağlantısıydı"
+  },
+  "w168408687": {
+    "addTo": [
+      "turbeler"
+    ],
+    "_not": "Hacı Bektaş-ı Veli Türbesi OSM'de yalnızca park olarak işaretli"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Rehber Harita",
+  "short_name": "Rehber Harita",
+  "description": "Rehberli turlar için etkileşimli il haritası",
+  "lang": "tr",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f4efe6",
+  "theme_color": "#b5532c",
+  "icons": [
+    {
+      "src": "icons/app/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/app/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/app/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/app/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "id": "./"
+}
