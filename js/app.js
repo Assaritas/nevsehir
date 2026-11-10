@@ -96,7 +96,12 @@ const isDark = () => state.theme === "dark" || (state.theme === "auto" && darkMQ
 function applyThemeAttr() {
   if (state.theme === "auto") document.documentElement.removeAttribute("data-theme");
   else document.documentElement.setAttribute("data-theme", state.theme);
-  document.getElementById("lblTheme").textContent = t(state.theme);
+  syncSettings();
+}
+function syncSettings() {
+  document.querySelectorAll("[data-theme-opt]").forEach((b) => b.classList.toggle("on", b.dataset.themeOpt === state.theme));
+  const l = document.getElementById("lblSettings");
+  if (l) l.textContent = lang().toUpperCase();
 }
 applyThemeAttr();
 
@@ -106,9 +111,27 @@ applyThemeAttr();
 // PMTiles: karolar tek dosyadan HTTP aralık istekleriyle okunur
 const pmProtocol = new pmtiles.Protocol();
 maplibregl.addProtocol("pmtiles", pmProtocol.tile);
-const lcArchive = new pmtiles.PMTiles(SRC.landcover);
-pmProtocol.add(lcArchive);
+// bitki örtüsü: tek PMTiles arşivi; büyük illerde (tam sürüm, dosya başına 25 MiB sınırı) üst yakınlaştırma
+// karoları boylam dilimlerine bölünmüş ek arşivlerdedir (ana arşivin metadata.parts listesi)
+const lcMain = new pmtiles.PMTiles(SRC.landcover);
+let lcParts = null;
+const lcArchive = {
+  async parts() {
+    if (!lcParts) lcParts = lcMain.getMetadata().then((md) => (md?.parts || []).map((p) => ({ ...p, a: new pmtiles.PMTiles(new URL(p.file, SRC.landcover).href) }))).catch(() => []);
+    return lcParts;
+  },
+  async getZxy(z, x, y, signal) {
+    const p = (await this.parts()).find((q) => z >= q.minzoom && z <= q.maxzoom && x >= q.x0 && x <= q.x1);
+    return (p ? p.a : lcMain).getZxy(z, x, y, signal);
+  },
+  getHeader: () => lcMain.getHeader(),
+};
 window.__lcArchive = lcArchive;
+maplibregl.addProtocol("lc", async (params, ctl) => {
+  const [z, x, y] = params.url.slice(5).split("/").map(Number);
+  const r = await lcArchive.getZxy(z, x, y, ctl?.signal).catch(() => null);
+  return { data: r ? new Uint8Array(r.data) : new Uint8Array() };
+});
 
 const demSource = new mlcontour.DemSource({ url: SRC.terrarium, encoding: "terrarium", maxzoom: 13, worker: true, cacheSize: 100 });
 demSource.setupMaplibre(maplibregl);
@@ -168,7 +191,11 @@ async function installCustom() {
   if (!map.getSource("dem")) map.addSource("dem", { type: "raster-dem", tiles: [SRC.terrarium], encoding: "terrarium", tileSize: 256, maxzoom: 15, attribution: ATTR.dem });
   if (!map.getSource("dem-hs")) map.addSource("dem-hs", { type: "raster-dem", tiles: [SRC.terrarium], encoding: "terrarium", tileSize: 256, maxzoom: 15 });
   if (!map.getSource("sat")) map.addSource("sat", { type: "raster", tiles: [SRC.satellite], tileSize: 256, maxzoom: 15, attribution: ATTR.sat });
-  if (!map.getSource("lc")) map.addSource("lc", { type: "raster", url: "pmtiles://" + SRC.landcover, tileSize: 256, attribution: ATTR.lc });
+  if (!map.getSource("lc")) {
+    const h = await lcArchive.getHeader().catch(() => null);
+    map.addSource("lc", { type: "raster", tiles: ["lc://{z}/{x}/{y}"], tileSize: 256, attribution: ATTR.lc,
+      minzoom: h?.minZoom ?? 8, maxzoom: h?.maxZoom ?? 14, ...(h ? { bounds: [h.minLon, h.minLat, h.maxLon, h.maxLat] } : {}) });
+  }
   if (!map.getSource("contours")) map.addSource("contours", {
     type: "vector", maxzoom: 15,
     tiles: [demSource.contourProtocolUrl({ thresholds: { 9: [200, 1000], 11: [100, 500], 12: [50, 250], 13: [20, 100], 15: [10, 50] }, elevationKey: "ele", levelKey: "level", contourLayer: "contours" })],
@@ -481,7 +508,7 @@ async function baseMapClick(box, lngLat) {
   const type = p.subclass || p.class || "";
   const cat = { id: "_base", icon: BASE_TYPES[p.class] || BASE_TYPES[p.subclass] || "marker", group: "_base",
     names: { tr: t("types." + type) !== "types." + type ? t("types." + type) : (type ? type.replace(/_/g, " ") : t("mapPlace")) } };
-  const props = { name: p["name:tr"] || p.name, osmSearch: p.name };
+  const props = { name: p["name:tr"] || p.name, osmSearch: p.name, _base: 1, _type: type };
   for (const l of ["en", "de", "fr", "es", "ru"]) if (p["name:" + l]) props["name:" + l] = p["name:" + l];
   openCard({ feature: { type: "Feature", properties: props, geometry: { type: "Point", coordinates: pt } }, cat, group: BASE_GROUP,
     lngLat: { lng: pt[0], lat: pt[1] }, prov, dataUrl: DATA });
@@ -529,8 +556,7 @@ function applyI18n() {
   document.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t(el.dataset.i18n)));
   document.querySelectorAll("[data-i18n-title]").forEach((el) => { el.title = t(el.dataset.i18nTitle); el.setAttribute("aria-label", t(el.dataset.i18nTitle)); });
   $("provName").textContent = prov.names[lang()] || prov.names.tr;
-  $("lblLang").textContent = lang().toUpperCase();
-  $("lblTheme").textContent = t(state.theme);
+  syncSettings();
   $("lbl3d").textContent = state.is3d ? t("mode2d") : t("mode3d");
   $("baseName").textContent = t(state.base);
   document.title = (prov.names[lang()] || prov.names.tr) + " – " + (lang() === "tr" ? "Rehber Harita" : "Guide Map");
@@ -538,8 +564,8 @@ function applyI18n() {
 }
 
 // panel aç/kapa
-const panels = ["layersPanel", "legendPanel", "langPanel", "searchPanel", "tourPanel", "provPanel"];
-const panelBtn = { layersPanel: "btnLayers", legendPanel: "btnLegend", searchPanel: "btnSearch", tourPanel: "btnTour" };
+const panels = ["layersPanel", "legendPanel", "settingsPanel", "searchPanel", "tourPanel", "provPanel"];
+const panelBtn = { layersPanel: "btnLayers", legendPanel: "btnLegend", searchPanel: "btnSearch", tourPanel: "btnTour", settingsPanel: "btnSettings" };
 function closePanels() {
   if (!$("tourPanel").hidden) setFocus(false);
   panels.forEach((p) => ($(p).hidden = true)); Object.values(panelBtn).forEach((b) => $(b).classList.remove("on"));
@@ -556,7 +582,7 @@ function togglePanel(id, force) {
 document.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => { if (b.dataset.close === "tourPanel") tour.close(); else togglePanel(b.dataset.close, false); }));
 $("btnLayers").onclick = () => togglePanel("layersPanel");
 $("btnLegend").onclick = () => togglePanel("legendPanel");
-$("btnLang").onclick = () => togglePanel("langPanel");
+$("btnSettings").onclick = () => togglePanel("settingsPanel");
 // il seçici: hazır iller (config/provinces.js); seçilince o ilin bağlantısı açılır
 $("btnProv").onclick = () => togglePanel("provPanel");
 function buildProvList() {
@@ -643,7 +669,6 @@ function buildLangList() {
     b.onclick = () => {
       state.lang = l.id; store.set("lang", l.id); setLang(l.id); applyI18n(); localizeLabels();
       for (const id of state.active) if (map.getLayer(`cat-${id}-label`)) map.setLayoutProperty(`cat-${id}-label`, "text-field", nameExpr());
-      togglePanel("langPanel", false);
       document.dispatchEvent(new CustomEvent("langchange"));
     };
     $("langList").appendChild(b);
@@ -690,13 +715,12 @@ function syncLegend() {
 $("allOff").onclick = () => { [...state.active].forEach((id) => setCat(id, false)); };
 
 // tema
-$("btnTheme").onclick = () => {
-  state.theme = { auto: "light", light: "dark", dark: "auto" }[state.theme];
+document.querySelectorAll("[data-theme-opt]").forEach((b) => (b.onclick = () => {
+  state.theme = b.dataset.themeOpt;
   store.set("theme", state.theme);
-  const wasDark = map.getStyle().sprite?.toString().includes("dark") ?? false;
   applyThemeAttr();
-  reloadStyleIfNeeded(wasDark);
-};
+  reloadStyleIfNeeded();
+}));
 darkMQ.addEventListener("change", () => state.theme === "auto" && reloadStyleIfNeeded());
 let currentStyleDark = isDark();
 function reloadStyleIfNeeded() {
@@ -768,6 +792,11 @@ diorama.initDiorama(map, {
     .filter((f) => !history.isActive() || (f.properties._from != null && f.properties._from <= history.currentYear()))
     .map((f) => ({ cat: id, name: f.properties["name:tr"] || f.properties.name, lng: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] }))),
   tourStops: () => tour.allStops(),
+  lcClasses: LC_CLASSES,
+  openFeature: (id) => { const e = Object.entries(state.data).find(([, fc]) => fc?.features?.some((f) => f.properties.id === id)); if (e) return focusFeature(e[0], id);
+    // kaynak kayıtları: yeraltı madeni ya da açık ocak katmanında
+    Promise.all(["yeralti_maden", "acik_ocak"].map((c) => fetch(DATA + c + ".geojson").then((r) => r.json()).then((fc) => (fc.features.some((f) => f.properties.id === id) ? c : null)).catch(() => null)))
+      .then((r) => { const c = r.find(Boolean); if (c) focusFeature(c, id); }); },
 });
 
 map.once("load", () => {

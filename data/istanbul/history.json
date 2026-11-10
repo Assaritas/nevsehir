@@ -6,7 +6,8 @@
     "akarsu_gol",
     "adalar",
     "magaralar",
-    "selaleler"
+    "selaleler",
+    "kaplicalar"
   ],
   "features": {
     "w109862851": {
@@ -162,6 +163,12 @@
       "from": 550,
       "approx": true,
       "note": "6. yüzyılın ortaları",
+      "src": "TDV İslâm Ansiklopedisi"
+    },
+    "w534088286": {
+      "from": 1090,
+      "approx": true,
+      "note": "11. yüzyıl sonlarında yeniden inşa edildi; Metokhites onarımı 1321'de tamamlandı",
       "src": "TDV İslâm Ansiklopedisi"
     },
     "r7614527": {

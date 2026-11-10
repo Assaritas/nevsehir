@@ -3,9 +3,10 @@
 //  - Özet metin: Vikipedi (seçili dilde, yoksa Türkçe/İngilizce) — her zaman kaynak bağlantısıyla
 //  - Rehber onaylı metin: data/<il>/curated.json (rehberin kendi doğruladığı içerik)
 import { t, lang } from "./i18n.js";
+import { DEPLOY } from "../config/deploy.js";
 
 const el = () => document.getElementById("card");
-let wikidata = null, curated = null, currentArgs = null;
+let wikidata = null, curated = null, summaries = null, districts = null, currentArgs = null;
 
 export function findFeature(fc, id) {
   if (!fc || !id) return null;
@@ -26,6 +27,7 @@ const ICON = {
   photo: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-8 8"/></svg>',
   share: '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/></svg>',
   map: '<svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg>',
+  search: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',
   flag: '<svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>',
 };
 
@@ -59,14 +61,16 @@ async function loadSide(dataUrl) {
     for (const v of Object.values(c)) for (const id of v.ids || []) c[id] = c[id] || v;
     return c;
   }).catch(() => ({}));
-  return [await wikidata, await curated];
+  if (!summaries) summaries = fetch(dataUrl + "summaries.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+  if (!districts) districts = fetch(dataUrl + "search.json").then((r) => r.json()).then((a) => new Map(a.filter((e) => e[6]).map((e) => [e[0], e[6]]))).catch(() => new Map());
+  return [await wikidata, await curated, await summaries, await districts];
 }
 
 export async function openCard(args) {
   currentArgs = args;
   const { feature, cat, group, lngLat, prov, dataUrl } = args;
   const p = feature.properties;
-  const [WD, CUR] = await loadSide(dataUrl);
+  const [WD, CUR, SUM, DIST] = await loadSide(dataUrl);
   if (currentArgs !== args) return;
   const w = WD[p.wikidata] || null;
   const L = lang();
@@ -94,6 +98,9 @@ export async function openCard(args) {
   if (w?.commonsCat) acts.push(`<a href="https://commons.wikimedia.org/wiki/Category:${encodeURIComponent(w.commonsCat.replace(/ /g, "_"))}" target="_blank" rel="noopener">${ICON.photo}${t("photos")}</a>`);
   if (p.id && cat.id !== "_base") acts.push(`<button type="button" data-share>${ICON.share}${t("share")}</button>`);
   if (guide && pt) acts.push(`<button type="button" class="tour-add" data-touradd>${ICON.flag}${t("g.addToTour")}</button>`);
+  const district = DIST.get(p.id) || "";
+  const q = [p["name:tr"] || p.name || title, district, prov.names.tr].filter(Boolean).join(" ");
+  acts.push(`<a href="https://www.google.com/search?q=${encodeURIComponent(q)}" target="_blank" rel="noopener">${ICON.search}${t("gen.webSearch")}</a>`);
   const osm = osmUrl(p.id) || (p.osmSearch ? `https://www.openstreetmap.org/search?query=${encodeURIComponent(p.osmSearch)}#map=18/${pt?.lat}/${pt?.lng}` : null);
   if (osm) acts.push(`<a href="${osm}" target="_blank" rel="noopener">${ICON.map}${t("osm")}</a>`);
 
@@ -134,8 +141,102 @@ export async function openCard(args) {
 
   if (!cur) {
     const box = c.querySelector("#cardSummary");
-    box.innerHTML = await summaryHtml(wt, L);
+    const sum = SUM[p.id];
+    const html = (await summaryHtml(wt, L))
+      || (sum?.wp ? await summaryHtml({ l: sum.wp.split(":")[0], title: sum.wp.slice(sum.wp.indexOf(":") + 1) }, L) : null)
+      || (sum?.web ? webHtml(sum.web) : null)
+      || (await liveHtml(p, w, pt))
+      || profileHtml(p, cat, title, district, prov, L);
+    if (currentArgs === args) box.innerHTML = html;
   }
+}
+
+// --- yerin kendi web sitesinin açıklaması --------------------------------------------------
+function webHtml(wb) {
+  let host = wb.u;
+  try { host = new URL(wb.u).hostname.replace(/^www\./, ""); } catch { /* */ }
+  return `<p class="summary">${esc(wb.x)}</p><p class="src">${t("gen.ownSite")}: <a href="${esc(wb.u)}" target="_blank" rel="noopener">${esc(host)}</a></p>`;
+}
+
+// --- canlı arama (hazır özet yoksa): yakındaki aynı adlı Vikipedi makalesi, OSM etiketleri, web sitesi ----
+const nrm = (s) => String(s || "").toLocaleLowerCase("tr").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ı/g, "i")
+  .replace(/\(.*?\)/g, " ").replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
+async function liveHtml(p, w, pt) {
+  if (!pt) return null;
+  const name = p["name:tr"] || p.name;
+  try {
+    for (const l of [...new Set([lang(), "tr", "en"])]) {
+      const r = await fetch(`https://${l}.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=${pt.lat}|${pt.lng}&gsradius=400&gslimit=30&format=json&origin=*`, { signal: AbortSignal.timeout(6000) });
+      const hit = (await r.json())?.query?.geosearch?.find((a) => nrm(a.title) === nrm(name) || (p["name:en"] && nrm(a.title) === nrm(p["name:en"])));
+      if (hit) { const h = await summaryHtml({ l, title: hit.title }, lang()); if (h) return h; }
+    }
+    // haritada tıklanan (veri dosyasında olmayan) yerler: OSM etiketlerini getir (web sitesi, işletmeci…)
+    if (p._base && !p.website) {
+      const nm = String(p.osmSearch || name).replace(/\\/g, "").replace(/"/g, '\\"');
+      const q = `[out:json][timeout:8];nwr(around:80,${pt.lat},${pt.lng})["name"="${nm}"];out tags 1;`;
+      const r = await fetch("https://overpass-api.de/api/interpreter", { method: "POST", body: "data=" + encodeURIComponent(q), signal: AbortSignal.timeout(9000) });
+      const tags = (await r.json())?.elements?.[0]?.tags;
+      if (tags) {
+        for (const [k, v] of Object.entries(tags)) if (p[k] == null) p[k] = v;
+        p.website = p.website || tags["contact:website"] || tags.url;
+        if (p.wikipedia) { const [l, ...rest] = p.wikipedia.split(":"); const h = await summaryHtml({ l, title: rest.join(":") }, lang()); if (h) return h; }
+      }
+    }
+    // yerin kendi web sitesi (tam sürüm: Cloudflare üzerindeki küçük okuyucu, yalnızca meta açıklamayı döndürür)
+    const web = (p.website || w?.website || "").split(";")[0].trim();
+    if (web && DEPLOY.target === "full") {
+      const r = await fetch("api/describe?url=" + encodeURIComponent(web), { signal: AbortSignal.timeout(9000) });
+      const j = r.ok ? await r.json() : null;
+      if (j?.x) return webHtml(j);
+    }
+  } catch { /* çevrimdışı / zaman aşımı → derlenmiş bilgi */ }
+  return null;
+}
+
+// --- derlenmiş bilgi metni (son çare): OSM ve Wikidata özelliklerinden -----------------------
+const TYPE_KEYS = ["tourism", "historic", "amenity", "leisure", "natural", "man_made", "place", "shop", "office", "railway", "aeroway", "power", "landuse", "craft", "waterway", "_type"];
+function typeLabel(p, cat, L) {
+  if (L === "tr" || L === "en") for (const k of TYPE_KEYS) {
+    const v = p[k];
+    if (!v || v === "yes") continue;
+    const key = k === "amenity" && v === "place_of_worship" && p.religion ? p.religion : v;
+    const tx = t("types." + key);
+    if (tx !== "types." + key) return tx;
+  }
+  return cat.names[L] || cat.names.tr;
+}
+function profileHtml(p, cat, title, district, prov, L) {
+  const pv = (prov.names[L] || prov.names.tr).split(" · ")[0];
+  const type = typeLabel(p, cat, L);
+  const place = district && district !== pv && district !== prov.names.tr.split(" · ")[0] ? t("gen.placeD").replace("{d}", district).replace("{p}", pv)
+    : district ? t("gen.placeC").replace("{p}", pv) : t("gen.placeP").replace("{p}", pv);
+  let intro = t("gen.intro").replace("{name}", title).replace("{place}", place)
+    .replace("{type}", L === "tr" ? type.toLocaleLowerCase("tr") : L === "en" ? type.toLowerCase() : type);
+  if (L === "en") intro = intro.replace(/ a ([aeiou])/i, " an $1");
+  const facts = [];
+  const add = (k, v) => v && facts.push([t("gen." + k), v]);
+  add("address", [p["addr:street"] && [p["addr:street"], p["addr:housenumber"]].filter(Boolean).join(" "), p["addr:district"], p["addr:city"]].filter(Boolean).join(", "));
+  add("district", district);
+  add("operator", p.operator || p.brand);
+  if (p.ext || p.method) add("method", t("gen.m." + (p.method === "cozelti" ? "cozelti" : p.ext || "yeralti")));
+  add("resource", p.res);
+  if (p.depth_m) add("depth", `~${p.depth_m} m`);
+  if (p["plant:source"]) add("power", p["plant:source"].split(";").map((x) => { const k = "gen.src." + x.trim(); const v = t(k); return v === k ? x : v; }).join(", "));
+  add("output", p["plant:output:electricity"]);
+  add("cuisine", p.cuisine && p.cuisine.replace(/_/g, " ").replace(/;/g, ", "));
+  add("stars", p.stars && "★".repeat(Math.min(7, parseInt(p.stars, 10) || 0)));
+  add("denomination", p.denomination);
+  add("artist", p.artist_name);
+  add("architect", p.architect);
+  add("levels", p["building:levels"]);
+  add("capacity", p.capacity);
+  add("inscription", p.inscription);
+  if (p.heritage) add("heritage", t("gen.heritageYes"));
+  if (p.fee) add("fee", p.fee === "no" ? t("gen.free") : p.fee === "yes" ? t("gen.paid") : p.fee);
+  const note = p["description:" + L] || p.description || "";
+  return `<p class="summary">${esc(intro)}</p>${note ? `<p class="summary"><i>“${esc(note)}”</i></p>` : ""}
+    ${facts.length ? `<dl class="facts">${facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : ""}
+    <p class="src muted">${t("gen.compiled")}</p>`;
 }
 
 function curatedHtml(cur, L) {
@@ -148,7 +249,7 @@ function curatedHtml(cur, L) {
 }
 
 async function summaryHtml(wt, L) {
-  if (!wt) return `<p class="summary muted">${t("noSummary")}</p>`;
+  if (!wt) return null;
   try {
     // seçili dilde makale yoksa langlinks üzerinden bul
     let { l, title } = wt;
@@ -160,7 +261,7 @@ async function summaryHtml(wt, L) {
     const note = l !== L ? ` (${l.toUpperCase()})` : "";
     return `<p class="summary">${esc(s.extract)}</p><p class="src">${t("source")}: <a href="${url}" target="_blank" rel="noopener">Wikipedia${note}</a> · CC BY-SA 4.0</p>`;
   } catch {
-    return `<p class="summary muted">${t("noSummary")}</p>`;
+    return null;
   }
 }
 

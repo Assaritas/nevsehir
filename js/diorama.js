@@ -149,7 +149,26 @@ async function surfaceTexture(m) {
     const g = out.getContext("2d"); g.drawImage(under, 0, 0, 2048, 2048); g.globalAlpha = 0.9; g.drawImage(c, 0, 0);
     return out;
   }
-  return reliefTexture(m, base === "terrain" && false);
+  return overlayWater(m, reliefTexture(m, base === "terrain" && false));
+}
+// deniz, göl ve nehir alanları (vektör karolarından) kabartma dokusunun üstüne mavi boyanır
+function overlayWater(m, c) {
+  let feats = [];
+  try { feats = map.querySourceFeatures("openmaptiles", { sourceLayer: "water" }); } catch { return c; }
+  if (!feats.length) return c;
+  const g = c.getContext("2d"), S = c.width;
+  g.fillStyle = ctx.isDark() ? "#3f6f95" : "#8fc1e3";
+  // her alan ayrı doldurulur (komşu karoların taşma payları üst üste binse de boşluk oluşmaz)
+  for (const f of feats) for (const rings of polys(f.geometry)) {
+    g.beginPath();
+    for (const ring of rings) {
+      ring.forEach(([lng, lat], i) => { const [u, v] = lngLatToUV(m, lng, lat); i ? g.lineTo(u * S, v * S) : g.moveTo(u * S, v * S); });
+      g.closePath();
+    }
+    g.fill("evenodd");
+  }
+  m.hasWater = true;
+  return c;
 }
 
 // --- duvar dokusu (tüf katmanları) ---------------------------------------------
@@ -263,6 +282,8 @@ function applyHeights(m) {
   // etiketler ve yeraltı
   m.labels.forEach((l) => { const y = heightAt(m, l.u, l.v); l.obj.position.y = y + l.lift; l.stem && setStem(l.stem, y, y + l.lift); });
   buildUnderground(m);
+  clearTimeout(m._cityT);
+  if (m.city) m._cityT = setTimeout(() => { buildCity(m); renderKey(m); }, 200);
 }
 function setStem(line, y0, y1) {
   const p = line.geometry.attributes.position;
@@ -380,13 +401,20 @@ function buildUnderground(m) {
   m.ugInfo = [];
   const sites = (m.ugSites || []).map((s) => ({ ...s, uv: lngLatToUV(m, s.lng, s.lat) }))
     .filter((s) => s.uv[0] >= 0 && s.uv[0] <= 1 && s.uv[1] >= 0 && s.uv[1] <= 1);
-  if (!sites.length) return;
+  if (!sites.length) { buildResources(m); return; }
   // gerçek ölçekte görünmezler: derinlik ve yatay boyut ortak katsayılarla büyütülür (listede yazar)
   const ref = Math.max(...sites.map((s) => s.depth_m || s.visit_depth_m || 0), 40);
   m.ugExag = Math.max(1, Math.round((W * 0.18) / (ref * m.scale)));
   const k2u = m.scale * m.ugExag;
   const refSide = Math.sqrt(Math.max(...sites.map((s) => s.area_m2 || (s.length_m && s.width_m ? s.length_m * s.width_m : 2500))));
-  m.ugHExag = Math.max(1, Math.round((W * 0.085) / (refSide * m.scale)));   // yatay büyütme
+  m.ugHExag = Math.max(1, Math.round((W * 0.2) / (refSide * m.scale)));   // yatay büyütme
+  // yatay büyütme: yeraltı şehirleri bloğun yaklaşık beşte birine yayılır, ama komşu yeraltı şehirleriyle üst üste binmez
+  if (sites.length > 1) {
+    let minD = Infinity;
+    for (let a = 0; a < sites.length; a++) for (let b = a + 1; b < sites.length; b++)
+      minD = Math.min(minD, Math.hypot(sites[a].uv[0] - sites[b].uv[0], sites[a].uv[1] - sites[b].uv[1]) * W);
+    m.ugHExag = Math.max(1, Math.min(m.ugHExag, Math.floor((minD * 0.75) / (refSide * m.scale))));
+  }
   const h2u = m.scale * m.ugHExag;
   sites.forEach((s, si) => {
     const [u, v] = s.uv, cx = -W / 2 + u * W, cz = -W / 2 + v * W, top = heightAt(m, u, v);
@@ -409,7 +437,7 @@ function buildUnderground(m) {
       const rooms = [];
       for (let r = 0; r < nRooms; r++) {
         const ang = (r / nRooms) * Math.PI * 2 + rnd() * 0.6;
-        const dist = side * (0.22 + rnd() * 0.3);
+        const dist = side * (0.2 + rnd() * 0.55);
         const w = side * (0.14 + rnd() * 0.16), d = side * (0.1 + rnd() * 0.14);
         const rx = cx + Math.cos(ang) * dist, rz = cz + Math.sin(ang) * dist;
         const room = new THREE.Mesh(new THREE.BoxGeometry(w, levelH, d), mat);
@@ -456,6 +484,7 @@ function buildUnderground(m) {
     m.ugGroup.add(lbl);
     m.ugInfo.push({ ...s, n: si + 1, x: cx, z: cz, top, depthU: total * k2u, sourcedUpTo, floors, note: s.notes?.[lang()] || s.notes?.tr });
   });
+  buildResources(m);
 }
 
 // sarnıç: boyutları ve sütun sayısı kaynaklı dikdörtgen salon; derinlik bilinmiyorsa şematik konumda
@@ -499,8 +528,14 @@ function buildCistern(m, s, si, cx, cz, top, k2u, h2u) {
 function renderUgList(m) {
   const esc = (x) => String(x ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const body = $("dioListBody");
-  $("dioListTitle").textContent = `${t("d.ugList")} (${m.ugInfo.length})`;
-  if (!m.ugInfo.length) { body.innerHTML = `<p>${t("d.underNone")}</p>`; return; }
+  const res = m.resInfo || [];
+  $("dioListTitle").textContent = `${!res.length ? t("d.ugList") : !m.ugInfo.length ? t("d.resTitle") : t("d.under")} (${m.ugInfo.length + res.length})`;
+  if (!m.ugInfo.length && !res.length) { body.innerHTML = `<p>${t("d.underNone")}</p>`; return; }
+  const resHtml = res.length ? `${m.ugInfo.length ? `<h4 class="ug-sec">${t("d.resTitle")}</h4>` : ""}<p>${t("d.resNote").replace("{x}", m.resExag)}</p>
+    ${res.map((r, i) => `<div class="ug-item"><button data-res="${i}"><span class="n res ${r.ext}">${r.n}</span><span><b>${esc(r.name || t("d.k.res." + r.ext))}</b>
+      <small>${esc([t("d.k.res." + r.ext), r.res, r.depth_m ? `~${r.depth_m} m` : r.ext === "yerustu" ? null : t("d.depthUnknown"), r.operator, r.status].filter(Boolean).join(" · "))}</small></span></button>
+      ${r.hasText ? `<a class="ug-more" href="#" data-rescard="${esc(r.id)}">${t("d.details")} ›</a>` : ""}</div>`).join("")}` : "";
+  if (!m.ugInfo.length) { body.innerHTML = resHtml; bindUgList(m, body); return; }
   body.innerHTML = `<p>${t("d.depthNote").replace("{x}", m.ugExag)} ${t("d.hNote").replace("{x}", m.ugHExag)} ${t("d.layoutNote")}</p>
     <p class="sw"><i style="background:#d9a066"></i>${t("d.sourced")}<i style="background:#a8a29a"></i>${t("d.schematic")}</p>
     ${m.ugInfo.map((s, i) => {
@@ -511,8 +546,13 @@ function renderUgList(m) {
       return `<div class="ug-item"><button data-ug="${i}"><span class="n">${s.n}</span><span><b>${esc(s.name)}</b><small>${esc(facts)}</small></span></button>
         <details><summary>${t("d.details")}</summary><p>${esc(s.note || "")}</p>
         <ul>${(s.sources || []).map((x) => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a></li>`).join("")}</ul></details></div>`;
-    }).join("")}`;
+    }).join("")}${resHtml}`;
+  bindUgList(m, body);
+}
+function bindUgList(m, body) {
   body.querySelectorAll("[data-ug]").forEach((b) => (b.onclick = () => focusUg(m.ugInfo[+b.dataset.ug])));
+  body.querySelectorAll("[data-res]").forEach((b) => (b.onclick = () => focusUg(m.resInfo[+b.dataset.res])));
+  body.querySelectorAll("[data-rescard]").forEach((a) => (a.onclick = (e) => { e.preventDefault(); close(); ctx.openFeature(a.dataset.rescard); }));
 }
 function focusUg(s) {
   // kamerayı seçilen yeraltı şehrine çevir
@@ -548,6 +588,353 @@ function setUnderground(on) {
   m.labels.forEach((l) => (l.obj.element.style.opacity = on ? 0.35 : 1));
   $("dioLegend").hidden = !on;
   if (on) { renderUgList(m); setListOpen(innerWidth > 720); }
+  syncCityToggles(m);
+  renderKey(m);
+}
+
+// --- yer altı / yer üstü kaynakları (madenler, kuyular, açık ocaklar) ----------------
+// Veri: yeralti_maden.geojson ve acik_ocak.geojson (OSM + kaynaklı resources.json kayıtları).
+// Derinlik yalnızca kaynakta varsa gerçek (ortak katsayıyla); yoksa şematik ve listede "bilinmiyor" yazar.
+const RES_MAT = {
+  shaft: new THREE.MeshStandardMaterial({ color: 0x4a4f5c, roughness: 0.6, metalness: 0.3 }),
+  shaftSchem: new THREE.MeshStandardMaterial({ color: 0x8a8f99, roughness: 0.8, transparent: true, opacity: 0.6 }),
+  head: new THREE.MeshStandardMaterial({ color: 0xc23b22, roughness: 0.5, metalness: 0.4 }),
+  cavern: new THREE.MeshStandardMaterial({ color: 0x5fb3dd, emissive: 0x0d3550, roughness: 0.3, transparent: true, opacity: 0.7 }),
+  pit: new THREE.MeshStandardMaterial({ color: 0xe0913f, emissive: 0x3a1c04, roughness: 0.9, side: THREE.DoubleSide }),
+};
+const ORE_COLORS = [[/kömür|linyit|coal|lignite/i, 0x2b2b2b], [/trona|soda|tuz|salt|bor/i, 0xf1eefa], [/bakır|copper/i, 0xb87333], [/altın|gold/i, 0xd4af37],
+  [/demir|iron|krom|chrom/i, 0x7a4a3a], [/petrol|oil|gaz|gas/i, 0x1d1d1d], [/jeotermal|geotherm/i, 0xd94f30], [/pomza|pumice|tüf|tuff/i, 0xe9e2cf], [/mermer|marble|traverten/i, 0xf3f0ea]];
+const oreColor = (r) => (ORE_COLORS.find(([re]) => re.test(r || "")) || [0, 0x8e6bbf])[1];
+export const RES_KEY = { yeralti: "#4a4f5c", cozelti: "#5fb3dd", kuyu: "#1d1d1d", yerustu: "#e0913f" };
+
+function polyArea(geom) {
+  // yaklaşık alan (m²) — açık ocak çukurunun boyutu için
+  const ring = geom.type === "Polygon" ? geom.coordinates[0] : geom.type === "MultiPolygon" ? geom.coordinates[0][0] : null;
+  if (!ring) return 0;
+  const lat0 = ring[0][1] * Math.PI / 180, kx = 111320 * Math.cos(lat0), ky = 110540;
+  let a = 0;
+  for (let i = 0; i < ring.length - 1; i++) a += ring[i][0] * kx * ring[i + 1][1] * ky - ring[i + 1][0] * kx * ring[i][1] * ky;
+  return Math.abs(a / 2);
+}
+function buildResources(m) {
+  m.resInfo = [];
+  const feats = (m.resFeats || []).map((f) => {
+    const p = f.properties, [lng, lat] = f._pt;
+    const [u, v] = lngLatToUV(m, lng, lat);
+    return { p, u, v, lng, lat, area: f._area || 0, d2: (u - 0.5) ** 2 + (v - 0.5) ** 2 };
+  }).filter((r) => r.u >= 0.02 && r.u <= 0.98 && r.v >= 0.02 && r.v <= 0.98)
+    .sort((a, b) => (b.p._src ? 1 : 0) - (a.p._src ? 1 : 0) || (b.p.name ? 1 : 0) - (a.p.name ? 1 : 0) || a.d2 - b.d2)
+    .slice(0, 40);
+  if (!feats.length) return;
+  const known = feats.map((r) => +r.p.depth_m).filter((d) => d > 0);
+  const ref = Math.max(300, ...known);
+  m.resExag = Math.max(1, Math.round((m.baseDepth * 0.85) / (ref * m.scale)));
+  const k = m.scale * m.resExag;
+  const rad = Math.max(0.18, W * 0.004);
+  feats.forEach((r, i) => {
+    const x = -W / 2 + r.u * W, z = -W / 2 + r.v * W, top = heightAt(m, r.u, r.v);
+    const p = r.p, ext = p.method === "cozelti" ? "cozelti" : p.ext || "yeralti";
+    const depthM = +p.depth_m || 0, sourced = depthM > 0;
+    let depthU;
+    if (ext === "yerustu") {
+      // açık ocak: basamaklı çukur (alan OSM'den; derinlik bilinmiyorsa şematik)
+      const R = Math.max(0.5, Math.min(W * 0.06, Math.sqrt(Math.max(r.area, 20000) / Math.PI) * m.scale));
+      depthU = sourced ? depthM * k : Math.max(0.6, R * 0.5);
+      for (let s = 0; s < 3; s++) {
+        const r0 = R * (1 - s * 0.28), r1 = R * (1 - (s + 1) * 0.28) + R * 0.06;
+        const ring = new THREE.Mesh(new THREE.CylinderGeometry(r0, r1, depthU / 3, 28, 1, true), RES_MAT.pit);
+        ring.position.set(x, top + 0.05 - (s + 0.5) * (depthU / 3), z);
+        m.ugGroup.add(ring);
+      }
+    } else {
+      depthU = sourced ? depthM * k : m.baseDepth * 0.35;
+      const mat = sourced ? RES_MAT.shaft : RES_MAT.shaftSchem;
+      const nPipes = ext === "cozelti" ? 3 : 1;
+      for (let q = 0; q < nPipes; q++) {
+        const ox = nPipes > 1 ? Math.cos((q / nPipes) * Math.PI * 2) * rad * 4 : 0, oz = nPipes > 1 ? Math.sin((q / nPipes) * Math.PI * 2) * rad * 4 : 0;
+        const pipe = new THREE.Mesh(new THREE.CylinderGeometry(ext === "yeralti" ? rad : rad * 0.5, ext === "yeralti" ? rad : rad * 0.5, depthU, 10), mat);
+        pipe.position.set(x + ox, top - depthU / 2, z + oz);
+        m.ugGroup.add(pipe);
+      }
+      // ocak ağzı / kuyu başı (yüzeyde kırmızı işaret)
+      const head = new THREE.Mesh(ext === "yeralti" ? new THREE.ConeGeometry(rad * 3, rad * 6, 4) : new THREE.CylinderGeometry(rad * 1.6, rad * 1.6, rad * 2, 10), RES_MAT.head);
+      head.position.set(x, top + rad * 2.5, z);
+      m.ugGroup.add(head);
+      // cevher / çözelti boşluğu
+      if (ext === "cozelti") {
+        const cav = new THREE.Mesh(new THREE.SphereGeometry(rad * 7, 20, 12), RES_MAT.cavern);
+        cav.scale.set(1.4, 0.35, 1.1);
+        cav.position.set(x, top - depthU, z);
+        m.ugGroup.add(cav);
+      } else if (ext === "yeralti") {
+        const ore = new THREE.Mesh(new THREE.BoxGeometry(rad * 14, rad * 1.6, rad * 9),
+          new THREE.MeshStandardMaterial({ color: oreColor(p.res), roughness: 0.7, transparent: !sourced, opacity: sourced ? 1 : 0.6 }));
+        ore.position.set(x, top - depthU, z);
+        m.ugGroup.add(ore);
+        // galeri (yatay tünel)
+        const gal = new THREE.Mesh(new THREE.BoxGeometry(rad * 10, rad * 0.8, rad * 0.8), mat);
+        gal.position.set(x + rad * 5, top - depthU + rad * 1.2, z);
+        m.ugGroup.add(gal);
+      } else {
+        const blob = new THREE.Mesh(new THREE.SphereGeometry(rad * 3, 14, 10), new THREE.MeshStandardMaterial({ color: oreColor(p.res || "petrol"), roughness: 0.4 }));
+        blob.scale.y = 0.5;
+        blob.position.set(x, top - depthU, z);
+        m.ugGroup.add(blob);
+      }
+    }
+    const tag = document.createElement("div");
+    tag.className = "dio-ugtag res " + ext; tag.textContent = "M" + (i + 1);
+    const lbl = new CSS2DObject(tag);
+    lbl.visible = m.ugGroup.visible;
+    lbl.position.set(x, top + (ext === "yerustu" ? 1.2 : rad * 9), z);
+    m.ugGroup.add(lbl);
+    m.resInfo.push({ n: "M" + (i + 1), ext, name: p.name || p["name:tr"] || "", res: p.res, depth_m: depthM || null, operator: p.operator, status: p.status, id: p.id,
+      x, z, top, depthU, sourced, hasText: !!p._src });
+  });
+}
+
+// --- 3B şehir: binalar, anıt modelleri, yollar ve kaldırımlar ----------------------------
+// Binalar ve yollar haritanın vektör karolarından (OpenFreeMap / OpenMapTiles, © OSM) alınır; anıt modelleri
+// data/<il>/monuments.geojson (OSM building:part, kubbe / minare dilimleri). Yükseklikler gerçek ölçekte (abartısız).
+const CITY_MAX = 12000;     // m — daha geniş bölgelerde bina / yol çizilmez
+const ROAD_STYLE = {
+  motorway: [22, 0xe8913a, 6], trunk: [18, 0xf0a64a, 6], primary: [14, 0xf6c95a, 5], secondary: [11, 0xf8e08a, 4], tertiary: [9, 0xffffff, 3],
+  minor: [7, 0xfbfaf6, 2], service: [4.5, 0xf1eee8, 1], track: [3, 0xc8b08a, 1], path: [2.4, 0xd9c7a4, 0], rail: [3.2, 0x5b5b66, 3], transit: [3.2, 0x5b5b66, 3],
+  pedestrian: [6, 0xe9dfcf, 2], raceway: [8, 0xffffff, 1], busway: [7, 0xfbfaf6, 2],
+};
+const KEY_ROADS = [["main", 0xf6c95a], ["street", 0xfbfaf6], ["path", 0xd9c7a4], ["rail", 0x5b5b66]];
+function mergeGeos(geos) {
+  // basit birleştirme (aynı malzemeli çok sayıda parçayı tek çizim çağrısına indirir)
+  let n = 0;
+  const flat = geos.map((g) => { const ng = g.index ? g.toNonIndexed() : g; n += ng.attributes.position.count; return ng; });
+  const pos = new Float32Array(n * 3), nor = new Float32Array(n * 3), col = flat.some((g) => g.attributes.color) ? new Float32Array(n * 3) : null;
+  let o = 0;
+  for (const g of flat) {
+    if (!g.attributes.normal) g.computeVertexNormals();
+    pos.set(g.attributes.position.array, o * 3); nor.set(g.attributes.normal.array, o * 3);
+    if (col && g.attributes.color) col.set(g.attributes.color.array, o * 3);
+    o += g.attributes.position.count;
+    g.dispose();
+  }
+  const out = new THREE.BufferGeometry();
+  out.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  out.setAttribute("normal", new THREE.BufferAttribute(nor, 3));
+  if (col) out.setAttribute("color", new THREE.BufferAttribute(col, 3));
+  return out;
+}
+const xz = (m, lng, lat) => { const [u, v] = lngLatToUV(m, lng, lat); return [-W / 2 + u * W, -W / 2 + v * W, u, v]; };
+function groundRange(m, ring) {
+  let lo = Infinity, hi = -Infinity;
+  const step = Math.max(1, Math.floor(ring.length / 8));
+  for (let i = 0; i < ring.length; i += step) { const [, , u, v] = xz(m, ring[i][0], ring[i][1]); const h = heightAt(m, u, v); lo = Math.min(lo, h); hi = Math.max(hi, h); }
+  return [lo, hi];
+}
+function extrude(m, rings, b, h, sinkTo) {
+  const shape = new THREE.Shape(rings[0].map(([lng, lat]) => { const [X, Z] = xz(m, lng, lat); return new THREE.Vector2(X, -Z); }));
+  for (const hole of rings.slice(1)) shape.holes.push(new THREE.Path(hole.map(([lng, lat]) => { const [X, Z] = xz(m, lng, lat); return new THREE.Vector2(X, -Z); })));
+  const [lo, hi] = groundRange(m, rings[0]);
+  const base = (sinkTo ?? lo) + b;
+  const top = hi + h;                       // eğimli arazide çatı yüksek taraftan ölçülür
+  if (top - base < 0.01) return null;
+  const g = new THREE.ExtrudeGeometry(shape, { depth: top - base, bevelEnabled: false, curveSegments: 1 });
+  g.rotateX(-Math.PI / 2);
+  g.translate(0, base, 0);
+  return g;
+}
+const polys = (geom) => (geom.type === "Polygon" ? [geom.coordinates] : geom.type === "MultiPolygon" ? geom.coordinates : []);
+const inRegion = (m, ring) => ring.some(([lng, lat]) => { const [u, v] = lngLatToUV(m, lng, lat); return u > 0 && u < 1 && v > 0 && v < 1; });
+// bloğun kenarından taşan bina / anıt parçası çizilmez
+const allInside = (m, ring) => ring.every(([lng, lat]) => { const [u, v] = lngLatToUV(m, lng, lat); return u >= 0.002 && u <= 0.998 && v >= 0.002 && v <= 0.998; });
+
+function buildCity(m) {
+  if (m.city) { m.city.forEach((g) => { scene.remove(g); g.traverse((o) => { o.geometry?.dispose?.(); }); }); }
+  m.city = [];
+  m.cityInfo = { bld: 0, mon: 0, roads: {} };
+  if (m.region.size > CITY_MAX) return;
+  const vs = m.scale;                       // gerçek ölçek (m → sahne birimi)
+  // anıt modelleri (kaplanan alanlar sıradan binalardan çıkarılır)
+  const monCells = new Set();
+  const cellOf = (lng, lat) => `${Math.round(lng * 3000)}|${Math.round(lat * 4000)}`;
+  const monByColor = new Map();
+  for (const f of m.monFeats || []) {
+    for (const rings of polys(f.geometry)) {
+      if (!allInside(m, rings[0])) continue;
+      // taban = zemin + b, tepe = zemin + h (b, h: metre)
+      const g = extrude(m, rings, (f.properties.b || 0) * vs, (f.properties.h || 10) * vs);
+      if (!g) continue;
+      const c = f.properties.c || "#e6dccb";
+      if (!monByColor.has(c)) monByColor.set(c, []);
+      monByColor.get(c).push(g);
+      for (const [lng, lat] of rings[0]) monCells.add(cellOf(lng, lat));
+      m.cityInfo.mon++;
+    }
+  }
+  const monGroup = new THREE.Group(); monGroup.name = "mon";
+  for (const [c, geos] of monByColor) {
+    const mesh = new THREE.Mesh(mergeGeos(geos), new THREE.MeshStandardMaterial({ color: new THREE.Color(c), roughness: 0.75, metalness: 0.05, transparent: true, opacity: 1 }));
+    mesh.castShadow = mesh.receiveShadow = true;
+    monGroup.add(mesh);
+  }
+  // binalar
+  const bGeos = [];
+  const seen = new Set();
+  let tileFeats = [];
+  try { tileFeats = map.querySourceFeatures("openmaptiles", { sourceLayer: "building" }); } catch { /* stil yok */ }
+  for (const f of tileFeats) {
+    if (bGeos.length > 14000) break;
+    const p = f.properties || {};
+    if (p.hide_3d) continue;
+    for (const rings of polys(f.geometry)) {
+      const r0 = rings[0];
+      if (!r0 || r0.length < 4 || !allInside(m, r0)) continue;
+      const key = r0.length + "|" + r0[0][0].toFixed(6) + "|" + r0[0][1].toFixed(6);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      let cx = 0, cy = 0; for (const [a, b] of r0) { cx += a; cy += b; } cx /= r0.length; cy /= r0.length;
+      if (monCells.has(cellOf(cx, cy))) continue;
+      const h = Math.max(3, +p.render_height || +p.height || 8), b = +p.render_min_height || 0;
+      const g = extrude(m, rings, b * vs, h * vs);
+      if (g) bGeos.push(g);
+    }
+  }
+  const bldGroup = new THREE.Group(); bldGroup.name = "bld";
+  if (bGeos.length) {
+    const dark = ctx.isDark();
+    const mesh = new THREE.Mesh(mergeGeos(bGeos), new THREE.MeshStandardMaterial({ color: dark ? 0xc9c3b8 : 0xeee8dc, roughness: 0.85, transparent: true, opacity: 1 }));
+    mesh.castShadow = mesh.receiveShadow = true;
+    bldGroup.add(mesh);
+  }
+  m.cityInfo.bld = bGeos.length;
+  // yollar, sokaklar, yaya yolları / kaldırımlar, raylar — araziye serilmiş şeritler
+  let roads = [];
+  try { roads = map.querySourceFeatures("openmaptiles", { sourceLayer: "transportation" }); } catch { /* stil yok */ }
+  const pos = [], col = [], idx = [];
+  const tmpC = new THREE.Color();
+  const seenR = new Set();
+  const cell = W / (N - 1);
+  for (const f of roads) {
+    const p = f.properties || {};
+    if (p.brunnel === "tunnel") continue;
+    let cls = p.class;
+    if (cls === "path" && /pedestrian/.test(p.subclass || "")) cls = "pedestrian";
+    const st = ROAD_STYLE[cls];
+    if (!st) continue;
+    const lines = f.geometry.type === "LineString" ? [f.geometry.coordinates] : f.geometry.type === "MultiLineString" ? f.geometry.coordinates : [];
+    for (const line of lines) {
+      if (line.length < 2 || !inRegion(m, line)) continue;
+      const key = cls + line.length + line[0][0].toFixed(6) + line[0][1].toFixed(6);
+      if (seenR.has(key)) continue;
+      seenR.add(key);
+      const kind = cls === "rail" || cls === "transit" ? "rail" : cls === "path" || cls === "track" || cls === "pedestrian" ? "path" : ["motorway", "trunk", "primary", "secondary"].includes(cls) ? "main" : "street";
+      m.cityInfo.roads[kind] = (m.cityInfo.roads[kind] || 0) + 1;
+      const hw = Math.max(0.035, (st[0] * m.scale) / 2);
+      const lift = 0.06 + st[2] * 0.004 + (p.brunnel === "bridge" ? 0.15 : 0);
+      tmpC.setHex(st[1]);
+      // noktaları arazi ızgarası aralığında sıklaştır (şerit araziyi izlesin)
+      const pts = [];
+      for (let i = 0; i < line.length; i++) {
+        const [X, Z] = xz(m, line[i][0], line[i][1]);
+        if (i) {
+          const [pX, pZ] = pts[pts.length - 1];
+          const n = Math.min(40, Math.floor(Math.hypot(X - pX, Z - pZ) / cell));
+          for (let s = 1; s <= n; s++) pts.push([pX + ((X - pX) * s) / (n + 1), pZ + ((Z - pZ) * s) / (n + 1)]);
+        }
+        pts.push([X, Z]);
+      }
+      // blok dışına taşan kısımlar kesilir: yalnızca içteki ardışık nokta dizileri çizilir
+      const lim = W / 2 - hw - 0.05;
+      const runs = [[]];
+      for (const q of pts) { if (Math.abs(q[0]) <= lim && Math.abs(q[1]) <= lim) runs[runs.length - 1].push(q); else if (runs[runs.length - 1].length) runs.push([]); }
+      for (const run of runs) {
+        if (run.length < 2) continue;
+        const base = pos.length / 3;
+        for (let i = 0; i < run.length; i++) {
+          const [X, Z] = run[i];
+          const a = run[Math.max(0, i - 1)], b = run[Math.min(run.length - 1, i + 1)];
+          let dx = b[0] - a[0], dz = b[1] - a[1];
+          const len = Math.hypot(dx, dz) || 1; dx /= len; dz /= len;
+          const y = heightAt(m, (X + W / 2) / W, (Z + W / 2) / W) + lift;
+          pos.push(X - dz * hw, y, Z + dx * hw, X + dz * hw, y, Z - dx * hw);
+          col.push(tmpC.r, tmpC.g, tmpC.b, tmpC.r, tmpC.g, tmpC.b);
+          if (i) { const q = base + (i - 1) * 2; idx.push(q, q + 2, q + 1, q + 1, q + 2, q + 3); }
+        }
+      }
+    }
+  }
+  const roadGroup = new THREE.Group(); roadGroup.name = "roads";
+  if (idx.length) {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+    g.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
+    g.setIndex(idx);
+    g.computeVertexNormals();
+    const mesh = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.9, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2, transparent: true, opacity: 1 }));
+    mesh.receiveShadow = true;
+    roadGroup.add(mesh);
+  }
+  for (const g of [roadGroup, bldGroup, monGroup]) { scene.add(g); m.city.push(g); }
+  syncCityToggles(m);
+}
+function syncCityToggles(m) {
+  const show = { bld: $("dioBld").checked, mon: $("dioMon").checked, roads: $("dioRoads").checked };
+  for (const g of m.city || []) g.visible = show[g.name];
+  const ug = $("dioUnder").checked;
+  for (const g of m.city || []) g.traverse((o) => { if (o.material) { o.material.opacity = ug ? 0.25 : 1; o.material.depthWrite = !ug; } });
+  const has = { bld: m.cityInfo?.bld, mon: m.cityInfo?.mon, roads: Object.keys(m.cityInfo?.roads || {}).length };
+  for (const [k, id] of [["bld", "dioBldW"], ["mon", "dioMonW"], ["roads", "dioRoadsW"]]) $(id).hidden = !has[k];
+}
+
+// --- diorama lejantı -----------------------------------------------------------------
+function renderKey(m) {
+  const L = lang(), esc = (x) => String(x ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const hex = (n) => "#" + n.toString(16).padStart(6, "0");
+  const sw = (c, label, cls = "") => `<li><i class="${cls}" style="background:${c}"></i>${esc(label)}</li>`;
+  const base = ctx.base();
+  const out = [];
+  // yüzey
+  let surf;
+  if (base === "satellite") surf = `<ul>${sw("linear-gradient(135deg,#6d7b52,#b9a88f,#e8e1d3)", t("d.k.sat"))}</ul>`;
+  else if (base === "vegetation") surf = `<ul>${ctx.lcClasses.map(([k, c]) => sw(c, t("lc." + k))).join("")}</ul>`;
+  else {
+    const stops = [];
+    for (let q = 0; q <= 6; q++) { const h = m.hMin + ((m.hMax - m.hMin) * q) / 6; const [r, g, b] = rampColor(h); stops.push(`rgb(${r | 0},${g | 0},${b | 0})`); }
+    surf = `<div class="dk-ramp" style="background:linear-gradient(90deg,${stops.join(",")})"></div><div class="dk-ramp-l"><span>${Math.round(m.hMin)} m</span><span>${Math.round(m.hMax)} m</span></div>`;
+  }
+  if (m.hasWater) surf += `<ul>${sw(ctx.isDark() ? "#3f6f95" : "#8fc1e3", t("lc.water"))}</ul>`;
+  out.push(`<h4>${t("d.k.surface")}</h4>${surf}<ul>${sw("repeating-linear-gradient(180deg,#d9c3a0 0 3px,#a98462 3px 6px)", t("d.k.walls"))}</ul>`);
+  // şehir
+  const ci = m.cityInfo || {};
+  if (ci.bld || ci.mon || Object.keys(ci.roads || {}).length) {
+    const items = [];
+    if (ci.bld) items.push(sw(ctx.isDark() ? "#c9c3b8" : "#eee8dc", `${t("d.k.bld")} (${ci.bld.toLocaleString(L)})`));
+    if (ci.mon) items.push(sw("linear-gradient(135deg,#e6dccb 50%,#9aa3aa 50%)", t("d.k.mon")));
+    for (const [k, c] of KEY_ROADS) if (ci.roads?.[k]) items.push(sw(hex(c), t("d.k.road." + k), "line"));
+    out.push(`<h4>${t("d.k.city")}</h4><ul>${items.join("")}</ul>`);
+  } else if (m.region.size <= CITY_MAX) out.push(`<p class="dk-note">${t("d.k.zoomCity")}</p>`);
+  else out.push(`<p class="dk-note">${t("d.k.zoomCity")}</p>`);
+  // noktalar
+  const pts = [];
+  if (ctx.tourStops().length) pts.push(sw("#b5532c", t("d.k.tour"), "dot"));
+  const cats = [...new Set(ctx.activePoints().map((p) => p.cat))];
+  for (const c of cats) pts.push(sw(ctx.groups[ctx.cats[c].group].color, ctx.cats[c].names[L] || ctx.cats[c].names.tr, "dot"));
+  if (pts.length) out.push(`<h4>${t("d.k.points")}</h4><ul>${pts.join("")}</ul>`);
+  // yeraltı
+  if ($("dioUnder").checked) {
+    const u = [];
+    if (m.ugInfo?.length) {
+      u.push(sw("#d9a066", t("d.sourced")), sw("#a8a29a", t("d.schematic")), sw("#9c6a3c", t("d.k.tunnel")), sw("#3a2412", t("d.k.shaft")));
+      if (m.ugInfo.some((s) => s.type === "cistern")) u.push(sw("#e9dcc6", t("d.k.columns")));
+    }
+    if (m.resInfo?.length) {
+      const exts = new Set(m.resInfo.map((r) => r.ext));
+      for (const e of ["yeralti", "cozelti", "kuyu", "yerustu"]) if (exts.has(e)) u.push(sw(RES_KEY[e], t("d.k.res." + e)));
+      u.push(sw("#c23b22", t("d.k.head")));
+    }
+    if (u.length) out.push(`<h4>${t("d.under")}</h4><ul>${u.join("")}</ul>`);
+  }
+  const km = m.region.size >= 10000 ? Math.round(m.region.size / 1000) : (m.region.size / 1000).toFixed(1);
+  out.push(`<p class="dk-note">${t("d.k.scale").replace("{km}", km).replace("{x}", m.exag.toFixed(1))}</p>`);
+  $("dioKeyBody").innerHTML = out.join("");
 }
 
 // --- aç / kapa -------------------------------------------------------------------
@@ -559,6 +946,7 @@ async function open() {
   $("dioBusy").hidden = false;
   $("dioLegend").hidden = true;
   $("dioUnder").checked = false;
+  $("dioKeyBody").hidden = innerWidth <= 720; $("dioKeyToggle").setAttribute("aria-expanded", String(innerWidth > 720));
   $("dioHint").textContent = t("d.hint");
   ensureRenderer();
   resize();
@@ -570,10 +958,19 @@ async function open() {
     const m = { ...g, region: r, scale: W / r.size, exag, labels: [] };
     const relief = (g.hMax - g.hMin) * m.scale;
     m.baseDepth = Math.max(5, W * 0.06 + relief * 0.15);
-    const ugData = await fetch(ctx.dataUrl + "underground.json").then((x) => x.json()).catch(() => ({ sites: [] }));
+    const getJson = (f, d) => fetch(ctx.dataUrl + f).then((x) => (x.ok ? x.json() : d)).catch(() => d);
+    const [ugData, resA, resB, mon] = await Promise.all([getJson("underground.json", { sites: [] }), getJson("yeralti_maden.geojson", { features: [] }),
+      getJson("acik_ocak.geojson", { features: [] }), r.size <= CITY_MAX ? getJson("monuments.geojson", { features: [] }) : { features: [] }]);
     m.ugSites = ugData.sites || [];
+    m.monFeats = mon.features || [];
+    // kaynaklar: alanlar için etiket noktası (_pt) ve alan; noktalar doğrudan
+    const area = new Map();
+    for (const f of [...resA.features, ...resB.features]) if (/Polygon/.test(f.geometry.type)) area.set(f.properties.id, polyArea(f.geometry));
+    m.resFeats = [...resA.features, ...resB.features].filter((f) => f.geometry.type === "Point")
+      .map((f) => ({ properties: f.properties, _pt: f.geometry.coordinates, _area: area.get(f.properties.id) || 0 }));
+    const inside = (lng, lat) => { const [u, v] = lngLatToUV(m, lng, lat); return u >= 0 && u <= 1 && v >= 0 && v <= 1; };
     // yeraltı varsa blok tabanını derinleştir
-    if (m.ugSites.some((s) => { const [u, v] = lngLatToUV(m, s.lng, s.lat); return u >= 0 && u <= 1 && v >= 0 && v <= 1; })) m.baseDepth = Math.max(m.baseDepth, W * 0.24);
+    if (m.ugSites.some((s) => inside(s.lng, s.lat)) || m.resFeats.some((f) => inside(f._pt[0], f._pt[1]))) m.baseDepth = Math.max(m.baseDepth, W * 0.24);
     const tex = await surfaceTexture(m);
     buildBlock(m, tex);
     model = m;
@@ -581,6 +978,8 @@ async function open() {
     ctx.tourStops().forEach((s, i) => addLabel(m, { lng: s.x, lat: s.y, text: `${i + 1}. ${s.n || ""}`, color: "#b5532c", cls: "tour", lift: 7 }));
     ctx.activePoints().slice(0, 120).forEach((p) => addLabel(m, { lng: p.lng, lat: p.lat, text: p.name, color: ctx.groups[ctx.cats[p.cat].group].color }));
     applyHeights(m);
+    buildCity(m);
+    renderKey(m);
     const km = (r.size / 1000).toFixed(r.size < 10000 ? 1 : 0);
     $("dioTitle").textContent = `${ctx.prov.names[lang()] || ctx.prov.names.tr} · ≈ ${km} × ${km} km`;
     fitCamera();
@@ -611,6 +1010,12 @@ export function initDiorama(_map, _ctx) {
   $("dioListToggle").onclick = () => setListOpen($("dioListBody").hidden);
   $("dioRotate").onchange = (e) => { if (controls) controls.autoRotate = e.target.checked; };
   $("dioLabels").onchange = (e) => { if (labelRenderer) labelRenderer.domElement.classList.toggle("hide", !e.target.checked); };
+  for (const id of ["dioBld", "dioMon", "dioRoads"]) $(id).onchange = () => model && syncCityToggles(model);
+  $("dioKeyToggle").onclick = () => {
+    const open = $("dioKeyBody").hidden;
+    $("dioKeyBody").hidden = !open; $("dioKeyToggle").setAttribute("aria-expanded", String(open));
+    if (open && innerWidth <= 720) setListOpen(false);
+  };
   $("dioExag").oninput = (e) => {
     $("dioExagV").textContent = parseFloat(e.target.value).toFixed(1) + "×";
     if (!model) return;

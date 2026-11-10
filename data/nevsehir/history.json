@@ -1,28 +1,146 @@
 {
   "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler. from/to: yıl (MÖ için eksi). approx: yaklaşık. Burada olmayan yerler için Wikidata 'kuruluş' (P571) ve OSM start_date kullanılır; tarihi bilinmeyen yerler geçmiş görünümünde gizlenir.",
-  "timeless": ["daglar", "vadiler", "akarsu_gol"],
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "kaplicalar"
+  ],
   "features": {
-    "w26045752": { "from": 300, "approx": true, "note": "MS 4.–13. yüzyıllar arasında yoğun manastır hayatı", "src": "Kültür Portalı" },
-    "w22271687": { "from": 800, "approx": true, "note": "9.–13. yüzyıllarda önemli Hristiyan yerleşimi; 1952'ye kadar iskân edildi", "src": "Kültür Portalı" },
-    "n27151654": { "from": -1600, "approx": true, "note": "Kapadokya Alan Başkanlığı'na göre ilk katı Hitit döneminde; Roma ve Bizans dönemlerinde genişletildi", "src": "Kültür Portalı (Kapadokya Alan Başkanlığı)" },
-    "n939100433": { "from": -1600, "approx": true, "note": "Kapadokya Alan Başkanlığı'na göre ilk katı Hitit döneminde", "src": "Kültür Portalı (Kapadokya Alan Başkanlığı)" },
-    "n281777097": { "from": 200, "approx": true, "note": "Kültür Portalı'na göre yeraltı şehirlerini MS 2. yüzyıldan sonra bölgeye gelen ilk Hristiyanlar kurdu", "src": "Kültür Portalı (muze.gov.tr)" },
-    "n707408836": { "from": 17, "approx": true, "note": "Roma döneminden beri oyularak kullanıldı; 1960'lara kadar içinde ve çevresinde yaşandı", "src": "Kültür Portalı" },
-    "n6192482574": { "from": 17, "approx": true, "note": "Roma döneminden beri oyularak kullanıldı", "src": "Kültür Portalı" },
-    "w690518467": { "from": 1726, "note": "Damad İbrâhim Paşa Külliyesi 1139'da (1726-27) tamamlandı", "src": "TDV İslâm Ansiklopedisi" },
-    "w168408687": { "from": 1275, "approx": true, "note": "Türbe 13. yüzyılın son çeyreğinin başlarında yapılmış olmalı", "src": "TDV İslâm Ansiklopedisi" }
+    "w26045752": {
+      "from": 300,
+      "approx": true,
+      "note": "MS 4.–13. yüzyıllar arasında yoğun manastır hayatı",
+      "src": "Kültür Portalı"
+    },
+    "w22271687": {
+      "from": 800,
+      "approx": true,
+      "note": "9.–13. yüzyıllarda önemli Hristiyan yerleşimi; 1952'ye kadar iskân edildi",
+      "src": "Kültür Portalı"
+    },
+    "n27151654": {
+      "from": -1600,
+      "approx": true,
+      "note": "Kapadokya Alan Başkanlığı'na göre ilk katı Hitit döneminde; Roma ve Bizans dönemlerinde genişletildi",
+      "src": "Kültür Portalı (Kapadokya Alan Başkanlığı)"
+    },
+    "n939100433": {
+      "from": -1600,
+      "approx": true,
+      "note": "Kapadokya Alan Başkanlığı'na göre ilk katı Hitit döneminde",
+      "src": "Kültür Portalı (Kapadokya Alan Başkanlığı)"
+    },
+    "n281777097": {
+      "from": 200,
+      "approx": true,
+      "note": "Kültür Portalı'na göre yeraltı şehirlerini MS 2. yüzyıldan sonra bölgeye gelen ilk Hristiyanlar kurdu",
+      "src": "Kültür Portalı (muze.gov.tr)"
+    },
+    "n707408836": {
+      "from": 17,
+      "approx": true,
+      "note": "Roma döneminden beri oyularak kullanıldı; 1960'lara kadar içinde ve çevresinde yaşandı",
+      "src": "Kültür Portalı"
+    },
+    "n6192482574": {
+      "from": 17,
+      "approx": true,
+      "note": "Roma döneminden beri oyularak kullanıldı",
+      "src": "Kültür Portalı"
+    },
+    "w690518467": {
+      "from": 1726,
+      "note": "Damad İbrâhim Paşa Külliyesi 1139'da (1726-27) tamamlandı",
+      "src": "TDV İslâm Ansiklopedisi"
+    },
+    "w168408687": {
+      "from": 1275,
+      "approx": true,
+      "note": "Türbe 13. yüzyılın son çeyreğinin başlarında yapılmış olmalı",
+      "src": "TDV İslâm Ansiklopedisi"
+    }
   },
   "events": [
-    { "y": 300, "approx": true, "tr": "Göreme'de yoğun manastır hayatı başlar (MS 4.–13. yy)", "en": "Intense monastic life begins at Göreme (4th–13th c.)", "src": "Kültür Portalı", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/goreme-acik-hava-muzes" },
-    { "y": 800, "approx": true, "tr": "Zelve önemli bir Hristiyan yerleşim ve dinî merkez (9.–13. yy)", "en": "Zelve becomes an important Christian settlement (9th–13th c.)", "src": "Kültür Portalı", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/pasabaglari-ve-zelve-oren-yer" },
-    { "y": 1275, "approx": true, "tr": "Hacı Bektâş-ı Velî Türbesi yapılır", "en": "The tomb of Hacı Bektaş-ı Veli is built", "src": "TDV İslâm Ansiklopedisi", "url": "https://islamansiklopedisi.org.tr/haci-bektas-i-veli-kulliyesi" },
-    { "y": 1530, "tr": "İlk Osmanlı sayımında Uçhisar'da yaklaşık 3.000 kişi yaşıyor", "en": "First Ottoman census: about 3,000 people live in Uçhisar", "src": "Kültür Portalı", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/uchsar-kales" },
-    { "y": 1553, "tr": "Hacıbektaş'ta bugünkü Kırklar Meydanı inşa edilir", "en": "The present Kırklar Meydanı is built at Hacıbektaş", "src": "TDV İslâm Ansiklopedisi", "url": "https://islamansiklopedisi.org.tr/haci-bektas-i-veli-kulliyesi" },
-    { "y": 1726, "tr": "Damad İbrâhim Paşa Külliyesi tamamlanır; Muşkara köyünün adı Nevşehir olur", "en": "Damad İbrahim Pasha's complex is completed; the village of Muşkara is renamed Nevşehir", "src": "TDV İslâm Ansiklopedisi", "url": "https://islamansiklopedisi.org.tr/damad-ibrahim-pasa-kulliyesi--nevsehir" },
-    { "y": 1952, "tr": "Zelve'de iskân sona erer", "en": "Zelve ceases to be inhabited", "src": "Kültür Portalı", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/pasabaglari-ve-zelve-oren-yer" },
-    { "y": 1964, "tr": "Kaymaklı Yeraltı Şehri ziyarete açılır", "en": "Kaymaklı Underground City opens to visitors", "src": "Kültür Portalı", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/kaymakli-yeralti-sehri" },
-    { "y": 1965, "tr": "Derinkuyu Yeraltı Şehri ziyarete açılır", "en": "Derinkuyu Underground City opens to visitors", "src": "Kültür Portalı", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/derinkuyu-yeralti-sehri" },
-    { "y": 1967, "tr": "Göreme Açık Hava Müzesi ziyarete açılır", "en": "Göreme Open-Air Museum opens to visitors", "src": "T.C. Kültür ve Turizm Bakanlığı", "url": "https://muze.gov.tr/muze-detay?SectionId=GRM01&DistId=GRM" },
-    { "y": 1985, "tr": "Göreme Açık Hava Müzesi UNESCO Dünya Mirası Listesi'ne girer (6 Aralık)", "en": "Göreme Open-Air Museum enters the UNESCO World Heritage List (6 December)", "src": "Kültür Portalı", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/goreme-acik-hava-muzes" }
+    {
+      "y": 300,
+      "approx": true,
+      "tr": "Göreme'de yoğun manastır hayatı başlar (MS 4.–13. yy)",
+      "en": "Intense monastic life begins at Göreme (4th–13th c.)",
+      "src": "Kültür Portalı",
+      "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/goreme-acik-hava-muzes"
+    },
+    {
+      "y": 800,
+      "approx": true,
+      "tr": "Zelve önemli bir Hristiyan yerleşim ve dinî merkez (9.–13. yy)",
+      "en": "Zelve becomes an important Christian settlement (9th–13th c.)",
+      "src": "Kültür Portalı",
+      "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/pasabaglari-ve-zelve-oren-yer"
+    },
+    {
+      "y": 1275,
+      "approx": true,
+      "tr": "Hacı Bektâş-ı Velî Türbesi yapılır",
+      "en": "The tomb of Hacı Bektaş-ı Veli is built",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/haci-bektas-i-veli-kulliyesi"
+    },
+    {
+      "y": 1530,
+      "tr": "İlk Osmanlı sayımında Uçhisar'da yaklaşık 3.000 kişi yaşıyor",
+      "en": "First Ottoman census: about 3,000 people live in Uçhisar",
+      "src": "Kültür Portalı",
+      "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/uchsar-kales"
+    },
+    {
+      "y": 1553,
+      "tr": "Hacıbektaş'ta bugünkü Kırklar Meydanı inşa edilir",
+      "en": "The present Kırklar Meydanı is built at Hacıbektaş",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/haci-bektas-i-veli-kulliyesi"
+    },
+    {
+      "y": 1726,
+      "tr": "Damad İbrâhim Paşa Külliyesi tamamlanır; Muşkara köyünün adı Nevşehir olur",
+      "en": "Damad İbrahim Pasha's complex is completed; the village of Muşkara is renamed Nevşehir",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/damad-ibrahim-pasa-kulliyesi--nevsehir"
+    },
+    {
+      "y": 1952,
+      "tr": "Zelve'de iskân sona erer",
+      "en": "Zelve ceases to be inhabited",
+      "src": "Kültür Portalı",
+      "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/pasabaglari-ve-zelve-oren-yer"
+    },
+    {
+      "y": 1964,
+      "tr": "Kaymaklı Yeraltı Şehri ziyarete açılır",
+      "en": "Kaymaklı Underground City opens to visitors",
+      "src": "Kültür Portalı",
+      "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/kaymakli-yeralti-sehri"
+    },
+    {
+      "y": 1965,
+      "tr": "Derinkuyu Yeraltı Şehri ziyarete açılır",
+      "en": "Derinkuyu Underground City opens to visitors",
+      "src": "Kültür Portalı",
+      "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/derinkuyu-yeralti-sehri"
+    },
+    {
+      "y": 1967,
+      "tr": "Göreme Açık Hava Müzesi ziyarete açılır",
+      "en": "Göreme Open-Air Museum opens to visitors",
+      "src": "T.C. Kültür ve Turizm Bakanlığı",
+      "url": "https://muze.gov.tr/muze-detay?SectionId=GRM01&DistId=GRM"
+    },
+    {
+      "y": 1985,
+      "tr": "Göreme Açık Hava Müzesi UNESCO Dünya Mirası Listesi'ne girer (6 Aralık)",
+      "en": "Göreme Open-Air Museum enters the UNESCO World Heritage List (6 December)",
+      "src": "Kültür Portalı",
+      "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/goreme-acik-hava-muzes"
+    }
   ]
 }

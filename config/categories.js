@@ -37,7 +37,7 @@ export const CATEGORIES = [
 
   // ---------- Tarih ve kültür ----------
   { id: "turistik", group: "tarih", icon: "attraction",
-    osm: ['nwr["tourism"~"^(attraction|viewpoint)$"]'],
+    osm: ['nwr["tourism"="attraction"]'],
     names: { tr: "Turistik alanlar", en: "Tourist sights", de: "Sehenswürdigkeiten", fr: "Sites touristiques", es: "Lugares turísticos", ru: "Достопримечательности" } },
   { id: "antik", group: "tarih", icon: "landmark",
     osm: ['nwr["historic"~"^(archaeological_site|ruins)$"]'],
@@ -62,8 +62,15 @@ export const CATEGORIES = [
     osm: ['nwr["historic"="fountain"]', 'nwr["amenity"="fountain"]["historic"]', 'nwr["historic"]["name"~"[Çç]e[şs]me|[Ss]ebil"]'],
     names: { tr: "Tarihî çeşmeler ve sebiller", en: "Historic fountains", de: "Historische Brunnen", fr: "Fontaines historiques", es: "Fuentes históricas", ru: "Исторические фонтаны" } },
   { id: "tarihi_yapilar", group: "tarih", icon: "monument",
-    osm: ['nwr["historic"~"^(monument|memorial|building|city_gate|aqueduct|house|mansion|wayside_shrine|tower|obelisk|column)$"]["name"]', 'nwr["place"="square"]'],
+    osm: ['nwr["historic"~"^(building|city_gate|aqueduct|house|mansion|wayside_shrine|tower|obelisk|column)$"]["name"]', 'nwr["place"="square"]'],
     names: { tr: "Tarihi yapılar, meydanlar ve mekânlar", en: "Historic buildings & squares", de: "Historische Bauten & Plätze", fr: "Monuments et places historiques", es: "Edificios y plazas históricas", ru: "Исторические здания и площади" } },
+  { id: "anitlar", group: "tarih", icon: "monument",
+    osm: ['nwr["historic"~"^(monument|memorial)$"]["name"]', 'nwr["tourism"="artwork"]["artwork_type"~"^(statue|sculpture|bust)$"]["name"]'],
+    names: { tr: "Anıtlar ve heykeller", en: "Monuments & statues", de: "Denkmäler & Statuen", fr: "Monuments et statues", es: "Monumentos y estatuas", ru: "Памятники и статуи" } },
+  { id: "mezarliklar", group: "tarih", icon: "cemetery-JP",
+    osm: ['nwr["historic"="cemetery"]', 'nwr["cemetery"="war_cemetery"]', 'nwr["landuse"="cemetery"]["historic"]', 'nwr["landuse"="cemetery"]["name"~"[Şş]ehitli|[Hh]azire|[Tt]arihi"]',
+          'nwr["amenity"="grave_yard"]["historic"]'],
+    names: { tr: "Tarihî mezarlıklar ve şehitlikler", en: "Historic cemeteries & war memorials", de: "Historische Friedhöfe & Ehrenmale", fr: "Cimetières historiques et militaires", es: "Cementerios históricos y de guerra", ru: "Исторические и воинские кладбища" } },
   { id: "kaleler", group: "tarih", icon: "castle",
     osm: ['nwr["historic"~"^(castle|fort|citywalls|tower)$"]'],
     names: { tr: "Kaleler ve hisarlar", en: "Castles & fortresses", de: "Burgen & Festungen", fr: "Châteaux et forteresses", es: "Castillos y fortalezas", ru: "Крепости и замки" } },
@@ -78,6 +85,13 @@ export const CATEGORIES = [
   { id: "tiyatrolar", group: "tarih", icon: "theatre",
     osm: ['nwr["amenity"~"^(theatre|arts_centre)$"]', 'nwr["historic"="theatre"]'],
     names: { tr: "Tiyatrolar ve sahneler", en: "Theatres & stages", de: "Theater & Bühnen", fr: "Théâtres et scènes", es: "Teatros y escenarios", ru: "Театры и сцены" } },
+
+  { id: "kultur_merkezleri", group: "tarih", icon: "library",
+    osm: ['nwr["amenity"="library"]["name"]', 'nwr["amenity"="community_centre"]["name"~"[Kk]ültür|[Cc]ultur"]', 'nwr["tourism"="gallery"]', 'nwr["amenity"="exhibition_centre"]'],
+    names: { tr: "Kütüphaneler, galeriler ve kültür merkezleri", en: "Libraries, galleries & cultural centres", de: "Bibliotheken, Galerien & Kulturzentren", fr: "Bibliothèques, galeries et centres culturels", es: "Bibliotecas, galerías y centros culturales", ru: "Библиотеки, галереи и культурные центры" } },
+  { id: "universiteler", group: "tarih", icon: "college",
+    osm: ['nwr["amenity"="university"]["name"]'],
+    names: { tr: "Üniversiteler", en: "Universities", de: "Universitäten", fr: "Universités", es: "Universidades", ru: "Университеты" } },
 
   // ---------- İnanç yapıları ----------
   { id: "camiler", group: "inanc", icon: "religious-muslim",
@@ -98,6 +112,9 @@ export const CATEGORIES = [
   { id: "milli_parklar", group: "doga", icon: "park-alt1",
     osm: ['rel["boundary"~"^(national_park|protected_area)$"]', 'way["boundary"~"^(national_park|protected_area)$"]', 'nwr["leisure"="nature_reserve"]'],
     names: { tr: "Milli parklar ve korunan alanlar", en: "National parks & protected areas", de: "Nationalparks & Schutzgebiete", fr: "Parcs nationaux et zones protégées", es: "Parques nacionales y áreas protegidas", ru: "Нацпарки и охраняемые зоны" } },
+  { id: "seyir", group: "doga", icon: "viewpoint",
+    osm: ['nwr["tourism"="viewpoint"]', 'nwr["man_made"="tower"]["tower:type"="observation"]'],
+    names: { tr: "Seyir terasları ve manzara noktaları", en: "Viewpoints & observation decks", de: "Aussichtspunkte", fr: "Points de vue et belvédères", es: "Miradores", ru: "Смотровые площадки" } },
   { id: "parklar", group: "doga", icon: "park",
     osm: ['nwr["leisure"~"^(park|garden)$"]["name"]'],
     names: { tr: "Parklar ve bahçeler", en: "Parks & gardens", de: "Parks & Gärten", fr: "Parcs et jardins", es: "Parques y jardines", ru: "Парки и сады" } },
@@ -128,6 +145,12 @@ export const CATEGORIES = [
   { id: "hayvanat", group: "doga", icon: "zoo",
     osm: ['nwr["tourism"~"^(zoo|aquarium)$"]', 'nwr["amenity"="aquarium"]'],
     names: { tr: "Hayvanat bahçeleri ve akvaryumlar", en: "Zoos & aquariums", de: "Zoos & Aquarien", fr: "Zoos et aquariums", es: "Zoológicos y acuarios", ru: "Зоопарки и аквариумы" } },
+  { id: "bag_sarap", group: "doga", icon: "alcohol-shop",
+    osm: ['nwr["craft"="winery"]', 'nwr["landuse"="vineyard"]["name"]', 'nwr["tourism"]["name"~"[Şş]arap|[Ww]inery|[Bb]ağevi"]'],
+    names: { tr: "Bağlar ve şarap evleri", en: "Vineyards & wineries", de: "Weinberge & Weingüter", fr: "Vignobles et domaines viticoles", es: "Viñedos y bodegas", ru: "Виноградники и винодельни" } },
+  { id: "stadyumlar", group: "doga", icon: "stadium",
+    osm: ['nwr["leisure"="stadium"]["name"]'],
+    names: { tr: "Stadyumlar", en: "Stadiums", de: "Stadien", fr: "Stades", es: "Estadios", ru: "Стадионы" } },
   { id: "plajlar", group: "doga", icon: "beach",
     osm: ['nwr["natural"="beach"]', 'nwr["leisure"="beach_resort"]'],
     names: { tr: "Plajlar", en: "Beaches", de: "Strände", fr: "Plages", es: "Playas", ru: "Пляжи" } },
@@ -176,13 +199,22 @@ export const CATEGORIES = [
     names: { tr: "Büyükelçilik ve konsolosluklar", en: "Embassies & consulates", de: "Botschaften & Konsulate", fr: "Ambassades et consulats", es: "Embajadas y consulados", ru: "Посольства и консульства" } },
 
   // ---------- Madenler ve kaynaklar ----------
-  { id: "madenler", group: "kaynak", icon: "industry",
-    osm: ['nwr["landuse"="quarry"]', 'nwr["man_made"~"^(mineshaft|adit)$"]', 'nwr["industrial"="mine"]'],
-    names: { tr: "Madenler ve ocaklar", en: "Mines & quarries", de: "Bergwerke & Steinbrüche", fr: "Mines et carrières", es: "Minas y canteras", ru: "Шахты и карьеры" } },
-  { id: "kaynaklar", group: "kaynak", icon: "hot-spring",
-    osm: ['nwr["natural"~"^(hot_spring|geyser)$"]', 'nwr["natural"="spring"]["name"]', 'nwr["power"="plant"]', 'nwr["man_made"="petroleum_well"]'],
-    names: { tr: "Yer altı / yer üstü kaynakları", en: "Underground & surface resources", de: "Unter- & oberirdische Ressourcen", fr: "Ressources souterraines et de surface", es: "Recursos subterráneos y de superficie", ru: "Подземные и наземные ресурсы" } },
+  // ext: "yeralti" (galeri / kuyu / çözelti madenciliği) ya da "yerustu" (açık ocak / taş ocağı) — scripts/fetch-data.mjs belirler;
+  // data/<il>/resources.json içindeki kaynaklı kayıtlar (yöntem, derinlik, kaynak) bu iki kategoriye eklenir
+  { id: "yeralti_maden", group: "kaynak", icon: "mine-shaft", res: "yeralti",
+    osm: ['nwr["man_made"~"^(mineshaft|adit)$"]', 'nwr["industrial"="mine"]["location"="underground"]', 'nwr["mine:type"="underground"]',
+          'nwr["historic"~"^(mine|mine_shaft|mine_adit)$"]', 'nwr["man_made"="petroleum_well"]'],
+    names: { tr: "Yeraltı madenleri ve kuyular (çıkarım noktaları)", en: "Underground mines & wells (extraction points)", de: "Untertagebau & Bohrungen (Förderpunkte)", fr: "Mines souterraines et puits (points d'extraction)", es: "Minas subterráneas y pozos (puntos de extracción)", ru: "Подземные шахты и скважины (точки добычи)" } },
+  { id: "acik_ocak", group: "kaynak", icon: "mine-pit", res: "yerustu",
+    osm: ['nwr["landuse"="quarry"]', 'nwr["industrial"="mine"]["location"!="underground"]["mine:type"!="underground"]'],
+    names: { tr: "Açık ocaklar ve taş ocakları (yerüstü)", en: "Open-pit mines & quarries (surface)", de: "Tagebaue & Steinbrüche (übertage)", fr: "Mines à ciel ouvert et carrières (surface)", es: "Minas a cielo abierto y canteras (superficie)", ru: "Карьеры и открытые разработки (поверхность)" } },
+  { id: "kaplicalar", group: "kaynak", icon: "hot-spring",
+    osm: ['nwr["natural"~"^(hot_spring|geyser)$"]', 'nwr["natural"="spring"]["name"]', 'nwr["leisure"="resort"]["resort"="thermal"]'],
+    names: { tr: "Kaplıcalar ve su kaynakları", en: "Hot springs & springs", de: "Thermal- & Quellen", fr: "Sources thermales et sources", es: "Aguas termales y manantiales", ru: "Горячие источники и родники" } },
+  { id: "enerji", group: "kaynak", icon: "power",
+    osm: ['nwr["power"="plant"]'],
+    names: { tr: "Enerji santralleri", en: "Power plants", de: "Kraftwerke", fr: "Centrales électriques", es: "Centrales eléctricas", ru: "Электростанции" } },
 ];
 
 // Turistik yakınlık hesabında "turistik" sayılan kategoriler
-export const TOURIST_CATS = ["turistik", "antik", "yeralti_sehir", "muzeler", "tarihi_yapilar", "kaleler", "medrese_han_hamam", "kiliseler", "vadiler"];
+export const TOURIST_CATS = ["turistik", "anitlar", "seyir", "antik", "yeralti_sehir", "muzeler", "tarihi_yapilar", "kaleler", "medrese_han_hamam", "kiliseler", "vadiler"];

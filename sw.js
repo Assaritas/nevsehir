@@ -1,5 +1,5 @@
 // Çevrimdışı kullanım: uygulama kabuğu önbelleğe alınır, harita karoları ve veriler gezinildikçe saklanır.
-const VERSION = "github-mwan1q6z";
+const VERSION = "github-mwazswt2";
 const SHELL = `shell-${VERSION}`, DATA = `data-${VERSION}`, TILES = `tiles-${VERSION}`;
 const MAX_TILES = 4000;
 const SHELL_FILES = [
@@ -27,7 +27,7 @@ self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
   // PMTiles aralık istekleri (206) önbelleğe yazılamaz; Google 3B karoları kurallar gereği önbelleğe alınmaz
-  if (req.headers.has("range") || /googleapis\.com/.test(req.url)) return;
+  if (req.headers.has("range") || /googleapis\.com|\/api\/describe|overpass-api|wikipedia\.org\/w\/api/.test(req.url) || req.method !== "GET") return;
   const url = new URL(req.url);
 
   // Vikipedi özetleri: her zaman güncel olanı dene, yoksa önbellek

@@ -1,0 +1,159 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler",
+    "kaplicalar"
+  ],
+  "features": {
+    "n34668145": {
+      "from": 1953,
+      "note": "İnşaat Ekim 1953'te tamamlandı",
+      "src": "Vikipedi"
+    },
+    "n2726254474": {
+      "from": 1953,
+      "note": "İnşaat Ekim 1953'te tamamlandı",
+      "src": "Vikipedi"
+    },
+    "r15087280": {
+      "from": 1953,
+      "note": "İnşaat Ekim 1953'te tamamlandı",
+      "src": "Vikipedi"
+    },
+    "w469691342": {
+      "from": -25,
+      "approx": true,
+      "note": "Tahminen MÖ 25–20",
+      "src": "Vikipedi"
+    },
+    "w155197582": {
+      "from": 1427,
+      "note": "Zaviye olarak hicrî 831 (1427–1428)",
+      "src": "Vikipedi; TDV İslâm Ansiklopedisi"
+    },
+    "w922918560": {
+      "from": 1427,
+      "note": "Zaviye olarak hicrî 831 (1427–1428)",
+      "src": "Vikipedi; TDV İslâm Ansiklopedisi"
+    },
+    "w363095476": {
+      "from": 1290,
+      "note": "II. Mesud döneminde 1290",
+      "src": "Wikipedia"
+    },
+    "r6276462": {
+      "from": 1987,
+      "note": "1967'de başlandı, 1987'de tamamlandı",
+      "src": "Vikipedi"
+    },
+    "w419393108": {
+      "from": 1920,
+      "note": "Meclis 23 Nisan 1920'de burada toplandı",
+      "src": "Vikipedi; TDV İslâm Ansiklopedisi"
+    },
+    "n9465339467": {
+      "from": -2300,
+      "approx": true,
+      "note": "Erken Tunç Çağı'ndan (yaklaşık MÖ 2300) itibaren yerleşim",
+      "src": "Vikipedi"
+    }
+  },
+  "events": [
+    {
+      "y": -800,
+      "tr": "Gordion'da iyi korunmuş yıkım tabakası (yaklaşık MÖ 800)",
+      "en": "Well-preserved destruction level at Gordion (c. 800 BC)",
+      "src": "Vikipedi: Gordion",
+      "url": "https://tr.wikipedia.org/wiki/Gordion"
+    },
+    {
+      "y": -333,
+      "tr": "Büyük İskender Gordion'dan sonra Ankyra'ya (Ankara) geçer",
+      "en": "Alexander the Great moves on from Gordion to Ankyra (Ankara)",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/ankara"
+    },
+    {
+      "y": -278,
+      "tr": "Galatların Tektosages kolu Ankara'yı başşehir yapar (MÖ 278–189)",
+      "en": "Ankara becomes the capital of the Tectosages Galatians (278–189 BC)",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/ankara"
+    },
+    {
+      "y": -25,
+      "tr": "Augustus Tapınağı inşa edilir (tahminen MÖ 25–20)",
+      "en": "The Temple of Augustus is built (c. 25–20 BC)",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Augustus_Tap%C4%B1na%C4%9F%C4%B1"
+    },
+    {
+      "y": 806,
+      "tr": "Hârûnürreşîd Ankara'yı kuşatır",
+      "en": "Harun al-Rashid besieges Ankara",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/ankara"
+    },
+    {
+      "y": 1290,
+      "tr": "Aslanhane (Ahi Şerafeddin) Camii yapılır",
+      "en": "The Aslanhane Mosque is built",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Aslanhane_Mosque"
+    },
+    {
+      "y": 1354,
+      "tr": "Ankara, Orhan Gazi'nin oğlu Süleyman Paşa tarafından Osmanlı topraklarına katılır",
+      "en": "Ankara is annexed to the Ottoman state by Süleyman Pasha, son of Orhan Gazi",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/ankara"
+    },
+    {
+      "y": 1402,
+      "tr": "Yıldırım Bayezid ile Timur arasındaki Ankara Savaşı",
+      "en": "Battle of Ankara between Bayezid I and Timur",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/ankara"
+    },
+    {
+      "y": 1917,
+      "tr": "Ankara'da büyük yangın",
+      "en": "Great fire of Ankara",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/ankara"
+    },
+    {
+      "y": 1920,
+      "tr": "Türkiye Büyük Millet Meclisi 23 Nisan'da Ankara'da toplanır",
+      "en": "The Grand National Assembly convenes in Ankara on 23 April",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/ankara"
+    },
+    {
+      "y": 1923,
+      "tr": "13 Ekim'de Ankara başkent kabul edilir; Cumhuriyet 29 Ekim'de Ankara'da ilan edilir",
+      "en": "Ankara becomes the capital on 13 October; the Republic is proclaimed in Ankara on 29 October",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/ankara"
+    },
+    {
+      "y": 1953,
+      "tr": "Anıtkabir tamamlanır",
+      "en": "Anıtkabir is completed",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/An%C4%B1tkabir"
+    },
+    {
+      "y": 2023,
+      "tr": "Gordion UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Gordion is inscribed on the UNESCO World Heritage List",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Gordion"
+    }
+  ]
+}

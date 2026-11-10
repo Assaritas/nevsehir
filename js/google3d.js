@@ -128,7 +128,7 @@ export function initGoogle3d(_map, _ctx) {
     if (!v) return;
     try { localStorage.setItem(KEY, v); } catch { /* özel pencere */ }
     document.getElementById("g3dDialog").hidden = true;
-    if (await enable()) ctx.onEnabled();
+    if (await enable()) ctx.onEnabled(); else ctx.onCancel();
   };
   document.getElementById("g3dCancel").onclick = () => { document.getElementById("g3dDialog").hidden = true; ctx.onCancel(); };
 }

@@ -118,10 +118,41 @@ Anahtar Wikidata numarası (`Q…`) ya da OSM kimliği (`n…`, `w…`, `r…`) 
 | Bitki örtüsü / arazi örtüsü | ESA WorldCover 2021, 10 m | CC BY 4.0 |
 | Tarihî sınırlar ve yer adları | OpenHistoricalMap | CC0 |
 | İkonlar | Mapbox Maki | CC0 |
+| PMTiles okuyucu | protomaps/PMTiles | BSD-3 |
+| Google 3B katmanı | deck.gl | MIT |
 | 3B diorama motoru | three.js | MIT |
 | Harita motoru | MapLibre GL JS, maplibre-contour | BSD-3 |
 
 > **Not:** Uydu katmanı ticari olmayan kullanım lisanslıdır. Ücretli turlarda kullanım ticari sayılabilir; gerekirse bu katman ticari kullanıma izin veren bir kaynakla değiştirilmelidir.
+
+## İki yayın sürümü
+
+| Sürüm | Nereye | İçerik |
+|---|---|---|
+| **Tam sürüm** (`dist/full`) | Cloudflare Workers (ücretsiz): https://rehber-harita.rehber-harita-scripts.workers.dev | Bitki örtüsü z14, tam koordinat hassasiyeti, Google 3B (anahtar verilirse), kartlarda canlı web sitesi açıklaması |
+| **GitHub sürümü** (`dist/github`) | GitHub Pages | Bitki örtüsü z12, çizgi/alan koordinatları ~11 m, Google anahtarı yok |
+
+```
+cd scripts
+node build-dist.mjs full --key=GOOGLE_API_KEY   # anahtar isteğe bağlı
+node build-dist.mjs github
+npx wrangler login                              # bir kez: Cloudflare hesabına giriş (tarayıcı açılır)
+cd .. && npx wrangler deploy                    # wrangler.jsonc: dist/full + worker/index.js
+```
+
+`worker/index.js` statik dosyaları sunar ve iki iş yapar: PMTiles için HTTP aralık isteklerini (206) karşılar
+(Cloudflare statik sunucusu bunu desteklemez) ve `/api/describe?url=` ile bir yerin kendi web sitesindeki
+tanıtım (meta) açıklamasını döndürür (yalnızca kısa açıklama; 7 gün önbellek).
+
+Bitki örtüsü karoları her il için tek bir **PMTiles** dosyasındadır (`data/<il>/landcover.pmtiles`); bu sayede
+Cloudflare Pages'in 20.000 dosya sınırı aşılmaz. Yerelde denemek için aralık isteklerini destekleyen sunucu:
+`node scripts/serve.mjs . 8931`
+
+### Google 3B (fotogerçekçi)
+
+Google Maps Platform'da bir proje açıp **Map Tiles API**'yi etkinleştirin, faturalandırma hesabı bağlayın ve bir API anahtarı
+oluşturun. Anahtarı **HTTP yönlendiren kısıtlamasıyla** yalnızca sitenizin adresine 
+izin verecek şekilde sınırlayın (ör. `https://rehber-harita.rehber-harita-scripts.workers.dev/*`). Google koşulları gereği bu katman açıkken başka bir temel harita gösterilmez ve karolar önbelleğe alınmaz.
 
 ## Yeni il ekleme (81 il için aynı süreç)
 
@@ -130,11 +161,15 @@ Anahtar Wikidata numarası (`Q…`) ya da OSM kimliği (`n…`, `w…`, `r…`) 
    ```
    cd scripts
    node fetch-data.mjs <il>         # OSM + Wikidata (sunucu hatasında kategori atlanır; yeniden çalıştırınca tamamlanır)
-   node build-landcover.mjs <il>    # ESA WorldCover bitki örtüsü
+   node build-landcover.mjs <il>    # ESA WorldCover bitki örtüsü → data/<il>/landcover.pmtiles
    node build-monuments.mjs <il>    # OSM building:part → 3B anıt modelleri (kubbe, minare, külah)
    ```
-3. Araştırma: `data/<il>/content-src.json` — kaynaklı açıklamalar, tarihler, olaylar ve yeraltı verileri (ad kalıbıyla).
+3. Araştırma: `data/<il>/content-src.json` — kaynaklı açıklamalar, tarihler, olaylar ve yeraltı verileri (ad kalıbıyla);
+   `data/<il>/resources.json` — kaynaklı maden / kaynak kayıtları (yöntem: yeraltı, açık ocak, çözelti, kuyu; derinlik yalnızca kaynakta varsa).
    `node resolve-content.mjs <il>` bunları harita kayıtlarına bağlar; ardından `node fetch-data.mjs <il>` (önbellekten, hızlı) tarihleri işler.
+4. Kart özetleri: `node enrich-cards.mjs <il>` → `data/<il>/summaries.json`. Hiçbir kart boş kalmaz:
+   kaynaklı metin → Vikipedi (bağlantı ya da konum + ad eşleşmesi) → yerin kendi web sitesindeki açıklama →
+   OSM / Wikidata bilgilerinden derlenmiş özet (her biri kaynak bağlantısıyla). Kartta ayrıca "Web'de ara" düğmesi vardır.
 
 ## Arayüz notları
 
@@ -142,10 +177,15 @@ Anahtar Wikidata numarası (`Q…`) ya da OSM kimliği (`n…`, `w…`, `r…`) 
 - Telefonda yakınlaştırma çubuğu yalnızca yakınlaştırırken görünür.
 - Temel haritadaki adlı simgelere (cami, eczane, köy adı…) dokununca bilgi kartı açılır; lejant verisinde aynı yer varsa tam kart gösterilir.
 - Katmanlar: **Sade** (Google Haritalar'a benzer), Arazi, Uydu, Yer şekilleri, Bitki örtüsü; seçenekler: **3B binalar**, **3B anıt modelleri**.
+- **Ayarlar** düğmesi: tema (otomatik / açık / koyu) ve dil.
+- Diorama: lejant (yüzey, şehir, noktalar, yeraltı), 3B binalar, anıt modelleri (ör. Ayasofya), yollar / sokaklar / kaldırımlar
+  (her biri açılıp kapanabilir; ≈ 12 km'den küçük alanlarda); yeraltında yeraltı şehirleri ve sarnıçlar geniş ölçekte,
+  ayrıca madenler: yeraltı ocakları (kuyu + galeri), çözelti madenciliği (sondaj + boşluk), sondaj kuyuları ve açık ocaklar (yüzeyde turuncu çukur).
 - Tur programı birden çok gün içerebilir (her günün rengi ve sekmesi ayrı); tur ekranı açıkken haritada yalnızca o günün durakları görünür.
 
 ## Yol haritası
 
 - **Aşama 2 (tamamlandı):** arama, "Bugünkü tur" katmanı ve rehber modu, kaynaklı taslak metinler (10 yer), veri düzeltmeleri
 - **Aşama 3 (tamamlandı):** diorama, yeraltı katmanı, tarihsel zaman kaydırıcısı
-- **Aşama 4 (sürüyor):** İstanbul pilotu, il seçici, 3B binalar ve anıtlar, sade katman, çok günlü tur, yeni lejant öğeleri; ardından kalan iller
+- **Aşama 4 (tamamlandı):** İstanbul pilotu, il seçici, 3B binalar ve anıtlar, sade katman, çok günlü tur, yeni lejant öğeleri
+- **Aşama 5 (sürüyor):** Ankara, ayarlar menüsü, diorama lejantı ve 3B şehir, yeraltı / yerüstü kaynakları, boş kart kalmaması; ardından öncelikli iller

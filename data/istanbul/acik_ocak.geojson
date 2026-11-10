@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"id":"xagacli-komur","cat":"acik_ocak","name":"Eski Ağaçlı açık kömür ocakları (İstanbul Havalimanı alanı)","ext":"yerustu","method":"yerustu","res":"kömür (linyit)","_src":1,"status":"kapandı; ocaklar toprakla dolduruldu"},"geometry":{"type":"Point","coordinates":[28.728,41.262]}}]}

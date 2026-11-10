@@ -1,0 +1,78 @@
+{
+ "_aciklama": "Kaynaklı maden / kaynak kayıtları. method: yeralti | yerustu | cozelti | kuyu. depth_m yalnızca kaynakta geçiyorsa.",
+ "sites": [
+  {
+   "id": "kazan-trona",
+   "name": "Kazan trona sahası (Kazan Soda sondaj sahası)",
+   "lng": 32.51329,
+   "lat": 40.1216,
+   "method": "cozelti",
+   "res": "trona (doğal soda)",
+   "depth_m": 600,
+   "operator": "Kazan Soda Elektrik (Ciner Holding)",
+   "status": "üretimde",
+   "text": {
+    "tr": "Kahramankazan'daki büyük trona (doğal soda) yatağı ortalama 600 m derinliktedir ve Ciner Holding'e bağlı Kazan Soda Elektrik tarafından çözelti madenciliğiyle işletilir: açılan sondaj kuyularından sıcak su basılarak trona yeraltında çözülür, çözelti yüzeye pompalanıp soda külü ve sodyum bikarbonata işlenir. Maden sahası Kahramankazan ilçesinde, işleme tesisi Sincan ilçesindedir; işaret, OpenStreetMap'te \"Kazan Soda Sondaj Sahası\" olarak işaretli kuyu alanıdır. Tesis 15 Ocak 2018'de açıldı.",
+    "en": "The large trona (natural soda) deposit at Kahramankazan lies about 600 m underground and is worked by Kazan Soda Elektrik (Ciner Holding) using solution mining: hot water is injected through boreholes to dissolve the trona, and the solution is pumped up and processed into soda ash and sodium bicarbonate. The mining area is in Kahramankazan district and the processing plant in Sincan; the marker shows the well field mapped in OpenStreetMap as \"Kazan Soda Sondaj Sahası\". The plant opened on 15 January 2018."
+   },
+   "sources": [
+    {
+     "title": "Wikipedia: Kahramankazan",
+     "url": "https://en.wikipedia.org/wiki/Kahramankazan"
+    },
+    {
+     "title": "Wikipedia: Kazan Soda Elektrik",
+     "url": "https://en.wikipedia.org/wiki/Kazan_Soda_Elektrik"
+    }
+   ],
+   "osm": "w819816564"
+  },
+  {
+   "id": "beypazari-trona",
+   "name": "Beypazarı trona sahası (Eti Soda)",
+   "lng": 31.8592,
+   "lat": 40.1836,
+   "method": "cozelti",
+   "res": "trona (doğal soda)",
+   "operator": "Eti Soda (Ciner Holding %74, Eti Maden %26)",
+   "status": "üretimde",
+   "text": {
+    "tr": "Beypazarı'ndaki trona yatağı 1979'da kömür aramaları sırasında bulundu. Bilinen yöntemlerle işletilemeyeceği değerlendirilen yatak için Eti Maden ve Ciner Holding çözelti madenciliği yöntemini geliştirdi: sondaj kuyularından basılan sıcak su trona cevherini yeraltında çözer, çözelti yüzeye pompalanarak soda külü ve sodyum bikarbonata işlenir. Üretim 2009'da başladı. Kuyuların derinliği kaynakta belirtilmediğinden şematik çizilir.\n\nKonum: Eti Soda tesisi (OpenStreetMap).",
+    "en": "The Beypazarı trona deposit was discovered in 1979 during coal exploration. Judged unworkable with known methods, it was developed by Eti Maden and Ciner Holding with solution mining: hot water injected through boreholes dissolves the trona underground and the solution is pumped up and processed into soda ash and sodium bicarbonate. Production began in 2009. Well depth is not given in the source, so it is drawn schematically.\n\nLocation: Eti Soda plant (OpenStreetMap)."
+   },
+   "sources": [
+    {
+     "title": "Wikipedia: Eti Soda",
+     "url": "https://en.wikipedia.org/wiki/Eti_Soda"
+    }
+   ]
+  },
+  {
+   "id": "cayirhan-linyit",
+   "name": "Çayırhan linyit sahası",
+   "lng": 31.6724,
+   "lat": 40.098,
+   "method": "yeralti",
+   "res": "linyit",
+   "status": "üretimde",
+   "text": {
+    "tr": "Çayırhan, 1954'te çevresinde linyit sahaları bulunduktan sonra gelişti; bugün linyit madenciliği ve 620 MW gücündeki Çayırhan Termik Santrali kasabanın başlıca geçim kaynaklarıdır. Ocaktan çıkan kömür santralde yakılır. Kaynakların çoğu ocağı yeraltı (uzun ayak) işletmesi olarak tanımlar; Global Energy Monitor ise açık ocak olarak gösterir. Bildirilen derinlikler birbirini tutmadığından derinlik şematik çizilir.\n\nKonum yaklaşıktır (Çayırhan kasabası).",
+    "en": "Çayırhan grew after lignite fields were found around the town in 1954; today lignite mining and the 620 MW Çayırhan power station are its main sources of income. The coal is burned in the power station. Most sources describe the mine as an underground (longwall) operation, while Global Energy Monitor lists it as opencast. Reported depths disagree, so depth is drawn schematically.\n\nLocation is approximate (Çayırhan town)."
+   },
+   "sources": [
+    {
+     "title": "Wikipedia: Çayırhan",
+     "url": "https://en.wikipedia.org/wiki/%C3%87ay%C4%B1rhan"
+    },
+    {
+     "title": "Wikipedia: Çayırhan power station",
+     "url": "https://en.wikipedia.org/wiki/%C3%87ay%C4%B1rhan_power_station"
+    },
+    {
+     "title": "Global Energy Monitor: Çayırhan coal mine",
+     "url": "https://www.gem.wiki/%C3%87ay%C4%B1rhan_coal_mine"
+    }
+   ]
+  }
+ ]
+}

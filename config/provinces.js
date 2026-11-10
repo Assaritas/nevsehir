@@ -31,8 +31,8 @@ export const PROVINCES = {
     center: [33.862, 38.431], zoom: 9, bounds: [[30.9, 36.2], [36.9, 40.6]] },
   amasya: { id: "amasya", osmRelation: 223452, wikidata: "Q80036", names: { tr: "Amasya", en: "Amasya" },
     center: [35.833, 40.65], zoom: 9, bounds: [[32.8, 38.4], [38.8, 42.9]] },
-  ankara: { id: "ankara", osmRelation: 223422, wikidata: "Q2297724", names: { tr: "Ankara", en: "Ankara" },
-    center: [32.856, 39.926], zoom: 9, bounds: [[29.9, 37.7], [35.9, 42.1]] },
+  ankara: { id: "ankara", osmRelation: 223422, wikidata: "Q2297724", names: { tr: "Ankara", en: "Ankara", de: "Ankara", fr: "Ankara", es: "Ankara", ru: "Анкара" },
+    center: [32.856, 39.93], zoom: 11.2, bounds: [[30.6, 38.5], [34.2, 41.0]] },
   antalya: { id: "antalya", osmRelation: 223132, wikidata: "Q40249", names: { tr: "Antalya", en: "Antalya" },
     center: [30.933, 37.182], zoom: 9, bounds: [[27.9, 35.0], [33.9, 39.4]] },
   ardahan: { id: "ardahan", osmRelation: 1251450, wikidata: "Q79840", names: { tr: "Ardahan", en: "Ardahan" },
@@ -182,6 +182,6 @@ export const PROVINCES = {
 };
 
 // verisi hazırlanmış iller (il seçicide etkin)
-export const READY = ["nevsehir", "istanbul"];
+export const READY = ["nevsehir", "istanbul", "ankara"];
 
 export const DEFAULT_PROVINCE = "nevsehir";

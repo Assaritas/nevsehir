@@ -130,5 +130,17 @@
         "url": "https://islamansiklopedisi.org.tr/kariye-camii"
       }
     ]
+  },
+  "xagacli-komur": {
+    "text": {
+      "tr": "İstanbul Havalimanı, Terkos Gölü yakınındaki 7.600 hektarlık bir alanda kuruldu. Bu alan eski açık kömür ocaklarını kapsıyordu; ocaklar havalimanı yapımı sırasında toprakla dolduruldu. İşaret, havalimanı alanının merkezini gösterir.",
+      "en": "Istanbul Airport was built on a 7,600-hectare area near Lake Terkos. The area encompassed old open-pit coal mines, which were later filled with soil. The marker shows the centre of the airport area."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Istanbul Airport",
+        "url": "https://en.wikipedia.org/wiki/Istanbul_Airport"
+      }
+    ]
   }
 }
