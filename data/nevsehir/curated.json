@@ -1,127 +1,147 @@
 {
-  "_aciklama": "Rehber metinleri. status: 'taslak' = yalnızca rehber modunda görünür; 'onayli' = herkese görünür. Her cümle 'sources' listesindeki kaynaklara dayanır. Anahtar OSM kimliğidir; 'ids' ile aynı metin başka kayıtlara da bağlanır.",
-
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır. Anahtar OSM kimliğidir; 'ids' ile aynı metin başka kayıtlara da bağlanır.",
   "w26045752": {
-    "status": "taslak",
     "updated": "2026-11-10",
     "text": {
       "tr": "Göreme Açık Hava Müzesi, Göreme kasabasının yaklaşık 2 km doğusunda yer alan bir kaya yerleşimidir. Bölgede MS 4. yüzyıldan 13. yüzyıla kadar yoğun bir manastır hayatı yaşanmış; hemen her kaya bloğunun içine kilise, şapel, yemekhane ve oturma mekânları oyulmuştur. Alan, Kapadokya'daki manastır eğitim sisteminin başladığı yer olarak kabul edilir.\n\nKiliselerin duvar resimleri iki teknikle yapılmıştır: düzeltilmiş kaya yüzeyine doğrudan boyama ve secco (tempera) / fresko tekniği. Konular Eski Ahit, İncil ve Hz. İsa'nın hayatından alınmıştır. Alanda Kızlar ve Erkekler Manastırı, Aziz Basil, Elmalı, Azize Barbara, Yılanlı, Malta Haçlı, Azize Catherine, Karanlık, Çarıklı ve Tokalı kiliseleri bulunur.\n\n1967'de ziyarete açılan alan, 6 Aralık 1985'ten bu yana UNESCO Dünya Mirası Listesi'ndedir.",
       "en": "The Göreme Open-Air Museum is a rock-cut settlement about 2 km east of the town of Göreme. Monastic life flourished here from the 4th to the 13th century AD; churches, chapels, refectories and seating areas were carved into almost every rock block. The site is regarded as the place where the monastic education system in Cappadocia began.\n\nThe church paintings were made with two techniques: painting directly on the smoothed rock surface, and secco (tempera) / fresco. Their subjects come from the Old Testament, the Gospels and the life of Jesus. The site includes the Nunnery and Monastery, and the churches of St Basil, Elmalı (Apple), St Barbara, Yılanlı (Snake), the Maltese Cross, St Catherine, Karanlık (Dark), Çarıklı (Sandals) and Tokalı (Buckle).\n\nOpened to visitors in 1967, it has been on the UNESCO World Heritage List since 6 December 1985."
     },
     "sources": [
-      { "title": "Kültür Portalı – Göreme Açık Hava Müzesi (Nevşehir İl Kültür ve Turizm Müdürlüğü)", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/goreme-acik-hava-muzes" },
-      { "title": "T.C. Kültür ve Turizm Bakanlığı Müzeler – Göreme Açık Hava Müzesi", "url": "https://muze.gov.tr/muze-detay?SectionId=GRM01&DistId=GRM" }
+      {
+        "title": "Kültür Portalı – Göreme Açık Hava Müzesi (Nevşehir İl Kültür ve Turizm Müdürlüğü)",
+        "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/goreme-acik-hava-muzes"
+      },
+      {
+        "title": "T.C. Kültür ve Turizm Bakanlığı Müzeler – Göreme Açık Hava Müzesi",
+        "url": "https://muze.gov.tr/muze-detay?SectionId=GRM01&DistId=GRM"
+      }
     ]
   },
-
   "n281777097": {
-    "status": "taslak",
     "updated": "2026-11-10",
     "text": {
       "tr": "Derinkuyu Yeraltı Şehri, Kapadokya'nın jeolojik yapısı sayesinde oyulmuş sekiz katlı bir yeraltı şehridir; büyük bir topluluğu barındıracak ve ihtiyaçlarını karşılayacak mekânlardan oluşur. Uzun süre dışarı çıkmadan yaşanabilmesi için erzak depoları, havalandırma bacaları, şaraphaneler, kiliseler, su kuyuları ve toplantı odaları yapılmıştır.\n\nOdalar, bazıları yalnızca tek kişinin geçebileceği genişlikte dar tünellerle birbirine bağlanır; tünel ağızlarında geçidi kapatmak için kullanılan büyük taş silindirler (sürgü taşları) bulunur. Kaymaklı'dan farklı olarak Derinkuyu'da bir misyoner okulu, günah çıkarma yeri ve vaftiz havuzu da vardır.\n\n1965'te ziyarete açılan şehrin bugün yalnızca yaklaşık yüzde onluk bölümü gezilebilmektedir.",
       "en": "Derinkuyu Underground City is an eight-level city carved thanks to Cappadocia's geology, with spaces able to shelter and supply a large community. To make long periods underground possible, it was fitted with food stores, ventilation shafts, wineries, churches, water wells and meeting rooms.\n\nRooms are linked by narrow tunnels, some wide enough for only one person; at the tunnel mouths are large rolling stones used to seal the passage. Unlike Kaymaklı, Derinkuyu also has a missionary school, a confessional and a baptismal pool.\n\nIt opened to visitors in 1965; only about ten per cent of the city can be visited today."
     },
     "sources": [
-      { "title": "Kültür Portalı – Derinkuyu Yeraltı Şehri (kaynak: muze.gov.tr)", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/derinkuyu-yeralti-sehri" }
+      {
+        "title": "Kültür Portalı – Derinkuyu Yeraltı Şehri (kaynak: muze.gov.tr)",
+        "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/derinkuyu-yeralti-sehri"
+      }
     ]
   },
-
   "n27151654": {
-    "ids": ["n939100433"],
-    "status": "taslak",
+    "ids": [
+      "n939100433"
+    ],
     "updated": "2026-11-10",
     "text": {
       "tr": "Kaymaklı Yeraltı Şehri, Nevşehir'e yaklaşık 20 km uzaklıktaki Kaymaklı kasabasındadır. Tüf kayalara oyulmuş sekiz katlı şehir, bir topluluğun geçici olarak yaşayabilmesi için gerekli barınma koşullarına sahiptir: dar koridorlarla bağlanan oda ve salonlar, şarap depoları, su mahzenleri, mutfak ve erzak depoları, havalandırma bacaları, su kuyuları, bir kilise ve kapıyı içeriden kapatan büyük sürgü taşları.\n\nKapadokya Alan Başkanlığı'na göre ilk katı Hititler döneminde yapılmış, Roma ve Bizans dönemlerinde yeni alanlar oyularak bir yeraltı şehrine dönüştürülmüştür. 1964'te ziyarete açılmıştır; bugün dört katı gezilebilmektedir.",
       "en": "Kaymaklı Underground City lies in the town of Kaymaklı, about 20 km from Nevşehir. Carved into tuff, the eight-level city has everything a community needed to live there temporarily: rooms and halls linked by narrow corridors, wine stores, water cellars, kitchens and food stores, ventilation shafts, water wells, a church, and large rolling stones that sealed the doors from inside.\n\nAccording to the Cappadocia Area Directorate, its first level was made in the Hittite period, and it was enlarged into an underground city in Roman and Byzantine times. It opened to visitors in 1964; four levels can be visited today."
     },
     "sources": [
-      { "title": "Kültür Portalı – Kaymaklı Yeraltı Şehri (kaynak: Kapadokya Alan Başkanlığı)", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/kaymakli-yeralti-sehri" }
+      {
+        "title": "Kültür Portalı – Kaymaklı Yeraltı Şehri (kaynak: Kapadokya Alan Başkanlığı)",
+        "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/kaymakli-yeralti-sehri"
+      }
     ]
   },
-
   "n1628116735": {
-    "status": "taslak",
     "updated": "2026-11-10",
     "text": {
       "tr": "Özkonak Yeraltı Şehri, Avanos'a 14 km uzaklıktaki Özkonak kasabasında, İdiş Dağı'nın kuzey yamaçlarında, tüf tabakalarının oldukça kalın olduğu bir yerde oyulmuştur.\n\nKaymaklı ve Derinkuyu'dan farklı olarak burada katlar arasında haberleşmeyi sağlayan çok dar ve uzun delikler vardır; odaların girişleri kapatıldığında havalandırma da yaklaşık 5 cm çapındaki bu deliklerle sağlanmıştır. Geniş alanlara yayılan galeriler tünellerle birbirine bağlanır. Diğer yeraltı şehirlerinde olduğu gibi hava bacası, su kuyusu, şırahane ve sürgü taşları bulunur.",
       "en": "Özkonak Underground City was carved in the town of Özkonak, 14 km from Avanos, on the northern slopes of Mount İdiş where the tuff layers are particularly thick.\n\nUnlike Kaymaklı and Derinkuyu, it has very narrow, long holes that allowed communication between levels; when room entrances were sealed, these holes, about 5 cm across, also provided ventilation. Its widely spread galleries are linked by tunnels. As in the other underground cities, there are air shafts, water wells, a wine press and rolling stones."
     },
     "sources": [
-      { "title": "Kültür Portalı – Özkonak Yeraltı Şehri (kaynak: muze.gov.tr broşürü)", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/ozkonak-yeralti-sehri" }
+      {
+        "title": "Kültür Portalı – Özkonak Yeraltı Şehri (kaynak: muze.gov.tr broşürü)",
+        "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/ozkonak-yeralti-sehri"
+      }
     ]
   },
-
   "n707408836": {
-    "ids": ["n6192482574"],
-    "status": "taslak",
+    "ids": [
+      "n6192482574"
+    ],
     "updated": "2026-11-10",
     "text": {
       "tr": "Nevşehir merkeze 5 km uzaklıktaki Uçhisar Kalesi, birbirine bitişik iki sivri peribacasından oluşur; halk arasında büyüğüne \"Ağanın Kalesi\", küçüğüne \"Çavuşun Kalesi\" denir. Kale güneyden 50 metreyi, kuzeyden 100 metreyi aşan yüksekliğiyle bölgenin her yerinden görülür.\n\nRoma döneminden beri içine çok sayıda oda, sığınak, depo, sarnıç ve mezar oyulmuş; Arap akınlarına karşı önemli bir savunma noktası olmuştur. Selçuklu ve Beylikler döneminde (12.–14. yüzyıllar) de önemini korumuş; Başhisar (Ürgüp) ve Ortahisar ile birlikte bölgenin üç önemli koruma noktasından biri olmuştur. Bir sınır (uç) kalesi olması nedeniyle \"Uçhisar\" adıyla anılmaya başlanmıştır.\n\nKale II. Bayezid döneminde Osmanlılara geçmiştir. 1530 sayımında Uçhisar'da yaklaşık 3.000 kişinin yaşadığı tespit edilmiştir; kalede ve çevresinde 1960'lı yıllara kadar yaşanmıştır. Zirvede oyma küpler, mezarlar ve büyük bir sarnıç bulunur.",
       "en": "Uçhisar Castle, 5 km from central Nevşehir, consists of two adjoining pointed fairy chimneys; locally the larger is called the \"Agha's Castle\" and the smaller the \"Sergeant's Castle\". Rising more than 50 m on the south side and over 100 m on the north, it is visible from across the region.\n\nSince Roman times many rooms, shelters, stores, cisterns and tombs have been carved into it, and it was an important defensive point against Arab raids. It kept its importance in the Seljuk and Beylik periods (12th–14th centuries) as one of the region's three key strongholds, together with Başhisar (Ürgüp) and Ortahisar. Its role as a frontier (\"uç\") fortress gave it the name Uçhisar.\n\nThe castle passed to the Ottomans under Bayezid II. The 1530 census recorded about 3,000 people living in Uçhisar, and the castle and its surroundings were inhabited until the 1960s. On the summit are rock-cut storage jars, tombs and a large cistern."
     },
     "sources": [
-      { "title": "Kültür Portalı – Uçhisar Kalesi (Nevşehir İl Kültür ve Turizm Müdürlüğü)", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/uchsar-kales" }
+      {
+        "title": "Kültür Portalı – Uçhisar Kalesi (Nevşehir İl Kültür ve Turizm Müdürlüğü)",
+        "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/uchsar-kales"
+      }
     ]
   },
-
   "n9382198517": {
-    "status": "taslak",
     "updated": "2026-11-10",
     "text": {
       "tr": "Eskiden \"Rahipler Vadisi\" olarak bilinen Paşabağları, Göreme–Avanos yolunun sağında, yoldan yaklaşık 1 km içeridedir. Ören yeri kendine özgü peribacalarıyla kaplıdır.\n\nÇok gövdeli ve çok başlı bazı peribacalarının içine şapel ve oturma mekânları oyulmuştur. Üç başlı peribacalarından birinde Aziz Simeon adına yapılmış bir şapel ve inziva hücresi bulunur.",
       "en": "Paşabağları, formerly known as the \"Monks' Valley\", lies about 1 km off the right side of the Göreme–Avanos road. The site is covered with distinctive fairy chimneys.\n\nChapels and seating areas were carved into some of the multi-stemmed, multi-capped chimneys. One of the three-capped chimneys contains a chapel and hermit's cell dedicated to St Simeon."
     },
     "sources": [
-      { "title": "Kültür Portalı – Paşabağları ve Zelve Ören Yeri (kaynak: Kapadokya Alan Başkanlığı)", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/pasabaglari-ve-zelve-oren-yer" }
+      {
+        "title": "Kültür Portalı – Paşabağları ve Zelve Ören Yeri (kaynak: Kapadokya Alan Başkanlığı)",
+        "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/pasabaglari-ve-zelve-oren-yer"
+      }
     ]
   },
-
   "w22271687": {
-    "status": "taslak",
     "updated": "2026-11-10",
     "text": {
       "tr": "Zelve Ören Yeri, Göreme–Avanos karayolundan yaklaşık 2 km içeride, peribacalarının en yoğun olduğu alandır. Üç vadiden oluşan alan, 9. ve 13. yüzyıllar arasında Hristiyanların önemli yerleşim ve dinî merkezlerinden biri olmuş; papazlara ilk seminerlerin bu yörede verildiği kabul edilir.\n\nBalıklı, Üzümlü ve Geyikli kiliseler vadinin en önemli kiliseleridir. Üçüncü vadide yamaçlara oyulmuş güvercinlikler dikkat çeker. 1952'ye kadar iskân edilen bölgede manastırlar, kiliseler, konutlar, bir tünel, değirmen ve cami bulunur.",
       "en": "Zelve, about 2 km off the Göreme–Avanos road, is the area with the densest concentration of fairy chimneys. Made up of three valleys, it was one of the important Christian settlements and religious centres between the 9th and 13th centuries, and the first seminars for priests are said to have been held here.\n\nThe Balıklı (Fish), Üzümlü (Grape) and Geyikli (Deer) churches are the most important in the valley. In the third valley, dovecotes carved into the slopes stand out. Inhabited until 1952, the site contains monasteries, churches, dwellings, a tunnel, a mill and a mosque."
     },
     "sources": [
-      { "title": "Kültür Portalı – Paşabağları ve Zelve Ören Yeri (kaynak: Kapadokya Alan Başkanlığı)", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/pasabaglari-ve-zelve-oren-yer" }
+      {
+        "title": "Kültür Portalı – Paşabağları ve Zelve Ören Yeri (kaynak: Kapadokya Alan Başkanlığı)",
+        "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/pasabaglari-ve-zelve-oren-yer"
+      }
     ]
   },
-
   "w690518467": {
-    "status": "taslak",
     "updated": "2026-11-10",
     "text": {
       "tr": "Halk arasında Kurşunlu Camii olarak bilinen yapı, Nevşehirli Damad İbrâhim Paşa'nın yaptırdığı ve 1139'da (1726-27) tamamlanan külliyenin camisidir. Külliye; cami, medrese, sıbyan mektebi, imaret, kervansaray, hamam ve iki çeşmeden oluşur. Paşanın doğduğu Muşkara köyünün adı, bu külliyenin tamamlanması ve paşanın buradaki diğer imar faaliyetlerinden sonra Nevşehir olarak değiştirilmiştir.\n\nKitabelerin metinleri Nedîm ve Seyyid Vehbî gibi dönemin önemli şairleri tarafından yazılmış, kitabe taşları İstanbul'da hazırlanıp Nevşehir'e gönderilmiştir. Lâle Devri'nin naturalist çiçek ve yaprak motifli kalem işleri en yoğun olarak camide ve medresenin baş odasında görülür. TDV İslâm Ansiklopedisi'ne göre külliye genel hatlarıyla klasik Osmanlı mimarisinin devamı olmakla birlikte, camisi barok mimariyi hatırlatan bazı yenilikler gösterir.\n\nMedrese bugün Damad İbrâhim Paşa Halk Kütüphanesi olarak, imaret aşevi olarak kullanılmaktadır.",
       "en": "Known locally as the Kurşunlu (Lead-domed) Mosque, this is the mosque of the complex built by Nevşehirli Damad İbrahim Pasha and completed in 1139 AH (1726–27). The complex comprises the mosque, a madrasa, a primary school, a soup kitchen, a caravanserai, a hamam and two fountains. The Pasha's birthplace, the village of Muşkara, was renamed Nevşehir after this complex and his other building works were completed.\n\nThe inscriptions were composed by leading poets of the day such as Nedîm and Seyyid Vehbî, and the inscription stones were prepared in Istanbul and sent to Nevşehir. Painted decoration with the naturalistic flower and leaf motifs of the Tulip Era is richest in the mosque and the madrasa's head room. According to the TDV Encyclopedia of Islam, the complex broadly continues classical Ottoman architecture, while its mosque shows some innovations recalling Baroque architecture.\n\nThe madrasa is used today as the Damad İbrahim Pasha Public Library, and the soup kitchen still serves meals."
     },
     "sources": [
-      { "title": "İlknur Aktuğ Kolay, \"Damad İbrâhim Paşa Külliyesi\", TDV İslâm Ansiklopedisi", "url": "https://islamansiklopedisi.org.tr/damad-ibrahim-pasa-kulliyesi--nevsehir" },
-      { "title": "Encyclopaedia Britannica – Nevşehir (Kurşunlu Cami)", "url": "https://www.britannica.com/place/Nevsehir" }
+      {
+        "title": "İlknur Aktuğ Kolay, \"Damad İbrâhim Paşa Külliyesi\", TDV İslâm Ansiklopedisi",
+        "url": "https://islamansiklopedisi.org.tr/damad-ibrahim-pasa-kulliyesi--nevsehir"
+      },
+      {
+        "title": "Encyclopaedia Britannica – Nevşehir (Kurşunlu Cami)",
+        "url": "https://www.britannica.com/place/Nevsehir"
+      }
     ]
   },
-
   "w168408687": {
-    "status": "taslak",
     "updated": "2026-11-10",
     "text": {
       "tr": "Hacıbektaş'ta, Hacı Bektâş-ı Velî'nin (ö. 669/1271 [?]) türbesi etrafında oluşan bu külliye, Bektaşîliğin \"pîr evi\"dir. 13. yüzyılın ortalarından 20. yüzyılın ilk çeyreğine kadar gelişen yapı topluluğu, hemen bütün unsurlarıyla günümüze ulaşabilen nadir tarikat külliyelerinden biridir.\n\nHacı Bektâş-ı Velî, o zamanki adı Sulucakarahöyük olan Hacıbektaş'a gelerek burada kendi adına bir zaviye kurmuştur. İlk zaviyeden günümüze ulaşan tek unsur, onun kullandığı rivayet edilen Kızılca Halvet'tir. Selçuklu üslubundaki türbenin pîrin vefatından kısa süre sonra, 13. yüzyılın son çeyreğinin başlarında inşa edildiği düşünülmektedir; girişindeki kemerin üstünde stilize çift başlı kartal kabartması vardır.\n\nKırklar Meydanı'na açılan kapının kitabesine göre bugünkü Kırklar Meydanı 960 (1553) yılında yapılmıştır. Külliyenin bazı bölümlerinin yapım tarihleri ve banileri hâlâ tam olarak aydınlatılamamıştır.",
       "en": "This complex in Hacıbektaş, which grew up around the tomb of Hacı Bektaş-ı Veli (d. 669/1271 [?]), is the \"pîr evi\" (founder's house) of the Bektashi order. Developed from the mid-13th century to the first quarter of the 20th, it is one of the rare dervish complexes to survive with almost all its parts.\n\nHacı Bektaş-ı Veli came to Hacıbektaş, then called Sulucakarahöyük, and founded a zawiya (lodge) in his name. The only surviving element of that first lodge is the Kızılca Halvet, a retreat cell that tradition says he used. The Seljuk-style tomb is thought to have been built shortly after his death, early in the last quarter of the 13th century; above the arch of its entrance is a stylised double-headed eagle relief.\n\nAccording to the inscription on the gate opening onto it, the present Kırklar Meydanı (Hall of the Forty) was built in 960 AH (1553). The construction dates and patrons of some parts of the complex have still not been fully established."
     },
     "sources": [
-      { "title": "M. Baha Tanman, \"Hacı Bektâş-ı Velî Külliyesi\", TDV İslâm Ansiklopedisi", "url": "https://islamansiklopedisi.org.tr/haci-bektas-i-veli-kulliyesi" }
+      {
+        "title": "M. Baha Tanman, \"Hacı Bektâş-ı Velî Külliyesi\", TDV İslâm Ansiklopedisi",
+        "url": "https://islamansiklopedisi.org.tr/haci-bektas-i-veli-kulliyesi"
+      }
     ]
   },
-
   "w492643645": {
-    "status": "taslak",
     "updated": "2026-11-10",
     "text": {
       "tr": "Nevşehir il merkezinde, şehrin en yüksek noktalarından birine inşa edilen kalede volkanik kaya ve tüf malzeme kullanılmıştır. Silindirik planlı kalede dört yönde simetrik, daire biçimli burçlar yer alır. Savunma sistemi 46 küçük bölümden oluşur ve her bölümün ortasında bir savunma açıklığı bulunur.\n\nKale kapısının sağındaki ve solundaki burçların yanından çıkan merdivenlerle savunma duvarlarına ulaşılır. Orta avlu bugün park olarak kullanılmaktadır.",
       "en": "Built on one of the highest points of central Nevşehir, the castle is made of volcanic rock and tuff. It has a cylindrical plan with symmetrical round bastions facing four directions. Its defences are divided into 46 small sections, each with an embrasure in the middle.\n\nStairs beside the bastions on either side of the gate lead up to the walls. The central courtyard is used today as a park."
     },
     "sources": [
-      { "title": "Kültür Portalı – Nevşehir Kalesi", "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/nevsehr-kales" }
+      {
+        "title": "Kültür Portalı – Nevşehir Kalesi",
+        "url": "https://www.kulturportali.gov.tr/turkiye/nevsehir/gezilecekyer/nevsehr-kales"
+      }
     ]
   }
 }

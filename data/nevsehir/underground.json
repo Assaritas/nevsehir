@@ -1,42 +1,110 @@
 {
-  "_aciklama": "Yeraltı katmanı (diorama). floors: toplam kat; depth_m: toplam derinlik; visit_floors / visit_depth_m: ziyarete açık kısım. Yalnızca kaynakta geçen değerler yazılır, bilinmeyenler null. Kaynakların çeliştiği durumlar notes içinde belirtilir. Katlar arası mesafeler eşit varsayılır.",
+  "_aciklama": "Yeraltı katmanı (diorama). floors: toplam kat; depth_m: toplam derinlik; visit_floors / visit_depth_m: ziyarete açık kısım; area_m2: ölçümlü toplam alan. Yalnızca kaynakta geçen değerler yazılır, bilinmeyenler null. Oda düzeni temsilîdir; kat sayısı, derinlik ve alan kaynaklıdır.",
   "sites": [
     {
-      "id": "n281777097", "name": "Derinkuyu Yeraltı Şehri", "lng": 34.73512, "lat": 38.37358,
-      "floors": 8, "depth_m": 85, "visit_floors": 8, "visit_depth_m": 55,
+      "id": "n281777097",
+      "name": "Derinkuyu Yeraltı Şehri",
+      "lng": 34.73512,
+      "lat": 38.37358,
+      "floors": 8,
+      "depth_m": 85,
+      "visit_floors": 8,
+      "visit_depth_m": 55,
       "notes": {
-        "tr": "Toplam derinlik yaklaşık 85 m (Bakanlık). Ziyarete açık 8 kat yaklaşık 55 m'ye iner; şehrin toplam sınırları ve derinliği henüz tam belirlenmemiştir (NEVÜ Kapadokya Mirası dergisi).",
-        "en": "Total depth about 85 m (Ministry). The 8 visitable floors reach about 55 m; the city's full extent and depth are not yet fully determined (NEVÜ Kapadokya Mirası journal)."
+        "tr": "Toplam derinlik yaklaşık 85 m (Bakanlık). Ziyarete açık 8 kat yaklaşık 55 m'ye iner; şehrin toplam sınırları ve derinliği henüz tam belirlenmemiştir (NEVÜ Kapadokya Mirası dergisi). Ölçümlü plana göre toplam alan 3.786 m² (1.880 m ölçüm, 489 istasyon); plan beş ayrı kat olarak çizilmiştir (Yamaç & Tok 2015).",
+        "en": "Total depth about 85 m (Ministry). The 8 visitable floors reach about 55 m; the city's full extent and depth are not yet fully determined (NEVÜ Kapadokya Mirası journal). The measured plan gives a total area of 3,786 m² (1,880 m of survey, 489 stations), drawn as five separate storeys (Yamaç & Tok 2015)."
       },
       "sources": [
-        { "title": "T.C. Kültür ve Turizm Bakanlığı (muze.gov.tr) – Derinkuyu Yeraltı Şehri: yaklaşık 85 m; 55 m havalandırma bacası", "url": "https://muze.gov.tr/muze-detay?DistId=DKY&SectionId=DKY01" },
-        { "title": "AKÜ FEMÜBİD 23 (2023) – Derinkuyu Yeraltı Şehrinin Sabit Saçıcılı İnterferometri… (85 m; Birant 1992)", "url": "https://dergipark.org.tr/en/download/article-file/2802150" },
-        { "title": "NEVÜ Kapadokya Mirası Tarihi ve Kültürel Bellek Dergisi, sayı 6 – açık 8 kat ≈ 55 m", "url": "https://dosyalar.nevsehir.edu.tr/75e48941a13240217b38f27f81a184d6/dergi-6-sonrevize_compressed.pdf" },
-        { "title": "Derinkuyu Belediyesi – Yeraltı şehirleri (8. kat 55 m)", "url": "https://www.derinkuyu.bel.tr/sehir/yeralti-sehirleri/21/" }
-      ]
+        {
+          "title": "T.C. Kültür ve Turizm Bakanlığı (muze.gov.tr) – Derinkuyu Yeraltı Şehri: yaklaşık 85 m; 55 m havalandırma bacası",
+          "url": "https://muze.gov.tr/muze-detay?DistId=DKY&SectionId=DKY01"
+        },
+        {
+          "title": "AKÜ FEMÜBİD 23 (2023) – Derinkuyu Yeraltı Şehrinin Sabit Saçıcılı İnterferometri… (85 m; Birant 1992)",
+          "url": "https://dergipark.org.tr/en/download/article-file/2802150"
+        },
+        {
+          "title": "NEVÜ Kapadokya Mirası Tarihi ve Kültürel Bellek Dergisi, sayı 6 – açık 8 kat ≈ 55 m",
+          "url": "https://dosyalar.nevsehir.edu.tr/75e48941a13240217b38f27f81a184d6/dergi-6-sonrevize_compressed.pdf"
+        },
+        {
+          "title": "Derinkuyu Belediyesi – Yeraltı şehirleri (8. kat 55 m)",
+          "url": "https://www.derinkuyu.bel.tr/sehir/yeralti-sehirleri/21/"
+        },
+        {
+          "title": "Yamaç & Tok (2015), Surveying some of the touristic underground cities of Cappadocia, Hypogea 2015 (Roma) – ölçümlü planlar",
+          "url": "https://www.operaipogea.it/wp-content/uploads/1995/03/13-Yamac-Tok-touristic-Cappadocia.pdf"
+        }
+      ],
+      "area_m2": 3786
     },
     {
-      "id": "n27151654", "name": "Kaymaklı Yeraltı Şehri", "lng": 34.75249, "lat": 38.45993,
-      "floors": 8, "depth_m": null, "visit_floors": 4, "visit_depth_m": 20,
+      "id": "n27151654",
+      "name": "Kaymaklı Yeraltı Şehri",
+      "lng": 34.75249,
+      "lat": 38.45993,
+      "floors": 8,
+      "depth_m": null,
+      "visit_floors": 4,
+      "visit_depth_m": 20,
       "notes": {
         "tr": "8 kat, 4'ü ziyarete açık (Bakanlık). Ziyaretçiler 20 m derinlikteki 4. kata kadar inebiliyor (Derinkuyu Belediyesi). Alt katların derinliği için kaynak bulunamadı; 5–8. katlar şematiktir.",
         "en": "8 floors, 4 open to visitors (Ministry). Visitors can go down to the 4th floor at 20 m (Derinkuyu Municipality). No source found for the lower floors' depth; floors 5–8 are schematic."
       },
       "sources": [
-        { "title": "T.C. Kültür ve Turizm Bakanlığı (turkishmuseums.com) – Kaymaklı Yeraltı Şehri: 8 kat, 4'ü açık", "url": "https://www.turkishmuseums.com/museum/detail/2207-nevsehir-kaymakli-underground-city/2207/4" },
-        { "title": "Derinkuyu Belediyesi – Yeraltı şehirleri (Kaymaklı 4. kat 20 m)", "url": "https://www.derinkuyu.bel.tr/sehir/yeralti-sehirleri/21/" }
+        {
+          "title": "T.C. Kültür ve Turizm Bakanlığı (turkishmuseums.com) – Kaymaklı Yeraltı Şehri: 8 kat, 4'ü açık",
+          "url": "https://www.turkishmuseums.com/museum/detail/2207-nevsehir-kaymakli-underground-city/2207/4"
+        },
+        {
+          "title": "Derinkuyu Belediyesi – Yeraltı şehirleri (Kaymaklı 4. kat 20 m)",
+          "url": "https://www.derinkuyu.bel.tr/sehir/yeralti-sehirleri/21/"
+        }
       ]
     },
     {
-      "id": "n1628116735", "name": "Özkonak Yeraltı Şehri", "lng": 34.84073, "lat": 38.80687,
-      "floors": 10, "depth_m": 40, "visit_floors": 4, "visit_depth_m": null,
+      "id": "n1628116735",
+      "name": "Özkonak Yeraltı Şehri",
+      "lng": 34.84073,
+      "lat": 38.80687,
+      "floors": 10,
+      "depth_m": 40,
+      "visit_floors": 4,
+      "visit_depth_m": null,
       "notes": {
         "tr": "Bakanlık: toplam 10 kat, 40 m derinlik, bugün 4 katı açık. Kapadokya Jeopark sitesi ise şehri \"iki katlı\" olarak tanımlıyor; kaynaklar çelişiyor.",
         "en": "Ministry: 10 floors in total, 40 m deep, 4 open today. The Kapadokya Jeopark site describes it as \"two-storey\"; the sources conflict."
       },
       "sources": [
-        { "title": "T.C. Kültür ve Turizm Bakanlığı – Where to Visit (Özkonak: 10 kat, 40 m, 4'ü açık)", "url": "https://www.ktb.gov.tr/EN-36075/where-to-visit.html" },
-        { "title": "Kapadokya Jeopark – Özkonak Yeraltı Şehri (\"iki katlı\")", "url": "https://kapadokyajeopark.com.tr/tr/Geopark/ozkonak-yeralti-sehri_90" }
+        {
+          "title": "T.C. Kültür ve Turizm Bakanlığı – Where to Visit (Özkonak: 10 kat, 40 m, 4'ü açık)",
+          "url": "https://www.ktb.gov.tr/EN-36075/where-to-visit.html"
+        },
+        {
+          "title": "Kapadokya Jeopark – Özkonak Yeraltı Şehri (\"iki katlı\")",
+          "url": "https://kapadokyajeopark.com.tr/tr/Geopark/ozkonak-yeralti-sehri_90"
+        }
+      ]
+    },
+    {
+      "id": "n1143445897",
+      "name": "Mazı Yeraltı Şehri",
+      "lng": 34.83891,
+      "lat": 38.46999,
+      "floors": null,
+      "depth_m": null,
+      "visit_floors": null,
+      "visit_depth_m": null,
+      "area_m2": 4453,
+      "notes": {
+        "tr": "Ölçümlü plana göre toplam alan 4.453 m² (1.603 m ölçüm, 439 istasyon); büyük salonları nedeniyle Derinkuyu'dan daha geniş bir alan kaplar (Yamaç & Tok 2015). Kat sayısı ve derinlik için kaynak bulunamadı.",
+        "en": "The measured plan gives a total area of 4,453 m² (1,603 m of survey, 439 stations); with its large chambers it covers more area than Derinkuyu (Yamaç & Tok 2015). No source found for its levels or depth."
+      },
+      "sources": [
+        {
+          "title": "Yamaç & Tok (2015), Surveying some of the touristic underground cities of Cappadocia, Hypogea 2015 (Roma) – ölçümlü planlar",
+          "url": "https://www.operaipogea.it/wp-content/uploads/1995/03/13-Yamac-Tok-touristic-Cappadocia.pdf"
+        }
       ]
     }
   ]

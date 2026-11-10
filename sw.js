@@ -1,5 +1,5 @@
 // Çevrimdışı kullanım: uygulama kabuğu önbelleğe alınır, harita karoları ve veriler gezinildikçe saklanır.
-const VERSION = "v4";
+const VERSION = "github-mwan1q6z";
 const SHELL = `shell-${VERSION}`, DATA = `data-${VERSION}`, TILES = `tiles-${VERSION}`;
 const MAX_TILES = 4000;
 const SHELL_FILES = [
@@ -26,6 +26,8 @@ async function trim(cacheName, max) {
 self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
+  // PMTiles aralık istekleri (206) önbelleğe yazılamaz; Google 3B karoları kurallar gereği önbelleğe alınmaz
+  if (req.headers.has("range") || /googleapis\.com/.test(req.url)) return;
   const url = new URL(req.url);
 
   // Vikipedi özetleri: her zaman güncel olanı dene, yoksa önbellek

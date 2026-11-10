@@ -1,0 +1,47 @@
+{
+  "_aciklama": "Yeraltı katmanı. Yalnızca kaynakta geçen değerler; bilinmeyenler null (şematik çizilir).",
+  "sites": [
+    {
+      "id": "n11006008339",
+      "name": "Yerebatan Sarnıcı",
+      "lng": 28.97838,
+      "lat": 41.00848,
+      "type": "cistern",
+      "length_m": 140,
+      "width_m": 65,
+      "columns": 336,
+      "depth_m": null,
+      "notes": {
+        "tr": "6. yüzyıl ortası; 140 × 65 m, tonoz örtüsü 336 sütunla taşınır (TDV). Derinlik için kaynak bulunamadı; zemin altı konumu şematiktir.",
+        "en": "Mid-6th century; 140 × 65 m, vaults carried by 336 columns (TDV). No source found for its depth; the position below ground is schematic."
+      },
+      "sources": [
+        {
+          "title": "\"Sarnıç\", TDV İslâm Ansiklopedisi",
+          "url": "https://islamansiklopedisi.org.tr/sarnic"
+        }
+      ]
+    },
+    {
+      "id": "n4999341455",
+      "name": "Binbirdirek",
+      "lng": 28.9722,
+      "lat": 41.00709,
+      "type": "cistern",
+      "length_m": 64,
+      "width_m": 57,
+      "columns": 224,
+      "depth_m": null,
+      "notes": {
+        "tr": "Konstantinos devri; 64 × 57 m, 224 sütun (TDV). Derinlik için kaynak bulunamadı; zemin altı konumu şematiktir.",
+        "en": "Constantine's era; 64 × 57 m, 224 columns (TDV). No source found for its depth; the position below ground is schematic."
+      },
+      "sources": [
+        {
+          "title": "\"Sarnıç\", TDV İslâm Ansiklopedisi",
+          "url": "https://islamansiklopedisi.org.tr/sarnic"
+        }
+      ]
+    }
+  ]
+}

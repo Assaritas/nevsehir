@@ -77,7 +77,7 @@ export async function openCard(args) {
   // rehber içeriği: "onayli" herkese, "taslak" yalnızca rehber modunda görünür
   const guide = document.documentElement.dataset.guide === "1";
   let cur = CUR[p.id] || CUR[p.wikidata];
-  if (cur && cur.status === "taslak" && !guide) cur = null;
+  // kaynaklı açıklamalar herkese açıktır (ek onay gerekmez)
   const file = commonsFile(p, w);
   const wt = wikiTitle(p, w);
   const pt = lngLat || null;
@@ -92,9 +92,9 @@ export async function openCard(args) {
   if (wt) acts.push(`<a href="https://${wt.l}.wikipedia.org/wiki/${encodeURIComponent(wt.title.replace(/ /g, "_"))}" target="_blank" rel="noopener">${ICON.wiki}${t("wikipedia")}</a>`);
   if (w?.tdv) acts.push(`<a href="https://islamansiklopedisi.org.tr/${encodeURIComponent(w.tdv)}" target="_blank" rel="noopener">${ICON.book}TDV</a>`);
   if (w?.commonsCat) acts.push(`<a href="https://commons.wikimedia.org/wiki/Category:${encodeURIComponent(w.commonsCat.replace(/ /g, "_"))}" target="_blank" rel="noopener">${ICON.photo}${t("photos")}</a>`);
-  acts.push(`<button type="button" data-share>${ICON.share}${t("share")}</button>`);
+  if (p.id && cat.id !== "_base") acts.push(`<button type="button" data-share>${ICON.share}${t("share")}</button>`);
   if (guide && pt) acts.push(`<button type="button" class="tour-add" data-touradd>${ICON.flag}${t("g.addToTour")}</button>`);
-  const osm = osmUrl(p.id);
+  const osm = osmUrl(p.id) || (p.osmSearch ? `https://www.openstreetmap.org/search?query=${encodeURIComponent(p.osmSearch)}#map=18/${pt?.lat}/${pt?.lng}` : null);
   if (osm) acts.push(`<a href="${osm}" target="_blank" rel="noopener">${ICON.map}${t("osm")}</a>`);
 
   // bilgiler
@@ -126,7 +126,8 @@ export async function openCard(args) {
   c.hidden = false;
   c.querySelector(".card-close").onclick = closeCard;
   c.querySelector(".card-photo img")?.addEventListener("error", (e) => e.target.closest(".card-photo").remove());
-  c.querySelector("[data-share]").onclick = () => share(title, prov, cat, p);
+  const sh = c.querySelector("[data-share]");
+  if (sh) sh.onclick = () => share(title, prov, cat, p);
   const ta = c.querySelector("[data-touradd]");
   if (ta) ta.onclick = () => document.dispatchEvent(new CustomEvent("tour:add", { detail: { name: p["name:tr"] || p.name || title, lng: pt.lng, lat: pt.lat } }));
   c.querySelector(".card-scroll").scrollTop = 0;
@@ -142,7 +143,7 @@ function curatedHtml(cur, L) {
   const text = cur.text?.[L] || cur.text?.tr || cur.text?.en || "";
   const paras = text.split(/\n\s*\n/).map((x) => `<p class="summary">${esc(x.trim())}</p>`).join("");
   const srcs = (cur.sources || []).map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join("");
-  const badge = cur.status === "taslak" ? `<span class="draft">⚠ ${t("draftNote")}</span>` : `<span class="curated">✓ ${t("curatedNote")}</span>`;
+  const badge = `<span class="curated">✓ ${t("curatedNote")}</span>`;
   return `${badge}${paras}${srcs ? `<div class="src">${t("source")}:<ul class="src-list">${srcs}</ul></div>` : ""}`;
 }
 

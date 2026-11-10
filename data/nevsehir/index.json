@@ -1,7 +1,8 @@
 {
   "province": "nevsehir",
-  "generated": "2026-11-10T00:17:30.359Z",
+  "generated": "2026-11-10T11:17:45.434Z",
   "counts": {
+    "il_siniri": 0,
     "ilceler": 16,
     "koy_mahalle_sinir": 341,
     "yerlesimler": 247,
@@ -10,6 +11,9 @@
     "antik": 131,
     "yeralti_sehir": 9,
     "muzeler": 16,
+    "saraylar": 2,
+    "carsilar": 0,
+    "cesmeler": 0,
     "tarihi_yapilar": 26,
     "kaleler": 7,
     "medrese_han_hamam": 6,
@@ -25,11 +29,19 @@
     "daglar": 196,
     "akarsu_gol": 44,
     "barajlar": 25,
+    "magaralar": 148,
+    "selaleler": 0,
+    "adalar": 0,
+    "kayak": 0,
+    "hayvanat": 0,
     "plajlar": 0,
-    "rayli": 15,
+    "rayli": 18,
     "toplu_tasima": 12,
     "yollar": 642,
     "liman_havalimani": 1,
+    "deniz_ulasimi": 0,
+    "teleferik": 0,
+    "fenerler": 0,
     "tuneller": 8,
     "kopruler": 45,
     "saglik": 98,
@@ -43,6 +55,7 @@
     "Wikidata (CC0)"
   ],
   "dates": {
+    "il_siniri": [],
     "ilceler": [],
     "koy_mahalle_sinir": [],
     "yerlesimler": [],
@@ -111,6 +124,9 @@
         null
       ]
     ],
+    "saraylar": [],
+    "carsilar": [],
+    "cesmeler": [],
     "tarihi_yapilar": [],
     "kaleler": [
       [
@@ -159,6 +175,24 @@
     "daglar": "timeless",
     "akarsu_gol": "timeless",
     "barajlar": [],
+    "magaralar": [
+      [
+        -1600,
+        null
+      ],
+      [
+        200,
+        null
+      ],
+      [
+        2021,
+        null
+      ]
+    ],
+    "selaleler": [],
+    "adalar": [],
+    "kayak": [],
+    "hayvanat": [],
     "plajlar": [],
     "rayli": [
       [
@@ -219,6 +253,9 @@
         null
       ]
     ],
+    "deniz_ulasimi": [],
+    "teleferik": [],
+    "fenerler": [],
     "tuneller": [],
     "kopruler": [
       [

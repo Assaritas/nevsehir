@@ -365,3 +365,116 @@ input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 
 .dio-ug small { display: block; }
 .dio-legend .ug-note { font-size: 12px; }
 .dio-legend { max-height: calc(100vh - 220px); overflow: auto; }
+
+/* ================= Aşama 4: araç çubuğu (gruplu, açılır-kapanır) ================= */
+.toolbar { padding: 4px; gap: 0; max-height: calc(100vh - 24px); overflow-y: auto; overscroll-behavior: contain; }
+.tb-toggle { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; border: 0; border-radius: 10px; background: transparent;
+  font-weight: 700; font-size: 13px; letter-spacing: .02em; }
+.tb-toggle:hover { background: var(--surface-2); }
+.tb-toggle .ic-close { display: block; }
+.tb-toggle .ic-menu { display: none; }
+.toolbar.collapsed .tb-toggle .ic-close { display: none; }
+.toolbar.collapsed .tb-toggle .ic-menu { display: block; }
+.toolbar.collapsed .tb-groups { display: none; }
+.tb-groups { display: flex; flex-direction: column; gap: 2px; }
+.tb-group { display: flex; flex-direction: column; gap: 1px; padding-top: 4px; border-top: 1px solid var(--line); }
+.tb-gtitle { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 4px 12px 2px; }
+.tool { min-height: 40px; }
+/* tur ekranı: araç çubuğundaki rozetler dışında sade */
+.tour-focus .exag-panel { display: none !important; }
+
+/* katman seçenekleri */
+.opt-title { font-size: 12.5px; color: var(--muted); font-weight: 600; margin: 14px 0 4px; }
+.opt-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); cursor: pointer; }
+.opt-row > span:first-child { flex: 1; display: flex; flex-direction: column; }
+.opt-row b { font-size: 14px; font-weight: 600; }
+.opt-row small { font-size: 12px; color: var(--muted); }
+.base-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.base-opt .thumb { height: 62px; }
+
+/* tur günleri */
+.day-tabs { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 10px; scrollbar-width: none; }
+.day-tab { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 18px;
+  background: var(--surface); font-size: 13px; font-weight: 600; white-space: nowrap; }
+.day-tab i { width: 10px; height: 10px; border-radius: 50%; background: var(--dc); }
+.day-tab small { color: var(--muted); font-weight: 600; }
+.day-tab.on { background: var(--dc); border-color: var(--dc); color: #fff; }
+.day-tab.on i { background: #fff; }
+.day-tab.on small { color: rgba(255,255,255,.85); }
+.day-tab.add { color: var(--accent); border-style: dashed; }
+.day-tab.add svg { width: 16px; height: 16px; }
+.stops .num { background: var(--dc, var(--accent)); }
+.stops .stop:not(:last-child)::after { border-left-color: var(--dc, var(--accent)); }
+.stops .time { color: var(--dc, var(--accent)); }
+.g-head label.wide { grid-column: 1 / -1; }
+
+/* diorama yeraltı listesi (ekranı kaplamaz; açılır-kapanır) */
+.dio-list { position: absolute; right: 12px; top: calc(70px + env(safe-area-inset-top)); width: 320px; max-width: calc(100vw - 24px);
+  background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); font-size: 12.5px; overflow: hidden; }
+.dio-list-head { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 0 14px; border: 0; background: none; font-weight: 700; font-size: 13.5px; text-align: left; }
+.dio-list-head span { flex: 1; }
+.dio-list-head svg { transition: transform .2s; }
+.dio-list-head[aria-expanded="true"] svg { transform: rotate(180deg); }
+.dio-list-body { max-height: min(55vh, 460px); overflow: auto; padding: 0 14px 12px; overscroll-behavior: contain; }
+.dio-list-body p { margin: 0 0 6px; }
+.ug-item { border-top: 1px solid var(--line); padding: 8px 0; }
+.ug-item > button { display: flex; align-items: center; gap: 8px; width: 100%; border: 0; background: none; padding: 0; text-align: left; }
+.ug-item .n { flex: none; width: 22px; height: 22px; border-radius: 50%; background: #e07a3f; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 12px; }
+.ug-item b { font-size: 13.5px; }
+.ug-item small { display: block; color: var(--muted); }
+.ug-item details { margin-top: 4px; }
+.ug-item summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+.ug-item ul { margin: 4px 0 0; padding-left: 16px; }
+.dio-list .sw i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin: 0 5px -1px 8px; }
+.dio-list .sw i:first-child { margin-left: 0; }
+.dio-ugtag { pointer-events: none; width: 22px; height: 22px; border-radius: 50%; background: #e07a3f; color: #fff; font-weight: 800; font-size: 12px;
+  display: grid; place-items: center; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.4); }
+
+@media (max-width: 720px) {
+  /* telefonda araç çubuğu: etiketli, gruplu; kapalıyken yalnızca menü düğmesi */
+  .toolbar { width: auto; }
+  .toolbar .tool { width: auto; justify-content: flex-start; padding: 0 12px 0 10px; gap: 10px; min-height: 38px; font-size: 13.5px; }
+  .toolbar .tool span { display: inline; }
+  .toolbar .badge { left: 22px; }
+  .tb-toggle { min-height: 44px; }
+  .toolbar.collapsed { padding: 2px; }
+  .toolbar.collapsed .tb-toggle { width: 44px; padding: 0; justify-content: center; }
+  .toolbar.collapsed .tb-toggle span { display: none; }
+  /* yakınlaştırma çubuğu yalnızca kullanılırken */
+  .zoombar { opacity: 0; pointer-events: none; transform: translateX(12px); transition: opacity .25s, transform .25s; }
+  .zoombar.show { opacity: 1; pointer-events: auto; transform: none; }
+  .base-grid { grid-template-columns: repeat(3, 1fr); }
+  .dio-list { top: auto; bottom: calc(150px + env(safe-area-inset-bottom)); right: 8px; left: 8px; width: auto; }
+  .dio-list-body { max-height: 38vh; }
+}
+
+@media (min-width: 721px) { .toolbar .tool { min-height: 36px; } .vslider { height: 120px; } .vslider input { width: 120px; } }
+
+.dio-labels { z-index: 1; }
+.dio-list, .dio-controls, .dio-top { z-index: 5; }
+
+/* il seçici */
+.prov-btn { display: flex; gap: 10px; align-items: center; border: 0; background: none; padding: 0; text-align: left; color: inherit; }
+.prov-btn .title { display: flex; align-items: center; gap: 4px; }
+.prov-btn .chev { width: 16px; height: 16px; color: var(--muted); }
+.title-chip { padding: 8px 12px 8px 10px; }
+.popover.prov { left: calc(12px + env(safe-area-inset-left)); right: auto; top: calc(70px + env(safe-area-inset-top)); width: 280px; }
+.prov-list { display: flex; flex-direction: column; gap: 2px; max-height: 60vh; overflow: auto; }
+.prov-item { padding: 10px 12px; border-radius: 10px; text-decoration: none; color: inherit; font-weight: 550; }
+.prov-item:hover { background: var(--surface-2); }
+.prov-item.on { background: var(--accent); color: var(--accent-ink); }
+@media (max-width: 720px) { .popover.prov { left: 12px; right: 68px; width: auto; } }
+
+.prov-sep { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 10px 12px 4px; }
+.prov-item.soon { color: var(--muted); opacity: .6; font-weight: 500; padding: 6px 12px; }
+
+/* Google 3B */
+.popover.g3d { left: 50%; right: auto; top: 50%; transform: translate(-50%, -50%); width: min(420px, calc(100vw - 24px)); z-index: 25; }
+.g3d-text { font-size: 13.5px; margin: 0 0 10px; }
+.g3d-small { font-size: 12.5px; margin: 6px 0 0; }
+.g3d-small a { color: var(--accent); }
+#g3dKey { width: 100%; font: inherit; font-size: 15px; padding: 9px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); }
+.g3d-credits { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(4px + env(safe-area-inset-bottom)); z-index: 4; font-size: 10.5px;
+  background: rgba(255,255,255,.85); color: #333; padding: 2px 8px; border-radius: 6px; max-width: calc(100vw - 120px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.g3d-credits b { font-weight: 700; letter-spacing: .01em; }
+.busy { position: fixed; inset: 0; display: grid; place-items: center; z-index: 26; pointer-events: none; }

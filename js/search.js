@@ -24,6 +24,20 @@ async function load() {
   return index;
 }
 
+/** Temel harita simgesini lejant verisindeki kayda eşle: aynı ad (normalize) ve ~300 m içinde */
+export async function findByName(name, lng, lat) {
+  if (!ctx || !name) return null;
+  await load();
+  const n = norm(name);
+  let best = null, bestD = Infinity;
+  for (const e of index) {
+    if (e.nameN !== n && !Object.values(e.alt).some((a) => norm(a) === n)) continue;
+    const d = Math.hypot((e.x - lng) * Math.cos((lat * Math.PI) / 180), e.y - lat) * 111000;
+    if (d < bestD) { best = e; bestD = d; }
+  }
+  return best && bestD < 300 ? best : null;
+}
+
 function search(q) {
   const qn = norm(q);
   if (!qn) return [];

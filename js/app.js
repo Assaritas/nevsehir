@@ -1,11 +1,12 @@
 import { CATEGORIES, GROUPS } from "../config/categories.js";
-import { PROVINCES, DEFAULT_PROVINCE } from "../config/provinces.js";
+import { PROVINCES, DEFAULT_PROVINCE, READY } from "../config/provinces.js";
 import { t, setLang, lang, UI_LANGS } from "./i18n.js";
 import { openCard, closeCard, findFeature } from "./card.js";
-import { initSearch } from "./search.js";
+import { initSearch, findByName } from "./search.js";
 import * as tour from "./tour.js";
 import * as history from "./history.js";
 import * as diorama from "./diorama.js";
+import * as g3d from "./google3d.js";
 
 /* global maplibregl, mlcontour */
 
@@ -13,7 +14,7 @@ import * as diorama from "./diorama.js";
 // Ayarlar
 // ---------------------------------------------------------------------------
 const params = new URLSearchParams(location.search);
-const prov = PROVINCES[params.get("il")] || PROVINCES[DEFAULT_PROVINCE];
+const prov = READY.includes(params.get("il")) ? PROVINCES[params.get("il")] : PROVINCES[DEFAULT_PROVINCE];
 const DATA = `data/${prov.id}/`;
 const GROUP = Object.fromEntries(GROUPS.map((g) => [g.id, g]));
 const CAT = Object.fromEntries(CATEGORIES.map((c) => [c.id, c]));
@@ -26,7 +27,10 @@ const store = {
 const state = {
   lang: store.get("lang", "tr"),
   theme: store.get("theme", "auto"),          // auto | light | dark
-  base: store.get("base", "terrain"),          // terrain | satellite | landforms | vegetation
+  base: store.get("base", "terrain"),          // standard | terrain | satellite | landforms | vegetation
+  b3d: store.get("b3d", "0") === "1",          // 3B binalar
+  mon3d: store.get("mon3d", "0") === "1",      // 3B anıt modelleri
+  focus: false,                                // tur ekranı: yalnızca tur durakları
   is3d: false,
   exag: 1.5,
   active: new Set(),                          // lejant: açılışta hiçbir şey açık değil
@@ -42,7 +46,7 @@ const SRC = {
   styleDark: "https://tiles.openfreemap.org/styles/dark",
   terrarium: "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
   satellite: "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2024_3857/default/g/{z}/{y}/{x}.jpg",
-  landcover: DATA + "landcover/{z}/{x}/{y}.png",   // scripts/build-landcover.mjs ile üretilir (ESA WorldCover)
+  landcover: new URL(DATA + "landcover.pmtiles", location.href).href,   // tek dosya (PMTiles): build-landcover + pack-pmtiles
 };
 const ATTR = {
   dem: '<a href="https://registry.opendata.aws/terrain-tiles/" target="_blank">Terrain Tiles (Mapzen/AWS: SRTM, GMTED, ETOPO1)</a>',
@@ -55,7 +59,34 @@ const LC_CLASSES = [
   ["trees", "#2d7a3a"], ["shrub", "#b59a52"], ["grass", "#cfe0a0"], ["crops", "#f2cf6b"],
   ["built", "#d9483b"], ["bare", "#cfc6b8"], ["water", "#3b82c4"], ["wetland", "#4fb3a9"], ["snow", "#ffffff"],
 ];
-const BASES = ["terrain", "satellite", "landforms", "vegetation"];
+const BASES = ["standard", "terrain", "satellite", "landforms", "vegetation", "google3d"];
+
+// "Sade" katman: Google Haritalar'a benzer sade renkler (açık tema). Özgün değerler geri yüklemek için saklanır.
+const STANDARD_PAINT = {
+  background: { "background-color": "#f4f3ef" },
+  park: { "fill-color": "#cfe9c4" }, landcover_wood: { "fill-color": "#c3e2b7" }, landcover_grass: { "fill-color": "#d7ecc9" },
+  landuse_residential: { "fill-color": "#efede8" }, landuse_cemetery: { "fill-color": "#d9e8d0" },
+  water: { "fill-color": "#a6d3f3" }, waterway_river: { "line-color": "#a6d3f3" }, waterway_other: { "line-color": "#a6d3f3" },
+  building: { "fill-color": "#e7e4de" },
+  road_minor: { "line-color": "#ffffff" }, road_minor_casing: { "line-color": "#dcdcdc" },
+  road_service_track: { "line-color": "#ffffff" }, road_service_track_casing: { "line-color": "#e2e2e2" },
+  road_secondary_tertiary: { "line-color": "#ffffff" }, road_secondary_tertiary_casing: { "line-color": "#d2d2d2" },
+  road_trunk_primary: { "line-color": "#fde9a9" }, road_trunk_primary_casing: { "line-color": "#e7c56a" },
+  road_motorway: { "line-color": "#f8cf6b" }, road_motorway_casing: { "line-color": "#e2a63c" },
+  road_link: { "line-color": "#fde9a9" }, road_motorway_link: { "line-color": "#f8cf6b" },
+  bridge_trunk_primary: { "line-color": "#fde9a9" }, bridge_motorway: { "line-color": "#f8cf6b" }, bridge_secondary_tertiary: { "line-color": "#ffffff" },
+};
+const savedPaint = {};
+function applyStandardPaint(on) {
+  for (const [id, props] of Object.entries(STANDARD_PAINT)) {
+    if (!map.getLayer(id)) continue;
+    for (const [k, v] of Object.entries(props)) {
+      const key = id + "|" + k;
+      if (on) { if (!(key in savedPaint)) savedPaint[key] = map.getPaintProperty(id, k); map.setPaintProperty(id, k, v); }
+      else if (key in savedPaint) map.setPaintProperty(id, k, savedPaint[key]);
+    }
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Tema
@@ -72,6 +103,13 @@ applyThemeAttr();
 // ---------------------------------------------------------------------------
 // Harita
 // ---------------------------------------------------------------------------
+// PMTiles: karolar tek dosyadan HTTP aralık istekleriyle okunur
+const pmProtocol = new pmtiles.Protocol();
+maplibregl.addProtocol("pmtiles", pmProtocol.tile);
+const lcArchive = new pmtiles.PMTiles(SRC.landcover);
+pmProtocol.add(lcArchive);
+window.__lcArchive = lcArchive;
+
 const demSource = new mlcontour.DemSource({ url: SRC.terrarium, encoding: "terrarium", maxzoom: 13, worker: true, cacheSize: 100 });
 demSource.setupMaplibre(maplibregl);
 
@@ -130,7 +168,7 @@ async function installCustom() {
   if (!map.getSource("dem")) map.addSource("dem", { type: "raster-dem", tiles: [SRC.terrarium], encoding: "terrarium", tileSize: 256, maxzoom: 15, attribution: ATTR.dem });
   if (!map.getSource("dem-hs")) map.addSource("dem-hs", { type: "raster-dem", tiles: [SRC.terrarium], encoding: "terrarium", tileSize: 256, maxzoom: 15 });
   if (!map.getSource("sat")) map.addSource("sat", { type: "raster", tiles: [SRC.satellite], tileSize: 256, maxzoom: 15, attribution: ATTR.sat });
-  if (!map.getSource("lc")) map.addSource("lc", { type: "raster", tiles: [new URL(SRC.landcover, location.href).href.replace(/%7B/g, "{").replace(/%7D/g, "}")], tileSize: 256, minzoom: 8, maxzoom: 14, bounds: lcBounds(), attribution: ATTR.lc });
+  if (!map.getSource("lc")) map.addSource("lc", { type: "raster", url: "pmtiles://" + SRC.landcover, tileSize: 256, attribution: ATTR.lc });
   if (!map.getSource("contours")) map.addSource("contours", {
     type: "vector", maxzoom: 15,
     tiles: [demSource.contourProtocolUrl({ thresholds: { 9: [200, 1000], 11: [100, 500], 12: [50, 250], 13: [20, 100], 15: [10, 50] }, elevationKey: "ele", levelKey: "level", contourLayer: "contours" })],
@@ -168,10 +206,34 @@ async function installCustom() {
     const g = boundaryData.features[0].geometry;
     const outers = g.type === "Polygon" ? [g.coordinates[0]] : g.coordinates.map((p) => p[0]);
     map.addSource("mask", { type: "geojson", data: { type: "Feature", geometry: { type: "Polygon", coordinates: [[[-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85]], ...outers.map((r) => [...r].reverse())] } } });
-    map.addLayer({ id: "mask", type: "fill", source: "mask", paint: { "fill-color": dark ? "#000" : "#3b3026", "fill-opacity": dark ? 0.45 : 0.28 } }, labels);
-    map.addLayer({ id: "prov-casing", type: "line", source: "boundary", paint: { "line-color": dark ? "rgba(0,0,0,.6)" : "rgba(255,255,255,.85)", "line-width": 5 } }, labels);
-    map.addLayer({ id: "prov-line", type: "line", source: "boundary", paint: { "line-color": "#b5532c", "line-width": 2.2, "line-dasharray": [3, 1.5] } }, labels);
+    map.addLayer({ id: "mask", type: "fill", source: "mask", layout: { visibility: "none" }, paint: { "fill-color": dark ? "#000" : "#3b3026", "fill-opacity": dark ? 0.45 : 0.28 } }, labels);
+    map.addLayer({ id: "prov-casing", type: "line", source: "boundary", layout: { visibility: "none" }, paint: { "line-color": dark ? "rgba(0,0,0,.6)" : "rgba(255,255,255,.85)", "line-width": 5 } }, labels);
+    map.addLayer({ id: "prov-line", type: "line", source: "boundary", layout: { visibility: "none" }, paint: { "line-color": "#b5532c", "line-width": 2.2, "line-dasharray": [3, 1.5] } }, labels);
   }
+
+  // 3B binalar (OpenMapTiles bina yükseklikleri) — temel stilin kendi 3B katmanı yerine
+  if (map.getLayer("building-3d")) map.setLayoutProperty("building-3d", "visibility", "none");
+  if (!map.getLayer("bld-3d")) map.addLayer({ id: "bld-3d", type: "fill-extrusion", source: "openmaptiles", "source-layer": "building", minzoom: 13,
+    layout: { visibility: "none" },
+    paint: {
+      "fill-extrusion-color": dark ? ["interpolate", ["linear"], ["get", "render_height"], 0, "#3a3e46", 60, "#4a4f59"]
+        : ["interpolate", ["linear"], ["get", "render_height"], 0, "#ebe5da", 30, "#e0d8ca", 120, "#cfc6b6"],
+      "fill-extrusion-height": ["interpolate", ["linear"], ["zoom"], 13, 0, 14, ["get", "render_height"]],
+      "fill-extrusion-base": ["get", "render_min_height"],
+      "fill-extrusion-opacity": 0.95,
+    } }, labels);
+  // 3B anıt modelleri (OSM building:part — kubbe, minare, külah; scripts/build-monuments.mjs)
+  if (!map.getSource("mon3d")) map.addSource("mon3d", { type: "geojson", data: DATA + "monuments.geojson" });
+  if (!map.getLayer("mon-3d")) map.addLayer({ id: "mon-3d", type: "fill-extrusion", source: "mon3d", minzoom: 12,
+    layout: { visibility: "none" },
+    paint: {
+      "fill-extrusion-color": ["get", "c"], "fill-extrusion-height": ["get", "h"], "fill-extrusion-base": ["get", "b"],
+      "fill-extrusion-opacity": 1, "fill-extrusion-vertical-gradient": true,
+    } }, labels);
+  // ışık: binalara ve anıtlara güneş ışığı gibi gölgelendirme
+  map.setLight({ anchor: "map", position: [1.3, 215, 35], color: "#fff7ea", intensity: dark ? 0.25 : 0.42 });
+  applyProvince();
+  apply3dObjects();
 
   localizeLabels();
   await ensureIcons();
@@ -186,21 +248,52 @@ async function installCustom() {
 // --- temel katman -----------------------------------------------------------
 function applyBase() {
   const b = state.base;
+  if (b === "google3d") {
+    if (!g3d.isActive()) g3d.enable().then((ok) => { if (!ok && !document.getElementById("g3dDialog").hidden) return; if (!ok) { state.base = "standard"; applyBase(); } });
+    document.getElementById("baseName").textContent = t(b);
+    document.querySelectorAll(".base-opt").forEach((el) => el.classList.toggle("on", el.dataset.base === b));
+    return;
+  }
+  if (g3d.isActive()) g3d.disable();
   const vis = (id, on) => map.getLayer(id) && map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
   vis("sat-raster", b === "satellite");
   vis("lc-raster", b === "vegetation");
   vis("relief-color", b === "landforms");
   vis("contour-lines", b === "terrain" || b === "landforms");
   vis("contour-labels", b === "terrain" || b === "landforms");
-  vis("hillshade", true);
-  if (map.getLayer("hillshade")) map.setPaintProperty("hillshade", "hillshade-exaggeration", { terrain: 0.4, satellite: 0.15, landforms: 0.75, vegetation: 0.35 }[b]);
+  vis("hillshade", b !== "standard");
+  vis("natural_earth", b !== "standard");
+  applyStandardPaint(b === "standard");
+  if (map.getLayer("hillshade") && b !== "standard") map.setPaintProperty("hillshade", "hillshade-exaggeration", { terrain: 0.4, satellite: 0.15, landforms: 0.75, vegetation: 0.35 }[b]);
   // yer şekilleri / bitki örtüsü modunda temel haritanın arazi kullanımı dolgularını gizle
   for (const l of map.getStyle().layers) {
-    if (l.type === "fill" && ["landcover", "landuse", "park"].includes(l["source-layer"])) vis(l.id, b === "terrain" || b === "satellite");
+    if (l.type === "fill" && ["landcover", "landuse", "park"].includes(l["source-layer"])) vis(l.id, ["terrain", "satellite", "standard"].includes(b));
   }
   document.getElementById("baseName").textContent = t(b);
   document.querySelectorAll(".base-opt").forEach((el) => el.classList.toggle("on", el.dataset.base === b));
   document.getElementById("lcKey").hidden = b !== "vegetation";
+}
+
+// --- il sınırı (lejant öğesi) ----------------------------------------------------
+function applyProvince() {
+  const on = state.active.has("il_siniri");
+  for (const id of ["mask", "prov-casing", "prov-line"]) if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
+}
+// --- 3B binalar / anıt modelleri ---------------------------------------------------
+function apply3dObjects() {
+  if (map.getLayer("bld-3d")) map.setLayoutProperty("bld-3d", "visibility", state.b3d ? "visible" : "none");
+  if (map.getLayer("building")) map.setLayoutProperty("building", "visibility", state.b3d ? "none" : "visible");
+  if (map.getLayer("mon-3d")) map.setLayoutProperty("mon-3d", "visibility", state.mon3d ? "visible" : "none");
+  const b = $("optB3d"), m = $("optMon3d");
+  if (b) b.checked = state.b3d;
+  if (m) m.checked = state.mon3d;
+}
+// --- odak modu (tur ekranı): yalnızca tur durakları görünür -------------------------
+function setFocus(on) {
+  state.focus = on;
+  for (const id of state.active) for (const l of catLayerIds(id)) if (map.getLayer(l)) map.setLayoutProperty(l, "visibility", on ? "none" : "visible");
+  for (const l of map.getStyle().layers) if (l["source-layer"] === "poi") map.setLayoutProperty(l.id, "visibility", on ? "none" : "visible");
+  document.documentElement.classList.toggle("tour-focus", on);
 }
 
 // --- 2B / 3B ----------------------------------------------------------------
@@ -209,7 +302,7 @@ function apply3d(animate = true) {
   btn.classList.toggle("on", state.is3d);
   document.getElementById("lbl3d").textContent = state.is3d ? t("mode2d") : t("mode3d");
   document.getElementById("exagPanel").hidden = !state.is3d;
-  if (state.is3d) {
+  if (state.is3d && !g3d.isActive()) {
     map.setTerrain({ source: "dem", exaggeration: state.exag });
     const dark = isDark();
     map.setSky({
@@ -217,7 +310,7 @@ function apply3d(animate = true) {
       "fog-color": dark ? "#1a1f29" : "#efe4d2", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.6, "fog-ground-blend": 0.25, "atmosphere-blend": 0.6,
     });
     if (animate) map.easeTo({ pitch: 62, duration: 1200 });
-  } else {
+  } else if (!state.is3d) {
     map.setTerrain(null);
     if (animate) map.easeTo({ pitch: 0, bearing: 0, duration: 900 });
   }
@@ -275,13 +368,15 @@ function addCatLayers(id) {
   const line = ["==", ["geometry-type"], "LineString"];
   const point = ["==", ["geometry-type"], "Point"];
 
-  const below = map.getLayer("tour-line") ? "tour-line" : undefined;
+  const below = map.getLayer("tour-line-casing") ? "tour-line-casing" : map.getLayer("tour-line") ? "tour-line" : undefined;
   map.addLayer({ id: `cat-${id}-fill`, type: "fill", source: src, filter: poly,
     paint: { "fill-color": color, "fill-opacity": isBorder ? 0.01 : 0.16 } }, below);
 
   let lineColor = color, lineWidth = 2, dash = null;
   if (id === "yollar") { lineColor = ["match", ["get", "highway"], "motorway", "#d4442e", "trunk", "#e0742d", "primary", "#e8a33a", "#c9b23a"]; lineWidth = ["interpolate", ["linear"], ["zoom"], 8, 1.5, 14, 6]; }
   if (id === "akarsu_gol") { lineColor = "#2b7bd1"; lineWidth = ["interpolate", ["linear"], ["zoom"], 8, 1.5, 14, 4]; }
+  if (["rayli", "deniz_ulasimi", "teleferik"].includes(id)) { lineColor = ["coalesce", ["to-color", ["get", "colour"], color], color]; lineWidth = ["interpolate", ["linear"], ["zoom"], 9, 2, 15, 5]; }
+  if (id === "deniz_ulasimi") dash = [2, 2];
   if (isBorder) { lineWidth = id === "ilceler" ? 2.2 : 1.2; dash = [2, 1.5]; }
   map.addLayer({ id: `cat-${id}-line`, type: "line", source: src, filter: ["any", poly, line],
     layout: { "line-join": "round", "line-cap": "round" },
@@ -291,7 +386,8 @@ function addCatLayers(id) {
     layout: { "icon-image": "pin-" + id, "icon-allow-overlap": true, "icon-ignore-placement": false, "icon-size": ["interpolate", ["linear"], ["zoom"], 8, 0.75, 13, 1] } }, below);
 
   map.addLayer({ id: `cat-${id}-label`, type: "symbol", source: src,
-    filter: isBorder ? point : (["yollar", "akarsu_gol"].includes(id) ? ["any", point, line] : point),
+    filter: isBorder ? point : (["yollar", "akarsu_gol"].includes(id) ? ["any", point, line]
+      : id === "rayli" ? ["all", point, ["match", ["get", "railway"], ["station", "halt", "tram_stop"], true, false]] : point),
     minzoom: isBorder ? (id === "ilceler" ? 7 : 11) : 11.5,
     layout: {
       "text-field": nameExpr(), "text-font": ["Noto Sans Regular"], "text-size": isBorder ? (id === "ilceler" ? 14 : 11.5) : 12,
@@ -300,6 +396,7 @@ function addCatLayers(id) {
       ...(isBorder ? { "text-transform": id === "ilceler" ? "uppercase" : "none", "text-letter-spacing": id === "ilceler" ? 0.12 : 0 } : {}),
     },
     paint: { "text-color": isBorder ? color : (isDark() ? "#f0ebe3" : "#2a2420"), "text-halo-color": isDark() ? "rgba(0,0,0,.8)" : "rgba(255,255,255,.92)", "text-halo-width": 1.6 } }, below);
+  if (state.focus) for (const l of catLayerIds(id)) map.setLayoutProperty(l, "visibility", "none");
 }
 // zaman kaydırıcısı: kategori katmanlarına yıl süzgeci ekle / kaldır
 const baseFilters = {};
@@ -318,6 +415,10 @@ function removeCatLayers(id) {
   if (map.getSource("cat-" + id)) map.removeSource("cat-" + id);
 }
 async function setCat(id, on) {
+  if (CAT[id]?.kind === "province") {   // il sınırı: veri katmanı değil, sınır + il dışı karartma
+    on ? state.active.add(id) : state.active.delete(id);
+    applyProvince(); syncLegend(); return;
+  }
   if (on) {
     state.active.add(id);
     await loadCat(id);
@@ -331,11 +432,14 @@ async function setCat(id, on) {
 
 // --- tıklama → bilgi kartı ------------------------------------------------
 const activeLayerIds = () => [...state.active].flatMap(catLayerIds).filter((l) => map.getLayer(l));
+const coarse = matchMedia("(pointer: coarse)").matches;
 map.on("click", (e) => {
   if (tour.handleMapClick(e)) return;
-  const box = [[e.point.x - 8, e.point.y - 8], [e.point.x + 8, e.point.y + 8]];
-  const feats = map.queryRenderedFeatures(box, { layers: activeLayerIds() });
-  if (!feats.length) return;
+  const r = coarse ? 16 : 8;                         // parmakla dokunmada daha geniş alan
+  const box = [[e.point.x - r, e.point.y - r], [e.point.x + r, e.point.y + r]];
+  const ids = state.focus ? [] : activeLayerIds();
+  const feats = ids.length ? map.queryRenderedFeatures(box, { layers: ids }) : [];
+  if (!feats.length) { baseMapClick(box, e.lngLat); return; }
   const rank = (f) => (f.geometry.type === "Point" && !CAT[f.properties.cat]?.kind ? 0 : f.geometry.type.includes("Line") ? 1 : 2);
   feats.sort((a, b) => rank(a) - rank(b));
   const f = feats[0];
@@ -346,8 +450,42 @@ map.on("mousemove", (e) => {
   const ids = activeLayerIds();
   if (tour.isAddMode()) { map.getCanvas().style.cursor = "crosshair"; return; }
   if (map.getLayer("tour-pt")) ids.push("tour-pt");
-  map.getCanvas().style.cursor = ids.length && map.queryRenderedFeatures(e.point, { layers: ids }).length ? "pointer" : "";
+  const hitCat = ids.length && map.queryRenderedFeatures(e.point, { layers: ids }).length;
+  const hitBase = !hitCat && map.queryRenderedFeatures(e.point).some((x) => x.layer.type === "symbol" && x.properties?.name && ["poi", "place"].includes(x.layer["source-layer"]));
+  map.getCanvas().style.cursor = hitCat || hitBase ? "pointer" : "";
 });
+
+// temel haritadaki adlı simgeler (eczane, cami, otel, köy adı…) → bilgi kartı
+const BASE_TYPES = {
+  place_of_worship: "religious-muslim", pharmacy: "pharmacy", hospital: "hospital", museum: "museum", attraction: "attraction",
+  castle: "castle", monument: "monument", restaurant: "restaurant", cafe: "cafe", lodging: "lodging", bus: "bus", railway: "rail",
+  shop: "shop", grocery: "grocery", bank: "bank", police: "police", school: "school", college: "college", park: "park",
+  town_hall: "town-hall", fuel: "fuel", parking: "parking", toilets: "toilet", viewpoint: "viewpoint", theatre: "theatre",
+};
+const BASE_GROUP = { id: "_base", color: "#6d6559", names: { tr: "Harita" } };
+async function baseMapClick(box, lngLat) {
+  if (state.focus) return;
+  const f = map.queryRenderedFeatures(box).find((x) => x.layer.type === "symbol" && x.properties?.name
+    && ["poi", "place", "aerodrome_label", "water_name", "mountain_peak"].includes(x.layer["source-layer"]));
+  if (!f) return;
+  const p = f.properties;
+  const pt = f.geometry.type === "Point" ? f.geometry.coordinates : [lngLat.lng, lngLat.lat];
+  // aynı ad ve yakın konumda lejant verisinde bir kayıt varsa tam kartı aç
+  const hit = await findByName(p["name:tr"] || p.name, pt[0], pt[1]);
+  if (hit) {
+    const fc = await loadCat(hit.cat);
+    const full = findFeature(fc, hit.id);
+    if (full) { showCard(full, { lng: hit.x, lat: hit.y }); return; }
+  }
+  // yoksa harita verisinden sade bir kart
+  const type = p.subclass || p.class || "";
+  const cat = { id: "_base", icon: BASE_TYPES[p.class] || BASE_TYPES[p.subclass] || "marker", group: "_base",
+    names: { tr: t("types." + type) !== "types." + type ? t("types." + type) : (type ? type.replace(/_/g, " ") : t("mapPlace")) } };
+  const props = { name: p["name:tr"] || p.name, osmSearch: p.name };
+  for (const l of ["en", "de", "fr", "es", "ru"]) if (p["name:" + l]) props["name:" + l] = p["name:" + l];
+  openCard({ feature: { type: "Feature", properties: props, geometry: { type: "Point", coordinates: pt } }, cat, group: BASE_GROUP,
+    lngLat: { lng: pt[0], lat: pt[1] }, prov, dataUrl: DATA });
+}
 
 function showCard(feature, lngLat) {
   const cat = CAT[feature.properties.cat];
@@ -396,34 +534,88 @@ function applyI18n() {
   $("lbl3d").textContent = state.is3d ? t("mode2d") : t("mode3d");
   $("baseName").textContent = t(state.base);
   document.title = (prov.names[lang()] || prov.names.tr) + " – " + (lang() === "tr" ? "Rehber Harita" : "Guide Map");
-  buildBaseGrid(); buildLegend(); buildLangList(); updateAltitude();
+  buildBaseGrid(); buildLegend(); buildLangList(); buildProvList(); updateAltitude();
 }
 
 // panel aç/kapa
-const panels = ["layersPanel", "legendPanel", "langPanel", "searchPanel", "tourPanel"];
+const panels = ["layersPanel", "legendPanel", "langPanel", "searchPanel", "tourPanel", "provPanel"];
 const panelBtn = { layersPanel: "btnLayers", legendPanel: "btnLegend", searchPanel: "btnSearch", tourPanel: "btnTour" };
-function closePanels() { panels.forEach((p) => ($(p).hidden = true)); Object.values(panelBtn).forEach((b) => $(b).classList.remove("on")); }
+function closePanels() {
+  if (!$("tourPanel").hidden) setFocus(false);
+  panels.forEach((p) => ($(p).hidden = true)); Object.values(panelBtn).forEach((b) => $(b).classList.remove("on"));
+}
 function togglePanel(id, force) {
   const el = $(id);
   const open = force ?? el.hidden;
+  if (open && isPhone()) setToolbar(false);
   if (open) panels.forEach((p) => p !== id && ($(p).hidden = true));
   el.hidden = !open;
   for (const [p, b] of Object.entries(panelBtn)) $(b).classList.toggle("on", !$(p).hidden);
   if (open && id === "legendPanel" && matchMedia("(max-width: 720px)").matches) closeCard();
 }
-document.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => togglePanel(b.dataset.close, false)));
+document.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => { if (b.dataset.close === "tourPanel") tour.close(); else togglePanel(b.dataset.close, false); }));
 $("btnLayers").onclick = () => togglePanel("layersPanel");
 $("btnLegend").onclick = () => togglePanel("legendPanel");
 $("btnLang").onclick = () => togglePanel("langPanel");
+// il seçici: hazır iller (config/provinces.js); seçilince o ilin bağlantısı açılır
+$("btnProv").onclick = () => togglePanel("provPanel");
+function buildProvList() {
+  const L = lang();
+  const list = Object.values(PROVINCES).sort((a, b) => (a.names.tr).localeCompare(b.names.tr, "tr"));
+  const ready = list.filter((p) => READY.includes(p.id)), later = list.filter((p) => !READY.includes(p.id));
+  $("provList").innerHTML = ready.map((p) => `<a class="prov-item${p.id === prov.id ? " on" : ""}" href="?il=${p.id}">${p.names[L] || p.names.tr}</a>`).join("")
+    + `<div class="prov-sep">${t("prov.soon")} (${later.length})</div>`
+    + later.map((p) => `<span class="prov-item soon">${p.names[L] || p.names.tr}</span>`).join("");
+}
 $("btnLocate").onclick = () => geolocate.trigger();
 
-// katman seçici
+// katman seçenekleri: 3B binalar, 3B anıt modelleri
+$("optB3d").onchange = (e) => { state.b3d = e.target.checked; store.set("b3d", state.b3d ? "1" : "0"); apply3dObjects(); if (state.b3d && map.getZoom() < 14.5) map.easeTo({ zoom: 15.5, pitch: Math.max(map.getPitch(), 55) }); };
+$("optMon3d").onchange = (e) => { state.mon3d = e.target.checked; store.set("mon3d", state.mon3d ? "1" : "0"); apply3dObjects(); if (state.mon3d && map.getZoom() < 14.5) map.easeTo({ zoom: 16, pitch: Math.max(map.getPitch(), 55) }); };
+
+// araç çubuğu: gruplu, açılır-kapanır (telefonda varsayılan kapalı)
+const isPhone = () => matchMedia("(max-width: 720px)").matches;
+function setToolbar(open) {
+  $("toolbar").classList.toggle("collapsed", !open);
+  $("tbToggle").setAttribute("aria-expanded", String(open));
+  store.set("toolbar", open ? "1" : "0");
+}
+setToolbar(isPhone() ? false : store.get("toolbar", "1") === "1");
+$("tbToggle").onclick = () => setToolbar($("toolbar").classList.contains("collapsed"));
+
+// yakınlaştırma çubuğu: telefonda yalnızca kullanılırken görünür
+const zoombar = document.querySelector(".zoombar");
+let zbTimer = 0;
+function showZoombar() {
+  if (!isPhone()) return;
+  zoombar.classList.add("show");
+  clearTimeout(zbTimer);
+  zbTimer = setTimeout(() => { if (!zoombar.matches(":hover, :focus-within")) zoombar.classList.remove("show"); }, 2600);
+}
+map.on("zoomstart", showZoombar);
+map.on("zoom", showZoombar);
+zoombar.addEventListener("pointerdown", showZoombar);
+zoombar.addEventListener("input", showZoombar);
+
+// katman seçici (önizlemeler ilin merkezindeki z11 karosundan)
+const T11 = [Math.floor(((prov.center[0] + 180) / 360) * 2048),
+  Math.floor(((1 - Math.log(Math.tan((prov.center[1] * Math.PI) / 180) + 1 / Math.cos((prov.center[1] * Math.PI) / 180)) / Math.PI) / 2) * 2048)];
 const thumbs = {
-  satellite: `url("https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2024_3857/default/g/11/785/1222.jpg")`,
-  vegetation: `url("${DATA}landcover/11/1222/785.png")`,
+  standard: "linear-gradient(135deg, #f4f3ef 0 38%, #fde9a9 38% 44%, #f4f3ef 44% 62%, #cfe9c4 62% 80%, #a6d3f3 80%)",
+  satellite: `url("https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2024_3857/default/g/11/${T11[1]}/${T11[0]}.jpg")`,
+  vegetation: "linear-gradient(135deg, #cfe0a0, #f2cf6b 45%, #2d7a3a 75%, #d9483b)",
+  google3d: "linear-gradient(160deg, #8fb3d9 0 30%, #c9bfae 30% 55%, #9c8f7d 55% 70%, #6f7f5d 70%)",
   landforms: "linear-gradient(160deg, #4e9a5f 0%, #b9cf83 28%, #ecd28c 48%, #cf985a 68%, #9a6545 86%, #e6e2df 100%)",
   terrain: "repeating-radial-gradient(circle at 60% 45%, #efe9dc 0 7px, #c9b89a 7px 8px)",
 };
+// bitki örtüsü önizlemesi: PMTiles arşivinden il merkezinin z11 karosu
+let lcThumb = null;
+lcArchive.getZxy(11, T11[0], T11[1]).then((r) => {
+  if (!r) return;
+  lcThumb = URL.createObjectURL(new Blob([r.data], { type: "image/png" }));
+  const el = document.querySelector('.base-opt[data-base="vegetation"] .thumb');
+  if (el) el.style.backgroundImage = `url("${lcThumb}")`;
+}).catch(() => {});
 function buildBaseGrid() {
   const g = $("baseGrid");
   g.innerHTML = "";
@@ -431,7 +623,8 @@ function buildBaseGrid() {
     const btn = document.createElement("button");
     btn.className = "base-opt" + (state.base === b ? " on" : "");
     btn.dataset.base = b;
-    btn.innerHTML = `<div class="thumb" style='background-image:${thumbs[b]}'></div><span>${t(b)}</span>`;
+    const th = b === "vegetation" && lcThumb ? `url("${lcThumb}")` : thumbs[b];
+    btn.innerHTML = `<div class="thumb" style='background-image:${th}'></div><span>${t(b)}</span>`;
     btn.onclick = () => { state.base = b; store.set("base", b); applyBase(); };
     g.appendChild(btn);
   }
@@ -511,6 +704,7 @@ function reloadStyleIfNeeded() {
   currentStyleDark = isDark();
   for (const id of state.active) removeCatLayers(id);
   for (const k of Object.keys(baseFilters)) delete baseFilters[k];
+  if (g3d.isActive()) g3d.disable();
   map.setStyle(currentStyleDark ? SRC.styleDark : SRC.styleLight, { diff: false });
 }
 
@@ -550,16 +744,21 @@ $("compass").onclick = () => map.easeTo({ bearing: 0, pitch: state.is3d ? map.ge
 map.on("style.load", () => { installCustom().catch((e) => console.error(e)); });
 // kaynak satırı kapalı başlasın (ⓘ ile açılır), ölçek çubuğunun üstüne binmesin
 map.once("load", () => { document.querySelector(".maplibregl-ctrl-attrib")?.classList.remove("maplibregl-compact-show"); });
-fetch(DATA + "index.json").then((r) => r.json()).then((idx) => { state.counts = idx.counts; state.dates = idx.dates || {}; buildLegend(); syncLegend(); }).catch(() => {});
+fetch(DATA + "index.json").then((r) => r.json()).then((idx) => { state.counts = { ...idx.counts, il_siniri: 1 }; state.dates = idx.dates || {}; buildLegend(); syncLegend(); }).catch(() => {});
 applyI18n();
 syncLegend();
 
 // Arama ve tur
 initSearch({ dataUrl: DATA, cats: CAT, groups: GROUP, focus: focusFeature, closePanels });
-const tourInit = tour.initTour(map, { prov, toast, closePanels });
+const tourInit = tour.initTour(map, { prov, toast, closePanels, setFocus });
 history.initHistory(map, {
   dataUrl: DATA, cats: CATEGORIES, dates: () => state.dates, closePanels,
   onChange: () => { applyYearFilters(); buildLegend(); syncLegend(); },
+});
+g3d.initGoogle3d(map, {
+  toast, busy: (on) => ($("busy").hidden = !on),
+  onEnabled: () => { state.base = "google3d"; store.set("base", "google3d"); applyBase(); },
+  onCancel: () => { state.base = "standard"; applyBase(); buildBaseGrid(); },
 });
 diorama.initDiorama(map, {
   dataUrl: DATA, prov, toast, closePanels, cats: CAT, groups: GROUP,
@@ -568,7 +767,7 @@ diorama.initDiorama(map, {
     .filter((f) => f.geometry.type === "Point" && !CAT[id].kind && (f.properties.name || f.properties["name:tr"]))
     .filter((f) => !history.isActive() || (f.properties._from != null && f.properties._from <= history.currentYear()))
     .map((f) => ({ cat: id, name: f.properties["name:tr"] || f.properties.name, lng: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] }))),
-  tourStops: () => { try { return JSON.parse(localStorage.getItem("rh.tour") || "null")?.s || []; } catch { return []; } },
+  tourStops: () => tour.allStops(),
 });
 
 map.once("load", () => {

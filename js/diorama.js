@@ -32,6 +32,7 @@ function loadImage(url) {
   });
 }
 /** Bir karo bölgesini tek bir tuvale birleştirir. Bölge: [x0,y0,x1,y1] (z düzeyinde karo birimi) */
+// tmpl: URL kalıbı ya da (z, x, y) → Promise<Image|null> döndüren işlev (PMTiles için)
 async function mosaic(tmpl, z, [x0, y0, x1, y1], outPx, fill, smooth = true) {
   const c = document.createElement("canvas");
   c.width = c.height = outPx;
@@ -41,11 +42,11 @@ async function mosaic(tmpl, z, [x0, y0, x1, y1], outPx, fill, smooth = true) {
   const k = outPx / (x1 - x0);                // karo birimi → piksel
   const jobs = [];
   for (let tx = Math.floor(x0); tx < x1; tx++) for (let ty = Math.floor(y0); ty < y1; ty++) {
-    const url = tmpl.replace("{z}", z).replace("{x}", tx).replace("{y}", ty);
+    const get = typeof tmpl === "function" ? tmpl(z, tx, ty) : loadImage(tmpl.replace("{z}", z).replace("{x}", tx).replace("{y}", ty));
     // karo sınırlarını tam piksele yuvarla (boşluk / üst üste binme olmasın)
     const px0 = Math.round((tx - x0) * k), py0 = Math.round((ty - y0) * k);
     const px1 = Math.round((tx + 1 - x0) * k), py1 = Math.round((ty + 1 - y0) * k);
-    jobs.push(loadImage(url).then((img) => { if (img) g.drawImage(img, px0, py0, px1 - px0, py1 - py0); }));
+    jobs.push(get.then((img) => { if (img) g.drawImage(img, px0, py0, px1 - px0, py1 - py0); }));
   }
   await Promise.all(jobs);
   return c;
@@ -138,7 +139,8 @@ async function surfaceTexture(m) {
     const zMax = base === "satellite" ? 14 : 14;
     const zTex = Math.max(8, Math.min(zMax, m.zDem + 2));
     const cx = lon2x(r.lng, zTex), cy = lat2y(r.lat, zTex), half = r.size / 2 / mpp(r.lat, zTex) / 256;
-    const tmpl = base === "satellite" ? SAT : new URL(ctx.dataUrl + "landcover/{z}/{x}/{y}.png", location.href).href.replace(/%7B/g, "{").replace(/%7D/g, "}");
+    const tmpl = base === "satellite" ? SAT : (z, x, y) => window.__lcArchive.getZxy(z, x, y)
+      .then((r) => (r ? createImageBitmap(new Blob([r.data], { type: "image/png" })) : null)).catch(() => null);
     // bitki örtüsü yalnızca il içinde var; dışını kabartmayla doldur
     const under = base === "vegetation" ? reliefTexture(m, true) : null;
     const c = await mosaic(tmpl, zTex, [cx - half, cy - half, cx + half, cy + half], 2048, base === "satellite" ? "#b9a88f" : null);
@@ -357,6 +359,21 @@ function addLabel(m, { lng, lat, text, color, cls = "", lift = 5 }) {
 }
 
 // --- yeraltı -------------------------------------------------------------------
+// Blok model: her kat, ortada havalandırma bacası çevresinde dizilmiş odalardan, odaları bağlayan dar
+// tünellerden ve katları bağlayan rampalardan oluşur. Kat sayısı, derinlik ve toplam alan kaynaklıdır;
+// odaların dizilişi temsilîdir (gerçek plan değildir). Ölçümlü planlar: Yamaç & Tok 2015.
+function seeded(seed) {
+  let h = 2166136261;
+  for (const c of String(seed)) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+  return () => { h = Math.imul(h ^ (h >>> 15), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; };
+}
+const UG_MAT = {
+  room: new THREE.MeshStandardMaterial({ color: 0xd9a066, emissive: 0x4a2208, roughness: 0.9 }),
+  roomSchem: new THREE.MeshStandardMaterial({ color: 0xa8a29a, emissive: 0x1e1c1a, roughness: 0.95, transparent: true, opacity: 0.75 }),
+  tunnel: new THREE.MeshStandardMaterial({ color: 0x9c6a3c, emissive: 0x2a1406, roughness: 1 }),
+  shaft: new THREE.MeshStandardMaterial({ color: 0x3a2412, roughness: 1 }),
+  stone: new THREE.MeshStandardMaterial({ color: 0xe9dcc6, roughness: 0.8 }),
+};
 function buildUnderground(m) {
   if (!m.ugGroup) return;
   m.ugGroup.clear();
@@ -364,77 +381,173 @@ function buildUnderground(m) {
   const sites = (m.ugSites || []).map((s) => ({ ...s, uv: lngLatToUV(m, s.lng, s.lat) }))
     .filter((s) => s.uv[0] >= 0 && s.uv[0] <= 1 && s.uv[1] >= 0 && s.uv[1] <= 1);
   if (!sites.length) return;
-  // gerçek ölçekte 85 m bu blokta görünmez; derinlik ortak bir katsayıyla büyütülür (açıklamada yazar)
+  // gerçek ölçekte görünmezler: derinlik ve yatay boyut ortak katsayılarla büyütülür (listede yazar)
   const ref = Math.max(...sites.map((s) => s.depth_m || s.visit_depth_m || 0), 40);
   m.ugExag = Math.max(1, Math.round((W * 0.18) / (ref * m.scale)));
-  const k2u = m.scale * m.ugExag;                       // metre → sahne birimi
-  const matSourced = new THREE.MeshStandardMaterial({ color: 0xe07a3f, emissive: 0x5a1e00, transparent: true, opacity: 0.88, roughness: 0.6 });
-  const matSchem = new THREE.MeshStandardMaterial({ color: 0x9a9a9a, emissive: 0x222222, transparent: true, opacity: 0.6, roughness: 0.8 });
-  for (const s of sites) {
-    const [u, v] = s.uv, x = -W / 2 + u * W, z = -W / 2 + v * W, top = heightAt(m, u, v);
+  const k2u = m.scale * m.ugExag;
+  const refSide = Math.sqrt(Math.max(...sites.map((s) => s.area_m2 || (s.length_m && s.width_m ? s.length_m * s.width_m : 2500))));
+  m.ugHExag = Math.max(1, Math.round((W * 0.085) / (refSide * m.scale)));   // yatay büyütme
+  const h2u = m.scale * m.ugHExag;
+  sites.forEach((s, si) => {
+    const [u, v] = s.uv, cx = -W / 2 + u * W, cz = -W / 2 + v * W, top = heightAt(m, u, v);
+    if (s.type === "cistern") { buildCistern(m, s, si, cx, cz, top, k2u, h2u); return; }
+    const rnd = seeded(s.id);
     const floors = s.floors || 4;
-    // kat aralığı (m): önce "açık kısım derinliği / açık kat", yoksa "toplam derinlik / toplam kat", yoksa şematik
     let sp, sourcedUpTo;
     if (s.visit_depth_m && s.visit_floors) { sp = s.visit_depth_m / s.visit_floors; sourcedUpTo = s.visit_floors; }
     else if (s.depth_m && s.floors) { sp = s.depth_m / s.floors; sourcedUpTo = s.floors; }
     else { sp = (ref * 0.6) / floors; sourcedUpTo = 0; }
-    const r = Math.max(1.6, Math.min(4, W * 0.025));
+    // kat başına alan: toplam ölçümlü alan / kat (yoksa varsayılan, şematik)
+    const perFloor = (s.area_m2 || 2500) / floors;
+    const side = Math.sqrt(perFloor) * h2u;        // bir katın yaklaşık genişliği (sahne birimi)
+    const levelH = Math.max(0.35, sp * k2u * 0.55);
     for (let k = 0; k < floors; k++) {
       const sourced = k < sourcedUpTo;
       const y = top - (k + 0.6) * sp * k2u;
-      const slab = new THREE.Mesh(new THREE.CylinderGeometry(r * (1 - k * 0.035), r * (1 - k * 0.035), Math.max(0.25, sp * k2u * 0.45), 24), sourced ? matSourced : matSchem);
-      slab.position.set(x, y, z);
-      m.ugGroup.add(slab);
+      const mat = sourced ? UG_MAT.room : UG_MAT.roomSchem;
+      const nRooms = 5 + Math.floor(rnd() * 5);
+      const rooms = [];
+      for (let r = 0; r < nRooms; r++) {
+        const ang = (r / nRooms) * Math.PI * 2 + rnd() * 0.6;
+        const dist = side * (0.22 + rnd() * 0.3);
+        const w = side * (0.14 + rnd() * 0.16), d = side * (0.1 + rnd() * 0.14);
+        const rx = cx + Math.cos(ang) * dist, rz = cz + Math.sin(ang) * dist;
+        const room = new THREE.Mesh(new THREE.BoxGeometry(w, levelH, d), mat);
+        room.position.set(rx, y, rz);
+        room.rotation.y = rnd() * Math.PI;
+        m.ugGroup.add(room);
+        rooms.push([rx, rz]);
+        // bacaya bağlanan dar tünel
+        const len = Math.hypot(rx - cx, rz - cz);
+        const tun = new THREE.Mesh(new THREE.BoxGeometry(Math.max(0.12, side * 0.035), levelH * 0.45, len), UG_MAT.tunnel);
+        tun.position.set((rx + cx) / 2, y - levelH * 0.2, (rz + cz) / 2);
+        tun.lookAt(rx, y - levelH * 0.2, rz);
+        m.ugGroup.add(tun);
+        // bazı tünel ağızlarında sürgü taşı
+        if (rnd() < 0.3) {
+          const st = new THREE.Mesh(new THREE.CylinderGeometry(levelH * 0.32, levelH * 0.32, Math.max(0.06, side * 0.02), 16), UG_MAT.stone);
+          st.position.set(cx + (rx - cx) * 0.35, y - levelH * 0.1, cz + (rz - cz) * 0.35);
+          st.lookAt(rx, y - levelH * 0.1, rz);
+          st.rotateX(Math.PI / 2);
+          m.ugGroup.add(st);
+        }
+      }
+      // bir alt kata inen rampa
+      if (k < floors - 1) {
+        const [rx, rz] = rooms[Math.floor(rnd() * rooms.length)];
+        const ramp = new THREE.Mesh(new THREE.BoxGeometry(Math.max(0.12, side * 0.04), Math.max(0.08, levelH * 0.25), sp * k2u * 1.3), UG_MAT.tunnel);
+        ramp.position.set(rx, y - sp * k2u * 0.5, rz);
+        ramp.rotation.x = Math.PI / 4;
+        m.ugGroup.add(ramp);
+      }
     }
-    const floorsBottom = floors * sp;                   // metre
+    // havalandırma bacası (katlar boyunca) ve kaynakta geçen toplam derinliğe uzanan kuyu
+    const floorsBottom = floors * sp;
     const total = Math.max(floorsBottom, s.depth_m || 0);
-    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, floorsBottom * k2u + 1, 8), new THREE.MeshBasicMaterial({ color: 0x3a2412 }));
-    shaft.position.set(x, top - (floorsBottom * k2u) / 2, z);
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(Math.max(0.15, side * 0.03), Math.max(0.15, side * 0.03), total * k2u + 0.6, 10), UG_MAT.shaft);
+    shaft.position.set(cx, top - (total * k2u) / 2 + 0.3, cz);
     m.ugGroup.add(shaft);
-    // katların altında kalan, kaynakta geçen toplam derinlik (ör. Derinkuyu: açık 8 kat ≈ 55 m, toplam ≈ 85 m)
-    if (s.depth_m && s.depth_m > floorsBottom + 1) {
-      const ext = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.12, (s.depth_m - floorsBottom) * k2u, 10), matSourced);
-      ext.position.set(x, top - (floorsBottom + (s.depth_m - floorsBottom) / 2) * k2u, z);
-      m.ugGroup.add(ext);
-    }
-    const L = lang();
-    const line2 = [`${floors} ${t("d.floors")}`, s.depth_m ? `${t("d.total")} ~${s.depth_m} m` : t("d.totalUnknown")];
-    const line3 = [];
-    if (s.visit_floors) line3.push(`${t("d.visit")}: ${s.visit_floors} ${t("d.floors")}${s.visit_depth_m ? ` (~${s.visit_depth_m} m)` : ""}`);
-    if (sourcedUpTo < floors) line3.push(sourcedUpTo ? `${sourcedUpTo + 1}–${floors}. ${t("d.floors")}: ${t("d.schematic")}` : t("d.schematic"));
-    const el = document.createElement("div");
-    el.className = "dio-ug";
-    el.innerHTML = `<b></b><small></small><small></small>`;
-    const [b, sm1, sm2] = el.children;
-    b.textContent = s.name; sm1.textContent = line2.join(" · "); sm2.textContent = line3.join(" · ");
-    sm2.style.display = line3.length ? "block" : "none";
-    const lbl = new CSS2DObject(el);
-    lbl.visible = m.ugGroup.visible;   // CSS2D etiketleri üst grubun görünürlüğüne bakmaz
-    lbl.position.set(x + r + 1, top - total * k2u * 0.45, z);
+    // küçük numara etiketi (açıklama listede)
+    const tag = document.createElement("div");
+    tag.className = "dio-ugtag"; tag.textContent = String(si + 1);
+    const lbl = new CSS2DObject(tag);
+    lbl.visible = m.ugGroup.visible;
+    lbl.position.set(cx + side * 0.6, top - total * k2u * 0.35, cz);
     m.ugGroup.add(lbl);
-    m.ugInfo.push({ ...s, note: s.notes?.[L] || s.notes?.tr });
+    m.ugInfo.push({ ...s, n: si + 1, x: cx, z: cz, top, depthU: total * k2u, sourcedUpTo, floors, note: s.notes?.[lang()] || s.notes?.tr });
+  });
+}
+
+// sarnıç: boyutları ve sütun sayısı kaynaklı dikdörtgen salon; derinlik bilinmiyorsa şematik konumda
+function buildCistern(m, s, si, cx, cz, top, k2u, h2u) {
+  const L = (s.length_m || 60) * h2u, Wd = (s.width_m || 40) * h2u;
+  const hallH = 9 * k2u;                                  // salon yüksekliği (şematik ~9 m)
+  const depthTop = (s.depth_m ?? 6) * k2u;                // örtü üstü toprak (bilinmiyorsa şematik)
+  const yMid = top - depthTop - hallH / 2;
+  const sourcedDims = !!(s.length_m && s.width_m);
+  const floor = new THREE.Mesh(new THREE.BoxGeometry(L, Math.max(0.15, hallH * 0.08), Wd), sourcedDims ? UG_MAT.room : UG_MAT.roomSchem);
+  floor.position.set(cx, yMid - hallH / 2, cz);
+  m.ugGroup.add(floor);
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(L, Math.max(0.12, hallH * 0.06), Wd),
+    new THREE.MeshStandardMaterial({ color: 0xc58a55, transparent: true, opacity: 0.35, roughness: 0.9 }));
+  roof.position.set(cx, yMid + hallH / 2, cz);
+  m.ugGroup.add(roof);
+  // sütun ızgarası: sütun sayısına en yakın satır × sütun düzeni (en/boy oranına göre)
+  const n = s.columns || 0;
+  if (n) {
+    const ratio = (s.length_m || 1) / (s.width_m || 1);
+    let rows = Math.max(1, Math.round(Math.sqrt(n / ratio))), cols = Math.max(1, Math.round(n / rows));
+    const col = new THREE.InstancedMesh(new THREE.CylinderGeometry(Math.max(0.04, Math.min(L, Wd) * 0.012), Math.max(0.04, Math.min(L, Wd) * 0.012), hallH, 8), UG_MAT.stone, rows * cols);
+    const mtx = new THREE.Matrix4();
+    let k = 0;
+    for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
+      mtx.makeTranslation(cx - L / 2 + ((i + 0.5) * L) / cols, yMid, cz - Wd / 2 + ((j + 0.5) * Wd) / rows);
+      col.setMatrixAt(k++, mtx);
+    }
+    m.ugGroup.add(col);
   }
+  const tag = document.createElement("div");
+  tag.className = "dio-ugtag"; tag.textContent = String(si + 1);
+  const lbl = new CSS2DObject(tag);
+  lbl.visible = m.ugGroup.visible;
+  lbl.position.set(cx + L * 0.55, yMid + hallH, cz);
+  m.ugGroup.add(lbl);
+  m.ugInfo.push({ ...s, n: si + 1, x: cx, z: cz, top, depthU: depthTop + hallH, sourcedUpTo: 0, floors: null,
+    area_m2: s.length_m && s.width_m ? s.length_m * s.width_m : s.area_m2, note: s.notes?.[lang()] || s.notes?.tr });
+}
+
+function renderUgList(m) {
+  const esc = (x) => String(x ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const body = $("dioListBody");
+  $("dioListTitle").textContent = `${t("d.ugList")} (${m.ugInfo.length})`;
+  if (!m.ugInfo.length) { body.innerHTML = `<p>${t("d.underNone")}</p>`; return; }
+  body.innerHTML = `<p>${t("d.depthNote").replace("{x}", m.ugExag)} ${t("d.hNote").replace("{x}", m.ugHExag)} ${t("d.layoutNote")}</p>
+    <p class="sw"><i style="background:#d9a066"></i>${t("d.sourced")}<i style="background:#a8a29a"></i>${t("d.schematic")}</p>
+    ${m.ugInfo.map((s, i) => {
+      const facts = s.type === "cistern" ? [`${s.length_m} × ${s.width_m} m`, s.columns ? `${s.columns} ${t("d.columns")}` : null, s.depth_m ? `~${s.depth_m} m` : t("d.depthUnknown")].filter(Boolean).join(" · ") : [s.floors && s.floors !== 4 || s.sourcedUpTo ? `${s.floors} ${t("d.floors")}` : t("d.floorsUnknown"),
+        s.depth_m ? `${t("d.total")} ~${s.depth_m} m` : t("d.totalUnknown"),
+        s.area_m2 ? `${s.area_m2.toLocaleString(lang())} m²` : null,
+        s.visit_floors ? `${t("d.visit")}: ${s.visit_floors} ${t("d.floors")}${s.visit_depth_m ? ` (~${s.visit_depth_m} m)` : ""}` : null].filter(Boolean).join(" · ");
+      return `<div class="ug-item"><button data-ug="${i}"><span class="n">${s.n}</span><span><b>${esc(s.name)}</b><small>${esc(facts)}</small></span></button>
+        <details><summary>${t("d.details")}</summary><p>${esc(s.note || "")}</p>
+        <ul>${(s.sources || []).map((x) => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a></li>`).join("")}</ul></details></div>`;
+    }).join("")}`;
+  body.querySelectorAll("[data-ug]").forEach((b) => (b.onclick = () => focusUg(m.ugInfo[+b.dataset.ug])));
+}
+function focusUg(s) {
+  // kamerayı seçilen yeraltı şehrine çevir
+  controls.autoRotate = false; $("dioRotate").checked = false;
+  const target = new THREE.Vector3(s.x, s.top - s.depthU * 0.5, s.z);
+  const dir = camera.position.clone().sub(controls.target).normalize();
+  const dist = Math.max(30, s.depthU * 2.6);
+  const from = controls.target.clone(), fromPos = camera.position.clone();
+  const toPos = target.clone().add(dir.multiplyScalar(dist));
+  const t0 = performance.now();
+  const step = () => {
+    const k = Math.min(1, (performance.now() - t0) / 700), e = k * (2 - k);
+    controls.target.lerpVectors(from, target, e);
+    camera.position.lerpVectors(fromPos, toPos, e);
+    if (k < 1) requestAnimationFrame(step);
+  };
+  step();
+  if (innerWidth <= 720) setListOpen(false);
+}
+function setListOpen(open) {
+  $("dioListToggle").setAttribute("aria-expanded", String(open));
+  $("dioListBody").hidden = !open;
 }
 function setUnderground(on) {
   if (!model) return;
   const m = model;
   m.ugGroup.visible = on;
   m.ugGroup.traverse((o) => { if (o.isCSS2DObject) o.visible = on; });
-  m.terrain.material.opacity = on ? 0.32 : 1;
+  m.terrain.material.opacity = on ? 0.3 : 1;
   m.terrain.material.depthWrite = !on;
-  m.wallMat.opacity = on ? 0.35 : 1;
+  m.wallMat.opacity = on ? 0.3 : 1;
   m.wallMat.depthWrite = !on;
-  m.labels.forEach((l) => (l.obj.element.style.opacity = on ? 0.45 : 1));
-  const lg = $("dioLegend");
-  if (!on) { lg.hidden = true; return; }
-  if (!m.ugInfo?.length) { lg.innerHTML = `<p>${t("d.underNone")}</p>`; lg.hidden = false; return; }
-  const srcs = [...new Map(m.ugInfo.flatMap((s) => s.sources || []).map((s) => [s.url, s])).values()];
-  const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  lg.innerHTML = `<p><b>${t("d.depthNote").replace("{x}", m.ugExag)}</b> ${t("d.spacing")}</p>
-    <p class="sw"><i style="background:#e07a3f"></i>${t("d.sourced")}<i style="background:#9a9a9a"></i>${t("d.schematic")}</p>
-    ${m.ugInfo.map((s) => `<p class="ug-note"><b>${esc(s.name)}:</b> ${esc(s.note || "")}</p>`).join("")}
-    <ul>${srcs.map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join("")}</ul>`;
-  lg.hidden = false;
+  m.labels.forEach((l) => (l.obj.element.style.opacity = on ? 0.35 : 1));
+  $("dioLegend").hidden = !on;
+  if (on) { renderUgList(m); setListOpen(innerWidth > 720); }
 }
 
 // --- aç / kapa -------------------------------------------------------------------
@@ -495,6 +608,7 @@ export function initDiorama(_map, _ctx) {
   $("dioClose").onclick = close;
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("diorama").hidden) close(); });
   $("dioUnder").onchange = (e) => setUnderground(e.target.checked);
+  $("dioListToggle").onclick = () => setListOpen($("dioListBody").hidden);
   $("dioRotate").onchange = (e) => { if (controls) controls.autoRotate = e.target.checked; };
   $("dioLabels").onchange = (e) => { if (labelRenderer) labelRenderer.domElement.classList.toggle("hide", !e.target.checked); };
   $("dioExag").oninput = (e) => {

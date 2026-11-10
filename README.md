@@ -1,7 +1,7 @@
 # Rehber Harita
 
 Rehberli turlarda misafirlerle WhatsApp üzerinden paylaşılan, telefona uygulama gibi kurulabilen (PWA) etkileşimli il haritası.
-İlk pilot il: **Nevşehir / Kapadokya**.
+Pilot iller: **Nevşehir / Kapadokya** ve **İstanbul**. Aynı süreç 81 ilin tamamı için uygulanır.
 
 Tamamen ücretsiz araçlar ve açık lisanslı verilerle çalışır; API anahtarı, sunucu veya abonelik gerekmez.
 
@@ -89,13 +89,11 @@ Tur bilgisi bağlantının içindedir; sunucu ya da hesap gerekmez.
 ## Rehber onaylı içerik
 
 `data/<il>/curated.json` dosyasındaki metinler kartta Vikipedi özetinin yerine gösterilir.
-`"status": "taslak"` olan metinler **yalnızca rehber modunda** "TASLAK" etiketiyle görünür; misafirler görmez.
-Rehber metni okuyup onayladığında `"status": "onayli"` yapılır ve herkese **"Rehber tarafından onaylandı"** etiketiyle görünür.
+Metinler kaynaklıdır ve herkese **"Kaynaklı açıklama"** etiketiyle, kaynak listesiyle birlikte görünür.
 
 ```json
 {
   "Q1234567": {
-    "status": "taslak",
     "ids": ["n123", "w456"],
     "text": { "tr": "Türkçe açıklama…
 
@@ -125,8 +123,29 @@ Anahtar Wikidata numarası (`Q…`) ya da OSM kimliği (`n…`, `w…`, `r…`) 
 
 > **Not:** Uydu katmanı ticari olmayan kullanım lisanslıdır. Ücretli turlarda kullanım ticari sayılabilir; gerekirse bu katman ticari kullanıma izin veren bir kaynakla değiştirilmelidir.
 
+## Yeni il ekleme (81 il için aynı süreç)
+
+1. `config/provinces.js` dosyasına il kaydı (OSM ilişki numarası, merkez, sınır kutusu).
+2. Veriler:
+   ```
+   cd scripts
+   node fetch-data.mjs <il>         # OSM + Wikidata (sunucu hatasında kategori atlanır; yeniden çalıştırınca tamamlanır)
+   node build-landcover.mjs <il>    # ESA WorldCover bitki örtüsü
+   node build-monuments.mjs <il>    # OSM building:part → 3B anıt modelleri (kubbe, minare, külah)
+   ```
+3. Araştırma: `data/<il>/content-src.json` — kaynaklı açıklamalar, tarihler, olaylar ve yeraltı verileri (ad kalıbıyla).
+   `node resolve-content.mjs <il>` bunları harita kayıtlarına bağlar; ardından `node fetch-data.mjs <il>` (önbellekten, hızlı) tarihleri işler.
+
+## Arayüz notları
+
+- Sağdaki menü gruplu (Keşfet / Harita / Ayarlar) ve açılır-kapanır; telefonda kapalı başlar.
+- Telefonda yakınlaştırma çubuğu yalnızca yakınlaştırırken görünür.
+- Temel haritadaki adlı simgelere (cami, eczane, köy adı…) dokununca bilgi kartı açılır; lejant verisinde aynı yer varsa tam kart gösterilir.
+- Katmanlar: **Sade** (Google Haritalar'a benzer), Arazi, Uydu, Yer şekilleri, Bitki örtüsü; seçenekler: **3B binalar**, **3B anıt modelleri**.
+- Tur programı birden çok gün içerebilir (her günün rengi ve sekmesi ayrı); tur ekranı açıkken haritada yalnızca o günün durakları görünür.
+
 ## Yol haritası
 
 - **Aşama 2 (tamamlandı):** arama, "Bugünkü tur" katmanı ve rehber modu, kaynaklı taslak metinler (10 yer), veri düzeltmeleri
 - **Aşama 3 (tamamlandı):** diorama, yeraltı katmanı, tarihsel zaman kaydırıcısı
-- **Aşama 4:** Diğer iller, ek diller, 3B anıt modelleri
+- **Aşama 4 (sürüyor):** İstanbul pilotu, il seçici, 3B binalar ve anıtlar, sade katman, çok günlü tur, yeni lejant öğeleri; ardından kalan iller
