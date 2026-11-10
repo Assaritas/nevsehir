@@ -1,0 +1,54 @@
+{
+  "_aciklama": "Yeraltı katmanı. Yalnızca kaynakta geçen değerler; bilinmeyenler null (şematik çizilir).",
+  "sites": [
+    {
+      "id": "pmidyat-yeralti",
+      "name": "Midyat Yeraltı Şehri (Matiate)",
+      "lng": 41.36972,
+      "lat": 37.41667,
+      "floors": null,
+      "depth_m": null,
+      "area_m2": null,
+      "notes": {
+        "tr": "2022'ye kadar 49 oda ve yaklaşık 100 m tünel ortaya çıkarıldı; bunun şehrin yaklaşık %3'ü olduğu tahmin edilir. Kat sayısı ve derinlik için kaynak bulunamadı; çizim şematiktir.",
+        "en": "By 2022, 49 rooms and about 100 m of tunnels had been uncovered, thought to be about 3% of the city. No source was found for the number of levels or the depth; the drawing is schematic."
+      },
+      "sources": [
+        {
+          "title": "Vikipedi: Midyat Yeraltı Şehri",
+          "url": "https://tr.wikipedia.org/wiki/Midyat_Yeralt%C4%B1_%C5%9Eehri"
+        },
+        {
+          "title": "Wikipedia: Matiate",
+          "url": "https://en.wikipedia.org/wiki/Matiate"
+        }
+      ]
+    },
+    {
+      "id": "w124023954",
+      "name": "Dara Antik Kenti",
+      "lng": 40.94267,
+      "lat": 37.17898,
+      "type": "cistern",
+      "length_m": null,
+      "width_m": null,
+      "columns": null,
+      "depth_m": null,
+      "bottom_m": 25,
+      "notes": {
+        "tr": "Büyük sarnıç (\"Zindan\"): yaklaşık 25 m derinlik ve yaklaşık 10.000 m³ hacim, kazı başkanının açıklamalarına dayanan basın haberlerine göre. Plan ölçüleri için kaynak bulunamadı; salon boyutları şematiktir.",
+        "en": "The great cistern (\"Dungeon\"): about 25 m deep and about 10,000 m³, according to press reports quoting the excavation director. No source was found for its plan dimensions; the hall size is schematic."
+      },
+      "sources": [
+        {
+          "title": "Milliyet (01.09.2020)",
+          "url": "https://milliyet.com.tr/galeri/darada-ortaya-cikarilan-sarnic-yerebatandan-daha-derin-6294993"
+        },
+        {
+          "title": "Sözcü: Yaşadıkları evin altından tarihi zindan çıktı",
+          "url": "https://www.sozcu.com.tr/yasadiklari-evin-altindan-tarihi-zindan-cikti-p325926"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+ "_aciklama": "Kaynaklı maden / kaynak kayıtları. method: yeralti | yerustu | cozelti | kuyu. depth_m yalnızca kaynakta geçiyorsa.",
+ "sites": [
+  {
+   "id": "mazidagi-fosfat",
+   "name": "Mazıdağı–Derik fosfat sahası (yaklaşık konum)",
+   "lng": 40.328,
+   "lat": 37.423,
+   "method": "yerustu",
+   "res": "fosfat kayası",
+   "operator": "Eti Bakır (Cengiz Holding)",
+   "text": {
+    "tr": "Mazıdağı–Derik bölgesi Türkiye'nin en önemli fosfat yataklarının bulunduğu bölgedir. MTA'nın 1950'lerde başlattığı aramalarda ilk yatak 1962'de Mazıdağı bölgesinde bulundu; 1970'e kadar bölgede Taşıt, Kasrik ve Akras adlı üç yatak biliniyordu. Fosforitler Üst Kretase yaşlı Karababa Formasyonu'ndadır.\n\nEtibank bünyesinde 1974'te kurulan Mazıdağı tesisine fosfat kayası açık ocaktan kamyonlarla taşınıyordu; tesis 1994'te kapatıldı; Cengiz Holding'e bağlı Eti Bakır tarafından yeniden devreye alınan Mazıdağı tesisleri bugün fosfat ve metal geri kazanımı yapan entegre bir gübre tesisi olarak tanıtılır. İşaret ocağın kendisini değil, kaynaklarda adı geçen Taşıt yatağının bulunduğu mahalleyi gösterir; ocakların kesin sınırları için kaynak bulunamadı.",
+    "en": "The Mazıdağı–Derik area holds Turkey's most important phosphate deposits. In exploration begun by MTA in the 1950s, the first deposit was found in the Mazıdağı area in 1962; by 1970 three deposits were known there, named Taşıt, Kasrik and Akras. The phosphorites lie in the Upper Cretaceous Karababa Formation.\n\nUnder Etibank, which founded the Mazıdağı plant in 1974, phosphate rock was trucked to it from an open pit; closed in 1994, the plant was brought back into use by Eti Bakır (Cengiz Holding) and is now presented as an integrated fertiliser and metal-recovery facility. The marker shows the Taşıt neighbourhood named in the sources, not the pit itself; no source was found for the exact pit boundaries."
+   },
+   "sources": [
+    {
+     "title": "MTA: Dünyada ve Türkiye'de Fosfat",
+     "url": "https://mta.gov.tr/v3.0/sayfalar/bilgi-merkezi/maden-serisi/Dunyada_Turkiyede_fosfat.pdf"
+    },
+    {
+     "title": "Derik-Mazıdağ (Mardin) fosfat yataklarının sedimantolojisi (YÖK Açık Bilim)",
+     "url": "https://acikbilim.yok.gov.tr/handle/20.500.12812/514591"
+    },
+    {
+     "title": "Dünya: Doğu'nun en büyük özel yatırımında sona gelindi",
+     "url": "https://www.dunya.com/sirketler/dogunun-en-buyuk-ozel-yatiriminda-sona-gelindi-haberi-425872"
+    },
+    {
+     "title": "Ekonomist: Cengiz Holding gübre işine giriyor",
+     "url": "https://www.ekonomist.com.tr/makale/cengiz-holding-gubre-isine-giriyor-138"
+    }
+   ]
+  }
+ ]
+}

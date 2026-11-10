@@ -101,6 +101,10 @@ async function buildGrid(r) {
       for (let yy = 0; yy < px; yy++) { const q = yy * px + x; if (Number.isNaN(raw[q])) raw[q] = l2; else l2 = raw[q]; }
     }
   }
+  // Yakın ölçekte karolar ~30 m'lik kaynak veriden büyütülmüş ve tam metreye yuvarlanmıştır; abartılı yükseklikte
+  // basamak / şerit görünür. Piksel boyutu kaynaktan ne kadar küçükse o kadar yumuşat (3 geçişli kutu ≈ Gauss).
+  const pxM = r.size / px, rad = Math.min(8, Math.round(12 / pxM));
+  if (rad >= 1 && !raw.some(Number.isNaN)) for (let pass = 0; pass < 3; pass++) boxBlur(raw, px, rad);
   const elev = (i) => { const v = raw[i / 4]; return Number.isNaN(v) ? 0 : v; };
   const grid = new Float32Array(N * N);
   let hMin = Infinity, hMax = -Infinity;
@@ -180,6 +184,31 @@ export async function decodeTerrarium(b) {
     prev.set(cur);
   }
   return out;
+}
+
+/** Yatay + dikey kayan ortalama (kenarlarda pencere daralır); NaN'sız dizi bekler */
+function boxBlur(a, n, r) {
+  const tmp = new Float32Array(a.length);
+  for (let y = 0; y < n; y++) {
+    let s = 0, c = 0;
+    for (let x = 0; x < Math.min(n, r + 1); x++) { s += a[y * n + x]; c++; }
+    for (let x = 0; x < n; x++) {
+      tmp[y * n + x] = s / c;
+      const add = x + r + 1, rem = x - r;
+      if (add < n) { s += a[y * n + add]; c++; }
+      if (rem >= 0) { s -= a[y * n + rem]; c--; }
+    }
+  }
+  for (let x = 0; x < n; x++) {
+    let s = 0, c = 0;
+    for (let y = 0; y < Math.min(n, r + 1); y++) { s += tmp[y * n + x]; c++; }
+    for (let y = 0; y < n; y++) {
+      a[y * n + x] = s / c;
+      const add = y + r + 1, rem = y - r;
+      if (add < n) { s += tmp[add * n + x]; c++; }
+      if (rem >= 0) { s -= tmp[rem * n + x]; c--; }
+    }
+  }
 }
 
 /** Tek piksellik iğne / çukurları ayıklar: 8 komşusunun tümünden belirgin biçimde yüksek ya da alçak olan değer
@@ -504,7 +533,7 @@ function buildUnderground(m) {
     .filter((s) => s.uv[0] >= 0 && s.uv[0] <= 1 && s.uv[1] >= 0 && s.uv[1] <= 1);
   if (!sites.length) { buildResources(m); return; }
   // gerçek ölçekte görünmezler: derinlik ve yatay boyut ortak katsayılarla büyütülür (listede yazar)
-  const ref = Math.max(...sites.map((s) => s.depth_m || s.visit_depth_m || 0), 40);
+  const ref = Math.max(...sites.map((s) => s.depth_m || s.bottom_m || s.visit_depth_m || 0), 40);
   m.ugExag = Math.max(1, Math.round((W * 0.18) / (ref * m.scale)));
   const k2u = m.scale * m.ugExag;
   const refSide = Math.sqrt(Math.max(...sites.map((s) => s.area_m2 || (s.length_m && s.width_m ? s.length_m * s.width_m : 2500))));
@@ -592,7 +621,8 @@ function buildUnderground(m) {
 function buildCistern(m, s, si, cx, cz, top, k2u, h2u) {
   const L = (s.length_m || 60) * h2u, Wd = (s.width_m || 40) * h2u;
   const hallH = 9 * k2u;                                  // salon yüksekliği (şematik ~9 m)
-  const depthTop = (s.depth_m ?? 6) * k2u;                // örtü üstü toprak (bilinmiyorsa şematik)
+  // örtü üstü toprak: depth_m (örtü derinliği) ya da bottom_m (zeminden taban derinliği) kaynaklıysa ondan, yoksa şematik
+  const depthTop = (s.bottom_m ? Math.max(1, s.bottom_m - 9) : s.depth_m ?? 6) * k2u;
   const yMid = top - depthTop - hallH / 2;
   const sourcedDims = !!(s.length_m && s.width_m);
   const floor = new THREE.Mesh(new THREE.BoxGeometry(L, Math.max(0.15, hallH * 0.08), Wd), sourcedDims ? UG_MAT.room : UG_MAT.roomSchem);
@@ -640,7 +670,7 @@ function renderUgList(m) {
   body.innerHTML = `<p>${t("d.depthNote").replace("{x}", m.ugExag)} ${t("d.hNote").replace("{x}", m.ugHExag)} ${t("d.layoutNote")}</p>
     <p class="sw"><i style="background:#d9a066"></i>${t("d.sourced")}<i style="background:#a8a29a"></i>${t("d.schematic")}</p>
     ${m.ugInfo.map((s, i) => {
-      const facts = s.type === "cistern" ? [`${s.length_m} × ${s.width_m} m`, s.columns ? `${s.columns} ${t("d.columns")}` : null, s.depth_m ? `~${s.depth_m} m` : t("d.depthUnknown")].filter(Boolean).join(" · ") : [s.floors && s.floors !== 4 || s.sourcedUpTo ? `${s.floors} ${t("d.floors")}` : t("d.floorsUnknown"),
+      const facts = s.type === "cistern" ? [s.length_m && s.width_m ? `${s.length_m} × ${s.width_m} m` : null, s.columns ? `${s.columns} ${t("d.columns")}` : null, s.bottom_m || s.depth_m ? `~${s.bottom_m || s.depth_m} m` : t("d.depthUnknown")].filter(Boolean).join(" · ") : [s.floors && s.floors !== 4 || s.sourcedUpTo ? `${s.floors} ${t("d.floors")}` : t("d.floorsUnknown"),
         s.depth_m ? `${t("d.total")} ~${s.depth_m} m` : t("d.totalUnknown"),
         s.area_m2 ? `${s.area_m2.toLocaleString(lang())} m²` : null,
         s.visit_floors ? `${t("d.visit")}: ${s.visit_floors} ${t("d.floors")}${s.visit_depth_m ? ` (~${s.visit_depth_m} m)` : ""}` : null].filter(Boolean).join(" · ");

@@ -131,8 +131,8 @@ export const PROVINCES = {
     center: [38.318, 38.348], zoom: 9, bounds: [[35.3, 36.1], [41.3, 40.5]] },
   manisa: { id: "manisa", osmRelation: 223168, wikidata: "Q130553", names: { tr: "Manisa", en: "Manisa" },
     center: [28.123, 38.749], zoom: 9, bounds: [[25.1, 36.5], [31.1, 40.9]] },
-  mardin: { id: "mardin", osmRelation: 223436, wikidata: "Q131293", names: { tr: "Mardin", en: "Mardin" },
-    center: [40.715, 37.318], zoom: 9, bounds: [[37.7, 35.1], [43.7, 39.5]] },
+  mardin: { id: "mardin", osmRelation: 223436, wikidata: "Q131293", names: { tr: "Mardin", en: "Mardin", de: "Mardin", fr: "Mardin", es: "Mardin", ru: "Мардин" },
+    center: [40.735, 37.313], zoom: 11.5, bounds: [[39.3, 36.6], [42.6, 38.0]] },
   mersin: { id: "mersin", osmRelation: 223131, wikidata: "Q132637", names: { tr: "Mersin", en: "Mersin" },
     center: [33.805, 36.679], zoom: 9, bounds: [[30.8, 34.5], [36.8, 38.9]] },
   mugla: { id: "mugla", osmRelation: 223136, wikidata: "Q123934", names: { tr: "Muğla", en: "Muğla" },
@@ -182,6 +182,6 @@ export const PROVINCES = {
 };
 
 // verisi hazırlanmış iller (il seçicide etkin)
-export const READY = ["nevsehir", "istanbul", "ankara"];
+export const READY = ["nevsehir", "istanbul", "ankara", "mardin"];
 
 export const DEFAULT_PROVINCE = "nevsehir";

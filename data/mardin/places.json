@@ -1,0 +1,6 @@
+{
+ "_aciklama": "OSM'de bulunmayan kaynaklı yerler. Konumu yaklaşık olanlar approx: true ile işaretlenir.",
+ "sites": [
+  { "id": "midyat-yeralti", "name": "Midyat Yeraltı Şehri (Matiate)", "cat": "yeralti_sehir", "lng": 41.36972, "lat": 37.41667, "approx": true, "wikidata": "Q111972948" }
+ ]
+}

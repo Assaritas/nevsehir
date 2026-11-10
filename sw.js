@@ -1,5 +1,5 @@
 // Çevrimdışı kullanım: uygulama kabuğu önbelleğe alınır, harita karoları ve veriler gezinildikçe saklanır.
-const VERSION = "github-mwb12oui";
+const VERSION = "github-mwb4fge8";
 const SHELL = `shell-${VERSION}`, DATA = `data-${VERSION}`, TILES = `tiles-${VERSION}`;
 const MAX_TILES = 4000;
 const SHELL_FILES = [

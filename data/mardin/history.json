@@ -1,0 +1,162 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler",
+    "kaplicalar"
+  ],
+  "features": {
+    "w377249224": {
+      "from": 1176,
+      "note": "Minaredeki kitabe 1176; avlu kitabesi 1186",
+      "src": "Vikipedi"
+    },
+    "r5694257": {
+      "from": 1385,
+      "note": "13 Şubat 1385'te tamamlandı",
+      "src": "TDV İslâm Ansiklopedisi"
+    },
+    "n5852249128": {
+      "from": 1385,
+      "note": "13 Şubat 1385'te tamamlandı",
+      "src": "TDV İslâm Ansiklopedisi"
+    },
+    "r5694256": {
+      "from": 1490,
+      "approx": true,
+      "note": "15. yüzyıl sonlarında Akkoyunlu Kasım döneminde tamamlandı",
+      "src": "Vikipedi; TDV İslâm Ansiklopedisi"
+    },
+    "n3541501727": {
+      "from": 1371,
+      "note": "772 (1371)",
+      "src": "TDV İslâm Ansiklopedisi"
+    },
+    "r17646327": {
+      "from": 1371,
+      "note": "772 (1371)",
+      "src": "TDV İslâm Ansiklopedisi"
+    },
+    "w1290852179": {
+      "from": 1176,
+      "approx": true,
+      "note": "II. Kutbüddin İlgazi döneminde (1176–1184)",
+      "src": "TDV İslâm Ansiklopedisi"
+    },
+    "w555465696": {
+      "from": 397,
+      "note": "397'de kuruldu",
+      "src": "Wikipedia"
+    },
+    "w1466074455": {
+      "from": 569,
+      "note": "569'da inşa edildi",
+      "src": "Vikipedi"
+    },
+    "w94916602": {
+      "from": 350,
+      "approx": true,
+      "note": "4. yüzyıl",
+      "src": "Vikipedi"
+    },
+    "n364631164": {
+      "from": 505,
+      "note": "505'te I. Anastasios'un kararıyla yeniden kuruldu",
+      "src": "Wikipedia"
+    },
+    "w326589894": {
+      "from": 505,
+      "note": "505'te I. Anastasios'un kararıyla yeniden kuruldu",
+      "src": "Wikipedia"
+    },
+    "pmidyat-yeralti": {
+      "from": -100,
+      "approx": true,
+      "note": "MÖ 1. – MS 6. yüzyılda sığınak olarak kullanıldığı düşünülür; 2020'de bulundu",
+      "src": "Vikipedi"
+    }
+  },
+  "events": [
+    {
+      "y": 397,
+      "tr": "Mor Gabriel Manastırı kurulur",
+      "en": "Mor Gabriel Monastery is founded",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Mor_Gabriel_Monastery"
+    },
+    {
+      "y": 505,
+      "tr": "İmparator I. Anastasios Dara'yı kale kenti olarak yeniden kurdurur",
+      "en": "Emperor Anastasius I refounds Dara as a fortress city",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Dara_(Mesopotamia)"
+    },
+    {
+      "y": 640,
+      "tr": "Mardin, Tur Abdin ve Dara ile birlikte İslâm ordularınca fethedilir (Belâzürî)",
+      "en": "Mardin is conquered by the Muslim armies together with Tur Abdin and Dara (al-Baladhuri)",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/mardin"
+    },
+    {
+      "y": 885,
+      "tr": "Hamdûn Mardin Kalesi'ni zapteder",
+      "en": "Hamdun captures Mardin Castle",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/mardin"
+    },
+    {
+      "y": 1085,
+      "tr": "Büyük Selçuklu Sultanı Melikşah şehirdeki Mervânî hâkimiyetine son verir",
+      "en": "The Great Seljuk sultan Malik-Shah ends Marwanid rule in the city",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/mardin"
+    },
+    {
+      "y": 1103,
+      "tr": "Mardin Artukluların eline geçer",
+      "en": "Mardin passes to the Artuqids",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/mardin"
+    },
+    {
+      "y": 1166,
+      "tr": "Deyrulzafaran Manastırı Süryani Ortodoks Patrikliği'nin merkezi olur (1932'ye kadar)",
+      "en": "Deyrulzafaran becomes the seat of the Syriac Orthodox Patriarchate (until 1932)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Mor_Hananyo_Monastery"
+    },
+    {
+      "y": 1385,
+      "tr": "Sultan Îsâ (Zinciriye) Medresesi tamamlanır",
+      "en": "The Sultan Isa (Zinciriye) Madrasa is completed",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/mardin"
+    },
+    {
+      "y": 1401,
+      "tr": "Timur kaleye giremez, şehri tahrip ederek ayrılır",
+      "en": "Timur fails to take the castle and leaves after ravaging the city",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/mardin"
+    },
+    {
+      "y": 1517,
+      "tr": "Bıyıklı Mehmed Paşa Mardin'i Osmanlı topraklarına katar (1516 sonu veya Mayıs 1517)",
+      "en": "Bıyıklı Mehmed Pasha takes Mardin for the Ottomans (late 1516 or May 1517)",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/mardin"
+    },
+    {
+      "y": 2020,
+      "tr": "Midyat Yeraltı Şehri (Matiate) restorasyon sırasında bulunur",
+      "en": "The Midyat Underground City (Matiate) is discovered during restoration work",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Midyat_Yeralt%C4%B1_%C5%9Eehri"
+    }
+  ]
+}
