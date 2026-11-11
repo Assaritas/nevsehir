@@ -1314,15 +1314,14 @@ function focusRegion(f) {
   return base;
 }
 
-async function open() {
+// ana diorama düğmesi: her zaman haritada görünen alan; kart düğmesi: o yerin alanı (openArea)
+async function open(focus = null) {
   ctx.closePanels();
   $("diorama").hidden = false;
   document.documentElement.classList.add("dio-open");
   $("dioUnder").checked = false;
   $("dioKeyBody").hidden = innerWidth <= 720; $("dioKeyToggle").setAttribute("aria-expanded", String(innerWidth > 720));
   $("dioHint").textContent = t("d.hint");
-  // açık bir bilgi kartı varsa model o yerin alanına göre kurulur
-  const focus = ctx.focusArea?.();
   await build(focus ? focusRegion(focus) : region(), false);
 }
 
@@ -1398,7 +1397,9 @@ function close() {
 export function initDiorama(_map, _ctx) {
   map = _map; ctx = _ctx;
   window.__dioModel = () => model;   // tanılama / test
-  $("btnDiorama").onclick = open;
+  $("btnDiorama").onclick = () => open();
+  // bilgi kartındaki "Diorama" düğmesi: yalnızca o yerin sınırları içinde model
+  document.addEventListener("diorama:area", () => { const f = ctx.focusArea?.(); if (f) open(f); });
   $("dioClose").onclick = close;
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("diorama").hidden) close(); });
   $("dioUnder").onchange = (e) => setUnderground(e.target.checked);

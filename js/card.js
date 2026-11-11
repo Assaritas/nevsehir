@@ -23,6 +23,7 @@ document.addEventListener("keydown", (e) => e.key === "Escape" && closeCard());
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const ICON = {
+  cube: '<svg viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5Z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>',
   dir: '<svg viewBox="0 0 24 24"><path d="M12 2 3 21l9-4 9 4L12 2Z"/></svg>',
   call: '<svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>',
   web: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>',
@@ -105,6 +106,7 @@ export async function openCard(args) {
   if (wt) acts.push(`<a href="https://${wt.l}.wikipedia.org/wiki/${encodeURIComponent(wt.title.replace(/ /g, "_"))}" target="_blank" rel="noopener">${ICON.wiki}${t("wikipedia")}</a>`);
   if (w?.tdv) acts.push(`<a href="https://islamansiklopedisi.org.tr/${encodeURIComponent(w.tdv)}" target="_blank" rel="noopener">${ICON.book}TDV</a>`);
   if (w?.commonsCat) acts.push(`<a href="https://commons.wikimedia.org/wiki/Category:${encodeURIComponent(w.commonsCat.replace(/ /g, "_"))}" target="_blank" rel="noopener">${ICON.photo}${t("photos")}</a>`);
+  if (pt) acts.push(`<button type="button" data-dio>${ICON.cube}${t("d.title")}</button>`);
   if (p.id && cat.id !== "_base") acts.push(`<button type="button" data-share>${ICON.share}${t("share")}</button>`);
   if (guide && pt) acts.push(`<button type="button" class="tour-add" data-touradd>${ICON.flag}${t("g.addToTour")}</button>`);
   const district = DIST.get(p.id) || "";
@@ -142,6 +144,8 @@ export async function openCard(args) {
   c.hidden = false;
   c.querySelector(".card-close").onclick = closeCard;
   c.querySelector(".card-photo img")?.addEventListener("error", (e) => e.target.closest(".card-photo").remove());
+  const dio = c.querySelector("[data-dio]");
+  if (dio) dio.onclick = () => document.dispatchEvent(new CustomEvent("diorama:area"));
   const sh = c.querySelector("[data-share]");
   if (sh) sh.onclick = () => share(title, prov, cat, p);
   const ta = c.querySelector("[data-touradd]");
