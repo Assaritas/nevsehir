@@ -1,7 +1,7 @@
 import { CATEGORIES, GROUPS } from "../config/categories.js";
 import { PROVINCES, DEFAULT_PROVINCE, READY } from "../config/provinces.js";
 import { t, setLang, lang, UI_LANGS } from "./i18n.js";
-import { openCard, closeCard, findFeature } from "./card.js";
+import { openCard, closeCard, findFeature, currentCard } from "./card.js";
 import { initSearch, findByName } from "./search.js";
 import * as tour from "./tour.js";
 import * as history from "./history.js";
@@ -179,7 +179,9 @@ function localizeLabels() {
     if (!tf) continue;
     const s = JSON.stringify(tf);
     if (!/name/.test(s) || /housenumber|"ref"/.test(s)) continue;
-    map.setLayoutProperty(l.id, "text-field", ["coalesce", ["get", "name:" + L], ["get", "name"]]);
+    // seçili dilde ad yoksa Latin harfli karşılık (sınır ötesindeki Yunanca/Ermenice/Gürcüce/Arapça adlar
+    // yerel yazıyla görünmesin; Rusçada Kiril ad tercih edildiği için name:ru zaten önce gelir)
+    map.setLayoutProperty(l.id, "text-field", ["coalesce", ["get", "name:" + L], ["get", "name:latin"], ["get", "name"]]);
   }
 }
 
@@ -792,6 +794,14 @@ diorama.initDiorama(map, {
     .filter((f) => !history.isActive() || (f.properties._from != null && f.properties._from <= history.currentYear()))
     .map((f) => ({ cat: id, name: f.properties["name:tr"] || f.properties.name, lng: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] }))),
   tourStops: () => tour.allStops(),
+  // açık bilgi kartının yeri: alan ise tam sınırı (ilçe, park, ören yeri…), nokta ise konumu
+  focusArea: () => {
+    const a = currentCard();
+    const p = a?.feature?.properties;
+    if (!p) return null;
+    const poly = p.id && state.data[a.cat.id]?.features.find((f) => f.properties.id === p.id && !f.properties._pt && /Polygon/.test(f.geometry.type));
+    return { name: p["name:tr"] || p.name || null, lngLat: a.lngLat || null, geometry: poly?.geometry || null };
+  },
   lcClasses: LC_CLASSES,
   openFeature: (id) => { const e = Object.entries(state.data).find(([, fc]) => fc?.features?.some((f) => f.properties.id === id)); if (e) return focusFeature(e[0], id);
     // kaynak kayıtları: yeraltı madeni ya da açık ocak katmanında

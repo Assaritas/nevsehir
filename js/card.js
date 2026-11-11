@@ -1,9 +1,11 @@
 // Bilgi kartı: yalnızca kaynağı belli verileri gösterir.
 //  - Ad, açıklama, görsel, web sitesi, telefon: OpenStreetMap + Wikidata
-//  - Özet metin: Vikipedi (seçili dilde, yoksa Türkçe/İngilizce) — her zaman kaynak bağlantısıyla
+//  - Özet metin: Vikipedi — Türkçe arayüzde yalnızca Türkçe metin gösterilir (başka dilde makale varsa
+//    yalnızca bağlantısı verilir); diğer dillerde seçili dil, yoksa İngilizce/Türkçe
 //  - Rehber onaylı metin: data/<il>/curated.json (rehberin kendi doğruladığı içerik)
 import { t, lang } from "./i18n.js";
 import { DEPLOY } from "../config/deploy.js";
+import { trName, isTurkishText } from "./names.js";
 
 const el = () => document.getElementById("card");
 let wikidata = null, curated = null, summaries = null, districts = null, currentArgs = null;
@@ -14,6 +16,8 @@ export function findFeature(fc, id) {
 }
 
 export function closeCard() { el().hidden = true; el().innerHTML = ""; currentArgs = null; }
+/** Açık kartın bilgileri (diorama bu yerin alanını kullanır); kart kapalıysa null */
+export const currentCard = () => currentArgs;
 document.addEventListener("langchange", () => currentArgs && openCard(currentArgs));
 document.addEventListener("keydown", (e) => e.key === "Escape" && closeCard());
 
@@ -47,10 +51,13 @@ function fmtYear(y) {
   const v = y.y < 0 ? `${t("bce")} ${-y.y}` : String(y.y);
   return y.approx ? `${t("approx")} ${v}` : v;
 }
-function wikiTitle(p, w) {
+// textOnly: özet metni gösterilecek makale (Türkçede yalnızca Türkçe); değilse bağlantı için herhangi biri
+const textLangs = (L) => (L === "tr" ? ["tr"] : [L, "en", "tr"]);
+function wikiTitle(p, w, textOnly = false) {
   const L = lang();
-  for (const l of [L, "tr", "en"]) if (w?.wp?.[l]) return { l, title: w.wp[l] };
-  if (p.wikipedia) { const [l, ...r] = p.wikipedia.split(":"); if (r.length) return { l, title: r.join(":") }; }
+  const langs = textOnly ? textLangs(L) : [L, "tr", "en"];
+  for (const l of langs) if (w?.wp?.[l]) return { l, title: w.wp[l] };
+  if (p.wikipedia) { const [l, ...r] = p.wikipedia.split(":"); if (r.length && (!textOnly || langs.includes(l))) return { l, title: r.join(":") }; }
   return null;
 }
 
@@ -75,9 +82,11 @@ export async function openCard(args) {
   const w = WD[p.wikidata] || null;
   const L = lang();
   // Türkçede yerel OSM adı (ör. "Göreme Açık Hava Müzesi"), diğer dillerde Wikidata çevirisi öncelikli
-  const title = (L === "tr" ? p["name:tr"] || p.name || w?.label?.tr : w?.label?.[L] || p["name:" + L])
+  // (OSM adı İngilizce ya da başka yazıyla girilmişse Türkçede Wikidata Türkçe etiketi kullanılır)
+  const title = (L === "tr" ? trName(p, w) : w?.label?.[L] || p["name:" + L])
     || p.name || w?.label?.tr || w?.label?.en || (cat.names[L] || cat.names.tr);
-  const desc = w?.desc?.[L] || w?.desc?.tr || w?.desc?.en || "";
+  // kısa açıklama yalnızca seçili dilde (Türkçede İngilizce açıklama gösterilmez)
+  const desc = w?.desc?.[L] || (L !== "tr" ? w?.desc?.en : "") || "";
   // rehber içeriği: "onayli" herkese, "taslak" yalnızca rehber modunda görünür
   const guide = document.documentElement.dataset.guide === "1";
   let cur = CUR[p.id] || CUR[p.wikidata];
@@ -142,9 +151,11 @@ export async function openCard(args) {
   if (!cur) {
     const box = c.querySelector("#cardSummary");
     const sum = SUM[p.id];
-    const html = (await summaryHtml(wt, L))
-      || (sum?.wp ? await summaryHtml({ l: sum.wp.split(":")[0], title: sum.wp.slice(sum.wp.indexOf(":") + 1) }, L) : null)
-      || (sum?.web ? webHtml(sum.web) : null)
+    const sumWp = sum?.wp && textLangs(L).includes(sum.wp.split(":")[0]) ? sum.wp : null;
+    const okWeb = (wb) => wb && (L !== "tr" || isTurkishText(wb.x));
+    const html = (await summaryHtml(wikiTitle(p, w, true), L))
+      || (sumWp ? await summaryHtml({ l: sumWp.split(":")[0], title: sumWp.slice(sumWp.indexOf(":") + 1) }, L) : null)
+      || (okWeb(sum?.web) ? webHtml(sum.web) : null)
       || (await liveHtml(p, w, pt))
       || profileHtml(p, cat, title, district, prov, L);
     if (currentArgs === args) box.innerHTML = html;
@@ -165,7 +176,7 @@ async function liveHtml(p, w, pt) {
   if (!pt) return null;
   const name = p["name:tr"] || p.name;
   try {
-    for (const l of [...new Set([lang(), "tr", "en"])]) {
+    for (const l of textLangs(lang())) {
       const r = await fetch(`https://${l}.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=${pt.lat}|${pt.lng}&gsradius=400&gslimit=30&format=json&origin=*`, { signal: AbortSignal.timeout(6000) });
       const hit = (await r.json())?.query?.geosearch?.find((a) => nrm(a.title) === nrm(name) || (p["name:en"] && nrm(a.title) === nrm(p["name:en"])));
       if (hit) { const h = await summaryHtml({ l, title: hit.title }, lang()); if (h) return h; }
@@ -179,7 +190,7 @@ async function liveHtml(p, w, pt) {
       if (tags) {
         for (const [k, v] of Object.entries(tags)) if (p[k] == null) p[k] = v;
         p.website = p.website || tags["contact:website"] || tags.url;
-        if (p.wikipedia) { const [l, ...rest] = p.wikipedia.split(":"); const h = await summaryHtml({ l, title: rest.join(":") }, lang()); if (h) return h; }
+        if (p.wikipedia) { const [l, ...rest] = p.wikipedia.split(":"); if (textLangs(lang()).includes(l)) { const h = await summaryHtml({ l, title: rest.join(":") }, lang()); if (h) return h; } }
       }
     }
     // yerin kendi web sitesi (tam sürüm: Cloudflare üzerindeki küçük okuyucu, yalnızca meta açıklamayı döndürür)
@@ -187,7 +198,7 @@ async function liveHtml(p, w, pt) {
     if (web && DEPLOY.target === "full") {
       const r = await fetch("api/describe?url=" + encodeURIComponent(web), { signal: AbortSignal.timeout(9000) });
       const j = r.ok ? await r.json() : null;
-      if (j?.x) return webHtml(j);
+      if (j?.x && (lang() !== "tr" || isTurkishText(j.x))) return webHtml(j);
     }
   } catch { /* çevrimdışı / zaman aşımı → derlenmiş bilgi */ }
   return null;

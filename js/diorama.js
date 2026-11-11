@@ -390,6 +390,76 @@ function lngLatToUV(m, lng, lat) {
   return [(lon2x(lng, m.zDem) - x0) / (x1 - x0), (lat2y(lat, m.zDem) - y0) / (y1 - y0)];
 }
 
+// --- alan kırpması: ilçe / açık kartın alanı seçiliyse model yalnızca o sınırın içini gösterir ----------
+// m.mask: N×N ızgara köşesi içeride mi (1/0); kırpma yoksa her şey içeride sayılır
+function inMask(m, u, v) {
+  if (!m.mask) return true;
+  if (u < 0 || u > 1 || v < 0 || v > 1) return false;
+  return !!m.mask[Math.round(v * (N - 1)) * N + Math.round(u * (N - 1))];
+}
+function makeMask(m, rings) {
+  const [x0, y0, x1, y1] = m.box;
+  const mask = new Uint8Array(N * N);
+  // halkalar ızgaranın (u, v) uzayına çevrilir; her satır için tarama çizgisi (çift-tek kuralı)
+  const R = rings.map((r) => r.map(([lng, lat]) => [(lon2x(lng, m.zDem) - x0) / (x1 - x0), (lat2y(lat, m.zDem) - y0) / (y1 - y0)]));
+  for (let j = 0; j < N; j++) {
+    const v = j / (N - 1), xs = [];
+    for (const r of R) for (let k = 0; k < r.length - 1; k++) {
+      const [ua, va] = r[k], [ub, vb] = r[k + 1];
+      if ((va <= v) !== (vb <= v)) xs.push(ua + ((v - va) / (vb - va)) * (ub - ua));
+    }
+    xs.sort((a, b) => a - b);
+    for (let q = 0; q + 1 < xs.length; q += 2) {
+      const i0 = Math.max(0, Math.ceil(xs[q] * (N - 1))), i1 = Math.min(N - 1, Math.floor(xs[q + 1] * (N - 1)));
+      for (let i = i0; i <= i1; i++) mask[j * N + i] = 1;
+    }
+  }
+  return mask;
+}
+// yüzeyden dışarıdaki üçgenleri at; tek üçgene ait kenarlar boyunca dikey duvar ve aynı biçimde taban
+function clipBlock(m, geo, wallMat, baseMat) {
+  const src = geo.index.array, keep = [], cnt = new Map();
+  const key = (p, q) => (p < q ? p * 70000 + q : q * 70000 + p);
+  for (let t = 0; t < src.length; t += 3) {
+    const a = src[t], b = src[t + 1], c = src[t + 2];
+    if (!m.mask[a] || !m.mask[b] || !m.mask[c]) continue;
+    keep.push(a, b, c);
+    for (const [p, q] of [[a, b], [b, c], [c, a]]) cnt.set(key(p, q), (cnt.get(key(p, q)) || 0) + 1);
+  }
+  geo.setIndex(keep);
+  const edges = [];
+  for (let t = 0; t < keep.length; t += 3) for (const [p, q] of [[keep[t], keep[t + 1]], [keep[t + 1], keep[t + 2]], [keep[t + 2], keep[t]]]) if (cnt.get(key(p, q)) === 1) edges.push(p, q);
+  const tp = geo.attributes.position;
+  const E = edges.length / 2, pos = new Float32Array(E * 12), uv = new Float32Array(E * 8), idx = [];
+  for (let e = 0; e < E; e++) {
+    const p = edges[2 * e], q = edges[2 * e + 1];
+    const xp = tp.getX(p), zp = tp.getZ(p), xq = tp.getX(q), zq = tp.getZ(q);
+    pos.set([xp, 0, zp, xq, 0, zq, xp, 0, zp, xq, 0, zq], e * 12);
+    const up = (xp + zp) / W, uq = (xq + zq) / W;
+    uv.set([up, 1, uq, 1, up, 0, uq, 0], e * 8);
+    idx.push(e * 4, e * 4 + 2, e * 4 + 1, e * 4 + 1, e * 4 + 2, e * 4 + 3);
+  }
+  const wg = new THREE.BufferGeometry();
+  wg.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  wg.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
+  wg.setIndex(idx);
+  m.clipEdges = edges;
+  m.clipWall = new THREE.Mesh(wg, wallMat);
+  m.clipWall.castShadow = true;
+  scene.add(m.clipWall);
+  // taban: aynı üçgenler, kaide derinliğinin altında düz
+  const bg = new THREE.BufferGeometry();
+  const bp = new Float32Array(tp.count * 3);
+  for (let k = 0; k < tp.count; k++) bp.set([tp.getX(k), -m.baseDepth - 0.4, tp.getZ(k)], k * 3);
+  bg.setAttribute("position", new THREE.BufferAttribute(bp, 3));
+  bg.setIndex(keep);
+  bg.computeVertexNormals();
+  const base = new THREE.Mesh(bg, baseMat);
+  base.receiveShadow = true;
+  scene.add(base);
+  return base;
+}
+
 function applyHeights(m) {
   const pos = m.terrain.geometry.attributes.position;
   for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) pos.setY(j * N + i, (m.grid[j * N + i] - m.hMin) * m.scale * m.exag);
@@ -409,6 +479,17 @@ function applyHeights(m) {
     p.needsUpdate = true;
     wall.geometry.computeVertexNormals();
   });
+  if (m.clipWall) {
+    const p = m.clipWall.geometry.attributes.position, e2 = m.clipEdges;
+    for (let e = 0; e < e2.length / 2; e++) {
+      p.setY(e * 4, (m.grid[e2[2 * e]] - m.hMin) * m.scale * m.exag);
+      p.setY(e * 4 + 1, (m.grid[e2[2 * e + 1]] - m.hMin) * m.scale * m.exag);
+      p.setY(e * 4 + 2, -m.baseDepth); p.setY(e * 4 + 3, -m.baseDepth);
+    }
+    p.needsUpdate = true;
+    m.clipWall.geometry.computeVertexNormals();
+  }
+  if (live.on) placeMe(m);
   // etiketler ve yeraltı
   m.labels.forEach((l) => { const y = heightAt(m, l.u, l.v); l.obj.position.y = y + l.lift; l.stem && setStem(l.stem, y, y + l.lift); });
   buildUnderground(m);
@@ -449,7 +530,7 @@ function buildBlock(m, tex) {
   const edgeXZ = [
     (f) => [-half + f * W, -half], (f) => [half, -half + f * W], (f) => [half - f * W, half], (f) => [-half, half - f * W],
   ];
-  m.walls = edgeXZ.map((fn) => {
+  m.walls = m.mask ? [] : edgeXZ.map((fn) => {
     const g = new THREE.BufferGeometry();
     const pos = new Float32Array(N * 2 * 3), uv = new Float32Array(N * 2 * 2), idx = [];
     for (let k = 0; k < N; k++) {
@@ -468,12 +549,16 @@ function buildBlock(m, tex) {
   });
   m.wallMat = wallMat;
 
-  // kaide
-  const plinth = new THREE.Mesh(new THREE.BoxGeometry(W + 8, 3, W + 8), new THREE.MeshStandardMaterial({ color: dark ? 0x2b2622 : 0x3d3128, roughness: 0.6 }));
-  plinth.position.y = -m.baseDepth - 1.5;
-  plinth.receiveShadow = true;
-  scene.add(plinth);
-  m.plinth = plinth;
+  // kaide (kırpılmış alanda: alanın biçiminde taban)
+  const plinthMat = new THREE.MeshStandardMaterial({ color: dark ? 0x2b2622 : 0x3d3128, roughness: 0.6, side: THREE.DoubleSide });
+  if (m.mask) m.plinth = clipBlock(m, geo, wallMat, plinthMat);
+  else {
+    const plinth = new THREE.Mesh(new THREE.BoxGeometry(W + 8, 3, W + 8), plinthMat);
+    plinth.position.y = -m.baseDepth - 1.5;
+    plinth.receiveShadow = true;
+    scene.add(plinth);
+    m.plinth = plinth;
+  }
   const ground = new THREE.Mesh(new THREE.CircleGeometry(260, 64), new THREE.ShadowMaterial({ opacity: dark ? 0.35 : 0.18 }));
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -m.baseDepth - 3;
@@ -492,9 +577,9 @@ function buildBlock(m, tex) {
 }
 
 // --- etiketler -----------------------------------------------------------------
-function addLabel(m, { lng, lat, text, color, cls = "", lift = 5 }) {
+function addLabel(m, { lng, lat, text, color, cls = "", lift = 5, key = "" }) {
   const [u, v] = lngLatToUV(m, lng, lat);
-  if (u < 0 || u > 1 || v < 0 || v > 1) return;
+  if (u < 0 || u > 1 || v < 0 || v > 1 || !inMask(m, u, v)) return;
   const el = document.createElement("div");
   el.className = "dio-pin " + cls;
   el.innerHTML = `<span class="dot" style="background:${color}"></span><span class="txt"></span>`;
@@ -506,7 +591,7 @@ function addLabel(m, { lng, lat, text, color, cls = "", lift = 5 }) {
   const stem = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x, y, z), new THREE.Vector3(x, y + lift - 0.6, z)]),
     new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85 }));
   scene.add(stem);
-  m.labels.push({ u, v, obj, stem, lift });
+  m.labels.push({ u, v, obj, stem, lift, key });
 }
 
 // --- yeraltı -------------------------------------------------------------------
@@ -530,7 +615,7 @@ function buildUnderground(m) {
   m.ugGroup.clear();
   m.ugInfo = [];
   const sites = (m.ugSites || []).map((s) => ({ ...s, uv: lngLatToUV(m, s.lng, s.lat) }))
-    .filter((s) => s.uv[0] >= 0 && s.uv[0] <= 1 && s.uv[1] >= 0 && s.uv[1] <= 1);
+    .filter((s) => s.uv[0] >= 0 && s.uv[0] <= 1 && s.uv[1] >= 0 && s.uv[1] <= 1 && inMask(m, s.uv[0], s.uv[1]));
   if (!sites.length) { buildResources(m); return; }
   // gerçek ölçekte görünmezler: derinlik ve yatay boyut ortak katsayılarla büyütülür (listede yazar)
   const ref = Math.max(...sites.map((s) => s.depth_m || s.bottom_m || s.visit_depth_m || 0), 40);
@@ -753,7 +838,7 @@ function buildResources(m) {
     const p = f.properties, [lng, lat] = f._pt;
     const [u, v] = lngLatToUV(m, lng, lat);
     return { p, u, v, lng, lat, area: f._area || 0, d2: (u - 0.5) ** 2 + (v - 0.5) ** 2 };
-  }).filter((r) => r.u >= 0.02 && r.u <= 0.98 && r.v >= 0.02 && r.v <= 0.98)
+  }).filter((r) => r.u >= 0.02 && r.u <= 0.98 && r.v >= 0.02 && r.v <= 0.98 && inMask(m, r.u, r.v))
     .sort((a, b) => (b.p._src ? 1 : 0) - (a.p._src ? 1 : 0) || (b.p.name ? 1 : 0) - (a.p.name ? 1 : 0) || a.d2 - b.d2)
     .slice(0, 40);
   if (!feats.length) return;
@@ -904,7 +989,7 @@ function monumentRefs(m, feats) {
 const polys = (geom) => (geom.type === "Polygon" ? [geom.coordinates] : geom.type === "MultiPolygon" ? geom.coordinates : []);
 const inRegion = (m, ring) => ring.some(([lng, lat]) => { const [u, v] = lngLatToUV(m, lng, lat); return u > 0 && u < 1 && v > 0 && v < 1; });
 // bloğun kenarından taşan bina / anıt parçası çizilmez
-const allInside = (m, ring) => ring.every(([lng, lat]) => { const [u, v] = lngLatToUV(m, lng, lat); return u >= 0.002 && u <= 0.998 && v >= 0.002 && v <= 0.998; });
+const allInside = (m, ring) => ring.every(([lng, lat]) => { const [u, v] = lngLatToUV(m, lng, lat); return u >= 0.002 && u <= 0.998 && v >= 0.002 && v <= 0.998 && inMask(m, u, v); });
 
 function buildCity(m) {
   if (m.city) { m.city.forEach((g) => { scene.remove(g); g.traverse((o) => { o.geometry?.dispose?.(); }); }); }
@@ -969,7 +1054,9 @@ function buildCity(m) {
   // yollar, sokaklar, yaya yolları / kaldırımlar, raylar — araziye serilmiş şeritler
   let roads = [];
   try { roads = map.querySourceFeatures("openmaptiles", { sourceLayer: "transportation" }); } catch { /* stil yok */ }
-  const pos = [], col = [], idx = [];
+  // yol türlerine göre ayrı ağlar (lejantta tek tek gizlenebilsin)
+  const RB = {};
+  const rb = (k) => (RB[k] = RB[k] || { pos: [], col: [], idx: [] });
   const tmpC = new THREE.Color();
   const seenR = new Set();
   const cell = W / (N - 1);
@@ -988,6 +1075,7 @@ function buildCity(m) {
       seenR.add(key);
       const kind = cls === "rail" || cls === "transit" ? "rail" : cls === "path" || cls === "track" || cls === "pedestrian" ? "path" : ["motorway", "trunk", "primary", "secondary"].includes(cls) ? "main" : "street";
       m.cityInfo.roads[kind] = (m.cityInfo.roads[kind] || 0) + 1;
+      const { pos, col, idx } = rb(kind);
       const hw = Math.max(0.035, (st[0] * m.scale) / 2);
       const lift = 0.06 + st[2] * 0.004 + (p.brunnel === "bridge" ? 0.15 : 0);
       tmpC.setHex(st[1]);
@@ -1005,7 +1093,7 @@ function buildCity(m) {
       // blok dışına taşan kısımlar kesilir: yalnızca içteki ardışık nokta dizileri çizilir
       const lim = W / 2 - hw - 0.05;
       const runs = [[]];
-      for (const q of pts) { if (Math.abs(q[0]) <= lim && Math.abs(q[1]) <= lim) runs[runs.length - 1].push(q); else if (runs[runs.length - 1].length) runs.push([]); }
+      for (const q of pts) { if (Math.abs(q[0]) <= lim && Math.abs(q[1]) <= lim && inMask(m, (q[0] + W / 2) / W, (q[1] + W / 2) / W)) runs[runs.length - 1].push(q); else if (runs[runs.length - 1].length) runs.push([]); }
       for (const run of runs) {
         if (run.length < 2) continue;
         const base = pos.length / 3;
@@ -1023,7 +1111,8 @@ function buildCity(m) {
     }
   }
   const roadGroup = new THREE.Group(); roadGroup.name = "roads";
-  if (idx.length) {
+  for (const [kind, { pos, col, idx }] of Object.entries(RB)) {
+    if (!idx.length) continue;
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
     g.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
@@ -1031,10 +1120,12 @@ function buildCity(m) {
     g.computeVertexNormals();
     const mesh = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.9, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2, transparent: true, opacity: 1 }));
     mesh.receiveShadow = true;
+    mesh.name = kind;
     roadGroup.add(mesh);
   }
   for (const g of [roadGroup, bldGroup, monGroup]) { scene.add(g); m.city.push(g); }
   syncCityToggles(m);
+  applyKeyVis(m);
 }
 function syncCityToggles(m) {
   const show = { bld: $("dioBld").checked, mon: $("dioMon").checked, roads: $("dioRoads").checked };
@@ -1045,11 +1136,88 @@ function syncCityToggles(m) {
   for (const [k, id] of [["bld", "dioBldW"], ["mon", "dioMonW"], ["roads", "dioRoadsW"]]) $(id).hidden = !has[k];
 }
 
+// --- lejanttan gizle / göster ------------------------------------------------------------
+const keyHidden = new Set();   // kapatılan öğeler; diorama yeniden kurulsa da korunur
+function applyKeyVis(m) {
+  if (!m) return;
+  const on = (k) => !keyHidden.has(k);
+  for (const o of [...(m.walls || []), m.clipWall, m.plinth]) if (o) o.visible = on("walls");
+  for (const g of m.city || []) {
+    if (g.name === "roads") g.children.forEach((c) => (c.visible = on("road:" + c.name)));
+    else g.children.forEach((c) => (c.visible = on(g.name)));
+  }
+  for (const l of m.labels || []) { const v = on(l.key); l.obj.visible = v; if (l.stem) l.stem.visible = v; }
+}
+
+// --- canlı konum: cihazın konumu modelde mavi nokta olarak gösterilir, istenirse kamera izler ----------
+const live = { on: false, follow: false, watch: null, pos: null, err: null };
+function meInfo(m) {
+  if (!live.on) return t("d.k.meOff");
+  if (live.err) return live.err;
+  if (!live.pos) return t("d.k.meWait");
+  const acc = t("d.k.meAcc").replace("{m}", Math.round(live.pos.acc));
+  if (m && !insideModel(m, live.pos.lng, live.pos.lat)) {
+    const c = m.region, dx = (live.pos.lng - c.lng) * 111320 * Math.cos((c.lat * Math.PI) / 180), dy = (live.pos.lat - c.lat) * 110540;
+    return t("d.k.meOut").replace("{km}", (Math.hypot(dx, dy) / 1000).toFixed(1)) + " · " + acc;
+  }
+  return acc;
+}
+function insideModel(m, lng, lat) { const [u, v] = lngLatToUV(m, lng, lat); return u >= 0 && u <= 1 && v >= 0 && v <= 1 && inMask(m, u, v); }
+function setLive(on) {
+  live.on = on; live.err = null;
+  if (on) {
+    if (!navigator.geolocation) { live.err = t("d.k.noGeo"); }
+    else live.watch = navigator.geolocation.watchPosition((p) => {
+      live.pos = { lng: p.coords.longitude, lat: p.coords.latitude, acc: p.coords.accuracy };
+      live.err = null;
+      placeMe(model);
+    }, (e) => { live.err = e.code === 1 ? t("d.k.geoDenied") : t("d.k.meWait"); updateMeInfo(); }, { enableHighAccuracy: true, maximumAge: 2000, timeout: 30000 });
+  } else {
+    if (live.watch != null) navigator.geolocation.clearWatch(live.watch);
+    live.watch = null; live.pos = null; live.follow = false;
+    if (model?.me) { scene?.remove(model.me.obj, model.me.stem); model.me.obj.element.remove(); model.me = null; }
+  }
+}
+function updateMeInfo() { const el = $("dioMeInfo"); if (el) el.textContent = meInfo(model); }
+function placeMe(m) {
+  updateMeInfo();
+  if (!m || !scene || !live.pos) return;
+  if (!m.me) {
+    const el = document.createElement("div");
+    el.className = "dio-me";
+    el.innerHTML = `<span class="pulse"></span><span class="txt">${t("d.k.meShort")}</span>`;
+    const obj = new CSS2DObject(el);
+    const stem = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(0, 1, 0)]), new THREE.LineBasicMaterial({ color: 0x1a73e8 }));
+    scene.add(obj, stem);
+    m.me = { obj, stem };
+  }
+  const [u, v] = lngLatToUV(m, live.pos.lng, live.pos.lat);
+  const inside = insideModel(m, live.pos.lng, live.pos.lat);
+  m.me.obj.visible = m.me.stem.visible = inside;
+  if (!inside) return;
+  const X = -W / 2 + u * W, Z = -W / 2 + v * W, y = heightAt(m, u, v);
+  m.me.obj.position.set(X, y + 6, Z);
+  setStem(m.me.stem, y, y + 6);
+  m.me.stem.position.set(X, 0, Z);
+  if (live.follow) { controls.target.set(X, y, Z); controls.update(); }
+}
+function onKeyClick(e) {
+  const li = e.target.closest("li[data-k]");
+  if (!li) return;
+  const k = li.dataset.k;
+  if (k === "live") { setLive(!live.on); renderKey(model); return; }
+  if (k === "follow") { live.follow = !live.follow; li.classList.toggle("off", !live.follow); placeMe(model); return; }
+  if (keyHidden.has(k)) keyHidden.delete(k); else keyHidden.add(k);
+  li.classList.toggle("off", keyHidden.has(k));
+  applyKeyVis(model);
+}
+
 // --- diorama lejantı -----------------------------------------------------------------
 function renderKey(m) {
   const L = lang(), esc = (x) => String(x ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const hex = (n) => "#" + n.toString(16).padStart(6, "0");
-  const sw = (c, label, cls = "") => `<li><i class="${cls}" style="background:${c}"></i>${esc(label)}</li>`;
+  // k: lejant anahtarı — dokununca o öğe modelde gizlenir / gösterilir
+  const sw = (c, label, cls = "", k = "") => `<li${k ? ` data-k="${k}" class="tog${keyHidden.has(k) ? " off" : ""}" role="button" tabindex="0"` : ""}><i class="${cls}" style="background:${c}"></i>${esc(label)}</li>`;
   const base = ctx.base();
   const out = [];
   // yüzey
@@ -1062,23 +1230,28 @@ function renderKey(m) {
     surf = `<div class="dk-ramp" style="background:linear-gradient(90deg,${stops.join(",")})"></div><div class="dk-ramp-l"><span>${Math.round(m.hMin)} m</span><span>${Math.round(m.hMax)} m</span></div>`;
   }
   if (m.hasWater) surf += `<ul>${sw(ctx.isDark() ? "#3f6f95" : "#8fc1e3", t("lc.water"))}</ul>`;
-  out.push(`<h4>${t("d.k.surface")}</h4>${surf}<ul>${sw("repeating-linear-gradient(180deg,#d9c3a0 0 3px,#a98462 3px 6px)", t("d.k.walls"))}</ul>`);
+  out.push(`<p class="dk-note">${t("d.k.toggleHint")}</p>`);
+  out.push(`<h4>${t("d.k.surface")}</h4>${surf}<ul>${sw("repeating-linear-gradient(180deg,#d9c3a0 0 3px,#a98462 3px 6px)", t("d.k.walls"), "", "walls")}</ul>`);
   // şehir
   const ci = m.cityInfo || {};
   if (ci.bld || ci.mon || Object.keys(ci.roads || {}).length) {
     const items = [];
-    if (ci.bld) items.push(sw(ctx.isDark() ? "#c9c3b8" : "#eee8dc", `${t("d.k.bld")} (${ci.bld.toLocaleString(L)})`));
-    if (ci.mon) items.push(sw("linear-gradient(135deg,#e6dccb 50%,#9aa3aa 50%)", t("d.k.mon")));
-    for (const [k, c] of KEY_ROADS) if (ci.roads?.[k]) items.push(sw(hex(c), t("d.k.road." + k), "line"));
+    if (ci.bld) items.push(sw(ctx.isDark() ? "#c9c3b8" : "#eee8dc", `${t("d.k.bld")} (${ci.bld.toLocaleString(L)})`, "", "bld"));
+    if (ci.mon) items.push(sw("linear-gradient(135deg,#e6dccb 50%,#9aa3aa 50%)", t("d.k.mon"), "", "mon"));
+    for (const [k, c] of KEY_ROADS) if (ci.roads?.[k]) items.push(sw(hex(c), t("d.k.road." + k), "line", "road:" + k));
     out.push(`<h4>${t("d.k.city")}</h4><ul>${items.join("")}</ul>`);
   }
   if (!ci.bld && m.region.size > m.cityMax) out.push(`<p class="dk-note">${t("d.k.zoomCity").replace("{km}", (m.cityMax / 1000).toFixed(1))}</p>`);
   // noktalar
   const pts = [];
-  if (ctx.tourStops().length) pts.push(sw("#b5532c", t("d.k.tour"), "dot"));
+  if (ctx.tourStops().length) pts.push(sw("#b5532c", t("d.k.tour"), "dot", "tour"));
   const cats = [...new Set(ctx.activePoints().map((p) => p.cat))];
-  for (const c of cats) pts.push(sw(ctx.groups[ctx.cats[c].group].color, ctx.cats[c].names[L] || ctx.cats[c].names.tr, "dot"));
+  for (const c of cats) pts.push(sw(ctx.groups[ctx.cats[c].group].color, ctx.cats[c].names[L] || ctx.cats[c].names.tr, "dot", "cat:" + c));
   if (pts.length) out.push(`<h4>${t("d.k.points")}</h4><ul>${pts.join("")}</ul>`);
+  // canlı konum (isteğe bağlı; açılınca cihaz konumu modelde gösterilir ve izlenir)
+  out.push(`<h4>${t("d.k.loc")}</h4><ul>
+    <li data-k="live" class="tog${live.on ? "" : " off"}" role="button" tabindex="0"><i class="dot" style="background:#1a73e8"></i>${t("d.k.me")} <small id="dioMeInfo">${esc(meInfo(m))}</small></li>
+    ${live.on ? `<li data-k="follow" class="tog${live.follow ? "" : " off"}" role="button" tabindex="0"><i class="line" style="background:#1a73e8"></i>${t("d.k.follow")}</li>` : ""}</ul>`);
   // yeraltı
   if ($("dioUnder").checked) {
     const u = [];
@@ -1123,6 +1296,24 @@ async function setSize(size) {
   await build({ lng: c.lng, lat: c.lat, size: Math.max(SIZE_MIN, Math.min(SIZE_MAX, size)) }, true);
 }
 
+// Kartın alanı: çokgense sınır kutusu kadar kare + kırpma halkaları; küçük alan ya da noktaysa
+// mevcut görünüm boyutunda, yere ortalanmış kare
+function focusRegion(f) {
+  const base = region();
+  const g = f.geometry;
+  if (g) {
+    const rings = (g.type === "Polygon" ? [g.coordinates] : g.coordinates).map((pl) => pl[0]);
+    let w = 180, e = -180, s = 90, n = -90;
+    for (const r of rings) for (const [x, y] of r) { w = Math.min(w, x); e = Math.max(e, x); s = Math.min(s, y); n = Math.max(n, y); }
+    const lat = (s + n) / 2, lng = (w + e) / 2;
+    const ext = Math.max((e - w) * 111320 * Math.cos((lat * Math.PI) / 180), (n - s) * 110540);
+    if (ext >= 800) return { lng, lat, size: Math.max(SIZE_MIN, Math.min(SIZE_MAX, ext * 1.08)), clip: rings, name: f.name };
+    return { ...base, lng, lat, name: f.name };
+  }
+  if (f.lngLat) return { ...base, lng: f.lngLat.lng, lat: f.lngLat.lat, name: f.name };
+  return base;
+}
+
 async function open() {
   ctx.closePanels();
   $("diorama").hidden = false;
@@ -1130,7 +1321,9 @@ async function open() {
   $("dioUnder").checked = false;
   $("dioKeyBody").hidden = innerWidth <= 720; $("dioKeyToggle").setAttribute("aria-expanded", String(innerWidth > 720));
   $("dioHint").textContent = t("d.hint");
-  await build(region(), false);
+  // açık bir bilgi kartı varsa model o yerin alanına göre kurulur
+  const focus = ctx.focusArea?.();
+  await build(focus ? focusRegion(focus) : region(), false);
 }
 
 // keep: kamera konumu ve yeraltı görünümü korunur (alan değiştirilirken)
@@ -1151,6 +1344,7 @@ async function build(r, keep) {
     const g = await buildGrid(r);
     const exag = parseFloat($("dioExag").value);
     const m = { ...g, region: r, scale: W / r.size, exag, labels: [], cityMax: cityMax(r.lat) };
+    if (r.clip) { m.mask = makeMask(m, r.clip); if (!m.mask.some((x) => x)) m.mask = null; }
     const relief = (g.hMax - g.hMin) * m.scale;
     m.baseDepth = Math.max(5, W * 0.06 + relief * 0.15);
     const getJson = (f, d) => fetch(ctx.dataUrl + f).then((x) => (x.ok ? x.json() : d)).catch(() => d);
@@ -1163,7 +1357,7 @@ async function build(r, keep) {
     for (const f of [...resA.features, ...resB.features]) if (/Polygon/.test(f.geometry.type)) area.set(f.properties.id, polyArea(f.geometry));
     m.resFeats = [...resA.features, ...resB.features].filter((f) => f.geometry.type === "Point")
       .map((f) => ({ properties: f.properties, _pt: f.geometry.coordinates, _area: area.get(f.properties.id) || 0 }));
-    const inside = (lng, lat) => { const [u, v] = lngLatToUV(m, lng, lat); return u >= 0 && u <= 1 && v >= 0 && v <= 1; };
+    const inside = (lng, lat) => { const [u, v] = lngLatToUV(m, lng, lat); return u >= 0 && u <= 1 && v >= 0 && v <= 1 && inMask(m, u, v); };
     // yeraltı varsa blok tabanını derinleştir
     if (m.ugSites.some((s) => inside(s.lng, s.lat)) || m.resFeats.some((f) => inside(f._pt[0], f._pt[1]))) m.baseDepth = Math.max(m.baseDepth, W * 0.24);
     const tex = await surfaceTexture(m);
@@ -1171,14 +1365,16 @@ async function build(r, keep) {
     buildBlock(m, tex);
     model = m;
     // etiketler: tur durakları + açık lejant öğeleri (en fazla 120)
-    ctx.tourStops().forEach((s, i) => addLabel(m, { lng: s.x, lat: s.y, text: `${i + 1}. ${s.n || ""}`, color: "#b5532c", cls: "tour", lift: 7 }));
-    ctx.activePoints().slice(0, 120).forEach((p) => addLabel(m, { lng: p.lng, lat: p.lat, text: p.name, color: ctx.groups[ctx.cats[p.cat].group].color }));
+    ctx.tourStops().forEach((s, i) => addLabel(m, { lng: s.x, lat: s.y, text: `${i + 1}. ${s.n || ""}`, color: "#b5532c", cls: "tour", lift: 7, key: "tour" }));
+    ctx.activePoints().slice(0, 120).forEach((p) => addLabel(m, { lng: p.lng, lat: p.lat, text: p.name, color: ctx.groups[ctx.cats[p.cat].group].color, key: "cat:" + p.cat }));
     applyHeights(m);
     buildCity(m);
     renderKey(m);
     const km = (r.size / 1000).toFixed(r.size < 10000 ? 1 : 0);
-    $("dioTitle").textContent = `${ctx.prov.names[lang()] || ctx.prov.names.tr} · ≈ ${km} × ${km} km`;
+    $("dioTitle").textContent = `${r.name || ctx.prov.names[lang()] || ctx.prov.names.tr} · ≈ ${km} × ${km} km`;
     if (cam) { camera.position.copy(cam.p); controls.target.copy(cam.t); } else fitCamera();
+    applyKeyVis(m);
+    if (live.on) placeMe(m);
     if (keep && $("dioUnder").checked) setUnderground(true);
     controls.autoRotate = $("dioRotate").checked;
     controls.update();
@@ -1191,6 +1387,7 @@ async function build(r, keep) {
   }
 }
 function close() {
+  if (live.on) setLive(false);
   cancelAnimationFrame(raf);
   $("diorama").hidden = true;
   document.documentElement.classList.remove("dio-open");
@@ -1209,6 +1406,8 @@ export function initDiorama(_map, _ctx) {
   $("dioRotate").onchange = (e) => { if (controls) controls.autoRotate = e.target.checked; };
   $("dioLabels").onchange = (e) => { if (labelRenderer) labelRenderer.domElement.classList.toggle("hide", !e.target.checked); };
   for (const id of ["dioBld", "dioMon", "dioRoads"]) $(id).onchange = () => model && syncCityToggles(model);
+  $("dioKeyBody").addEventListener("click", onKeyClick);
+  $("dioKeyBody").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onKeyClick(e); } });
   $("dioKeyToggle").onclick = () => {
     const open = $("dioKeyBody").hidden;
     $("dioKeyBody").hidden = !open; $("dioKeyToggle").setAttribute("aria-expanded", String(open));
