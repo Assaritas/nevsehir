@@ -318,7 +318,8 @@ input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 
 .chk input { width: 18px; height: 18px; accent-color: var(--accent); }
 .dio-exag { display: inline-flex; align-items: center; gap: 8px; }
 .dio-exag input { width: 120px; }
-.dio-exag b { color: var(--accent); font-variant-numeric: tabular-nums; min-width: 34px; }
+.dio-exag b { color: var(--accent); font-variant-numeric: tabular-nums; min-width: 34px; white-space: nowrap; }
+#dioSizeV { min-width: 52px; }
 .dio-legend { position: absolute; right: 12px; top: calc(70px + env(safe-area-inset-top)); width: 300px; max-width: calc(100vw - 24px); padding: 10px 14px;
   background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); font-size: 12.5px; }
 .dio-legend p { margin: 0 0 6px; }

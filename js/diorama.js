@@ -828,6 +828,12 @@ function buildResources(m) {
 // Binalar ve yollar haritanın vektör karolarından (OpenFreeMap / OpenMapTiles, © OSM) alınır; anıt modelleri
 // data/<il>/monuments.geojson (OSM building:part, kubbe / minare dilimleri). Yükseklikler gerçek ölçekte (abartısız).
 const CITY_MAX = 12000;     // m — daha geniş bölgelerde bina / yol çizilmez
+// Bina karoları haritada ancak ≈ z13'ten itibaren gelir; bu yüzden üst sınır ekran boyutuna bağlıdır
+// (dizüstünde ≈ 6 km, telefonda ≈ 3 km). Bina görünen en geniş alan:
+function cityMax(lat) {
+  const cv = map.getCanvas();
+  return Math.min(CITY_MAX, (Math.min(cv.clientWidth, cv.clientHeight) * 40075016.686 * Math.cos((lat * Math.PI) / 180) * 0.95) / (512 * 2 ** 13.05));
+}
 const ROAD_STYLE = {
   motorway: [22, 0xe8913a, 6], trunk: [18, 0xf0a64a, 6], primary: [14, 0xf6c95a, 5], secondary: [11, 0xf8e08a, 4], tertiary: [9, 0xffffff, 3],
   minor: [7, 0xfbfaf6, 2], service: [4.5, 0xf1eee8, 1], track: [3, 0xc8b08a, 1], path: [2.4, 0xd9c7a4, 0], rail: [3.2, 0x5b5b66, 3], transit: [3.2, 0x5b5b66, 3],
@@ -860,17 +866,40 @@ function groundRange(m, ring) {
   for (let i = 0; i < ring.length; i += step) { const [, , u, v] = xz(m, ring[i][0], ring[i][1]); const h = heightAt(m, u, v); lo = Math.min(lo, h); hi = Math.max(hi, h); }
   return [lo, hi];
 }
-function extrude(m, rings, b, h, sinkTo) {
+// follow: true → çatı her köşede o noktadaki zeminden h yukarıda (binalar). Yükselti ölçeği artınca
+//   eğimli arazide düz çatılı kutunun yokuş aşağı cephesi ölçekle birlikte uzuyor, bina orantısız büyüyordu.
+// follow: false → düz çatı, tek zemin referansı (anıt parçaları: kubbe, kasnak, minare üst üste oturmalı)
+function extrude(m, rings, b, h, { follow = false, ref } = {}) {
   const shape = new THREE.Shape(rings[0].map(([lng, lat]) => { const [X, Z] = xz(m, lng, lat); return new THREE.Vector2(X, -Z); }));
   for (const hole of rings.slice(1)) shape.holes.push(new THREE.Path(hole.map(([lng, lat]) => { const [X, Z] = xz(m, lng, lat); return new THREE.Vector2(X, -Z); })));
-  const [lo, hi] = groundRange(m, rings[0]);
-  const base = (sinkTo ?? lo) + b;
-  const top = hi + h;                       // eğimli arazide çatı yüksek taraftan ölçülür
-  if (top - base < 0.01) return null;
-  const g = new THREE.ExtrudeGeometry(shape, { depth: top - base, bevelEnabled: false, curveSegments: 1 });
-  g.rotateX(-Math.PI / 2);
-  g.translate(0, base, 0);
+  const [lo] = groundRange(m, rings[0]);
+  if (h - b < 0.002) return null;
+  const g = new THREE.ExtrudeGeometry(shape, { depth: 1, bevelEnabled: false, curveSegments: 1 });
+  g.rotateX(-Math.PI / 2);                  // derinlik → y (0 = taban, 1 = çatı)
+  const p = g.attributes.position;
+  const g0 = ref ?? lo;
+  for (let i = 0; i < p.count; i++) {
+    const X = p.getX(i), Z = p.getZ(i);
+    const ground = follow ? heightAt(m, (X + W / 2) / W, (Z + W / 2) / W) : g0;
+    // taban: zemine oturan parçalar en alçak noktaya gömülür (yokuşta boşluk kalmasın)
+    p.setY(i, p.getY(i) < 0.5 ? (b > 0 ? ground + b : Math.min(lo, ground) - 0.02) : ground + h);
+  }
+  p.needsUpdate = true;
+  g.computeVertexNormals();
   return g;
+}
+// anıt parçalarının ortak zemin referansı: yakın parçalar (≈ 40 m) aynı zemini kullanır
+function monumentRefs(m, feats) {
+  const refs = new Map(), anchors = [];
+  for (const f of feats) {
+    const r0 = polys(f.geometry)[0]?.[0];
+    if (!r0) continue;
+    let cx = 0, cy = 0; for (const [a, b] of r0) { cx += a; cy += b; } cx /= r0.length; cy /= r0.length;
+    let a = anchors.find((q) => Math.hypot((q.x - cx) * 85000, (q.y - cy) * 111000) < 40);
+    if (!a) { const [, , u, v] = xz(m, cx, cy); a = { x: cx, y: cy, h: heightAt(m, u, v) }; anchors.push(a); }
+    refs.set(f, a.h);
+  }
+  return refs;
 }
 const polys = (geom) => (geom.type === "Polygon" ? [geom.coordinates] : geom.type === "MultiPolygon" ? geom.coordinates : []);
 const inRegion = (m, ring) => ring.some(([lng, lat]) => { const [u, v] = lngLatToUV(m, lng, lat); return u > 0 && u < 1 && v > 0 && v < 1; });
@@ -881,17 +910,18 @@ function buildCity(m) {
   if (m.city) { m.city.forEach((g) => { scene.remove(g); g.traverse((o) => { o.geometry?.dispose?.(); }); }); }
   m.city = [];
   m.cityInfo = { bld: 0, mon: 0, roads: {} };
-  if (m.region.size > CITY_MAX) return;
+  if (m.region.size > m.cityMax) return;
   const vs = m.scale;                       // gerçek ölçek (m → sahne birimi)
   // anıt modelleri (kaplanan alanlar sıradan binalardan çıkarılır)
   const monCells = new Set();
   const cellOf = (lng, lat) => `${Math.round(lng * 3000)}|${Math.round(lat * 4000)}`;
   const monByColor = new Map();
+  const monRef = monumentRefs(m, m.monFeats || []);
   for (const f of m.monFeats || []) {
     for (const rings of polys(f.geometry)) {
       if (!allInside(m, rings[0])) continue;
       // taban = zemin + b, tepe = zemin + h (b, h: metre)
-      const g = extrude(m, rings, (f.properties.b || 0) * vs, (f.properties.h || 10) * vs);
+      const g = extrude(m, rings, (f.properties.b || 0) * vs, (f.properties.h || 10) * vs, { ref: monRef.get(f) });
       if (!g) continue;
       const c = f.properties.c || "#e6dccb";
       if (!monByColor.has(c)) monByColor.set(c, []);
@@ -924,7 +954,7 @@ function buildCity(m) {
       let cx = 0, cy = 0; for (const [a, b] of r0) { cx += a; cy += b; } cx /= r0.length; cy /= r0.length;
       if (monCells.has(cellOf(cx, cy))) continue;
       const h = Math.max(3, +p.render_height || +p.height || 8), b = +p.render_min_height || 0;
-      const g = extrude(m, rings, b * vs, h * vs);
+      const g = extrude(m, rings, b * vs, h * vs, { follow: true });
       if (g) bGeos.push(g);
     }
   }
@@ -1041,8 +1071,8 @@ function renderKey(m) {
     if (ci.mon) items.push(sw("linear-gradient(135deg,#e6dccb 50%,#9aa3aa 50%)", t("d.k.mon")));
     for (const [k, c] of KEY_ROADS) if (ci.roads?.[k]) items.push(sw(hex(c), t("d.k.road." + k), "line"));
     out.push(`<h4>${t("d.k.city")}</h4><ul>${items.join("")}</ul>`);
-  } else if (m.region.size <= CITY_MAX) out.push(`<p class="dk-note">${t("d.k.zoomCity")}</p>`);
-  else out.push(`<p class="dk-note">${t("d.k.zoomCity")}</p>`);
+  }
+  if (!ci.bld && m.region.size > m.cityMax) out.push(`<p class="dk-note">${t("d.k.zoomCity").replace("{km}", (m.cityMax / 1000).toFixed(1))}</p>`);
   // noktalar
   const pts = [];
   if (ctx.tourStops().length) pts.push(sw("#b5532c", t("d.k.tour"), "dot"));
@@ -1069,29 +1099,63 @@ function renderKey(m) {
 }
 
 // --- aç / kapa -------------------------------------------------------------------
+// --- alan (kenar uzunluğu) denetimi: kaydırıcı 0–100 → 1,5–140 km (logaritmik) -----------
+const SIZE_MIN = 1500, SIZE_MAX = 140000;
+const sizeToSlider = (s) => Math.round((100 * Math.log(s / SIZE_MIN)) / Math.log(SIZE_MAX / SIZE_MIN));
+const sliderToSize = (v) => SIZE_MIN * (SIZE_MAX / SIZE_MIN) ** (v / 100);
+const fmtKm = (s) => (s >= 10000 ? Math.round(s / 1000) : (s / 1000).toFixed(1)) + " km";
+function showSize(s) { $("dioSize").value = sizeToSlider(s); $("dioSizeV").textContent = fmtKm(s); }
+
+// Alanı diorama ekranından değiştir: harita arka planda yeni alana yakınlaşır (bina ve yol karoları
+// yüklensin), ardından model aynı kamera açısıyla yeniden kurulur.
+let resizing = 0, lastRegion = null;
+async function setSize(size) {
+  if (!lastRegion || $("diorama").hidden) return;
+  const job = ++resizing;
+  const c = lastRegion;
+  const cv = map.getCanvas();
+  const z = Math.log2((Math.min(cv.clientWidth, cv.clientHeight) * 40075016.686 * Math.cos((c.lat * Math.PI) / 180) * 0.95) / (512 * size));
+  $("dioBusy").hidden = false;
+  map.jumpTo({ center: [c.lng, c.lat], zoom: Math.max(map.getMinZoom(), Math.min(map.getMaxZoom(), z)) });
+  // karolar yüklenene kadar bekle (en çok 8 sn)
+  await new Promise((res) => { const tm = setTimeout(res, 8000); map.once("idle", () => { clearTimeout(tm); res(); }); });
+  if (job !== resizing || $("diorama").hidden) return;
+  await build({ lng: c.lng, lat: c.lat, size: Math.max(SIZE_MIN, Math.min(SIZE_MAX, size)) }, true);
+}
+
 async function open() {
   ctx.closePanels();
-  const r = region();
   $("diorama").hidden = false;
   document.documentElement.classList.add("dio-open");
-  $("dioBusy").hidden = false;
-  $("dioLegend").hidden = true;
   $("dioUnder").checked = false;
   $("dioKeyBody").hidden = innerWidth <= 720; $("dioKeyToggle").setAttribute("aria-expanded", String(innerWidth > 720));
   $("dioHint").textContent = t("d.hint");
+  await build(region(), false);
+}
+
+// keep: kamera konumu ve yeraltı görünümü korunur (alan değiştirilirken)
+let buildSeq = 0;
+async function build(r, keep) {
+  const seq = ++buildSeq;   // sürmekte olan eski kurulum yeni istek gelince bırakılır
+  $("dioBusy").hidden = false;
+  $("dioLegend").hidden = true;
+  showSize(r.size);
+  lastRegion = r;
   ensureRenderer();
   resize();
+  const cam = keep && camera ? { p: camera.position.clone(), t: controls.target.clone() } : null;
   cancelAnimationFrame(raf);
   disposeScene();
+  model = null;
   try {
     const g = await buildGrid(r);
     const exag = parseFloat($("dioExag").value);
-    const m = { ...g, region: r, scale: W / r.size, exag, labels: [] };
+    const m = { ...g, region: r, scale: W / r.size, exag, labels: [], cityMax: cityMax(r.lat) };
     const relief = (g.hMax - g.hMin) * m.scale;
     m.baseDepth = Math.max(5, W * 0.06 + relief * 0.15);
     const getJson = (f, d) => fetch(ctx.dataUrl + f).then((x) => (x.ok ? x.json() : d)).catch(() => d);
     const [ugData, resA, resB, mon] = await Promise.all([getJson("underground.json", { sites: [] }), getJson("yeralti_maden.geojson", { features: [] }),
-      getJson("acik_ocak.geojson", { features: [] }), r.size <= CITY_MAX ? getJson("monuments.geojson", { features: [] }) : { features: [] }]);
+      getJson("acik_ocak.geojson", { features: [] }), r.size <= m.cityMax ? getJson("monuments.geojson", { features: [] }) : { features: [] }]);
     m.ugSites = ugData.sites || [];
     m.monFeats = mon.features || [];
     // kaynaklar: alanlar için etiket noktası (_pt) ve alan; noktalar doğrudan
@@ -1103,6 +1167,7 @@ async function open() {
     // yeraltı varsa blok tabanını derinleştir
     if (m.ugSites.some((s) => inside(s.lng, s.lat)) || m.resFeats.some((f) => inside(f._pt[0], f._pt[1]))) m.baseDepth = Math.max(m.baseDepth, W * 0.24);
     const tex = await surfaceTexture(m);
+    if (seq !== buildSeq || $("diorama").hidden) return;
     buildBlock(m, tex);
     model = m;
     // etiketler: tur durakları + açık lejant öğeleri (en fazla 120)
@@ -1113,7 +1178,8 @@ async function open() {
     renderKey(m);
     const km = (r.size / 1000).toFixed(r.size < 10000 ? 1 : 0);
     $("dioTitle").textContent = `${ctx.prov.names[lang()] || ctx.prov.names.tr} · ≈ ${km} × ${km} km`;
-    fitCamera();
+    if (cam) { camera.position.copy(cam.p); controls.target.copy(cam.t); } else fitCamera();
+    if (keep && $("dioUnder").checked) setUnderground(true);
     controls.autoRotate = $("dioRotate").checked;
     controls.update();
     loop();
@@ -1121,7 +1187,7 @@ async function open() {
     console.error(e);
     ctx.toast(String(e.message || e));
   } finally {
-    $("dioBusy").hidden = true;
+    if (seq === buildSeq) $("dioBusy").hidden = true;
   }
 }
 function close() {
@@ -1148,6 +1214,9 @@ export function initDiorama(_map, _ctx) {
     $("dioKeyBody").hidden = !open; $("dioKeyToggle").setAttribute("aria-expanded", String(open));
     if (open && innerWidth <= 720) setListOpen(false);
   };
+  // alan kaydırıcısı: sürüklerken yalnızca değer gösterilir, bırakınca model yeniden kurulur
+  $("dioSize").oninput = (e) => { $("dioSizeV").textContent = fmtKm(sliderToSize(+e.target.value)); };
+  $("dioSize").onchange = (e) => setSize(sliderToSize(+e.target.value));
   $("dioExag").oninput = (e) => {
     $("dioExagV").textContent = parseFloat(e.target.value).toFixed(1) + "×";
     if (!model) return;
