@@ -1,0 +1,1051 @@
+{
+  "province": "kars",
+  "generated": "2026-11-11T08:36:21.272Z",
+  "counts": {
+    "il_siniri": 0,
+    "ilceler": 16,
+    "koy_mahalle_sinir": 42,
+    "yerlesimler": 490,
+    "kamu": 16,
+    "turistik": 6,
+    "antik": 84,
+    "yeralti_sehir": 0,
+    "muzeler": 4,
+    "saraylar": 0,
+    "carsilar": 0,
+    "cesmeler": 0,
+    "tarihi_yapilar": 3,
+    "anitlar": 4,
+    "mezarliklar": 7,
+    "kaleler": 25,
+    "medrese_han_hamam": 3,
+    "turbeler": 1,
+    "tiyatrolar": 0,
+    "kultur_merkezleri": 3,
+    "universiteler": 3,
+    "camiler": 167,
+    "kiliseler": 32,
+    "sinagoglar": 0,
+    "tapinaklar": 0,
+    "milli_parklar": 3,
+    "seyir": 6,
+    "parklar": 4,
+    "vadiler": 1,
+    "daglar": 345,
+    "akarsu_gol": 193,
+    "barajlar": 28,
+    "magaralar": 1,
+    "selaleler": 1,
+    "adalar": 0,
+    "kayak": 12,
+    "hayvanat": 0,
+    "bag_sarap": 0,
+    "stadyumlar": 1,
+    "plajlar": 0,
+    "rayli": 269,
+    "toplu_tasima": 27,
+    "yollar": 443,
+    "liman_havalimani": 1,
+    "deniz_ulasimi": 0,
+    "teleferik": 11,
+    "fenerler": 0,
+    "tuneller": 32,
+    "kopruler": 124,
+    "saglik": 15,
+    "polis": 11,
+    "elcilikler": 1,
+    "yeralti_maden": 0,
+    "acik_ocak": 11,
+    "kaplicalar": 0,
+    "enerji": 6
+  },
+  "sources": [
+    "OpenStreetMap (ODbL)",
+    "Wikidata (CC0)"
+  ],
+  "dates": {
+    "il_siniri": [],
+    "ilceler": [],
+    "koy_mahalle_sinir": [],
+    "yerlesimler": [],
+    "kamu": [],
+    "turistik": [
+      [
+        989,
+        null
+      ],
+      [
+        1153,
+        null
+      ],
+      [
+        601,
+        null
+      ]
+    ],
+    "antik": [
+      [
+        1001,
+        null
+      ],
+      [
+        635,
+        null
+      ],
+      [
+        1878,
+        null
+      ],
+      [
+        601,
+        null
+      ]
+    ],
+    "yeralti_sehir": [],
+    "muzeler": [
+      [
+        1981,
+        null
+      ]
+    ],
+    "saraylar": [],
+    "carsilar": [],
+    "cesmeler": [],
+    "tarihi_yapilar": [],
+    "anitlar": [],
+    "mezarliklar": [],
+    "kaleler": [
+      [
+        1153,
+        null
+      ],
+      [
+        801,
+        null
+      ]
+    ],
+    "medrese_han_hamam": [],
+    "turbeler": [],
+    "tiyatrolar": [],
+    "kultur_merkezleri": [],
+    "universiteler": [
+      [
+        1992,
+        null
+      ]
+    ],
+    "camiler": [
+      [
+        940,
+        null
+      ],
+      [
+        900,
+        null
+      ],
+      [
+        1890,
+        null
+      ]
+    ],
+    "kiliseler": [
+      [
+        1001,
+        null
+      ],
+      [
+        635,
+        null
+      ],
+      [
+        989,
+        null
+      ],
+      [
+        901,
+        null
+      ],
+      [
+        1000,
+        null
+      ],
+      [
+        1001,
+        null
+      ]
+    ],
+    "sinagoglar": [],
+    "tapinaklar": [],
+    "milli_parklar": [],
+    "seyir": [],
+    "parklar": [],
+    "vadiler": "timeless",
+    "daglar": "timeless",
+    "akarsu_gol": "timeless",
+    "barajlar": [
+      [
+        2020,
+        null
+      ]
+    ],
+    "magaralar": "timeless",
+    "selaleler": "timeless",
+    "adalar": "timeless",
+    "kayak": [],
+    "hayvanat": [],
+    "bag_sarap": [],
+    "stadyumlar": [],
+    "plajlar": [],
+    "rayli": [
+      [
+        1936,
+        null
+      ],
+      [
+        2019,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1962,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ]
+    ],
+    "toplu_tasima": [
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1962,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ]
+    ],
+    "yollar": [
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ]
+    ],
+    "liman_havalimani": [
+      [
+        1988,
+        null
+      ]
+    ],
+    "deniz_ulasimi": [],
+    "teleferik": [],
+    "fenerler": [],
+    "tuneller": [
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ]
+    ],
+    "kopruler": [
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1579,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1913,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ],
+      [
+        2020,
+        null
+      ]
+    ],
+    "saglik": [],
+    "polis": [],
+    "elcilikler": [],
+    "yeralti_maden": [],
+    "acik_ocak": [],
+    "kaplicalar": [],
+    "enerji": [
+      [
+        2020,
+        null
+      ]
+    ]
+  }
+}

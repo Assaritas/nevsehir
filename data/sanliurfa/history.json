@@ -1,0 +1,169 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w124331302": {
+      "from": -9500,
+      "approx": true,
+      "note": "MÖ 9500 – en az MÖ 8000",
+      "src": "Wikipedia"
+    },
+    "w502057666": {
+      "from": -9500,
+      "approx": true,
+      "note": "MÖ 9500 – en az MÖ 8000",
+      "src": "Wikipedia"
+    },
+    "w989126381": {
+      "from": -10000,
+      "approx": true,
+      "note": "MÖ 10.000–9500",
+      "src": "Wikipedia"
+    },
+    "w188882056": {
+      "from": 814,
+      "note": "Bugünkü surlar Abbasi, 814",
+      "src": "Wikipedia"
+    },
+    "w190753502": {
+      "from": 1170,
+      "approx": true,
+      "note": "1170–1175 dolayı (tahmin)",
+      "src": "Vikipedi"
+    },
+    "w300410168": {
+      "from": 744,
+      "note": "744–750, II. Mervan",
+      "src": "Vikipedi"
+    },
+    "w275032941": {
+      "from": 1200,
+      "approx": true,
+      "note": "Bugünkü yapı Eyyubi, 1200 dolayı; daha eski Bizans çekirdeği",
+      "src": "Wikipedia"
+    },
+    "n5017937110": {
+      "from": 1990,
+      "note": "1983–1990",
+      "src": "Wikipedia"
+    },
+    "n9469586305": {
+      "from": -1000,
+      "approx": true,
+      "note": "MÖ 1000–300 arası (tahmin)",
+      "src": "Vikipedi"
+    },
+    "w188098897": {
+      "from": -1000,
+      "approx": true,
+      "note": "MÖ 1000–300 arası (tahmin)",
+      "src": "Vikipedi"
+    },
+    "w440018769": {
+      "from": -1000,
+      "approx": true,
+      "note": "MÖ 1000–300 arası (tahmin)",
+      "src": "Vikipedi"
+    }
+  },
+  "events": [
+    {
+      "y": -9500,
+      "tr": "Göbeklitepe'de ilk anıtsal yapılar",
+      "en": "First monumental structures at Göbekli Tepe",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/G%C3%B6bekli_Tepe"
+    },
+    {
+      "y": -612,
+      "tr": "Harran, Yeni Asur'un son başkenti olur (MÖ 612–609)",
+      "en": "Harran becomes the last Neo-Assyrian capital (612–609 BC)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Harran"
+    },
+    {
+      "y": -305,
+      "tr": "I. Seleukos Edessa'yı kurar (hd. MÖ 305–281 arasında)",
+      "en": "Seleucus I founds Edessa (during his reign, 305–281 BC)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Edessa"
+    },
+    {
+      "y": 639,
+      "tr": "Urfa İslam ordularınca fethedilir",
+      "en": "Urfa conquered by the Muslim armies",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/sanliurfa"
+    },
+    {
+      "y": 744,
+      "tr": "Harran Ulu Camii'nin inşası başlar (744–750)",
+      "en": "Construction of the Great Mosque of Harran (744–750)",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Harran_Ulu_Camii"
+    },
+    {
+      "y": 1098,
+      "tr": "Baudouin Urfa Haçlı Kontluğu'nu kurar (10 Mart)",
+      "en": "Baldwin founds the Crusader County of Edessa (10 March)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/sanliurfa"
+    },
+    {
+      "y": 1144,
+      "tr": "Zengiler kuşatmadan sonra Urfa'yı alır (24 Aralık)",
+      "en": "Zengid forces take Edessa after a siege (24 December)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/sanliurfa"
+    },
+    {
+      "y": 1260,
+      "tr": "Bölge Hülâgû'ya teslim olur",
+      "en": "The region surrenders to Hülegü",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/sanliurfa"
+    },
+    {
+      "y": 1517,
+      "tr": "Urfa Osmanlı topraklarına katılır",
+      "en": "Urfa joins the Ottoman Empire",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/sanliurfa"
+    },
+    {
+      "y": 1920,
+      "tr": "Fransızlar Urfa'yı boşaltır (11 Nisan)",
+      "en": "French forces leave Urfa (11 April)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/sanliurfa"
+    },
+    {
+      "y": 1984,
+      "tr": "TBMM kararıyla şehrin adı Şanlıurfa olur",
+      "en": "Parliament renames the city Şanlıurfa",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/sanliurfa"
+    },
+    {
+      "y": 1990,
+      "tr": "Atatürk Barajı tamamlanır",
+      "en": "Atatürk Dam completed",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Dam"
+    },
+    {
+      "y": 2018,
+      "tr": "Göbeklitepe UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Göbekli Tepe inscribed on the UNESCO World Heritage List",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/1572"
+    }
+  ]
+}

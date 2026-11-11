@@ -1,0 +1,56 @@
+{
+ "_aciklama": "Kaynaklı maden / kaynak kayıtları. method: yeralti | yerustu | cozelti | kuyu. depth_m yalnızca kaynakta geçiyorsa.",
+ "sites": [
+  {
+   "id": "keles-linyit",
+   "name": "Keles linyit açık ocağı",
+   "lng": 29.17746,
+   "lat": 39.90331,
+   "method": "yerustu",
+   "res": "linyit",
+   "status": "faal",
+   "text": {
+    "tr": "Keles ilçesindeki açık ocakta linyit kömürü çıkarılır. Global Energy Monitor'ün maden kaydına göre ocak 1979'dan beri işletilmektedir; yıllık üretimi yaklaşık 1,6 milyon ton, rezervi yaklaşık 67 milyon ton olarak verilir.",
+    "en": "Lignite is extracted at this open-pit mine in the Keles district. According to Global Energy Monitor's mine record it has operated since 1979, with an annual output of about 1.6 million tonnes and reserves of about 67 million tonnes."
+   },
+   "sources": [
+    { "title": "Global Energy Monitor: Bursa Keles coal mine", "url": "https://www.gem.wiki/Bursa_Keles_coal_mine" }
+   ]
+  },
+  {
+   "id": "orhaneli-linyit",
+   "name": "Orhaneli linyit açık ocağı",
+   "lng": 28.968405,
+   "lat": 39.921991,
+   "method": "yerustu",
+   "res": "linyit",
+   "status": "faal",
+   "text": {
+    "tr": "Orhaneli ilçesindeki bu açık ocak Global Energy Monitor kayıtlarında \"Bursa kömür madeni\" adıyla geçer. Kayda göre 1980'den beri işletilen ocağın yıllık üretimi yaklaşık 1,65 milyon ton, rezervi yaklaşık 99 milyon ton, alanı yaklaşık 44 hektardır.",
+    "en": "This open pit in the Orhaneli district appears in Global Energy Monitor's records as the \"Bursa coal mine\". According to the record it has operated since 1980, producing about 1.65 million tonnes a year, with reserves of about 99 million tonnes over roughly 44 hectares."
+   },
+   "sources": [
+    { "title": "Global Energy Monitor: Bursa coal mine", "url": "https://www.gem.wiki/Bursa_coal_mine" }
+   ]
+  },
+  {
+   "id": "uludag-volfram",
+   "name": "Uludağ volfram madeni",
+   "lng": 29.1760664,
+   "lat": 40.0981309,
+   "method": "yeralti",
+   "res": "volfram (şelit)",
+   "operator": "Etibank",
+   "osm": "n269197110",
+   "text": {
+    "tr": "Uludağ'daki şelit yatağı Türkiye'nin en önemli volfram yatağı olarak bilinir. Kaynaklara göre yatakta %0,5 WO₃ tenörlü yaklaşık 14,6 milyon ton görünür ve muhtemel cevher belirlenmiştir. Etibank 1971'den itibaren yatağa yatırım yapmış ve üretimin 1976 ortasında başlaması planlanmıştır; yatak yeraltı yöntemiyle (alt katlı göçertme / sublevel stoping) işletilmek üzere tasarlanmıştır.\n\nİşaret, OpenStreetMap'te \"Volfram maden tesisleri\" olarak kayıtlı tesisi gösterir. Madenin bugünkü durumu ve kapanış tarihi için kaynak bulunamadı.",
+    "en": "The scheelite deposit on Uludağ is known as Turkey's most important tungsten deposit. According to the sources, about 14.6 million tonnes of proven and probable ore at 0.5% WO₃ were identified. Etibank invested in the deposit from 1971, with production planned to start in mid-1976; the deposit was designed to be worked underground (sublevel stoping).\n\nThe marker shows the facility recorded in OpenStreetMap as \"Volfram maden tesisleri\" (tungsten mine facilities). No source was found for the mine's current status or closure date."
+   },
+   "sources": [
+    { "title": "Madencilik dergisi (DergiPark): Uludağ volfram madeni", "url": "https://dergipark.org.tr/en/pub/madencilik/issue/32613/362070" },
+    { "title": "Uludağ volfram yatağındaki cevher ve mineral türleri (YÖK Açık Bilim)", "url": "https://acikbilim.yok.gov.tr/handle/20.500.12812/665040" },
+    { "title": "OpenStreetMap: Volfram maden tesisleri", "url": "https://www.openstreetmap.org/node/269197110" }
+   ]
+  }
+ ]
+}

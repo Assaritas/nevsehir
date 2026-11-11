@@ -1,0 +1,24 @@
+{
+ "_aciklama": "OSM'de bulunmayan, kaynaklı yerler. Konum kaynaktaki koordinattır; OSM'de aynı kategoride 300 m içinde kayıt varsa atlanır.",
+ "sites": [
+  {
+   "id": "eski-kaplica",
+   "name": "Eski Kaplıca (Armutlu Hamamı)",
+   "cat": "medrese_han_hamam",
+   "lng": 29.02333,
+   "lat": 40.20222,
+   "wikidata": "Q130645234",
+   "source": "https://tr.wikipedia.org/wiki/Eski_Kapl%C4%B1ca"
+  },
+  {
+   "id": "bursa-kalesi",
+   "name": "Bursa Kalesi",
+   "cat": "kaleler",
+   "lng": 29.05833,
+   "lat": 40.18472,
+   "wikidata": "Q6058405",
+   "source": "https://tr.wikipedia.org/wiki/Bursa_Kalesi",
+   "alwaysAdd": true
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "_aciklama": "OSM'de bulunmayan, kaynaklı yerler. Konum kaynaktaki koordinattır; OSM'de aynı kategoride 300 m içinde kayıt varsa atlanır.",
+ "sites": [
+  {
+   "id": "gulbahar-hatun",
+   "name": "Gülbahar Hatun Camii",
+   "cat": "camiler",
+   "lng": 39.71611,
+   "lat": 41.00333,
+   "wikidata": "Q6066259",
+   "source": "https://tr.wikipedia.org/wiki/G%C3%BClbahar_Hatun_Camii"
+  },
+  {
+   "id": "zagnos-koprusu",
+   "name": "Zağnos Köprüsü",
+   "cat": "kopruler",
+   "lng": 39.7175,
+   "lat": 41.00444,
+   "wikidata": "Q131402661",
+   "source": "https://tr.wikipedia.org/wiki/Za%C4%9Fnos_K%C3%B6pr%C3%BCs%C3%BC",
+   "alwaysAdd": true
+  },
+  {
+   "id": "trabzon-kalesi",
+   "name": "Trabzon Kalesi",
+   "cat": "kaleler",
+   "lng": 39.71978,
+   "lat": 41.00371,
+   "approx": true,
+   "wikidata": "Q6011652",
+   "source": "https://www.wikidata.org/wiki/Q6011652",
+   "alwaysAdd": true
+  }
+ ]
+}

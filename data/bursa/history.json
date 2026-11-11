@@ -1,0 +1,172 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler",
+    "kaplicalar"
+  ],
+  "features": {
+    "w26434413": {
+      "from": 1396,
+      "note": "1396–1400",
+      "src": "Vikipedi"
+    },
+    "w254313386": {
+      "from": 1421,
+      "note": "1421",
+      "src": "Vikipedi"
+    },
+    "w337880066": {
+      "from": 1421,
+      "approx": true,
+      "note": "Yeşil Külliye; türbe 1421",
+      "src": "Vikipedi"
+    },
+    "w397551853": {
+      "from": 1425,
+      "note": "1425–1426",
+      "src": "Vikipedi"
+    },
+    "r1018973": {
+      "from": 1490,
+      "approx": true,
+      "note": "15. yüzyıl sonları, II. Bayezid",
+      "src": "Vikipedi"
+    },
+    "w1271698329": {
+      "from": 1490,
+      "approx": true,
+      "note": "15. yüzyıl sonları, II. Bayezid",
+      "src": "Vikipedi"
+    },
+    "w247424180": {
+      "from": 1395,
+      "approx": true,
+      "note": "14. yüzyıl sonu",
+      "src": "Vikipedi"
+    },
+    "w255187109": {
+      "from": 1339,
+      "note": "1339–1340",
+      "src": "TDV İslâm Ansiklopedisi"
+    },
+    "w337402815": {
+      "from": 1442,
+      "note": "1442",
+      "src": "Vikipedi"
+    },
+    "r20372405": {
+      "from": 1370,
+      "approx": true,
+      "note": "14. yüzyıl, I. Murad dönemi",
+      "src": "Vikipedi"
+    },
+    "w254312132": {
+      "from": 1804,
+      "note": "1795 depreminden sonra 1804'te yeniden yapıldı (ilk yapı 15. yüzyıl başı)",
+      "src": "Vikipedi"
+    },
+    "w1167096746": {
+      "from": 1904,
+      "note": "Müze 1904'te kuruldu",
+      "src": "Vikipedi"
+    }
+  },
+  "events": [
+    {
+      "y": -75,
+      "tr": "Bitinyalılar Prusa'nın ilk surlarını yapar (MÖ 1. yüzyıl)",
+      "en": "The Bithynians build the first walls of Prusa (1st century BC)",
+      "src": "Vikipedi: Bursa Kalesi",
+      "url": "https://tr.wikipedia.org/wiki/Bursa_Kalesi"
+    },
+    {
+      "y": 787,
+      "tr": "Yedinci Konsil'in İznik Ayasofya'da toplanmış olabileceği düşünülür",
+      "en": "The Seventh Ecumenical Council may have met in İznik's Hagia Sophia",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Ayasofya_(%C4%B0znik)"
+    },
+    {
+      "y": 1080,
+      "tr": "Süleyman Şah İznik'i aldıktan hemen sonra Bursa'yı fetheder",
+      "en": "Süleyman Shah takes Bursa soon after capturing İznik",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/bursa"
+    },
+    {
+      "y": 1326,
+      "tr": "Uzun abluka sonunda Bursa 6 Nisan'da Osmanlılara teslim edilir",
+      "en": "After a long blockade Bursa surrenders to the Ottomans on 6 April",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/bursa"
+    },
+    {
+      "y": 1331,
+      "tr": "Orhan Gazi İznik'i fetheder; Ayasofya camiye dönüştürülür",
+      "en": "Orhan Gazi takes İznik; its Hagia Sophia becomes a mosque",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Ayasofya_(%C4%B0znik)"
+    },
+    {
+      "y": 1339,
+      "tr": "Orhan Gazi Külliyesi kalenin doğusunda kurulur (1339–1340)",
+      "en": "The Orhan Gazi Complex is built east of the citadel (1339–1340)",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/bursa"
+    },
+    {
+      "y": 1396,
+      "tr": "Ulu Cami'nin yapımı başlar (1396–1400)",
+      "en": "Construction of the Great Mosque begins (1396–1400)",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Bursa_Ulu_Camii"
+    },
+    {
+      "y": 1402,
+      "tr": "Timur Osmanlıları yenince Bursa'nın gelişmesi sekteye uğrar",
+      "en": "Timur's defeat of the Ottomans halts Bursa's growth",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/bursa"
+    },
+    {
+      "y": 1421,
+      "tr": "Yeşil Türbe yapılır",
+      "en": "The Green Tomb is built",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Ye%C5%9Fil_T%C3%BCrbe"
+    },
+    {
+      "y": 1837,
+      "tr": "İpek endüstrisinde buhar gücü kullanılmaya başlanır",
+      "en": "Steam power is introduced to the silk industry",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/bursa"
+    },
+    {
+      "y": 1855,
+      "tr": "Büyük Bursa depremi şehri harap eder",
+      "en": "The great Bursa earthquake devastates the city",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/bursa"
+    },
+    {
+      "y": 1920,
+      "tr": "8 Temmuz 1920'de Yunan işgali; şehir 10–11 Eylül 1922'de geri alınır",
+      "en": "Greek occupation on 8 July 1920; the city is retaken on 10–11 September 1922",
+      "src": "TDV İslâm Ansiklopedisi",
+      "url": "https://islamansiklopedisi.org.tr/bursa"
+    },
+    {
+      "y": 2014,
+      "tr": "\"Bursa ve Cumalıkızık: Osmanlı İmparatorluğu'nun Doğuşu\" UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "\"Bursa and Cumalıkızık: the Birth of the Ottoman Empire\" is inscribed on the UNESCO World Heritage List",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Cumal%C4%B1k%C4%B1z%C4%B1k"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w189989602": {
+      "from": 1153,
+      "note": "Saltuklu onarım kitabesi 548 (1153); 1579'da yeniden inşa",
+      "src": "TDV İslâm Ansiklopedisi"
+    },
+    "w547018564": {
+      "from": 940,
+      "approx": true,
+      "note": "10. yüzyıl ortası, I. Abas dönemi (928–953)",
+      "src": "Wikipedia"
+    },
+    "w547018532": {
+      "from": 1890,
+      "approx": true,
+      "note": "19. yüzyıl sonu, Rus dönemi",
+      "src": "Vikipedi"
+    },
+    "w293229981": {
+      "from": 1579,
+      "note": "1719'da yeniden yapıldı",
+      "src": "Wikipedia"
+    },
+    "w455450081": {
+      "from": 1981,
+      "note": "Bugünkü bina 1981",
+      "src": "Vikipedi"
+    },
+    "w102489815": {
+      "from": 1001,
+      "approx": true,
+      "note": "11. yüzyıl başında tamamlandı",
+      "src": "Wikipedia"
+    },
+    "w102632967": {
+      "from": 635,
+      "approx": true,
+      "note": "630/640 dolayı",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": 961,
+      "tr": "Ani, Bagratuni Ermeni krallığının başkenti olur",
+      "en": "Ani becomes capital of the Bagratid Armenian kingdom",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Ani"
+    },
+    {
+      "y": 1064,
+      "tr": "Alparslan Ani'yi alır",
+      "en": "Alp Arslan takes Ani",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/kars"
+    },
+    {
+      "y": 1153,
+      "tr": "Kars Kalesi Saltuklular döneminde onarılır",
+      "en": "Kars Castle repaired under the Saltukids",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/kars"
+    },
+    {
+      "y": 1319,
+      "tr": "Depremde Ani Katedrali'nin kubbesi çöker",
+      "en": "Earthquake brings down the dome of Ani Cathedral",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Cathedral_of_Ani"
+    },
+    {
+      "y": 1386,
+      "tr": "Timur Kars'ı alır",
+      "en": "Timur takes Kars",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/kars"
+    },
+    {
+      "y": 1579,
+      "tr": "Lala Mustafa Paşa kaleyi ve şehri yeniden imar eder",
+      "en": "Lala Mustafa Pasha rebuilds the castle and town",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/kars"
+    },
+    {
+      "y": 1828,
+      "tr": "Kars Rus işgaline uğrar",
+      "en": "Kars occupied by Russia",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/kars"
+    },
+    {
+      "y": 1855,
+      "tr": "Kars kuşatması ve Rus işgali",
+      "en": "Siege and Russian occupation of Kars",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/kars"
+    },
+    {
+      "y": 1878,
+      "tr": "Berlin Antlaşması ile Kars Rusya'ya bırakılır",
+      "en": "Treaty of Berlin cedes Kars to Russia",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/kars"
+    },
+    {
+      "y": 1914,
+      "tr": "Sarıkamış Harekâtı (22 Aralık 1914 – Ocak 1915)",
+      "en": "Battle of Sarikamish (22 Dec 1914 – Jan 1915)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Battle_of_Sarikamish"
+    },
+    {
+      "y": 1918,
+      "tr": "Türk ordusu Kars'a girer (23 Nisan)",
+      "en": "Ottoman army enters Kars (23 April)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/kars"
+    },
+    {
+      "y": 1920,
+      "tr": "Kâzım Karabekir Paşa Kars'a girer (30 Ekim)",
+      "en": "Kâzım Karabekir Pasha enters Kars (30 October)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/kars"
+    },
+    {
+      "y": 1921,
+      "tr": "Kars Antlaşması imzalanır (13 Ekim)",
+      "en": "Treaty of Kars signed (13 October)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Treaty_of_Kars"
+    },
+    {
+      "y": 2016,
+      "tr": "Ani UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Ani inscribed on the UNESCO World Heritage List",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/1518"
+    }
+  ]
+}

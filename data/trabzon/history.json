@@ -1,0 +1,157 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w856740625": {
+      "from": 386,
+      "to": 1923,
+      "approx": true,
+      "note": "Vikipedi'ye göre MS 386; 1923'e kadar kullanıldı",
+      "src": "Vikipedi"
+    },
+    "w220046416": {
+      "from": 1250,
+      "approx": true,
+      "note": "13. yüzyıl",
+      "src": "Wikipedia"
+    },
+    "n11215148439": {
+      "from": 1250,
+      "approx": true,
+      "note": "13. yüzyıl",
+      "src": "Wikipedia"
+    },
+    "w132930872": {
+      "from": 1000,
+      "approx": true,
+      "note": "10.–11. yüzyıl",
+      "src": "Wikipedia"
+    },
+    "w376957664": {
+      "from": 1514,
+      "note": "1514",
+      "src": "Vikipedi"
+    },
+    "w467228254": {
+      "from": 1514,
+      "note": "1514",
+      "src": "Vikipedi"
+    },
+    "pzagnos-koprusu": {
+      "from": 1467,
+      "note": "1467'de Zağanos Paşa yeniledi",
+      "src": "Vikipedi"
+    },
+    "w391984327": {
+      "from": 1913,
+      "note": "Kostaki Konağı 1898–1913",
+      "src": "Vikipedi"
+    },
+    "n4926439635": {
+      "from": 1950,
+      "note": "21 Şubat 1950 heyelanı",
+      "src": "Vikipedi"
+    },
+    "w472913160": {
+      "from": 1950,
+      "note": "21 Şubat 1950 heyelanı",
+      "src": "Vikipedi"
+    },
+    "w755824419": {
+      "from": 1950,
+      "note": "21 Şubat 1950 heyelanı",
+      "src": "Vikipedi"
+    },
+    "n2535001310": {
+      "from": 1424,
+      "note": "1424",
+      "src": "Vikipedi"
+    }
+  },
+  "events": [
+    {
+      "y": -756,
+      "tr": "Miletli Yunanlar Trapezus'u kurar",
+      "en": "Greeks from Miletus found Trapezous",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Trabzon"
+    },
+    {
+      "y": -68,
+      "tr": "Pontus krallığının Roma'ya karşı direnişi sona erer, bölge Roma'ya geçer",
+      "en": "Kingdom of Pontus' resistance to Rome ends; the area passes to Rome",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Trabzon"
+    },
+    {
+      "y": 1204,
+      "tr": "Trabzon İmparatorluğu kurulur",
+      "en": "Empire of Trebizond founded",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Empire_of_Trebizond"
+    },
+    {
+      "y": 1424,
+      "tr": "Kaymaklı Manastırı yapılır",
+      "en": "Kaymaklı Monastery built",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Amenap%C4%B1rgi%C3%A7_Manast%C4%B1r%C4%B1"
+    },
+    {
+      "y": 1461,
+      "tr": "II. Mehmed Trabzon'u alır",
+      "en": "Mehmed II takes Trabzon",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Trabzon"
+    },
+    {
+      "y": 1514,
+      "tr": "Gülbahar Hatun Camii yaptırılır",
+      "en": "Gülbahar Hatun Mosque built",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/G%C3%BClbahar_Hatun_Camii"
+    },
+    {
+      "y": 1923,
+      "tr": "Nüfus mübadelesi; Sümela Manastırı boşalır",
+      "en": "Population exchange; Sumela Monastery abandoned",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Sumela_Monastery"
+    },
+    {
+      "y": 1924,
+      "tr": "Atatürk'ün ilk Trabzon ziyareti (15–17 Eylül)",
+      "en": "Atatürk's first visit to Trabzon (15–17 September)",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Trabzon_M%C3%BCzesi"
+    },
+    {
+      "y": 1950,
+      "tr": "Heyelanla Sera Gölü oluşur (21 Şubat)",
+      "en": "Landslide forms Lake Sera (21 February)",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Sera_G%C3%B6l%C3%BC"
+    },
+    {
+      "y": 1989,
+      "tr": "Uzungöl Tabiat Parkı ilan edilir (3 Ekim)",
+      "en": "Uzungöl Nature Park declared (3 October)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Uzung%C3%B6l"
+    },
+    {
+      "y": 2013,
+      "tr": "Trabzon Ayasofya yeniden cami olur",
+      "en": "Hagia Sophia in Trabzon becomes a mosque again",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Hagia_Sophia,_Trabzon"
+    }
+  ]
+}

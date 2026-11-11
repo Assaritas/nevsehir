@@ -1,0 +1,523 @@
+{
+  "province": "bursa",
+  "generated": "2026-11-11T08:38:00.685Z",
+  "counts": {
+    "il_siniri": 0,
+    "ilceler": 34,
+    "koy_mahalle_sinir": 587,
+    "yerlesimler": 1128,
+    "kamu": 200,
+    "turistik": 27,
+    "antik": 126,
+    "yeralti_sehir": 1,
+    "muzeler": 30,
+    "saraylar": 0,
+    "carsilar": 0,
+    "cesmeler": 0,
+    "tarihi_yapilar": 32,
+    "anitlar": 45,
+    "mezarliklar": 2,
+    "kaleler": 34,
+    "medrese_han_hamam": 28,
+    "turbeler": 56,
+    "tiyatrolar": 19,
+    "kultur_merkezleri": 32,
+    "universiteler": 14,
+    "camiler": 1352,
+    "kiliseler": 14,
+    "sinagoglar": 1,
+    "tapinaklar": 1,
+    "milli_parklar": 5,
+    "seyir": 69,
+    "parklar": 236,
+    "vadiler": 0,
+    "daglar": 779,
+    "akarsu_gol": 131,
+    "barajlar": 95,
+    "magaralar": 3,
+    "selaleler": 10,
+    "adalar": 5,
+    "kayak": 32,
+    "hayvanat": 1,
+    "bag_sarap": 0,
+    "stadyumlar": 6,
+    "plajlar": 43,
+    "rayli": 694,
+    "toplu_tasima": 143,
+    "yollar": 4072,
+    "liman_havalimani": 11,
+    "deniz_ulasimi": 6,
+    "teleferik": 61,
+    "fenerler": 0,
+    "tuneller": 178,
+    "kopruler": 401,
+    "saglik": 744,
+    "polis": 43,
+    "elcilikler": 15,
+    "yeralti_maden": 3,
+    "acik_ocak": 149,
+    "kaplicalar": 3,
+    "enerji": 71
+  },
+  "sources": [
+    "OpenStreetMap (ODbL)",
+    "Wikidata (CC0)"
+  ],
+  "dates": {
+    "il_siniri": [],
+    "ilceler": [],
+    "koy_mahalle_sinir": [],
+    "yerlesimler": [],
+    "kamu": [],
+    "turistik": [
+      [
+        1396,
+        null
+      ]
+    ],
+    "antik": [
+      [
+        701,
+        null
+      ]
+    ],
+    "yeralti_sehir": [],
+    "muzeler": [
+      [
+        1937,
+        null
+      ],
+      [
+        1904,
+        null
+      ],
+      [
+        2023,
+        null
+      ],
+      [
+        1973,
+        null
+      ]
+    ],
+    "saraylar": [],
+    "carsilar": [],
+    "cesmeler": [],
+    "tarihi_yapilar": [
+      [
+        1490,
+        null
+      ]
+    ],
+    "anitlar": [
+      [
+        100,
+        null
+      ],
+      [
+        1931,
+        null
+      ]
+    ],
+    "mezarliklar": [],
+    "kaleler": [],
+    "medrese_han_hamam": [
+      [
+        1370,
+        null
+      ]
+    ],
+    "turbeler": [
+      [
+        1421,
+        null
+      ],
+      [
+        1573,
+        null
+      ]
+    ],
+    "tiyatrolar": [],
+    "kultur_merkezleri": [],
+    "universiteler": [
+      [
+        1975,
+        null
+      ]
+    ],
+    "camiler": [
+      [
+        1421,
+        null
+      ],
+      [
+        1396,
+        null
+      ],
+      [
+        600,
+        null
+      ],
+      [
+        1339,
+        null
+      ],
+      [
+        1378,
+        null
+      ],
+      [
+        701,
+        null
+      ],
+      [
+        1573,
+        null
+      ],
+      [
+        1395,
+        null
+      ],
+      [
+        1804,
+        null
+      ],
+      [
+        1459,
+        null
+      ],
+      [
+        1425,
+        null
+      ],
+      [
+        1952,
+        null
+      ],
+      [
+        1335,
+        null
+      ],
+      [
+        1490,
+        null
+      ]
+    ],
+    "kiliseler": [
+      [
+        701,
+        null
+      ],
+      [
+        780,
+        1923
+      ]
+    ],
+    "sinagoglar": [],
+    "tapinaklar": [],
+    "milli_parklar": [
+      [
+        1998,
+        null
+      ]
+    ],
+    "seyir": [],
+    "parklar": [],
+    "vadiler": "timeless",
+    "daglar": "timeless",
+    "akarsu_gol": "timeless",
+    "barajlar": [
+      [
+        2002,
+        null
+      ],
+      [
+        2006,
+        null
+      ]
+    ],
+    "magaralar": "timeless",
+    "selaleler": "timeless",
+    "adalar": "timeless",
+    "kayak": [],
+    "hayvanat": [],
+    "bag_sarap": [],
+    "stadyumlar": [
+      [
+        2023,
+        null
+      ],
+      [
+        2015,
+        null
+      ]
+    ],
+    "plajlar": [],
+    "rayli": [
+      [
+        2002,
+        null
+      ],
+      [
+        2002,
+        null
+      ],
+      [
+        2002,
+        null
+      ],
+      [
+        2002,
+        null
+      ],
+      [
+        2013,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        1983,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ]
+    ],
+    "toplu_tasima": [],
+    "yollar": [
+      [
+        2025,
+        null
+      ]
+    ],
+    "liman_havalimani": [],
+    "deniz_ulasimi": [],
+    "teleferik": [],
+    "fenerler": [],
+    "tuneller": [
+      [
+        2022,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        1932,
+        null
+      ],
+      [
+        2025,
+        null
+      ]
+    ],
+    "kopruler": [
+      [
+        1677,
+        null
+      ],
+      [
+        1442,
+        null
+      ],
+      [
+        2022,
+        null
+      ]
+    ],
+    "saglik": [
+      [
+        2019,
+        null
+      ]
+    ],
+    "polis": [],
+    "elcilikler": [],
+    "yeralti_maden": [],
+    "acik_ocak": [],
+    "kaplicalar": "timeless",
+    "enerji": [
+      [
+        1996,
+        null
+      ],
+      [
+        2013,
+        null
+      ]
+    ]
+  }
+}

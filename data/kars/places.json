@@ -1,0 +1,14 @@
+{
+ "_aciklama": "OSM'de bulunmayan, kaynaklı yerler. Konum kaynaktaki koordinattır; OSM'de aynı kategoride 300 m içinde kayıt varsa atlanır.",
+ "sites": [
+  {
+   "id": "magazberd",
+   "name": "Mağazberd",
+   "cat": "kaleler",
+   "lng": 43.54156,
+   "lat": 40.47537,
+   "wikidata": "Q18785722",
+   "source": "https://en.wikipedia.org/wiki/Magazberd"
+  }
+ ]
+}

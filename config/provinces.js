@@ -107,8 +107,8 @@ export const PROVINCES = {
     center: [32.64, 41.224], zoom: 9, bounds: [[29.6, 39.0], [35.6, 43.4]] },
   karaman: { id: "karaman", osmRelation: 223137, wikidata: "Q482975", names: { tr: "Karaman", en: "Karaman" },
     center: [33.083, 37.017], zoom: 9, bounds: [[30.1, 34.8], [36.1, 39.2]] },
-  kars: { id: "kars", osmRelation: 186431, wikidata: "Q83077", names: { tr: "Kars", en: "Kars" },
-    center: [43.06, 40.455], zoom: 9, bounds: [[40.1, 38.3], [46.1, 42.7]] },
+  kars: { id: "kars", osmRelation: 186431, wikidata: "Q83077", names: { tr: "Kars", en: "Kars", de: "Kars", fr: "Kars", es: "Kars", ru: "Карс" },
+    center: [43.095, 40.607], zoom: 12, bounds: [[41.8, 39.7], [44.1, 41.3]] },
   kastamonu: { id: "kastamonu", osmRelation: 223456, wikidata: "Q483191", names: { tr: "Kastamonu", en: "Kastamonu" },
     center: [33.69, 41.519], zoom: 9, bounds: [[30.7, 39.3], [36.7, 43.7]] },
   kayseri: { id: "kayseri", osmRelation: 154451, wikidata: "Q483472", names: { tr: "Kayseri", en: "Kayseri" },
@@ -157,16 +157,16 @@ export const PROVINCES = {
     center: [34.902, 41.609], zoom: 9, bounds: [[31.9, 39.4], [37.9, 43.8]] },
   sivas: { id: "sivas", osmRelation: 223425, wikidata: "Q483100", names: { tr: "Sivas", en: "Sivas" },
     center: [37.016, 39.75], zoom: 9, bounds: [[34.0, 37.5], [40.0, 42.0]] },
-  sanliurfa: { id: "sanliurfa", osmRelation: 223434, wikidata: "Q388469", names: { tr: "Şanlıurfa", en: "Şanlıurfa" },
-    center: [39.042, 37.254], zoom: 9, bounds: [[36.0, 35.1], [42.0, 39.5]] },
+  sanliurfa: { id: "sanliurfa", osmRelation: 223434, wikidata: "Q388469", names: { tr: "Şanlıurfa", en: "Şanlıurfa", de: "Şanlıurfa", fr: "Şanlıurfa (Urfa)", es: "Şanlıurfa", ru: "Шанлыурфа" },
+    center: [38.792, 37.149], zoom: 12, bounds: [[37.5, 36.4], [40.6, 38.3]] },
   sirnak: { id: "sirnak", osmRelation: 223438, wikidata: "Q647378", names: { tr: "Şırnak", en: "Şırnak" },
     center: [42.454, 37.519], zoom: 9, bounds: [[39.5, 35.3], [45.5, 39.7]] },
   tekirdag: { id: "tekirdag", osmRelation: 223470, wikidata: "Q129387", names: { tr: "Tekirdağ", en: "Tekirdağ" },
     center: [27.518, 40.978], zoom: 9, bounds: [[24.5, 38.8], [30.5, 43.2]] },
   tokat: { id: "tokat", osmRelation: 223424, wikidata: "Q483195", names: { tr: "Tokat", en: "Tokat" },
     center: [36.564, 40.353], zoom: 9, bounds: [[33.6, 38.2], [39.6, 42.6]] },
-  trabzon: { id: "trabzon", osmRelation: 223447, wikidata: "Q388995", names: { tr: "Trabzon", en: "Trabzon" },
-    center: [39.812, 40.781], zoom: 9, bounds: [[36.8, 38.6], [42.8, 43.0]] },
+  trabzon: { id: "trabzon", osmRelation: 223447, wikidata: "Q388995", names: { tr: "Trabzon", en: "Trabzon", de: "Trabzon", fr: "Trébizonde (Trabzon)", es: "Trebisonda (Trabzon)", ru: "Трабзон" },
+    center: [39.726, 41.003], zoom: 12, bounds: [[38.8, 40.3], [40.8, 41.5]] },
   tunceli: { id: "tunceli", osmRelation: 223537, wikidata: "Q620742", names: { tr: "Tunceli", en: "Tunceli" },
     center: [39.471, 39.215], zoom: 9, bounds: [[36.5, 37.0], [42.5, 41.4]] },
   usak: { id: "usak", osmRelation: 223170, wikidata: "Q483078", names: { tr: "Uşak", en: "Uşak" },
@@ -182,6 +182,6 @@ export const PROVINCES = {
 };
 
 // verisi hazırlanmış iller (il seçicide etkin)
-export const READY = ["nevsehir", "istanbul", "ankara", "mardin"];
+export const READY = ["nevsehir", "istanbul", "ankara", "mardin", "bursa", "kars", "sanliurfa", "trabzon"];
 
 export const DEFAULT_PROVINCE = "nevsehir";
