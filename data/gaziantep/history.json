@@ -1,0 +1,42 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w237058550": {
+      "from": 200,
+      "approx": true,
+      "note": "Roma dönemi (Hitit gözetleme noktası üzerinde)",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": 1148,
+      "tr": "Rumkale Ermeni Katolikosluğunun merkezi olur (1148–1150)",
+      "en": "Rumkale becomes seat of the Armenian Catholicos (1148–1150)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Rumkale"
+    },
+    {
+      "y": 2011,
+      "tr": "Zeugma Mozaik Müzesi açılır (9 Eylül)",
+      "en": "Zeugma Mosaic Museum opens (9 September)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Zeugma_Mosaic_Museum"
+    },
+    {
+      "y": 2023,
+      "tr": "Şubat depremleri Gaziantep Kalesi'ne ağır hasar verir",
+      "en": "February earthquakes severely damage Gaziantep Castle",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Gaziantep_Castle"
+    }
+  ]
+}

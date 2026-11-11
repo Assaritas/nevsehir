@@ -1,0 +1,1051 @@
+{
+  "province": "aydin",
+  "generated": "2026-11-11T09:34:35.778Z",
+  "counts": {
+    "il_siniri": 0,
+    "ilceler": 33,
+    "koy_mahalle_sinir": 81,
+    "yerlesimler": 946,
+    "kamu": 64,
+    "turistik": 57,
+    "antik": 161,
+    "yeralti_sehir": 2,
+    "muzeler": 13,
+    "saraylar": 1,
+    "carsilar": 0,
+    "cesmeler": 0,
+    "tarihi_yapilar": 29,
+    "anitlar": 25,
+    "mezarliklar": 1,
+    "kaleler": 14,
+    "medrese_han_hamam": 13,
+    "turbeler": 1,
+    "tiyatrolar": 18,
+    "kultur_merkezleri": 11,
+    "universiteler": 15,
+    "camiler": 538,
+    "kiliseler": 5,
+    "sinagoglar": 0,
+    "tapinaklar": 2,
+    "milli_parklar": 2,
+    "seyir": 36,
+    "parklar": 130,
+    "vadiler": 0,
+    "daglar": 482,
+    "akarsu_gol": 141,
+    "barajlar": 57,
+    "magaralar": 7,
+    "selaleler": 1,
+    "adalar": 7,
+    "kayak": 0,
+    "hayvanat": 0,
+    "bag_sarap": 0,
+    "stadyumlar": 4,
+    "plajlar": 62,
+    "rayli": 268,
+    "toplu_tasima": 63,
+    "yollar": 2341,
+    "liman_havalimani": 9,
+    "deniz_ulasimi": 7,
+    "teleferik": 0,
+    "fenerler": 4,
+    "tuneller": 35,
+    "kopruler": 245,
+    "saglik": 256,
+    "polis": 25,
+    "elcilikler": 1,
+    "yeralti_maden": 1,
+    "acik_ocak": 101,
+    "kaplicalar": 5,
+    "enerji": 154
+  },
+  "sources": [
+    "OpenStreetMap (ODbL)",
+    "Wikidata (CC0)"
+  ],
+  "dates": {
+    "il_siniri": [],
+    "ilceler": [],
+    "koy_mahalle_sinir": [],
+    "yerlesimler": [],
+    "kamu": [],
+    "turistik": [
+      [
+        -1100,
+        1500
+      ],
+      [
+        -1000,
+        null
+      ],
+      [
+        1618,
+        null
+      ]
+    ],
+    "antik": [
+      [
+        -1100,
+        1500
+      ],
+      [
+        -1000,
+        null
+      ],
+      [
+        -600,
+        null
+      ],
+      [
+        -300,
+        null
+      ],
+      [
+        -200,
+        null
+      ],
+      [
+        -200,
+        null
+      ],
+      [
+        100,
+        null
+      ],
+      [
+        200,
+        null
+      ],
+      [
+        81,
+        null
+      ],
+      [
+        -100,
+        null
+      ],
+      [
+        -200,
+        null
+      ]
+    ],
+    "yeralti_sehir": [],
+    "muzeler": [
+      [
+        1959,
+        null
+      ]
+    ],
+    "saraylar": [
+      [
+        1618,
+        null
+      ]
+    ],
+    "carsilar": [],
+    "cesmeler": [],
+    "tarihi_yapilar": [],
+    "anitlar": [],
+    "mezarliklar": [],
+    "kaleler": [
+      [
+        1618,
+        null
+      ]
+    ],
+    "medrese_han_hamam": [
+      [
+        1618,
+        null
+      ]
+    ],
+    "turbeler": [],
+    "tiyatrolar": [],
+    "kultur_merkezleri": [],
+    "universiteler": [
+      [
+        1992,
+        null
+      ]
+    ],
+    "camiler": [
+      [
+        1403,
+        null
+      ],
+      [
+        1618,
+        null
+      ]
+    ],
+    "kiliseler": [],
+    "sinagoglar": [],
+    "tapinaklar": [
+      [
+        -500,
+        null
+      ]
+    ],
+    "milli_parklar": [
+      [
+        1966,
+        null
+      ],
+      [
+        1994,
+        null
+      ]
+    ],
+    "seyir": [],
+    "parklar": [],
+    "vadiler": "timeless",
+    "daglar": "timeless",
+    "akarsu_gol": "timeless",
+    "barajlar": [
+      [
+        1995,
+        null
+      ],
+      [
+        2013,
+        null
+      ]
+    ],
+    "magaralar": "timeless",
+    "selaleler": "timeless",
+    "adalar": "timeless",
+    "kayak": [],
+    "hayvanat": [],
+    "bag_sarap": [],
+    "stadyumlar": [
+      [
+        1950,
+        null
+      ]
+    ],
+    "plajlar": [],
+    "rayli": [
+      [
+        2010,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1890,
+        null
+      ],
+      [
+        1890,
+        null
+      ],
+      [
+        1890,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        2026,
+        null
+      ],
+      [
+        2026,
+        null
+      ],
+      [
+        2026,
+        null
+      ],
+      [
+        2026,
+        null
+      ]
+    ],
+    "toplu_tasima": [
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1890,
+        null
+      ],
+      [
+        1890,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1890,
+        null
+      ],
+      [
+        2026,
+        null
+      ],
+      [
+        2026,
+        null
+      ],
+      [
+        2026,
+        null
+      ],
+      [
+        2026,
+        null
+      ]
+    ],
+    "yollar": [
+      [
+        2000,
+        null
+      ],
+      [
+        2000,
+        null
+      ]
+    ],
+    "liman_havalimani": [],
+    "deniz_ulasimi": [],
+    "teleferik": [],
+    "fenerler": [],
+    "tuneller": [
+      [
+        2000,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ]
+    ],
+    "kopruler": [
+      [
+        1882,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1866,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ],
+      [
+        1881,
+        null
+      ]
+    ],
+    "saglik": [],
+    "polis": [],
+    "elcilikler": [],
+    "yeralti_maden": [],
+    "acik_ocak": [
+      [
+        2024,
+        null
+      ],
+      [
+        2004,
+        null
+      ]
+    ],
+    "kaplicalar": [],
+    "enerji": [
+      [
+        2009,
+        null
+      ],
+      [
+        1984,
+        null
+      ]
+    ]
+  }
+}

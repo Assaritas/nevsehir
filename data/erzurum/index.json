@@ -1,0 +1,1148 @@
+{
+  "province": "erzurum",
+  "generated": "2026-11-11T10:35:28.433Z",
+  "counts": {
+    "il_siniri": 0,
+    "ilceler": 40,
+    "koy_mahalle_sinir": 75,
+    "yerlesimler": 1662,
+    "kamu": 54,
+    "turistik": 26,
+    "antik": 199,
+    "yeralti_sehir": 0,
+    "muzeler": 6,
+    "saraylar": 0,
+    "carsilar": 1,
+    "cesmeler": 0,
+    "tarihi_yapilar": 3,
+    "anitlar": 17,
+    "mezarliklar": 6,
+    "kaleler": 20,
+    "medrese_han_hamam": 4,
+    "turbeler": 7,
+    "tiyatrolar": 0,
+    "kultur_merkezleri": 14,
+    "universiteler": 7,
+    "camiler": 598,
+    "kiliseler": 11,
+    "sinagoglar": 0,
+    "tapinaklar": 0,
+    "milli_parklar": 5,
+    "seyir": 14,
+    "parklar": 51,
+    "vadiler": 112,
+    "daglar": 1020,
+    "akarsu_gol": 372,
+    "barajlar": 76,
+    "magaralar": 0,
+    "selaleler": 4,
+    "adalar": 0,
+    "kayak": 55,
+    "hayvanat": 0,
+    "bag_sarap": 0,
+    "stadyumlar": 3,
+    "plajlar": 0,
+    "rayli": 243,
+    "toplu_tasima": 44,
+    "yollar": 1256,
+    "liman_havalimani": 1,
+    "deniz_ulasimi": 0,
+    "teleferik": 52,
+    "fenerler": 0,
+    "tuneller": 40,
+    "kopruler": 215,
+    "saglik": 186,
+    "polis": 21,
+    "elcilikler": 2,
+    "yeralti_maden": 1,
+    "acik_ocak": 60,
+    "kaplicalar": 1,
+    "enerji": 29
+  },
+  "sources": [
+    "OpenStreetMap (ODbL)",
+    "Wikidata (CC0)"
+  ],
+  "dates": {
+    "il_siniri": [],
+    "ilceler": [
+      [
+        1310,
+        null
+      ]
+    ],
+    "koy_mahalle_sinir": [],
+    "yerlesimler": [],
+    "kamu": [],
+    "turistik": [
+      [
+        901,
+        null
+      ],
+      [
+        901,
+        null
+      ],
+      [
+        1260,
+        null
+      ]
+    ],
+    "antik": [],
+    "yeralti_sehir": [],
+    "muzeler": [
+      [
+        1310,
+        null
+      ]
+    ],
+    "saraylar": [],
+    "carsilar": [],
+    "cesmeler": [],
+    "tarihi_yapilar": [],
+    "anitlar": [],
+    "mezarliklar": [],
+    "kaleler": [
+      [
+        1876,
+        null
+      ],
+      [
+        450,
+        null
+      ]
+    ],
+    "medrese_han_hamam": [
+      [
+        1310,
+        null
+      ],
+      [
+        1260,
+        null
+      ]
+    ],
+    "turbeler": [],
+    "tiyatrolar": [],
+    "kultur_merkezleri": [],
+    "universiteler": [
+      [
+        1957,
+        null
+      ]
+    ],
+    "camiler": [
+      [
+        1665,
+        null
+      ],
+      [
+        1608,
+        null
+      ],
+      [
+        1720,
+        null
+      ],
+      [
+        1558,
+        null
+      ],
+      [
+        1717,
+        null
+      ],
+      [
+        1566,
+        null
+      ]
+    ],
+    "kiliseler": [
+      [
+        901,
+        null
+      ],
+      [
+        901,
+        null
+      ],
+      [
+        1790,
+        null
+      ]
+    ],
+    "sinagoglar": [],
+    "tapinaklar": [],
+    "milli_parklar": [
+      [
+        2007,
+        null
+      ],
+      [
+        2005,
+        null
+      ]
+    ],
+    "seyir": [],
+    "parklar": [],
+    "vadiler": "timeless",
+    "daglar": "timeless",
+    "akarsu_gol": "timeless",
+    "barajlar": [
+      [
+        1972,
+        null
+      ],
+      [
+        2008,
+        null
+      ]
+    ],
+    "magaralar": "timeless",
+    "selaleler": "timeless",
+    "adalar": "timeless",
+    "kayak": [
+      [
+        2010,
+        null
+      ]
+    ],
+    "hayvanat": [],
+    "bag_sarap": [],
+    "stadyumlar": [
+      [
+        1968,
+        null
+      ]
+    ],
+    "plajlar": [],
+    "rayli": [
+      [
+        1936,
+        null
+      ],
+      [
+        2019,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ]
+    ],
+    "toplu_tasima": [
+      [
+        1939,
+        null
+      ]
+    ],
+    "yollar": [
+      [
+        2021,
+        null
+      ]
+    ],
+    "liman_havalimani": [
+      [
+        1966,
+        null
+      ]
+    ],
+    "deniz_ulasimi": [],
+    "teleferik": [],
+    "fenerler": [],
+    "tuneller": [
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        2021,
+        null
+      ]
+    ],
+    "kopruler": [
+      [
+        2026,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1939,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ],
+      [
+        1916,
+        null
+      ]
+    ],
+    "saglik": [
+      [
+        2005,
+        null
+      ]
+    ],
+    "polis": [],
+    "elcilikler": [],
+    "yeralti_maden": [],
+    "acik_ocak": [],
+    "kaplicalar": [],
+    "enerji": [
+      [
+        2002,
+        null
+      ],
+      [
+        1972,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2008,
+        null
+      ],
+      [
+        2011,
+        null
+      ]
+    ]
+  }
+}

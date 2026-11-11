@@ -1,0 +1,65 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "n75969654": {
+    "ids": [
+      "w274793641",
+      "w974945296"
+    ],
+    "text": {
+      "tr": "Nemrut Dağı, 2.150 m yüksekliğinde bir dağdır; zirvesinde MÖ 1. yüzyıldan kaldığı düşünülen bir kraliyet mezarının çevresine dikilmiş büyük heykellerle tanınır. Toroslar'ın doğu kesiminin en yüksek zirvelerinden biridir ve 1987'de UNESCO Dünya Mirası Listesi'ne alınmıştır.",
+      "en": "Mount Nemrut is a 2,150 m mountain known for the large statues on its summit set around what is thought to be a royal tomb of the 1st century BC. It is one of the highest peaks of the eastern Taurus and was designated a UNESCO World Heritage Site in 1987."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Mount Nemrut",
+        "url": "https://en.wikipedia.org/wiki/Mount_Nemrut"
+      },
+      {
+        "title": "UNESCO: Nemrut Dağ",
+        "url": "https://whc.unesco.org/en/list/448"
+      }
+    ]
+  },
+  "n2428195154": {
+    "text": {
+      "tr": "Arsameia (Nymphaios kıyısında), Kâhta ilçesinde Eski Kâhta'da antik bir şehirdir; Kâhta Çayı'nın (antik Nymphaios) yakınındadır. Kommagene krallığının kraliyet merkezlerinden biriydi ve en çok, oğlu ve varisi I. Antiokhos tarafından Kral I. Mithridates Kallinikos için yaptırılan hierothesion ile tanınır.",
+      "en": "Arsameia on the Nymphaios is an ancient city at Eski Kâhta in Kâhta district, near the Kâhta stream (ancient Nymphaios). It was a royal seat of the kingdom of Commagene, best known for the hierothesion of King Mithridates I Kallinikos built by his son and heir Antiochos I."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Arsameia",
+        "url": "https://en.wikipedia.org/wiki/Arsameia"
+      }
+    ]
+  },
+  "w47036373": {
+    "ids": [
+      "w40119824"
+    ],
+    "text": {
+      "tr": "Cendere Köprüsü (Septimius Severus Köprüsü), yaklaşık 200 yılında yapılmış bir Roma köprüsüdür. Arsameia (Eski Kale) yakınında, Adıyaman'ın 55 km kuzeydoğusunda, Kâhta Çayı'nın bir kolu olan Cendere Çayı (Khabinas) üzerindedir. Köprü 1883'te Osman Hamdi Bey ve Osgan Efendi tarafından tanımlanıp çizilmiştir.",
+      "en": "The Cendere (Severan) Bridge is a Roman bridge built around AD 200 near Arsameia (Eski Kale), 55 km north-east of Adıyaman, spanning the Cendere (Chabinas) stream, a tributary of the Kâhta. It was described and drawn in 1883 by Osman Hamdi Bey and Osgan Efendi."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Severan Bridge",
+        "url": "https://en.wikipedia.org/wiki/Severan_Bridge"
+      }
+    ]
+  },
+  "w274793330": {
+    "ids": [
+      "n9844469917"
+    ],
+    "text": {
+      "tr": "Karakuş Tümülüsü, Kommagene Kralı II. Mithridates tarafından MÖ 30–20 yıllarında Kraliçe Isias ile prensesler Antiokhis ve Aka için yaptırılmış bir anıt mezardır (hierothesion). Kâhta'ya 12 km uzaklıkta, Çukurtaş köyü yakınındadır. Adını sütunlardan birinin tepesindeki kartaldan alır; tümülüs her biri yaklaşık 9 m yüksekliğinde üçlü Dor sütun gruplarıyla çevrilidir.",
+      "en": "The Karakuş Tumulus is a funerary monument (hierothesion) built by Mithridates II of Commagene in 30–20 BC for Queen Isias and Princesses Antiochis and Aka, near Çukurtaş village 12 km from Kâhta. It is named \"black bird\" after the eagle atop one column; it is ringed by groups of three Doric columns about 9 m high."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Karakuş Tumulus",
+        "url": "https://en.wikipedia.org/wiki/Karaku%C5%9F_Tumulus"
+      }
+    ]
+  }
+}

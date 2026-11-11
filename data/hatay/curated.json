@@ -1,0 +1,39 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "w1039441368": {
+    "text": {
+      "tr": "Hatay Arkeoloji Müzesi, Antakya'nın arkeoloji müzesidir ve geniş Roma ve Bizans dönemi mozaik koleksiyonuyla tanınır. Yapımına Fransız arkeolog Claude M. Prost'un önerisiyle 1934'te başlandı, 1938'de tamamlandı ve 1939'da Hatay'ın Türkiye'ye katılmasıyla Türk yönetimine geçti. Müze 1948'de ziyarete açıldı.",
+      "en": "The Hatay Archaeology Museum is the archaeology museum of Antakya, known for its extensive collection of Roman and Byzantine mosaics. Begun in 1934 on the recommendation of the French archaeologist Claude M. Prost and completed in 1938, it came under Turkish control in 1939 when Hatay joined Turkey, and opened to the public in 1948."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Hatay Archaeology Museum",
+        "url": "https://en.wikipedia.org/wiki/Hatay_Archaeology_Museum"
+      }
+    ]
+  },
+  "w102165117": {
+    "text": {
+      "tr": "Habib-i Neccar Camii, Antakya'da Asi Nehri'nin doğusunda, adını Marangoz Habib'den alan tarihî bir camidir. Şubat 2023 depremlerinde ağır hasar gördü.",
+      "en": "The Habib-i Neccar Mosque is a historic mosque in Antakya east of the Orontes (Asi), named after Habib the Carpenter. It was severely damaged by the earthquakes of February 2023."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Habib-i Nejjar Mosque",
+        "url": "https://en.wikipedia.org/wiki/Habib-i_Nejjar_Mosque"
+      }
+    ]
+  },
+  "w1052286668": {
+    "text": {
+      "tr": "Vespasianus–Titus Tüneli, Antakya'nın (Antiokheia) limanı Seleukeia Pieria için 1. ve 2. yüzyıllarda yapılmış antik bir su tünelidir. Nur Dağları'nın eteğinde, Çevlik köyü yakınında, Samandağ'ın 7 km kuzeybatısında ve Antakya'nın 35 km güneybatısındadır. Bir bent, kısa bir yaklaşım kanalı, iki tünel bölümü ve aradaki kanaldan oluşan bir su saptırma sisteminin parçasıdır.",
+      "en": "The Vespasianus Titus Tunnel is an ancient water tunnel built in the 1st and 2nd centuries AD for Seleucia Pieria, the port of Antioch. It lies at the foot of the Nur Mountains near Çevlik, 7 km north-west of Samandağ and 35 km south-west of Antakya, as part of a diversion system of a dam, approach channel and two tunnel sections."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Vespasianus Titus Tunnel",
+        "url": "https://en.wikipedia.org/wiki/Vespasianus_Titus_Tunnel"
+      }
+    ]
+  }
+}

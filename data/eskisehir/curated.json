@@ -1,0 +1,58 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "n5298913021": {
+    "ids": [
+      "w440152228",
+      "n959404760"
+    ],
+    "text": {
+      "tr": "Odunpazarı (\"odun pazarı\"), Eskişehir'in tarihî merkezini de içine alan, şehrin güney kesimini kapsayan ilçedir. 2008'de eski merkez ilçenin bölünmesiyle Tepebaşı ile birlikte kurulmuştur.",
+      "en": "Odunpazarı (\"firewood market\") is the district covering the southern part of Greater Eskişehir, including the historic centre. It was created in 2008, along with Tepebaşı, from the former central district."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Odunpazarı",
+        "url": "https://en.wikipedia.org/wiki/Odunpazar%C4%B1"
+      }
+    ]
+  },
+  "n29487496": {
+    "text": {
+      "tr": "Yazılıkaya (Midas Şehri), Han ilçesine bağlı bir mahalledir; Seyitgazi'nin yaklaşık 27 km, Eskişehir'in 66 km güneyindedir. Frig arkeolojik kalıntıları ve Midas'ın adının geçtiği yazıtla tanınır. Kalıntılar bir yerleşim ile kayaya oyulmuş kabartmalardan oluşur; en ünlüsü Midas Anıtı'dır.",
+      "en": "Yazılıkaya (Midas City) is a neighbourhood of Han district, about 27 km south of Seyitgazi and 66 km south of Eskişehir. It is known for its Phrygian remains and an inscription naming Midas; the remains comprise a settlement and rock-cut reliefs, the most famous being the Midas Monument."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Yazılı, Han",
+        "url": "https://en.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1,_Han"
+      }
+    ]
+  },
+  "w261834480": {
+    "ids": [
+      "n4899624124"
+    ],
+    "text": {
+      "tr": "Sazova Bilim, Kültür ve Sanat Parkı, Eskişehir Büyükşehir Belediyesi tarafından 2008'de kurulmuş bir parktır.",
+      "en": "Sazova Science, Culture and Art Park was established in Eskişehir by the metropolitan municipality in 2008."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Sazova Park",
+        "url": "https://en.wikipedia.org/wiki/Sazova_Park"
+      }
+    ]
+  },
+  "w124431912": {
+    "text": {
+      "tr": "Dorylaion, Eskişehir yakınında Şarhöyük'te bir antik şehirdir. İlk yeri Eskişehir'in yaklaşık 10 km güneybatısında, bugün Karacahisar denen yerdeydi; MÖ 4. yüzyılın sonlarına doğru bugünkü Eskişehir'in kuzeyine taşındı.",
+      "en": "Dorylaion was an ancient city at Şarhöyük near Eskişehir. Its original site was about 10 km south-west of Eskişehir at what is now Karacahisar; around the end of the 4th century BC it moved north of modern Eskişehir."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Dorylaeum",
+        "url": "https://en.wikipedia.org/wiki/Dorylaeum"
+      }
+    ]
+  }
+}

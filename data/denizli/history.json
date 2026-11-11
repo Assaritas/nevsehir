@@ -1,0 +1,48 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w52287248": {
+      "from": -250,
+      "approx": true,
+      "note": "MÖ 3. yüzyıl",
+      "src": "Wikipedia"
+    },
+    "r19365954": {
+      "from": -250,
+      "approx": true,
+      "note": "MÖ 3. yüzyıl",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": -250,
+      "tr": "Hierapolis kurulur (MÖ 3. yüzyıl)",
+      "en": "Hierapolis founded (3rd century BC)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Hierapolis"
+    },
+    {
+      "y": 1988,
+      "tr": "Hierapolis-Pamukkale UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Hierapolis-Pamukkale inscribed as UNESCO World Heritage",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/485"
+    },
+    {
+      "y": 2002,
+      "tr": "Laodikeia'da Pamukkale Üniversitesi kazıları başlar",
+      "en": "Pamukkale University excavations begin at Laodicea",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Laodicea_on_the_Lycus"
+    }
+  ]
+}

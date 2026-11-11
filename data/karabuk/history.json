@@ -1,0 +1,41 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w1088181508": {
+      "from": 1645,
+      "approx": true,
+      "note": "1640–1648 (tahmin)",
+      "src": "Vikipedi"
+    },
+    "w303761202": {
+      "from": 1750,
+      "approx": true,
+      "note": "18. yüzyıl",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": 1640,
+      "tr": "Cinci Hanı yapılır (1640–1648 arası, tahmin)",
+      "en": "Cinci Han built (c. 1640–1648)",
+      "src": "Vikipedi",
+      "url": "https://tr.wikipedia.org/wiki/Cinci_Han%C4%B1"
+    },
+    {
+      "y": 1994,
+      "tr": "Safranbolu UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Safranbolu inscribed as UNESCO World Heritage",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/614"
+    }
+  ]
+}

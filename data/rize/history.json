@@ -1,0 +1,28 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w247789320": {
+      "from": 550,
+      "approx": true,
+      "note": "İç kale Justinianus dönemi (527–565)",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": 527,
+      "tr": "Rize iç kalesinin Justinianus döneminde yapıldığı düşünülür (527–565)",
+      "en": "Rize citadel thought to date from Justinian's reign (527–565)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Rize_Castle"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "w423938794": {
+    "text": {
+      "tr": "Troya (İlion), bugünkü Çanakkale'de antik bir şehirdir ve en çok Yunan mitolojisindeki Truva Savaşı'nın geçtiği yer olarak bilinir. Hisarlık olarak da anılan arkeolojik alan ziyarete açıktır ve 1998'de UNESCO Dünya Mirası Listesi'ne alınmıştır. Yaklaşık 4.000 yıllık yerleşim süresince defalarca yıkılıp yeniden kurulan şehirde, her biri öncekinin kalıntıları üzerine kurulmuş dokuz arkeolojik katman belirlenmiştir.",
+      "en": "Troy (Ilion) is an ancient city in present-day Çanakkale, best known as the setting of the Trojan War in Greek myth. The archaeological site, also called Hisarlık, is open to visitors and was added to the UNESCO World Heritage List in 1998. Repeatedly destroyed and rebuilt over 4,000 years of settlement, it has nine archaeological layers, each a city built on the ruins of the previous one."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Troy",
+        "url": "https://en.wikipedia.org/wiki/Troy"
+      },
+      {
+        "title": "UNESCO: Archaeological Site of Troy",
+        "url": "https://whc.unesco.org/en/list/849"
+      }
+    ]
+  },
+  "w249314418": {
+    "text": {
+      "tr": "Assos, bugünkü Behramkale yakınında, Ayvacık ilçesinde Ege kıyısında antik bir Yunan şehridir. Biga Yarımadası'nın (Troas) güney kıyısında, Edremit Körfezi'ne bakar ve bu kıyının yaklaşık 80 km boyunca tek iyi limanını sunardı.",
+      "en": "Assos was an ancient Greek city near today's Behramkale in Ayvacık district, on the Aegean coast. On the south side of the Biga peninsula (the Troad), facing the Gulf of Edremit, it offered the only good harbour along some 80 km of coast."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Assos",
+        "url": "https://en.wikipedia.org/wiki/Assos"
+      }
+    ]
+  },
+  "w350088064": {
+    "text": {
+      "tr": "Aleksandreia Troas (halk arasında \"Eski Stambul\"), Troas bölgesinde, Bozcaada'nın biraz güneyinde, Ezine ilçesine bağlı Dalyan köyünün güneydoğusunda bir antik Yunan şehridir. Yaklaşık 400 hektarlık alana yayılan şehirden bugün bir hamam, odeon, tiyatro ve gymnasion kalıntıları kalmıştır.",
+      "en": "Alexandria Troas (locally \"Eski Stambul\") is an ancient Greek city in the Troad, a little south of Bozcaada (Tenedos) and south-east of Dalyan village in Ezine district. Spread over about 400 ha, its remains include a bath, an odeon, a theatre and a gymnasium."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Alexandria Troas",
+        "url": "https://en.wikipedia.org/wiki/Alexandria_Troas"
+      }
+    ]
+  },
+  "r7330312": {
+    "text": {
+      "tr": "Kilitbahir Kalesi, Çanakkale Boğazı'nın batı kıyısında, Çanakkale şehrinin karşısındadır; karşı kıyıdaki eşi Kale-i Sultaniye şehre adını vermiştir. İki kale, boğazın en dar yerini denetlemek için 1463'te Fatih Sultan Mehmed tarafından yaptırıldı; \"denizin kilidi\" anlamına gelen adı bu işlevini yansıtır.",
+      "en": "Kilitbahir Castle stands on the west side of the Dardanelles opposite Çanakkale, whose counterpart fortress, Kale-i Sultaniye, gave the city its name. Both were built by Mehmed II in 1463 to control the strait at its narrowest point; the name, \"lock of the sea\", reflects this purpose."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Kilitbahir Castle",
+        "url": "https://en.wikipedia.org/wiki/Kilitbahir_Castle"
+      }
+    ]
+  },
+  "w235113134": {
+    "ids": [
+      "w330206322"
+    ],
+    "text": {
+      "tr": "Kale-i Sultaniye (Çimenlik Kalesi), Çanakkale Boğazı'nın Asya kıyısında 1462'de yapılmış bir kaledir. Bugün Çanakkale Deniz Müzesi'nin bir parçasıdır.",
+      "en": "Kale-i Sultaniye (Çimenlik Castle) was built on the Asian shore of the Dardanelles in 1462. Today it is part of the Çanakkale Naval Museum."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Çimenlik Castle",
+        "url": "https://en.wikipedia.org/wiki/%C3%87imenlik_Castle"
+      }
+    ]
+  },
+  "r1715983": {
+    "text": {
+      "tr": "Gelibolu Yarımadası Tarihî Alanı 33.000 hektardan geniş bir alanı kapsar. Birinci Dünya Savaşı'ndan bu yana yarımadada yaşanan olaylara ait anıtları, mezarlıkları ve anma yerlerini barındırır. Gelibolu'da hayatını kaybeden 500.000'i aşkın asker anısına 1973'te milli park olarak kurulmuştur.",
+      "en": "The Gallipoli Peninsula Historical Site covers more than 33,000 ha and contains memorials, cemeteries and commemorations of events on the peninsula since the First World War. It was established as a national park in 1973 in honour of the more than 500,000 soldiers who died at Gallipoli."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Gallipoli Peninsula Historical Site",
+        "url": "https://en.wikipedia.org/wiki/Gallipoli_Peninsula_Historical_Site"
+      }
+    ]
+  }
+}

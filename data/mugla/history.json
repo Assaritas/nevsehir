@@ -1,0 +1,58 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w29094795": {
+      "from": 1402,
+      "note": "1402'den itibaren",
+      "src": "Wikipedia"
+    },
+    "w504006669": {
+      "from": 1402,
+      "note": "1402'den itibaren",
+      "src": "Wikipedia"
+    },
+    "w739181962": {
+      "from": -353,
+      "note": "MÖ 353–351",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": -353,
+      "tr": "Halikarnassos Mozolesi'nin yapımı başlar",
+      "en": "Construction of the Mausoleum at Halicarnassus begins",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Mausoleum_at_Halicarnassus"
+    },
+    {
+      "y": 1402,
+      "tr": "Saint John Şövalyeleri Bodrum Kalesi'ni yapmaya başlar",
+      "en": "Knights of St John begin Bodrum Castle",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Bodrum_Castle"
+    },
+    {
+      "y": 1522,
+      "tr": "Bodrum Kalesi Osmanlılara geçer",
+      "en": "Bodrum Castle passes to the Ottomans",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Bodrum_Castle"
+    },
+    {
+      "y": 1988,
+      "tr": "Ksanthos–Letoon UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Xanthos–Letoon inscribed as UNESCO World Heritage",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Letoon"
+    }
+  ]
+}

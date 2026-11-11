@@ -1,0 +1,58 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w47036373": {
+      "from": 200,
+      "approx": true,
+      "note": "200 dolayı",
+      "src": "Wikipedia"
+    },
+    "w40119824": {
+      "from": 200,
+      "approx": true,
+      "note": "200 dolayı",
+      "src": "Wikipedia"
+    },
+    "n9844469917": {
+      "from": -30,
+      "note": "MÖ 30–20",
+      "src": "Wikipedia"
+    },
+    "w274793330": {
+      "from": -30,
+      "note": "MÖ 30–20",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": -30,
+      "tr": "Karakuş Tümülüsü yapılır (MÖ 30–20)",
+      "en": "Karakuş Tumulus built (30–20 BC)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Karaku%C5%9F_Tumulus"
+    },
+    {
+      "y": 200,
+      "tr": "Cendere Köprüsü yapılır (yaklaşık)",
+      "en": "Cendere (Severan) Bridge built (c.)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Severan_Bridge"
+    },
+    {
+      "y": 1987,
+      "tr": "Nemrut Dağı UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Mount Nemrut inscribed as UNESCO World Heritage",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/448"
+    }
+  ]
+}

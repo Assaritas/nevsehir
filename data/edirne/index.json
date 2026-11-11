@@ -1,0 +1,418 @@
+{
+  "province": "edirne",
+  "generated": "2026-11-11T09:48:28.256Z",
+  "counts": {
+    "il_siniri": 0,
+    "ilceler": 18,
+    "koy_mahalle_sinir": 204,
+    "yerlesimler": 341,
+    "kamu": 63,
+    "turistik": 19,
+    "antik": 164,
+    "yeralti_sehir": 1,
+    "muzeler": 11,
+    "saraylar": 8,
+    "carsilar": 3,
+    "cesmeler": 62,
+    "tarihi_yapilar": 48,
+    "anitlar": 33,
+    "mezarliklar": 18,
+    "kaleler": 6,
+    "medrese_han_hamam": 26,
+    "turbeler": 36,
+    "tiyatrolar": 2,
+    "kultur_merkezleri": 5,
+    "universiteler": 15,
+    "camiler": 278,
+    "kiliseler": 8,
+    "sinagoglar": 1,
+    "tapinaklar": 0,
+    "milli_parklar": 2,
+    "seyir": 29,
+    "parklar": 52,
+    "vadiler": 0,
+    "daglar": 109,
+    "akarsu_gol": 160,
+    "barajlar": 175,
+    "magaralar": 1,
+    "selaleler": 1,
+    "adalar": 0,
+    "kayak": 0,
+    "hayvanat": 0,
+    "bag_sarap": 1,
+    "stadyumlar": 3,
+    "plajlar": 33,
+    "rayli": 307,
+    "toplu_tasima": 23,
+    "yollar": 1436,
+    "liman_havalimani": 3,
+    "deniz_ulasimi": 0,
+    "teleferik": 0,
+    "fenerler": 0,
+    "tuneller": 35,
+    "kopruler": 182,
+    "saglik": 182,
+    "polis": 22,
+    "elcilikler": 5,
+    "yeralti_maden": 15,
+    "acik_ocak": 57,
+    "kaplicalar": 0,
+    "enerji": 43
+  },
+  "sources": [
+    "OpenStreetMap (ODbL)",
+    "Wikidata (CC0)"
+  ],
+  "dates": {
+    "il_siniri": [],
+    "ilceler": [],
+    "koy_mahalle_sinir": [],
+    "yerlesimler": [],
+    "kamu": [],
+    "turistik": [
+      [
+        1561,
+        null
+      ],
+      [
+        1500,
+        null
+      ]
+    ],
+    "antik": [
+      [
+        1500,
+        null
+      ]
+    ],
+    "yeralti_sehir": [],
+    "muzeler": [
+      [
+        2023,
+        null
+      ],
+      [
+        2002,
+        null
+      ],
+      [
+        1488,
+        null
+      ]
+    ],
+    "saraylar": [
+      [
+        1561,
+        null
+      ],
+      [
+        1500,
+        null
+      ],
+      [
+        1610,
+        null
+      ]
+    ],
+    "carsilar": [],
+    "cesmeler": [
+      [
+        1750,
+        null
+      ]
+    ],
+    "tarihi_yapilar": [
+      [
+        1561,
+        null
+      ],
+      [
+        1873,
+        null
+      ],
+      [
+        1931,
+        null
+      ],
+      [
+        1530,
+        null
+      ],
+      [
+        1531,
+        null
+      ],
+      [
+        1610,
+        null
+      ],
+      [
+        1488,
+        null
+      ],
+      [
+        1488,
+        null
+      ]
+    ],
+    "anitlar": [
+      [
+        1935,
+        null
+      ],
+      [
+        1998,
+        null
+      ],
+      [
+        1931,
+        null
+      ],
+      [
+        1994,
+        null
+      ],
+      [
+        1488,
+        null
+      ]
+    ],
+    "mezarliklar": [],
+    "kaleler": [],
+    "medrese_han_hamam": [
+      [
+        1610,
+        null
+      ]
+    ],
+    "turbeler": [],
+    "tiyatrolar": [],
+    "kultur_merkezleri": [],
+    "universiteler": [
+      [
+        1982,
+        null
+      ]
+    ],
+    "camiler": [
+      [
+        1925,
+        null
+      ],
+      [
+        1438,
+        null
+      ],
+      [
+        1575,
+        null
+      ],
+      [
+        1402,
+        null
+      ],
+      [
+        1429,
+        null
+      ],
+      [
+        1400,
+        null
+      ],
+      [
+        1453,
+        null
+      ],
+      [
+        1486,
+        null
+      ],
+      [
+        1435,
+        null
+      ],
+      [
+        1458,
+        null
+      ],
+      [
+        1482,
+        null
+      ],
+      [
+        1600,
+        null
+      ],
+      [
+        1500,
+        1920
+      ]
+    ],
+    "kiliseler": [
+      [
+        1869,
+        null
+      ]
+    ],
+    "sinagoglar": [
+      [
+        1909,
+        null
+      ]
+    ],
+    "tapinaklar": [],
+    "milli_parklar": [
+      [
+        2005,
+        null
+      ]
+    ],
+    "seyir": [],
+    "parklar": [],
+    "vadiler": "timeless",
+    "daglar": "timeless",
+    "akarsu_gol": "timeless",
+    "barajlar": [],
+    "magaralar": "timeless",
+    "selaleler": "timeless",
+    "adalar": "timeless",
+    "kayak": [],
+    "hayvanat": [],
+    "bag_sarap": [],
+    "stadyumlar": [
+      [
+        1950,
+        null
+      ]
+    ],
+    "plajlar": [],
+    "rayli": [
+      [
+        1873,
+        null
+      ],
+      [
+        1873,
+        null
+      ],
+      [
+        1873,
+        null
+      ],
+      [
+        1873,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ]
+    ],
+    "toplu_tasima": [
+      [
+        1873,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ]
+    ],
+    "yollar": [
+      [
+        1444,
+        null
+      ]
+    ],
+    "liman_havalimani": [],
+    "deniz_ulasimi": [],
+    "teleferik": [],
+    "fenerler": [],
+    "tuneller": [],
+    "kopruler": [
+      [
+        1530,
+        null
+      ],
+      [
+        1531,
+        null
+      ],
+      [
+        1452,
+        null
+      ],
+      [
+        1488,
+        null
+      ],
+      [
+        1843,
+        null
+      ]
+    ],
+    "saglik": [],
+    "polis": [],
+    "elcilikler": [],
+    "yeralti_maden": [],
+    "acik_ocak": [],
+    "kaplicalar": [],
+    "enerji": []
+  }
+}

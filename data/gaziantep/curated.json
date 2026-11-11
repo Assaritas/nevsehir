@@ -1,0 +1,63 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "w322631331": {
+    "text": {
+      "tr": "Zeugma Mozaik Müzesi, 9 Eylül 2011'de ziyarete açılmıştır. 30.000 m²'lik müzede 2.448 m² mozaik sergilenir; açıldığında Tunus'taki Bardo Ulusal Müzesi'nin yerine dünyanın en büyük mozaik müzesi olmuştur. Helenistik ve Roma dönemi mozaikleri, Seleukos I Nikator tarafından Seleukeia adıyla kurulduğu söylenen Zeugma'dan gelir.",
+      "en": "The Zeugma Mosaic Museum opened on 9 September 2011. The 30,000 m² museum displays 2,448 m² of mosaics and on opening replaced the Bardo Museum in Tunis as the world's largest mosaic museum. Its Hellenistic and Roman mosaics come from Zeugma, said to have been founded as Seleucia by Seleucus I Nicator."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Zeugma Mosaic Museum",
+        "url": "https://en.wikipedia.org/wiki/Zeugma_Mosaic_Museum"
+      }
+    ]
+  },
+  "w692162182": {
+    "text": {
+      "tr": "Zeugma, Kommagene'de Helenistik dönem Yunan, sonra Roma şehridir. Adını Fırat'ı bu noktada geçen kayıklardan köprüden (zeugma) alır. Buradan çıkan mozaikler Gaziantep'teki Zeugma Mozaik Müzesi'nde sergilenir.",
+      "en": "Zeugma was a Hellenistic Greek and then Roman city of Commagene, named after the bridge of boats (zeugma) that crossed the Euphrates here. Mosaics from the site are displayed in the Zeugma Mosaic Museum in Gaziantep."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Zeugma (Commagene)",
+        "url": "https://en.wikipedia.org/wiki/Zeugma_(Commagene)"
+      }
+    ]
+  },
+  "w237058550": {
+    "text": {
+      "tr": "Gaziantep Kalesi, Gaziantep'in merkezinde bir höyüğün üzerindedir. Hitit İmparatorluğu döneminde gözetleme noktası olarak kullanılmış, Roma döneminde kaleye dönüştürülmüştür. Kale Şubat 2023 depremlerinde ağır hasar gördü.",
+      "en": "Gaziantep Castle stands on a mound in the centre of Gaziantep. First used as an observation point in the Hittite Empire, it was expanded into a castle under Roman rule. It was severely damaged by the earthquakes of February 2023."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Gaziantep Castle",
+        "url": "https://en.wikipedia.org/wiki/Gaziantep_Castle"
+      }
+    ]
+  },
+  "n1065022600": {
+    "text": {
+      "tr": "Rumkale (\"Rum kalesi\"), Fırat kıyısında, Şanlıurfa'nın 50 km batısında harabe hâlinde bir kaledir. Temelleri en erken Bizans dönemine uzanır; o dönemde bir Süryani Ortodoks piskoposluk merkeziydi. 11. yüzyılda Ermeni nüfusunun artmasıyla kasabaya dönüştü; 1148–1150 arasında Katolikos III. Grigor tarafından satın alınarak Ermeni Apostolik Kilisesi'nin merkezi yapıldı.",
+      "en": "Rumkale (\"Roman castle\") is a ruined fortress on the Euphrates, 50 km west of Şanlıurfa. Its foundations go back at the earliest to Byzantine rule, when it was a Syriac Orthodox bishop's seat. It grew into a town as its Armenian population increased in the 11th century, and between 1148 and 1150 Catholicos Grigor III bought it and made it the headquarters of the Armenian Apostolic Church."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Rumkale",
+        "url": "https://en.wikipedia.org/wiki/Rumkale"
+      }
+    ]
+  },
+  "w174944218": {
+    "text": {
+      "tr": "Yesemek Taşocağı ve Heykel Atölyesi bir açık hava müzesi ve arkeolojik alandır. Hitit döneminde taşocağı olan alan 100.000 m²'yi kaplar ve eski Yakın Doğu'nun bilinen en büyük taş işçiliği atölyesidir.",
+      "en": "The Yesemek Quarry and Sculpture Workshop is an open-air museum and archaeological site. A quarry in Hittite times, it covers 100,000 m² and is the largest known stonemasonry workshop of the ancient Near East."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Yesemek Quarry and Sculpture Workshop",
+        "url": "https://en.wikipedia.org/wiki/Yesemek_Quarry_and_Sculpture_Workshop"
+      }
+    ]
+  }
+}

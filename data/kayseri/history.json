@@ -1,0 +1,35 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {},
+  "events": [
+    {
+      "y": 238,
+      "tr": "Kayseri Kalesi ilk kez bir sikkede anılır (238–244)",
+      "en": "Kayseri Castle first mentioned on a coin (238–244)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Kayseri_Castle"
+    },
+    {
+      "y": 1994,
+      "tr": "Sultan Sazlığı Ramsar alanı olur",
+      "en": "Sultan Marshes become a Ramsar site",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Sultan_Reedy_National_Park"
+    },
+    {
+      "y": 2006,
+      "tr": "Sultan Sazlığı milli park olur",
+      "en": "Sultan Marshes become a national park",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Sultan_Reedy_National_Park"
+    }
+  ]
+}

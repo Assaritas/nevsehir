@@ -1,0 +1,62 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "w116720710": {
+    "text": {
+      "tr": "Hierapolis (\"Kutsal Şehir\"), Frigya'da Helenistik bir Yunan şehridir. MÖ 3. yüzyılda Anadolu ana tanrıçası Kybele'nin Frig kült merkezinin bulunduğu yerde kuruldu. Sıcak su kaynakları, kaliteli yün kumaşları ve boyaları ile Stoacı filozof Epiktetos'un doğum yeri olmasıyla ünlüydü. Kaynaklar en az MÖ 2. yüzyıldan beri kaplıca olarak kullanılır; geniş nekropol burada yaşamını sürdüren ya da ölen pek çok kişinin izlerini taşır. Kalıntıları Pamukkale'nin hemen yanındadır.",
+      "en": "Hierapolis (\"Holy City\") was a Hellenistic Greek city in Phrygia, founded in the 3rd century BC on the site of a Phrygian cult centre of the mother goddess Cybele. It was famous for its hot springs, fine wool fabrics and dyes, and as the birthplace of the Stoic philosopher Epictetus. The springs have been used as a spa since at least the 2nd century BC, as its large necropolis attests. Its extensive remains adjoin modern Pamukkale."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Hierapolis",
+        "url": "https://en.wikipedia.org/wiki/Hierapolis"
+      },
+      {
+        "title": "UNESCO: Hierapolis-Pamukkale",
+        "url": "https://whc.unesco.org/en/list/485"
+      }
+    ]
+  },
+  "w15494594": {
+    "ids": [
+      "n4889959123"
+    ],
+    "text": {
+      "tr": "Pamukkale (\"pamuk kale\"), sıcak su kaynaklarından akan suyun bıraktığı karbonat mineraliyle ünlü bir doğal alandır; Büyük Menderes vadisindedir. Antik Hierapolis şehri, toplam yaklaşık 2.700 m uzunluğunda, 600 m genişliğinde ve 160 m yüksekliğindeki traverten oluşumunun üzerine kurulmuştur.",
+      "en": "Pamukkale (\"cotton castle\") is a natural site famous for the carbonate mineral left by flowing thermal spring water, in the Menderes valley. The ancient city of Hierapolis was built on top of the travertine formation, which is about 2,700 m long, 600 m wide and 160 m high."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Pamukkale",
+        "url": "https://en.wikipedia.org/wiki/Pamukkale"
+      }
+    ]
+  },
+  "w145583478": {
+    "ids": [
+      "w356071716",
+      "w368492136"
+    ],
+    "text": {
+      "tr": "Laodikeia (Lykos kıyısında), eski adlarıyla Diospolis ve Rhoas, Çürüksu (Lykos) ırmağı üzerinde zengin bir antik Yunan şehridir. Karya ve Lidya bölgelerinde, sonra Roma'nın Phrygia Pacatiana eyaletinde yer alan şehrin kalıntıları Denizli yakınındadır. Pamukkale Üniversitesi 2002'den beri burada kazı ve restorasyon çalışmaları yürütmektedir.",
+      "en": "Laodicea on the Lycus, earlier Diospolis and Rhoas, was a rich ancient Greek city on the Lycus (Çürüksu) river, in the regions of Caria and Lydia and later the Roman province of Phrygia Pacatiana. Its ruins lie near Denizli; Pamukkale University has excavated and restored the site since 2002."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Laodicea on the Lycus",
+        "url": "https://en.wikipedia.org/wiki/Laodicea_on_the_Lycus"
+      }
+    ]
+  },
+  "w183386552": {
+    "text": {
+      "tr": "Tripolis, Frigya, Karya ve Lidya sınırında, Büyük Menderes'in yukarı kesiminin kuzey kıyısında ve Sardes'ten Philadelphia üzerinden Laodikeia'ya giden yol üzerinde antik bir şehirdir. Hierapolis'in 20 km kuzeybatısındadır; kalıntıları Buldan ilçesinde Yenicekent yakınındadır.",
+      "en": "Tripolis on the Meander was an ancient city on the borders of Phrygia, Caria and Lydia, on the north bank of the upper Maeander and on the road from Sardis via Philadelphia to Laodicea. It lay 20 km north-west of Hierapolis; its ruins are near Yenicekent in Buldan district."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Tripolis on the Meander",
+        "url": "https://en.wikipedia.org/wiki/Tripolis_on_the_Meander"
+      }
+    ]
+  }
+}

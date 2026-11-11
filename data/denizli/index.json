@@ -1,0 +1,544 @@
+{
+  "province": "denizli",
+  "generated": "2026-11-11T09:32:39.478Z",
+  "counts": {
+    "il_siniri": 0,
+    "ilceler": 37,
+    "koy_mahalle_sinir": 190,
+    "yerlesimler": 741,
+    "kamu": 92,
+    "turistik": 35,
+    "antik": 87,
+    "yeralti_sehir": 0,
+    "muzeler": 6,
+    "saraylar": 1,
+    "carsilar": 0,
+    "cesmeler": 0,
+    "tarihi_yapilar": 9,
+    "anitlar": 22,
+    "mezarliklar": 0,
+    "kaleler": 18,
+    "medrese_han_hamam": 10,
+    "turbeler": 25,
+    "tiyatrolar": 10,
+    "kultur_merkezleri": 7,
+    "universiteler": 8,
+    "camiler": 743,
+    "kiliseler": 2,
+    "sinagoglar": 0,
+    "tapinaklar": 0,
+    "milli_parklar": 7,
+    "seyir": 37,
+    "parklar": 138,
+    "vadiler": 1,
+    "daglar": 421,
+    "akarsu_gol": 209,
+    "barajlar": 53,
+    "magaralar": 6,
+    "selaleler": 12,
+    "adalar": 0,
+    "kayak": 6,
+    "hayvanat": 1,
+    "bag_sarap": 11,
+    "stadyumlar": 4,
+    "plajlar": 0,
+    "rayli": 117,
+    "toplu_tasima": 24,
+    "yollar": 1779,
+    "liman_havalimani": 2,
+    "deniz_ulasimi": 0,
+    "teleferik": 8,
+    "fenerler": 0,
+    "tuneller": 39,
+    "kopruler": 159,
+    "saglik": 271,
+    "polis": 16,
+    "elcilikler": 0,
+    "yeralti_maden": 0,
+    "acik_ocak": 90,
+    "kaplicalar": 2,
+    "enerji": 37
+  },
+  "sources": [
+    "OpenStreetMap (ODbL)",
+    "Wikidata (CC0)"
+  ],
+  "dates": {
+    "il_siniri": [],
+    "ilceler": [],
+    "koy_mahalle_sinir": [],
+    "yerlesimler": [],
+    "kamu": [],
+    "turistik": [
+      [
+        1253,
+        null
+      ],
+      [
+        -250,
+        null
+      ],
+      [
+        1994,
+        null
+      ]
+    ],
+    "antik": [
+      [
+        200,
+        null
+      ],
+      [
+        -250,
+        null
+      ],
+      [
+        -250,
+        null
+      ],
+      [
+        300,
+        null
+      ]
+    ],
+    "yeralti_sehir": [],
+    "muzeler": [
+      [
+        1984,
+        null
+      ]
+    ],
+    "saraylar": [
+      [
+        1253,
+        null
+      ]
+    ],
+    "carsilar": [],
+    "cesmeler": [],
+    "tarihi_yapilar": [
+      [
+        500,
+        null
+      ],
+      [
+        86,
+        null
+      ],
+      [
+        390,
+        null
+      ]
+    ],
+    "anitlar": [],
+    "mezarliklar": [],
+    "kaleler": [],
+    "medrese_han_hamam": [
+      [
+        1253,
+        null
+      ]
+    ],
+    "turbeler": [],
+    "tiyatrolar": [],
+    "kultur_merkezleri": [],
+    "universiteler": [
+      [
+        1992,
+        null
+      ]
+    ],
+    "camiler": [],
+    "kiliseler": [],
+    "sinagoglar": [],
+    "tapinaklar": [],
+    "milli_parklar": [],
+    "seyir": [],
+    "parklar": [
+      [
+        2003,
+        null
+      ],
+      [
+        2010,
+        null
+      ]
+    ],
+    "vadiler": "timeless",
+    "daglar": "timeless",
+    "akarsu_gol": "timeless",
+    "barajlar": [
+      [
+        1976,
+        null
+      ]
+    ],
+    "magaralar": "timeless",
+    "selaleler": "timeless",
+    "adalar": "timeless",
+    "kayak": [],
+    "hayvanat": [],
+    "bag_sarap": [],
+    "stadyumlar": [],
+    "plajlar": [],
+    "rayli": [
+      [
+        2010,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ]
+    ],
+    "toplu_tasima": [
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1899,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1889,
+        null
+      ]
+    ],
+    "yollar": [
+      [
+        2023,
+        null
+      ],
+      [
+        2023,
+        null
+      ]
+    ],
+    "liman_havalimani": [],
+    "deniz_ulasimi": [],
+    "teleferik": [
+      [
+        2015,
+        null
+      ]
+    ],
+    "fenerler": [],
+    "tuneller": [
+      [
+        2023,
+        null
+      ]
+    ],
+    "kopruler": [
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1882,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ],
+      [
+        1889,
+        null
+      ]
+    ],
+    "saglik": [],
+    "polis": [],
+    "elcilikler": [],
+    "yeralti_maden": [],
+    "acik_ocak": [],
+    "kaplicalar": [],
+    "enerji": [
+      [
+        1976,
+        null
+      ]
+    ]
+  }
+}

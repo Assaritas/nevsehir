@@ -1,0 +1,120 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w15782868": {
+      "from": 117,
+      "approx": true,
+      "note": "110'lu yıllar – Hadrianus dönemi",
+      "src": "Wikipedia"
+    },
+    "w186411899": {
+      "from": 1374,
+      "note": "1374–75",
+      "src": "Wikipedia"
+    },
+    "w736310381": {
+      "from": 550,
+      "approx": true,
+      "note": "6. yüzyıl, Justinianus",
+      "src": "Wikipedia"
+    },
+    "n7019009652": {
+      "from": -250,
+      "approx": true,
+      "note": "MÖ 3. yüzyıl",
+      "src": "Wikipedia"
+    },
+    "n1936293144": {
+      "from": -250,
+      "approx": true,
+      "note": "MÖ 3. yüzyıl",
+      "src": "Wikipedia"
+    },
+    "n10284697077": {
+      "from": -250,
+      "approx": true,
+      "note": "MÖ 3. yüzyıl",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": -550,
+      "tr": "Efes'teki Artemis Tapınağı tamamlanır (yaklaşık)",
+      "en": "Temple of Artemis at Ephesus completed (c.)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Ephesus"
+    },
+    {
+      "y": -281,
+      "tr": "Bergama Krallığı dönemi başlar (MÖ 281–133)",
+      "en": "Kingdom of Pergamon period begins (281–133 BC)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Pergamon"
+    },
+    {
+      "y": -129,
+      "tr": "Efes Roma denetimine girer",
+      "en": "Ephesus comes under Roman control",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Ephesus"
+    },
+    {
+      "y": 178,
+      "tr": "Deprem Smyrna agorasını yıkar; Marcus Aurelius yeniden yaptırır",
+      "en": "Earthquake ruins the agora of Smyrna; Marcus Aurelius rebuilds it",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Agora_of_Smyrna"
+    },
+    {
+      "y": 1344,
+      "tr": "Haçlı donanması kıyı İzmir'ini Aydınoğullarından alır (28 Ekim)",
+      "en": "A crusader fleet takes coastal Smyrna from the Aydınids (28 October)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/izmir"
+    },
+    {
+      "y": 1402,
+      "tr": "Timur kıyı İzmir'ini zapteder (Aralık)",
+      "en": "Timur captures coastal Smyrna (December)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/izmir"
+    },
+    {
+      "y": 1415,
+      "tr": "Çelebi Mehmed İzmir'i Osmanlı topraklarına katar",
+      "en": "Mehmed I annexes İzmir to the Ottoman state",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/izmir"
+    },
+    {
+      "y": 1688,
+      "tr": "30 Haziran depremi ve ardından gelen yangın",
+      "en": "Earthquake of 30 June and the fire that followed",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/izmir"
+    },
+    {
+      "y": 1919,
+      "tr": "Yunan işgali başlar (15 Mayıs)",
+      "en": "Greek occupation begins (15 May)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/izmir"
+    },
+    {
+      "y": 1922,
+      "tr": "İzmir'in kurtuluşu (9 Eylül)",
+      "en": "Liberation of İzmir (9 September)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/izmir"
+    }
+  ]
+}

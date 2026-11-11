@@ -1,0 +1,15 @@
+{
+ "_aciklama": "OSM'de bulunmayan, kaynaklı yerler. Konum kaynaktaki koordinattır; OSM'de aynı kategoride 300 m içinde kayıt varsa atlanır.",
+ "sites": [
+  {
+   "id": "karatay-medresesi",
+   "name": "Karatay Medresesi",
+   "cat": "muzeler",
+   "lng": 32.49278,
+   "lat": 37.87472,
+   "alwaysAdd": true,
+   "wikidata": "Q12060961",
+   "source": "https://en.wikipedia.org/wiki/Karatay_Medrese"
+  }
+ ]
+}

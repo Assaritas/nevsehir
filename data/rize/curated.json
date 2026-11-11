@@ -1,0 +1,51 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "w247789320": {
+    "text": {
+      "tr": "Rize Kalesi, şehir merkezinin güneybatısında bir tepe üzerinde, kısmen yıkık bir ortaçağ kalesidir ve şehre geniş bir manzara sunar. İç kale ve aşağı kaleden oluşur; iç kalenin Bizans imparatoru I. Justinianus (hd. 527–565) döneminde, aşağı kalenin 13. yüzyılda yapıldığı düşünülür.",
+      "en": "Rize Castle is a partly ruined medieval castle on a hill south-west of the city centre, with a panoramic view of the city. It consists of a citadel, believed to date from the reign of Justinian I (527–565), and a lower castle from the 13th century."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Rize Castle",
+        "url": "https://en.wikipedia.org/wiki/Rize_Castle"
+      }
+    ]
+  },
+  "n320972186": {
+    "text": {
+      "tr": "Ayder, Çamlıhemşin'in 19 km güneydoğusunda, 1.350 m yükseklikte, ladin ve kayın ormanlarıyla kaplı bir yayladır. 1300'lü yıllarda Hala Vadisi'nde yaşayanlar tarafından kurulmuştur.",
+      "en": "Ayder is a highland pasture (yayla) 19 km south-east of Çamlıhemşin at 1,350 m, covered with spruce and beech forest. It was founded in the 1300s by people living in the Hala valley."
+    },
+    "sources": [
+      {
+        "title": "Vikipedi: Ayder",
+        "url": "https://tr.wikipedia.org/wiki/Ayder"
+      }
+    ]
+  },
+  "n4938450321": {
+    "text": {
+      "tr": "Palovit Şelalesi, Çamlıhemşin ilçesinde, Kaçkar Dağları Milli Parkı içinde 15 m yükseklikten akan bir şelaledir; Rize'nin debisi en yüksek şelalelerinden biridir. Kaynağı Palovit Deresi'dir.",
+      "en": "The Palovit Waterfall in Çamlıhemşin district, within Kaçkar Mountains National Park, falls 15 m and is one of the highest-flow waterfalls in Rize; it is fed by the Palovit stream."
+    },
+    "sources": [
+      {
+        "title": "Vikipedi: Palovit Şelalesi",
+        "url": "https://tr.wikipedia.org/wiki/Palovit_%C5%9Eelalesi"
+      }
+    ]
+  },
+  "w1222924987": {
+    "text": {
+      "tr": "Kaçkar Dağları, Karadeniz kıyısının üzerinde yükselen bir dağ silsilesidir. En yüksek zirvesi 3.937 m'lik Kaçkar Dağı'dır; yaklaşık 3.000 m'deki yaylalarıyla Doğu Karadeniz Dağları'nın en yüksek kesimidir. Buzullarla şekillenmiş, alpin karakterli dik dağlardır.",
+      "en": "The Kaçkar Mountains rise above the Black Sea coast; their highest peak, Kaçkar Dağı, reaches 3,937 m, and with plateaus around 3,000 m they are the highest part of the Pontic Mountains, glaciated and alpine in character."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Kaçkar Mountains",
+        "url": "https://en.wikipedia.org/wiki/Ka%C3%A7kar_Mountains"
+      }
+    ]
+  }
+}

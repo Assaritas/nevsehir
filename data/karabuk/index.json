@@ -1,0 +1,826 @@
+{
+  "province": "karabuk",
+  "generated": "2026-11-11T10:41:42.277Z",
+  "counts": {
+    "il_siniri": 0,
+    "ilceler": 12,
+    "koy_mahalle_sinir": 77,
+    "yerlesimler": 820,
+    "kamu": 6,
+    "turistik": 13,
+    "antik": 6,
+    "yeralti_sehir": 0,
+    "muzeler": 4,
+    "saraylar": 0,
+    "carsilar": 0,
+    "cesmeler": 0,
+    "tarihi_yapilar": 3,
+    "anitlar": 1,
+    "mezarliklar": 0,
+    "kaleler": 1,
+    "medrese_han_hamam": 1,
+    "turbeler": 3,
+    "tiyatrolar": 0,
+    "kultur_merkezleri": 2,
+    "universiteler": 2,
+    "camiler": 242,
+    "kiliseler": 1,
+    "sinagoglar": 0,
+    "tapinaklar": 0,
+    "milli_parklar": 3,
+    "seyir": 13,
+    "parklar": 8,
+    "vadiler": 1,
+    "daglar": 44,
+    "akarsu_gol": 40,
+    "barajlar": 13,
+    "magaralar": 1,
+    "selaleler": 1,
+    "adalar": 0,
+    "kayak": 2,
+    "hayvanat": 0,
+    "bag_sarap": 0,
+    "stadyumlar": 2,
+    "plajlar": 0,
+    "rayli": 245,
+    "toplu_tasima": 19,
+    "yollar": 368,
+    "liman_havalimani": 0,
+    "deniz_ulasimi": 0,
+    "teleferik": 1,
+    "fenerler": 0,
+    "tuneller": 37,
+    "kopruler": 77,
+    "saglik": 46,
+    "polis": 7,
+    "elcilikler": 0,
+    "yeralti_maden": 0,
+    "acik_ocak": 22,
+    "kaplicalar": 1,
+    "enerji": 7
+  },
+  "sources": [
+    "OpenStreetMap (ODbL)",
+    "Wikidata (CC0)"
+  ],
+  "dates": {
+    "il_siniri": [],
+    "ilceler": [],
+    "koy_mahalle_sinir": [],
+    "yerlesimler": [],
+    "kamu": [],
+    "turistik": [
+      [
+        1645,
+        null
+      ]
+    ],
+    "antik": [],
+    "yeralti_sehir": [],
+    "muzeler": [],
+    "saraylar": [],
+    "carsilar": [],
+    "cesmeler": [],
+    "tarihi_yapilar": [],
+    "anitlar": [],
+    "mezarliklar": [],
+    "kaleler": [],
+    "medrese_han_hamam": [
+      [
+        1645,
+        null
+      ]
+    ],
+    "turbeler": [],
+    "tiyatrolar": [],
+    "kultur_merkezleri": [],
+    "universiteler": [
+      [
+        2007,
+        null
+      ]
+    ],
+    "camiler": [
+      [
+        1750,
+        null
+      ]
+    ],
+    "kiliseler": [],
+    "sinagoglar": [],
+    "tapinaklar": [],
+    "milli_parklar": [],
+    "seyir": [],
+    "parklar": [],
+    "vadiler": "timeless",
+    "daglar": "timeless",
+    "akarsu_gol": "timeless",
+    "barajlar": [],
+    "magaralar": "timeless",
+    "selaleler": "timeless",
+    "adalar": "timeless",
+    "kayak": [],
+    "hayvanat": [],
+    "bag_sarap": [],
+    "stadyumlar": [
+      [
+        1998,
+        null
+      ],
+      [
+        1974,
+        null
+      ]
+    ],
+    "plajlar": [],
+    "rayli": [
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ]
+    ],
+    "toplu_tasima": [
+      [
+        1934,
+        null
+      ]
+    ],
+    "yollar": [],
+    "liman_havalimani": [],
+    "deniz_ulasimi": [],
+    "teleferik": [],
+    "fenerler": [],
+    "tuneller": [
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ]
+    ],
+    "kopruler": [
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ],
+      [
+        1934,
+        null
+      ]
+    ],
+    "saglik": [],
+    "polis": [],
+    "elcilikler": [],
+    "yeralti_maden": [],
+    "acik_ocak": [],
+    "kaplicalar": [],
+    "enerji": [
+      [
+        2017,
+        null
+      ]
+    ]
+  }
+}

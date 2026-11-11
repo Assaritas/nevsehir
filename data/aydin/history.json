@@ -1,0 +1,28 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {},
+  "events": [
+    {
+      "y": 1966,
+      "tr": "Dilek Yarımadası–Büyük Menderes Deltası Milli Parkı kurulur",
+      "en": "Dilek Peninsula–Büyük Menderes Delta National Park established",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Dilek_Peninsula-B%C3%BCy%C3%BCk_Menderes_Delta_National_Park"
+    },
+    {
+      "y": 2017,
+      "tr": "Afrodisias UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Aphrodisias inscribed as UNESCO World Heritage",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/1519"
+    }
+  ]
+}

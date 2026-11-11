@@ -1,0 +1,15 @@
+{
+ "_aciklama": "OSM'de bulunmayan, kaynaklı yerler. Konum kaynaktaki koordinattır; OSM'de aynı kategoride 300 m içinde kayıt varsa atlanır.",
+ "sites": [
+  {
+   "id": "meric-koprusu",
+   "name": "Meriç Köprüsü",
+   "cat": "kopruler",
+   "lng": 26.55223,
+   "lat": 41.66354,
+   "alwaysAdd": true,
+   "wikidata": "Q6015752",
+   "source": "https://www.wikidata.org/wiki/Q6015752"
+  }
+ ]
+}

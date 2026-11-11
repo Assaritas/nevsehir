@@ -1,0 +1,21 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {},
+  "events": [
+    {
+      "y": 2008,
+      "tr": "Odunpazarı ve Tepebaşı ilçeleri kurulur; Sazova Parkı açılır",
+      "en": "Odunpazarı and Tepebaşı districts created; Sazova Park opens",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Odunpazar%C4%B1"
+    }
+  ]
+}

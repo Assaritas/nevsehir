@@ -1,0 +1,15 @@
+{
+ "_aciklama": "OSM'de bulunmayan, kaynaklı yerler. Konum kaynaktaki koordinattır; OSM'de aynı kategoride 300 m içinde kayıt varsa atlanır.",
+ "sites": [
+  {
+   "id": "kemeralti",
+   "name": "Kemeraltı Çarşısı",
+   "cat": "carsilar",
+   "lng": 27.13222,
+   "lat": 38.41833,
+   "alwaysAdd": true,
+   "wikidata": "Q6386921",
+   "source": "https://en.wikipedia.org/wiki/Kemeralt%C4%B1"
+  }
+ ]
+}

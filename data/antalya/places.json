@@ -1,0 +1,15 @@
+{
+ "_aciklama": "OSM'de bulunmayan, kaynaklı yerler. Konum kaynaktaki koordinattır; OSM'de aynı kategoride 300 m içinde kayıt varsa atlanır.",
+ "sites": [
+  {
+   "id": "kaleici",
+   "name": "Kaleiçi",
+   "cat": "turistik",
+   "lng": 30.70367,
+   "lat": 36.88102,
+   "alwaysAdd": true,
+   "wikidata": "Q5994531",
+   "source": "https://www.wikidata.org/wiki/Q5994531"
+  }
+ ]
+}

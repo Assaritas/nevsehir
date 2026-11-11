@@ -1,0 +1,78 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "r3376582": {
+      "from": 1575,
+      "note": "1568–1575",
+      "src": "Wikipedia"
+    },
+    "n11716355894": {
+      "from": 1488,
+      "note": "1488",
+      "src": "Wikipedia"
+    },
+    "w303003548": {
+      "from": 1488,
+      "note": "1488",
+      "src": "Wikipedia"
+    },
+    "w1433516284": {
+      "from": 1488,
+      "note": "1488",
+      "src": "Wikipedia"
+    },
+    "n13174910226": {
+      "from": 1488,
+      "note": "1488",
+      "src": "Wikipedia"
+    },
+    "w170145207": {
+      "from": 1488,
+      "note": "1488",
+      "src": "Wikipedia"
+    },
+    "pmeric-koprusu": {
+      "from": 1843,
+      "note": "1843'te tamamlandı",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": 1488,
+      "tr": "II. Bayezid Külliyesi yapılır",
+      "en": "Complex of Bayezid II built",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Complex_of_Sultan_Bayezid_II"
+    },
+    {
+      "y": 1568,
+      "tr": "Selimiye Camii'nin yapımı başlar (1568–1575)",
+      "en": "Construction of the Selimiye Mosque (1568–1575)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Selimiye_Mosque,_Edirne"
+    },
+    {
+      "y": 1843,
+      "tr": "Meriç Köprüsü tamamlanır",
+      "en": "Meriç Bridge completed",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Meri%C3%A7_Bridge"
+    },
+    {
+      "y": 2011,
+      "tr": "Selimiye Camii ve Külliyesi UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Selimiye Mosque inscribed as UNESCO World Heritage",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/1366"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "n365348106": {
+      "from": 1463,
+      "note": "1463",
+      "src": "Wikipedia"
+    },
+    "r7330312": {
+      "from": 1463,
+      "note": "1463",
+      "src": "Wikipedia"
+    },
+    "w235113134": {
+      "from": 1462,
+      "note": "1462",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": 1462,
+      "tr": "Kale-i Sultaniye (Çimenlik) yapılır",
+      "en": "Kale-i Sultaniye (Çimenlik) built",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/%C3%87imenlik_Castle"
+    },
+    {
+      "y": 1463,
+      "tr": "Kilitbahir Kalesi yapılır",
+      "en": "Kilitbahir Castle built",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Kilitbahir_Castle"
+    },
+    {
+      "y": 1915,
+      "tr": "Çanakkale Savaşları (Gelibolu)",
+      "en": "Gallipoli campaign",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Gallipoli_Peninsula_Historical_Site"
+    },
+    {
+      "y": 1973,
+      "tr": "Gelibolu Yarımadası milli park olur",
+      "en": "Gallipoli Peninsula becomes a national park",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Gallipoli_Peninsula_Historical_Site"
+    },
+    {
+      "y": 1998,
+      "tr": "Troya UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Troy inscribed as UNESCO World Heritage",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/849"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {},
+  "events": [
+    {
+      "y": -333,
+      "tr": "Amasya Pontus Krallığı'nın başkenti olur (MÖ 333–26)",
+      "en": "Amasya becomes capital of the Kingdom of Pontus (333–26 BC)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Amasya"
+    },
+    {
+      "y": -70,
+      "tr": "Lucullus komutasındaki Romalılar Amaseia'yı alır",
+      "en": "Roman forces under Lucullus take Amaseia",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Amasya"
+    },
+    {
+      "y": 1075,
+      "tr": "Danişmendliler Amasya'yı fetheder",
+      "en": "The Danishmendids conquer Amasya",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Amasya"
+    },
+    {
+      "y": 1392,
+      "tr": "Amasya Osmanlılara geçer (1391/92)",
+      "en": "Amasya passes to the Ottomans (1391/92)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Amasya"
+    }
+  ]
+}

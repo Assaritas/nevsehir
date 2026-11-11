@@ -1,0 +1,63 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w104787977": {
+      "from": 1228,
+      "note": "1228–1229",
+      "src": "Wikipedia"
+    },
+    "r5956847": {
+      "from": 1217,
+      "note": "1217",
+      "src": "Wikipedia"
+    },
+    "r7111070": {
+      "from": 1271,
+      "note": "1271",
+      "src": "Wikipedia"
+    },
+    "r19685648": {
+      "from": 1271,
+      "note": "1271/72",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": 1217,
+      "tr": "Şifaiye Medresesi ve darüşşifası yapılır",
+      "en": "Şifaiye Medrese and hospital built",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/%C5%9Eifaiye_Medrese"
+    },
+    {
+      "y": 1228,
+      "tr": "Divriği Ulu Camii ve Darüşşifası yapılır (1228–29)",
+      "en": "Great Mosque and Hospital of Divriği built (1228–29)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Divri%C4%9Fi_Great_Mosque_and_Hospital"
+    },
+    {
+      "y": 1271,
+      "tr": "Sivas'ta Çifte Minareli ve Buruciye medreseleri yapılır",
+      "en": "Çifte Minareli and Buruciye madrasas built in Sivas",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Buruciye_Medrese"
+    },
+    {
+      "y": 1985,
+      "tr": "Divriği UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Divriği inscribed as UNESCO World Heritage",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/358"
+    }
+  ]
+}

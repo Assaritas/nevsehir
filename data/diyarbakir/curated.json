@@ -1,0 +1,61 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "r7840464": {
+    "ids": [
+      "w680605274"
+    ],
+    "text": {
+      "tr": "Diyarbakır Ulu Camii (Cami-i Kebîr), 11. yüzyılın sonlarında Selçuklu sultanı Melikşah tarafından daha eski bir caminin üzerine yaptırılmıştır. Tasarımında etkili olan Şam Emevi Camii'nden sonra bazılarınca İslam'ın en kutsal beşinci mekânı sayılır. 5.000 kişiyi alabilir ve dört farklı mezhebe hizmet verir.",
+      "en": "The Great Mosque of Diyarbakır (Cami-i Kebîr) was built in the late 11th century by the Seljuk sultan Malik-Shah I over an older mosque. Some regard it as the fifth holiest site in Islam after the Great Mosque of Damascus, which influenced its design. It holds up to 5,000 worshippers and serves four Islamic traditions."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Great Mosque of Diyarbakır",
+        "url": "https://en.wikipedia.org/wiki/Great_Mosque_of_Diyarbak%C4%B1r"
+      }
+    ]
+  },
+  "phevsel": {
+    "text": {
+      "tr": "Hevsel Bahçeleri, Diyarbakır Kalesi ile Dicle arasında yaklaşık 700 hektarlık verimli tarım alanıdır. Kentin iki parçalı sur sistemiyle korunduğu dönemlerde, dik yamacın altındaki kaynaklarla beslenen bahçeler kentin besin ve su gereksiniminde hayati rol oynadı. 2013'te UNESCO Geçici Listesi'ne, 2015'te Diyarbakır surlarıyla birlikte Dünya Mirası Listesi'ne alındı.",
+      "en": "The Hevsel Gardens are some 700 ha of fertile farmland between the Diyarbakır Fortress and the Tigris. Fed by springs on the steep slope below, they played a vital role in provisioning and watering the walled city. They entered UNESCO's Tentative List in 2013 and became a World Heritage Site, with the city walls, in 2015."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Hevsel Gardens",
+        "url": "https://en.wikipedia.org/wiki/Hevsel_Gardens"
+      },
+      {
+        "title": "UNESCO: Diyarbakır Fortress and Hevsel Gardens",
+        "url": "https://whc.unesco.org/en/list/1488"
+      }
+    ]
+  },
+  "w129614304": {
+    "ids": [
+      "n9470543910"
+    ],
+    "text": {
+      "tr": "Dicle Köprüsü (On Gözlü Köprü), Diyarbakır'da Dicle üzerinde tarihî bir köprüdür. 1065'te tamamlanmıştır; on kemerli ve toplam 178 m uzunluğundadır. Silvan yolu üzerinde olduğu için Silvan Köprüsü olarak da anılır. Mervanîler döneminde (990–1085) yaptırılmıştır.",
+      "en": "The Dicle Bridge (\"Ten-Eyed Bridge\") is a historic bridge over the Tigris at Diyarbakır, completed in 1065, with ten arches and a total length of 178 m. Also called the Silvan Bridge for its position on the Silvan road, it was commissioned in the Marwanid era (990–1085)."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Dicle Bridge",
+        "url": "https://en.wikipedia.org/wiki/Dicle_Bridge"
+      }
+    ]
+  },
+  "w312453832": {
+    "text": {
+      "tr": "Zerzevan Kalesi (Samachi), Diyarbakır'da harabe hâlinde bir Doğu Roma kalesi ve önemli bir askerî üstür. Kazılarda yeraltı yapıları, bunlar arasında bir gizem dini olan Mitraizm'e ait bir tapınak bulunmuştur. Kale 1890'lardan 1960'lara kadar sivil yerleşim olarak kullanıldı; alan kısmen ziyarete açıktır.",
+      "en": "Zerzevan Castle (Samachi) is a ruined Eastern Roman castle and former military base in Diyarbakır Province. Excavations revealed underground structures, among them a temple of the mystery religion Mithraism. It was used as a civilian settlement from the 1890s to the 1960s and is partly open to visitors."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Zerzevan Castle",
+        "url": "https://en.wikipedia.org/wiki/Zerzevan_Castle"
+      }
+    ]
+  }
+}

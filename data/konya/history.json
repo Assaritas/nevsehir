@@ -1,0 +1,49 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "pkaratay-medresesi": {
+      "from": 1251,
+      "approx": true,
+      "note": "13. yüzyıl ortası",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": -7000,
+      "tr": "Çatalhöyük'ün en parlak dönemi",
+      "en": "Çatalhöyük at its height",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/%C3%87atalh%C3%B6y%C3%BCk"
+    },
+    {
+      "y": 1220,
+      "tr": "I. Alâeddin Keykubad tahta çıkar (1220–1237)",
+      "en": "Kayqubad I's reign begins (1220–1237)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Kubadabad_Palace"
+    },
+    {
+      "y": 1954,
+      "tr": "Karatay Medresesi müze olur",
+      "en": "Karatay Medrese becomes a museum",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Karatay_Medrese"
+    },
+    {
+      "y": 2012,
+      "tr": "Çatalhöyük UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Çatalhöyük inscribed as UNESCO World Heritage",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/1405"
+    }
+  ]
+}

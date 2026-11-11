@@ -1,0 +1,39 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w129614304": {
+      "from": 1065,
+      "note": "1065",
+      "src": "Wikipedia"
+    },
+    "n9470543910": {
+      "from": 1065,
+      "note": "1065",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": 1065,
+      "tr": "Dicle (On Gözlü) Köprüsü tamamlanır",
+      "en": "Dicle (Ten-Eyed) Bridge completed",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Dicle_Bridge"
+    },
+    {
+      "y": 2015,
+      "tr": "Diyarbakır Kalesi ve Hevsel Bahçeleri UNESCO Dünya Mirası Listesi'ne girer",
+      "en": "Diyarbakır Fortress and Hevsel Gardens inscribed as UNESCO World Heritage",
+      "src": "UNESCO",
+      "url": "https://whc.unesco.org/en/list/1488"
+    }
+  ]
+}

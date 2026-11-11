@@ -1,0 +1,256 @@
+{
+  "province": "van",
+  "generated": "2026-11-11T10:03:25.033Z",
+  "counts": {
+    "il_siniri": 0,
+    "ilceler": 22,
+    "koy_mahalle_sinir": 83,
+    "yerlesimler": 1082,
+    "kamu": 29,
+    "turistik": 33,
+    "antik": 110,
+    "yeralti_sehir": 0,
+    "muzeler": 1,
+    "saraylar": 1,
+    "carsilar": 0,
+    "cesmeler": 0,
+    "tarihi_yapilar": 2,
+    "anitlar": 1,
+    "mezarliklar": 1,
+    "kaleler": 4,
+    "medrese_han_hamam": 1,
+    "turbeler": 1,
+    "tiyatrolar": 3,
+    "kultur_merkezleri": 2,
+    "universiteler": 1,
+    "camiler": 1545,
+    "kiliseler": 20,
+    "sinagoglar": 0,
+    "tapinaklar": 0,
+    "milli_parklar": 3,
+    "seyir": 18,
+    "parklar": 17,
+    "vadiler": 0,
+    "daglar": 803,
+    "akarsu_gol": 274,
+    "barajlar": 35,
+    "magaralar": 0,
+    "selaleler": 10,
+    "adalar": 4,
+    "kayak": 1,
+    "hayvanat": 0,
+    "bag_sarap": 0,
+    "stadyumlar": 1,
+    "plajlar": 19,
+    "rayli": 154,
+    "toplu_tasima": 21,
+    "yollar": 744,
+    "liman_havalimani": 2,
+    "deniz_ulasimi": 7,
+    "teleferik": 4,
+    "fenerler": 0,
+    "tuneller": 17,
+    "kopruler": 136,
+    "saglik": 182,
+    "polis": 5,
+    "elcilikler": 0,
+    "yeralti_maden": 1,
+    "acik_ocak": 45,
+    "kaplicalar": 4,
+    "enerji": 40
+  },
+  "sources": [
+    "OpenStreetMap (ODbL)",
+    "Wikidata (CC0)"
+  ],
+  "dates": {
+    "il_siniri": [],
+    "ilceler": [],
+    "koy_mahalle_sinir": [],
+    "yerlesimler": [
+      [
+        1650,
+        null
+      ],
+      [
+        -750,
+        null
+      ]
+    ],
+    "kamu": [],
+    "turistik": [
+      [
+        501,
+        null
+      ],
+      [
+        653,
+        null
+      ],
+      [
+        901,
+        null
+      ],
+      [
+        -850,
+        null
+      ],
+      [
+        1100,
+        null
+      ],
+      [
+        1201,
+        null
+      ],
+      [
+        501,
+        null
+      ],
+      [
+        1401,
+        null
+      ]
+    ],
+    "antik": [
+      [
+        901,
+        null
+      ],
+      [
+        1100,
+        null
+      ],
+      [
+        901,
+        null
+      ]
+    ],
+    "yeralti_sehir": [],
+    "muzeler": [
+      [
+        1945,
+        null
+      ]
+    ],
+    "saraylar": [],
+    "carsilar": [],
+    "cesmeler": [],
+    "tarihi_yapilar": [],
+    "anitlar": [],
+    "mezarliklar": [],
+    "kaleler": [
+      [
+        -850,
+        null
+      ],
+      [
+        1643,
+        null
+      ]
+    ],
+    "medrese_han_hamam": [],
+    "turbeler": [],
+    "tiyatrolar": [],
+    "kultur_merkezleri": [],
+    "universiteler": [
+      [
+        1982,
+        null
+      ]
+    ],
+    "camiler": [
+      [
+        -750,
+        null
+      ]
+    ],
+    "kiliseler": [
+      [
+        501,
+        null
+      ],
+      [
+        653,
+        null
+      ],
+      [
+        915,
+        null
+      ],
+      [
+        1201,
+        null
+      ],
+      [
+        501,
+        null
+      ],
+      [
+        1401,
+        null
+      ]
+    ],
+    "sinagoglar": [],
+    "tapinaklar": [],
+    "milli_parklar": [],
+    "seyir": [],
+    "parklar": [],
+    "vadiler": "timeless",
+    "daglar": "timeless",
+    "akarsu_gol": "timeless",
+    "barajlar": [],
+    "magaralar": "timeless",
+    "selaleler": "timeless",
+    "adalar": "timeless",
+    "kayak": [],
+    "hayvanat": [],
+    "bag_sarap": [],
+    "stadyumlar": [],
+    "plajlar": [],
+    "rayli": [
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ]
+    ],
+    "toplu_tasima": [
+      [
+        1971,
+        null
+      ],
+      [
+        1971,
+        null
+      ]
+    ],
+    "yollar": [
+      [
+        2024,
+        null
+      ]
+    ],
+    "liman_havalimani": [],
+    "deniz_ulasimi": [],
+    "teleferik": [],
+    "fenerler": [],
+    "tuneller": [
+      [
+        2024,
+        null
+      ]
+    ],
+    "kopruler": [],
+    "saglik": [],
+    "polis": [],
+    "elcilikler": [],
+    "yeralti_maden": [],
+    "acik_ocak": [],
+    "kaplicalar": [],
+    "enerji": []
+  }
+}

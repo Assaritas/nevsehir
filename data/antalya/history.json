@@ -1,0 +1,82 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "n960574200": {
+      "from": 130,
+      "note": "Hadrianus'un ziyareti, 130",
+      "src": "Wikipedia"
+    },
+    "w1418062505": {
+      "from": 550,
+      "approx": true,
+      "note": "6. yüzyıl",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": -159,
+      "tr": "Bergama kralı II. Attalos Attaleia'yı kurar (MÖ 2. yüzyıl)",
+      "en": "Attalus II of Pergamon founds Attaleia (2nd century BC)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Antalya"
+    },
+    {
+      "y": 130,
+      "tr": "İmparator Hadrianus şehri ziyaret eder",
+      "en": "Emperor Hadrian visits the city",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Hadrian%27s_Gate"
+    },
+    {
+      "y": 1207,
+      "tr": "Selçuklular Antalya'yı fetheder (5 Mart)",
+      "en": "The Seljuks take Antalya (5 March)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/antalya"
+    },
+    {
+      "y": 1216,
+      "tr": "İzzeddin Keykâvus şehri yeniden fetheder (22 Ocak)",
+      "en": "Kaykaus I retakes the city (22 January)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/antalya"
+    },
+    {
+      "y": 1361,
+      "tr": "Kıbrıs Kralı Pierre şehri ele geçirir (24 Ağustos)",
+      "en": "King Peter of Cyprus captures the city (24 August)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/antalya"
+    },
+    {
+      "y": 1919,
+      "tr": "İtalyanlar Antalya'yı işgal eder (29 Nisan)",
+      "en": "Italian occupation of Antalya begins (29 April)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/antalya"
+    },
+    {
+      "y": 1921,
+      "tr": "İtalyanlar şehri boşaltmaya başlar (1 Haziran)",
+      "en": "Italian forces begin to leave the city (1 June)",
+      "src": "TDV",
+      "url": "https://islamansiklopedisi.org.tr/antalya"
+    },
+    {
+      "y": 1973,
+      "tr": "Köprülü Kanyon milli park ilan edilir",
+      "en": "Köprülü Canyon declared a national park",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/K%C3%B6pr%C3%BCl%C3%BC_Canyon"
+    }
+  ]
+}

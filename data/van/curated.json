@@ -1,0 +1,73 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "w135564251": {
+    "text": {
+      "tr": "Van Kalesi, Urartu krallığı tarafından MÖ 9.–7. yüzyıllarda yapılmış büyük bir taş tahkimattır ve türünün en büyük örneğidir. 9. yüzyılda Urartu başkenti olan ve kalenin bulunduğu dik yamaçlı kaya kütlesi çevresinde kurulan Tuşpa'nın kalıntılarına bakar.",
+      "en": "The Fortress of Van is a massive stone fortification built by the kingdom of Urartu in the 9th–7th centuries BC, the largest of its kind. It overlooks the ruins of Tushpa, the 9th-century Urartian capital, centred on the steep bluff where the fortress stands."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Van Fortress",
+        "url": "https://en.wikipedia.org/wiki/Van_Fortress"
+      }
+    ]
+  },
+  "w191563482": {
+    "ids": [
+      "w191563484"
+    ],
+    "text": {
+      "tr": "Akdamar (Ahtamar) Adası, Van Gölü'nün dört büyük adasının ikinci büyüğüdür; yaklaşık 0,7 km² büyüklüğünde ve kıyıdan yaklaşık 3 km açıktadır. Adadaki Surp Haç (Kutsal Haç) Kilisesi 921'de Vaspurakan krallarının saray kilisesi olarak yapılmış, sonra Ahtamar Katolikosluğunun merkezi olmuştur; 1915'ten sonra terk edilen kilise bugün müzedir.",
+      "en": "Akdamar (Aghtamar) is the second largest of the four main islands of Lake Van, about 0.7 km² and some 3 km offshore. Its Cathedral of the Holy Cross was built in 921 as a palatine church for the kings of Vaspurakan and later became the seat of the Catholicosate of Aghtamar; abandoned after 1915, it is now a museum."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Akdamar Island",
+        "url": "https://en.wikipedia.org/wiki/Akdamar_Island"
+      },
+      {
+        "title": "Wikipedia: Cathedral of the Holy Cross, Aghtamar",
+        "url": "https://en.wikipedia.org/wiki/Cathedral_of_the_Holy_Cross,_Aghtamar"
+      }
+    ]
+  },
+  "n1449289710": {
+    "text": {
+      "tr": "Hoşap Kalesi, Gürpınar ilçesine bağlı Hoşap köyünde 17. yüzyıldan kalma büyük bir kaledir; Van merkezine yaklaşık 50 km uzaklıktadır.",
+      "en": "Hoşap Castle is a large 17th-century castle in the village of Hoşap, Gürpınar district, about 50 km from central Van."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Hoşap Castle",
+        "url": "https://en.wikipedia.org/wiki/Ho%C5%9Fap_Castle"
+      }
+    ]
+  },
+  "w184072597": {
+    "ids": [
+      "n10998341306"
+    ],
+    "text": {
+      "tr": "Çavuştepe Kalesi (Sardurihinili), Gürpınar ilçesindeki Çavuştepe köyünün kuzeydoğusunda bir sırt üzerinde Urartu tahkimatıdır. Van'ın yaklaşık 25 km güneydoğusunda, Hakkâri yolu üzerindedir; Urartu kralı II. Sarduri (hd. MÖ 764–735) tarafından kurulmuştur.",
+      "en": "Çavuştepe Castle (Sardurihinili) is an Urartian fortified site on a ridge north-east of Çavuştepe village in Gürpınar district, about 25 km south-east of Van on the Hakkâri road, founded by the Urartian king Sarduri II (r. 764–735 BC)."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Çavuştepe",
+        "url": "https://en.wikipedia.org/wiki/%C3%87avu%C5%9Ftepe"
+      }
+    ]
+  },
+  "pvan-golu": {
+    "text": {
+      "tr": "Van Gölü, Türkiye'nin en büyük gölüdür ve Van ile Bitlis illerindedir. Çevredeki dağlardan inen küçük akarsularla beslenen tuzlu bir soda gölüdür; 3.000 km²'den büyük, dünyadaki az sayıdaki kapalı (çıkışı olmayan) gölden biridir ve ülkenin yüzey sularının %38'ini barındırır.",
+      "en": "Lake Van, in Van and Bitlis provinces, is the largest lake in Turkey: a saline soda lake fed by small streams from the surrounding mountains, one of the world's few endorheic lakes larger than 3,000 km², holding 38% of the country's surface water."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Lake Van",
+        "url": "https://en.wikipedia.org/wiki/Lake_Van"
+      }
+    ]
+  }
+}

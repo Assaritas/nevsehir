@@ -1,0 +1,1203 @@
+{
+  "province": "eskisehir",
+  "generated": "2026-11-11T09:47:45.751Z",
+  "counts": {
+    "il_siniri": 0,
+    "ilceler": 28,
+    "koy_mahalle_sinir": 233,
+    "yerlesimler": 605,
+    "kamu": 51,
+    "turistik": 20,
+    "antik": 78,
+    "yeralti_sehir": 4,
+    "muzeler": 24,
+    "saraylar": 0,
+    "carsilar": 2,
+    "cesmeler": 0,
+    "tarihi_yapilar": 9,
+    "anitlar": 19,
+    "mezarliklar": 1,
+    "kaleler": 0,
+    "medrese_han_hamam": 8,
+    "turbeler": 7,
+    "tiyatrolar": 5,
+    "kultur_merkezleri": 11,
+    "universiteler": 10,
+    "camiler": 452,
+    "kiliseler": 1,
+    "sinagoglar": 0,
+    "tapinaklar": 0,
+    "milli_parklar": 2,
+    "seyir": 16,
+    "parklar": 134,
+    "vadiler": 0,
+    "daglar": 160,
+    "akarsu_gol": 171,
+    "barajlar": 72,
+    "magaralar": 0,
+    "selaleler": 2,
+    "adalar": 1,
+    "kayak": 0,
+    "hayvanat": 1,
+    "bag_sarap": 0,
+    "stadyumlar": 3,
+    "plajlar": 3,
+    "rayli": 774,
+    "toplu_tasima": 25,
+    "yollar": 1179,
+    "liman_havalimani": 6,
+    "deniz_ulasimi": 0,
+    "teleferik": 0,
+    "fenerler": 0,
+    "tuneller": 30,
+    "kopruler": 117,
+    "saglik": 310,
+    "polis": 16,
+    "elcilikler": 4,
+    "yeralti_maden": 0,
+    "acik_ocak": 172,
+    "kaplicalar": 0,
+    "enerji": 21
+  },
+  "sources": [
+    "OpenStreetMap (ODbL)",
+    "Wikidata (CC0)"
+  ],
+  "dates": {
+    "il_siniri": [],
+    "ilceler": [],
+    "koy_mahalle_sinir": [],
+    "yerlesimler": [],
+    "kamu": [],
+    "turistik": [],
+    "antik": [],
+    "yeralti_sehir": [],
+    "muzeler": [
+      [
+        2019,
+        null
+      ],
+      [
+        2007,
+        null
+      ],
+      [
+        1994,
+        null
+      ],
+      [
+        2013,
+        null
+      ]
+    ],
+    "saraylar": [],
+    "carsilar": [],
+    "cesmeler": [],
+    "tarihi_yapilar": [],
+    "anitlar": [],
+    "mezarliklar": [],
+    "kaleler": [],
+    "medrese_han_hamam": [],
+    "turbeler": [],
+    "tiyatrolar": [],
+    "kultur_merkezleri": [],
+    "universiteler": [
+      [
+        1958,
+        null
+      ],
+      [
+        2018,
+        null
+      ]
+    ],
+    "camiler": [
+      [
+        1992,
+        null
+      ],
+      [
+        1232,
+        null
+      ]
+    ],
+    "kiliseler": [],
+    "sinagoglar": [],
+    "tapinaklar": [],
+    "milli_parklar": [],
+    "seyir": [],
+    "parklar": [],
+    "vadiler": "timeless",
+    "daglar": "timeless",
+    "akarsu_gol": "timeless",
+    "barajlar": [
+      [
+        1966,
+        null
+      ],
+      [
+        2002,
+        null
+      ],
+      [
+        1967,
+        null
+      ],
+      [
+        1997,
+        null
+      ]
+    ],
+    "magaralar": "timeless",
+    "selaleler": "timeless",
+    "adalar": "timeless",
+    "kayak": [],
+    "hayvanat": [
+      [
+        2017,
+        null
+      ]
+    ],
+    "bag_sarap": [],
+    "stadyumlar": [],
+    "plajlar": [],
+    "rayli": [
+      [
+        1975,
+        null
+      ],
+      [
+        1983,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2013,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2014,
+        null
+      ],
+      [
+        2014,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2022,
+        null
+      ],
+      [
+        2013,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1892,
+        null
+      ]
+    ],
+    "toplu_tasima": [
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ],
+      [
+        1892,
+        null
+      ]
+    ],
+    "yollar": [],
+    "liman_havalimani": [],
+    "deniz_ulasimi": [],
+    "teleferik": [],
+    "fenerler": [],
+    "tuneller": [
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ]
+    ],
+    "kopruler": [
+      [
+        1872,
+        null
+      ],
+      [
+        2009,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ],
+      [
+        1894,
+        null
+      ]
+    ],
+    "saglik": [
+      [
+        2018,
+        null
+      ],
+      [
+        1976,
+        null
+      ]
+    ],
+    "polis": [],
+    "elcilikler": [],
+    "yeralti_maden": [],
+    "acik_ocak": [],
+    "kaplicalar": [],
+    "enerji": [
+      [
+        1967,
+        null
+      ],
+      [
+        2010,
+        null
+      ]
+    ]
+  }
+}

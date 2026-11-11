@@ -1,0 +1,15 @@
+{
+ "_aciklama": "OSM'de bulunmayan, kaynaklı yerler. Konum kaynaktaki koordinattır; OSM'de aynı kategoride 300 m içinde kayıt varsa atlanır.",
+ "sites": [
+  {
+   "id": "hevsel",
+   "name": "Hevsel Bahçeleri",
+   "cat": "parklar",
+   "lng": 40.2475,
+   "lat": 37.9075,
+   "alwaysAdd": true,
+   "wikidata": "Q19611498",
+   "source": "https://en.wikipedia.org/wiki/Hevsel_Gardens"
+  }
+ ]
+}

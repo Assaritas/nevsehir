@@ -1,0 +1,60 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "w135564251": {
+      "from": -850,
+      "approx": true,
+      "note": "MÖ 9.–7. yüzyıl",
+      "src": "Wikipedia"
+    },
+    "n1223406783": {
+      "from": 1650,
+      "approx": true,
+      "note": "17. yüzyıl",
+      "src": "Wikipedia"
+    },
+    "n1482094046": {
+      "from": -750,
+      "approx": true,
+      "note": "II. Sarduri dönemi (MÖ 764–735)",
+      "src": "Wikipedia"
+    },
+    "n13584342577": {
+      "from": -750,
+      "approx": true,
+      "note": "II. Sarduri dönemi (MÖ 764–735)",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": -850,
+      "tr": "Urartu başkenti Tuşpa ve Van Kalesi (MÖ 9. yüzyıl)",
+      "en": "Urartian capital Tushpa and Van Fortress (9th century BC)",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Van_Fortress"
+    },
+    {
+      "y": -764,
+      "tr": "II. Sarduri dönemi; Çavuştepe kurulur",
+      "en": "Reign of Sarduri II; Çavuştepe founded",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/%C3%87avu%C5%9Ftepe"
+    },
+    {
+      "y": 921,
+      "tr": "Akdamar Kilisesi yapılır",
+      "en": "Church on Akdamar built",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Cathedral_of_the_Holy_Cross,_Aghtamar"
+    }
+  ]
+}

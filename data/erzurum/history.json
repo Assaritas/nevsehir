@@ -1,0 +1,46 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {
+    "r1832942": {
+      "from": 1310,
+      "note": "1310",
+      "src": "Wikipedia"
+    },
+    "r11788485": {
+      "from": 1260,
+      "approx": true,
+      "note": "1265'ten birkaç yıl önce",
+      "src": "Wikipedia"
+    },
+    "r15310579": {
+      "from": 450,
+      "approx": true,
+      "note": "5. yüzyıl",
+      "src": "Wikipedia"
+    }
+  },
+  "events": [
+    {
+      "y": 1310,
+      "tr": "Yakutiye Medresesi yapılır",
+      "en": "Yakutiye Medrese built",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Yakutiye_Medrese"
+    },
+    {
+      "y": 1960,
+      "tr": "Tortum Barajı ve santrali tamamlanır",
+      "en": "Tortum dam and power plant completed",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Tortum_Waterfall"
+    }
+  ]
+}

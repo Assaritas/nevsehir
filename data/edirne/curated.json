@@ -1,0 +1,71 @@
+{
+  "_aciklama": "Kaynaklı açıklamalar (herkese görünür). Her cümle 'sources' listesindeki kaynaklara dayanır.",
+  "r3376582": {
+    "text": {
+      "tr": "Selimiye Camii, Sultan II. Selim'in emriyle Mimar Sinan tarafından 1568–1575 yılları arasında Edirne'de yapılmış bir Osmanlı selatin camisidir. Sinan bu eseri ustalık eseri saymıştır; İslam mimarisinin ve özellikle Osmanlı mimarisinin en yüksek başarılarından biridir. Cami külliyesiyle birlikte 2011'de UNESCO Dünya Mirası Listesi'ne alındı.",
+      "en": "The Selimiye Mosque is an Ottoman imperial mosque in Edirne, commissioned by Selim II and built by the imperial architect Mimar Sinan in 1568–1575. Sinan considered it his masterpiece, and it is one of the highest achievements of Islamic, and especially Ottoman, architecture. With its külliye it was added to the UNESCO World Heritage List in 2011."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Selimiye Mosque, Edirne",
+        "url": "https://en.wikipedia.org/wiki/Selimiye_Mosque,_Edirne"
+      },
+      {
+        "title": "UNESCO: Selimiye Mosque and its Social Complex",
+        "url": "https://whc.unesco.org/en/list/1366"
+      }
+    ]
+  },
+  "w211425197": {
+    "text": {
+      "tr": "Eski Camii (Ulucami), Edirne'de 15. yüzyıl başına ait bir Osmanlı camisidir.",
+      "en": "The Old Mosque (Eski Camii, also Ulucami) is an early 15th-century Ottoman mosque in Edirne."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Old Mosque, Edirne",
+        "url": "https://en.wikipedia.org/wiki/Old_Mosque,_Edirne"
+      }
+    ]
+  },
+  "w211425199": {
+    "text": {
+      "tr": "Üç Şerefeli Camii, Edirne'de 15. yüzyıla ait bir Osmanlı camisidir.",
+      "en": "The Üç Şerefeli Mosque is a 15th-century Ottoman mosque in Edirne."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Üç Şerefeli Mosque",
+        "url": "https://en.wikipedia.org/wiki/%C3%9C%C3%A7_%C5%9Eerefeli_Mosque"
+      }
+    ]
+  },
+  "n11716355894": {
+    "ids": [
+      "w303003548",
+      "w1433516284"
+    ],
+    "text": {
+      "tr": "II. Bayezid Külliyesi, Sultan II. Bayezid (hd. 1481–1512) için Mimar Hayreddin tarafından 1488'de yapıldı. Külliyedeki darüşşifa (hastane) 1488'den 1877–78 Osmanlı-Rus Savaşı'na kadar dört yüzyıl hizmet verdi. Hastane, müzik, su sesi ve kokuların kullanıldığı ruhsal hastalık tedavileriyle özellikle tanınıyordu.",
+      "en": "The Complex of Sultan Bayezid II was built in 1488 by the architect Mimar Hayruddin for Bayezid II (r. 1481–1512). Its darüşşifa (hospital) operated for four centuries, from 1488 until the Russo-Turkish War of 1877–78, and was notable for treating mental disorders with music, the sound of water and scents."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Complex of Sultan Bayezid II",
+        "url": "https://en.wikipedia.org/wiki/Complex_of_Sultan_Bayezid_II"
+      }
+    ]
+  },
+  "pmeric-koprusu": {
+    "text": {
+      "tr": "Meriç Köprüsü (Yeni Köprü ya da Mecidiye Köprüsü), Edirne'de Meriç Nehri üzerinde, Pazarkule sınır kapısını Karaağaç üzerinden Edirne'ye bağlayan tarihî Osmanlı köprüsüdür. Yapımına II. Mahmud (hd. 1808–1839) döneminde başlanmış, 1843'te Abdülmecid döneminde tamamlanmıştır.",
+      "en": "The Meriç Bridge (also Yeni Köprü or Mecidiye Bridge) is a historic Ottoman bridge over the Meriç river in Edirne, linking the Pazarkule border gate via Karaağaç to the city. Begun under Mahmud II (r. 1808–1839), it was completed in 1843 under Abdülmecid I."
+    },
+    "sources": [
+      {
+        "title": "Wikipedia: Meriç Bridge",
+        "url": "https://en.wikipedia.org/wiki/Meri%C3%A7_Bridge"
+      }
+    ]
+  }
+}

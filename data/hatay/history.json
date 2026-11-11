@@ -1,0 +1,35 @@
+{
+  "_aciklama": "Zaman kaydırıcısı için kaynaklı tarihler ve olaylar.",
+  "timeless": [
+    "daglar",
+    "vadiler",
+    "akarsu_gol",
+    "adalar",
+    "magaralar",
+    "selaleler"
+  ],
+  "features": {},
+  "events": [
+    {
+      "y": 1938,
+      "tr": "Hatay Arkeoloji Müzesi binası tamamlanır",
+      "en": "Hatay Archaeology Museum building completed",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Hatay_Archaeology_Museum"
+    },
+    {
+      "y": 1939,
+      "tr": "Hatay Türkiye'ye katılır",
+      "en": "Hatay joins Turkey",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Hatay_Archaeology_Museum"
+    },
+    {
+      "y": 2023,
+      "tr": "Şubat depremleri Antakya'da büyük yıkıma yol açar",
+      "en": "February earthquakes cause great destruction in Antakya",
+      "src": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Habib-i_Nejjar_Mosque"
+    }
+  ]
+}

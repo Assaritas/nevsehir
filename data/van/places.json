@@ -1,0 +1,16 @@
+{
+ "_aciklama": "OSM'de bulunmayan, kaynaklı yerler. Konum kaynaktaki koordinattır; OSM'de aynı kategoride 300 m içinde kayıt varsa atlanır.",
+ "sites": [
+  {
+   "id": "van-golu",
+   "name": "Van Gölü",
+   "cat": "akarsu_gol",
+   "lng": 43.25,
+   "lat": 38.56,
+   "approx": true,
+   "alwaysAdd": true,
+   "wikidata": "Q126307",
+   "source": "https://en.wikipedia.org/wiki/Lake_Van"
+  }
+ ]
+}
